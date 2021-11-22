@@ -10,3 +10,6 @@
 [submodule "repositories/exploitable"]
 	path = repositories/exploitable
 	url = /home/paul/repositories/exploitable
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = /home/paul/.oh-my-zsh
