@@ -1,0 +1,24 @@
+export PATH="$PATH:/usr/local/qt5/bin"
+export PATH="$HOME/bin/rbenv/plugins/ruby-build/bin:$PATH"
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/repositories/john/run"
+
+# qt5
+# export CMAKE_PREFIX_PATH="/usr/lib/x86_64-linux-gnu/qt5"
+# /lib/x86_64-linux-gnu/cmake/Qt5/ ?
+
+# ruby
+export PATH="$HOME/bin/rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+# perl
+export PATH="$PATH:$HOME/perl5/bin"
+export PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+export PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
+export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
+
+# opt out of dotnet telemetry
+export DOTNET_CLI_TELEMETRY_OPTOUT="true"
+
