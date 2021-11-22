@@ -1,3 +1,12 @@
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
 	url = /home/paul/.vim/bundle/Vundle.vim
+[submodule "repositories/z"]
+	path = repositories/z
+	url = /home/paul/repositories/z
+[submodule "repositories/peda"]
+	path = repositories/peda
+	url = /home/paul/repositories/peda
+[submodule "repositories/exploitable"]
+	path = repositories/exploitable
+	url = /home/paul/repositories/exploitable
