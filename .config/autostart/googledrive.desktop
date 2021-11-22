@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=sh -c "google-drive-ocamlfuse ~/GoogleDrive/GoogleDrive"
+Hidden=false
+X-MATE-Autostart-enabled=true
+Name[en_US]=googledrive
+Name=googledrive
+Comment[en_US]=
+Comment=
+X-MATE-Autostart-Delay=10

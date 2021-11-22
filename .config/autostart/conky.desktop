@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=conky -d -c $HOME/.config/conky.conf
+Hidden=false
+X-MATE-Autostart-enabled=true
+Name[en_US]=conky
+Name=conky
+Comment[en_US]=System information
+Comment=System information
+X-MATE-Autostart-Delay=0

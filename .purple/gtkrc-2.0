@@ -1,0 +1,29 @@
+style "chat"
+{
+  font_name = "Monospace"
+	base[NORMAL] = "#000011"
+	bg[NORMAL] = "#000011"
+	GtkTreeView::odd_row_color = ""
+	GtkTreeView::even_row_color = ""    
+  text[NORMAL] = "#00DD00"	
+  # Change the color of hyperlinks.
+  GtkIMHtml::hyperlink-color = "#000080"
+  # Change the color of the nick in highlighted messages, e.g. messages containing your nick
+  # GtkIMHtml::highlight-name-color = "#AF7F00"
+  # Change the color of the nick in received message
+  # GtkIMHtml::receive-name-color = "#cc0000"
+  # Change the color of the nick in sent message
+  # GtkIMHtml::send-name-color = "#204a87"
+  # Change the color of the nick in action messages, e.g. "/me likes pidgin"
+  # GtkIMHtml::action-name-color = "#062585"
+  # Change the font of the typing notification in conversation history.
+  GtkIMHtml::typing-notification-font = "italic light 8.0"
+  # Change the color of the typing notification
+  GtkIMHtml::typing-notification-color = "#00DD00"
+}
+
+# Conversation entry box--where you type.
+widget "*pidgin_conv_entry" style "chat"
+
+# Conversation history pane--where you read the conversation.
+widget "*pidgin_conv_imhtml" style "chat"
