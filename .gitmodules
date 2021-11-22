@@ -13,3 +13,12 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = /home/paul/.oh-my-zsh
+[submodule ".vim/bundle/nerdtree"]
+	path = .vim/bundle/nerdtree
+	url = /home/paul/.vim/bundle/nerdtree
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = /home/paul/.vim/bundle/syntastic
+[submodule ".vim/bundle/YouCompleteMe"]
+	path = .vim/bundle/YouCompleteMe
+	url = /home/paul/.vim/bundle/YouCompleteMe
