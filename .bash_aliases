@@ -30,6 +30,12 @@ alias quit='exit'
 alias ipython='ipython3'
 alias nmap='nmap --reason --script-args="shodan-api.apikey=AE8hqan6Zibwzk6spvZZVt09VfzPbuHf"'
 
+if [ $TERM = "xterm-kitty" ]; then
+    alias icat='kitty +kitten icat'
+    alias kitty-diff='kitty +kitten diff'
+    alias ssh='kitty +kitten ssh'
+fi
+
 # g++ enable warnings and treat special warnings as errors
 # default warnings, extra warnings and ISO-C++ deviations
 GPP_WARN="-Wall -Wextra -Wpedantic"
