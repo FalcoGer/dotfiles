@@ -33,7 +33,7 @@ alias nmap='nmap --reason --script-args="shodan-api.apikey=AE8hqan6Zibwzk6spvZZV
 if [ $TERM = "xterm-kitty" ]; then
     alias icat='kitty +kitten icat'
     alias kitty-diff='kitty +kitten diff'
-    alias ssh='kitty +kitten ssh'
+    # alias ssh='kitty +kitten ssh'
 fi
 
 # g++ enable warnings and treat special warnings as errors
