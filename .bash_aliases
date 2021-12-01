@@ -23,7 +23,7 @@ fi
 which exa > /dev/null
 if [ $? -eq 0 ]; then
     # we have exa
-    alias ls='exa -alF --group-directories-first'
+    alias ls='exa -alF --group-directories-first --color-scale --icons --time-style long-iso --git --extended'
 else
     alias ls='ls -alhF --color=auto --group-directories-first'
 fi
