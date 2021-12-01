@@ -20,7 +20,13 @@ fi
 #alias la='ls -A'
 #alias l='ls -CF'
 #alias ls='ls -alF --color=auto | grep "^d";ls -alF --color=auto | grep "^-";ls -alF --color=auto | grep "^l"'
-alias ls='ls -alhF --color=auto --group-directories-first'
+which exa > /dev/null
+if [ $? -eq 0 ]; then
+    # we have exa
+    alias ls='exa -alF --group-directories-first'
+else
+    alias ls='ls -alhF --color=auto --group-directories-first'
+fi
 alias rmdir='rmdir -v'
 alias rm='rm -v --interactive=once'
 alias cp='cp -v -i'
