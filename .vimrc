@@ -99,10 +99,14 @@ endif
 set title
 
 " Directory for swap and backup files
-set dir=~/.cache/vim/,./
-set backupdir-=.
-set backupdir^=~/tmp,/tmp
-set patchmode=.orig
+" // at the end makes sure file locations are saved in the file name
+set dir=~/.vim/swp//,/tmp//
+set backup
+set backupdir=~/.vim/backup//,/tmp//
+set undodir=~/.vim/undo//,/tmp//
+" patchmode will keep the first version of a file and not write it anymore
+" after that
+" set patchmode=.orig
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
