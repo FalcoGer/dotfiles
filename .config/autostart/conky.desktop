@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=conky -d -c $HOME/.config/conky.conf
+Exec=conky -d -c /home/paul/.config/conky.conf
 Hidden=false
 X-MATE-Autostart-enabled=true
 Name[en_US]=conky
