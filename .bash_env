@@ -4,6 +4,8 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/repositories/john/run"
 
+# export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib"
+
 # qt5
 # export CMAKE_PREFIX_PATH="/usr/lib/x86_64-linux-gnu/qt5"
 # /lib/x86_64-linux-gnu/cmake/Qt5/ ?
