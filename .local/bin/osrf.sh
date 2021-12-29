@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# turn list of arguments into string to pass them as is to pwncat
+# turn list of arguments into string to pass them as they are
 ARGS=$(echo "$@")
 WD='/home/paul/repositories/osrframework/'
 

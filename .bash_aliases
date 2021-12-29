@@ -40,6 +40,15 @@ if [ $TERM = "xterm-kitty" ]; then
     alias icat='kitty +kitten icat'
     alias kitty-diff='kitty +kitten diff'
     # alias ssh='kitty +kitten ssh'
+    export TERM="xterm-256color"
+fi
+
+if [ -f $HOME/repositories/john/run/john ]; then
+    alias john="$HOME/repositories/john/run/john"
+fi
+
+if [ -f $HOME/repositories/wesng/wes.py ]; then
+    alias wes.py='$HOME/repositories/wesng/wes.py --color --definitions $HOME/repositories/wesng/definitions.zip'
 fi
 
 # g++ enable warnings and treat special warnings as errors
@@ -89,4 +98,3 @@ alias g++="g++ $GPP_STD $GPP_WARN $GPP_ERR"
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 alias viless='/usr/local/share/vim/vim82/macros/less.sh'
-alias john="$HOME/repositories/john/run/john"
