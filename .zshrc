@@ -92,7 +92,8 @@ plugins=(
     dotenv                  # load environment variables from ".env" file when entering a directory containing one.
     encode64                # provides encode64 (e64) and decode64 (d64) commands (aliases)
     extract                 # provides extract function to automatically pick the correct extraction tool for an archive file
-    fzf
+    fzf                     # fuzzy search in history (ctrl+r)
+    fzf-tab                 # fzf support in tab complete
     git                     # git support
     git-auto-fetch          # automatically fetch remote when you're working in a git repository folder
     git-prompt              # provide information about the repository, remote information, conflicts, etc
@@ -132,6 +133,19 @@ export ZSH_DOTENV_FILE=".env"  # the file name to look for
 
 # git-auto-fetch
 GIT_AUTO_FETCH_INTERVAL=900 # in seconds
+
+# fzf-tab
+# https://github.com/Aloxaf/fzf-tab
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -alF1 -g --color-scale --color=always --icons --time-style long-iso --git --extended $realpath'
+zstyle ':fzf-tab:complete:*' fzf-preview 'if [[ -r $realpath ]]; then /usr/bin/echo Preview for $realpath; if [[ -d $realpath ]]; then /usr/local/bin/exa -alF1 -g --color-scale --color=always --icons --time-style long-iso --git --extended $realpath; elif [[ $(/usr/bin/file -b $realpath | /usr/bin/grep -i ASCII) ]]; then /usr/bin/head -n 20 $realpath; else /usr/bin/hexdump -n 256 -C $realpath; fi; else /usr/bin/echo $realpath not readable; fi'
 
 # zsh-autosuggestions
 # options: fg=name/#hex bg, underline, bold, italic
@@ -198,6 +212,11 @@ else
 fi
 
 # autocomplete stuff
+# autocomplete from man pages
+zstyle ':completion:*:manuals'    separate-sections true
+zstyle ':completion:*:manuals.*'  insert-sections   true
+zstyle ':completion:*:man:*'      menu yes select
+
 # The following lines were added by compinstall
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _complete _ignored _correct _approximate
