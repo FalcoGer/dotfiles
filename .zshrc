@@ -93,7 +93,6 @@ plugins=(
     encode64                # provides encode64 (e64) and decode64 (d64) commands (aliases)
     extract                 # provides extract function to automatically pick the correct extraction tool for an archive file
     fzf                     # fuzzy search in history (ctrl+r)
-    fzf-tab                 # fzf support in tab complete
     git                     # git support
     git-auto-fetch          # automatically fetch remote when you're working in a git repository folder
     git-prompt              # provide information about the repository, remote information, conflicts, etc
@@ -107,13 +106,15 @@ plugins=(
     systemd                 # aliases. also provides monitoring of specific services if environment variables set correctly
     timer                   # provides execution time for commands
     z                       # z - build database of visited directories and jump into them via first matching regex.
+    fzf-tab                 # fzf support in tab complete
     zsh-autosuggestions     # provide automatic suggestions based on history and completion
 # breaks history search
 # see: https://github.com/ohmyzsh/ohmyzsh/issues/8749
 #    safe-paste              # prevents code that's pasted into terminal from running immediately
     
     # zsh-syntax-highlighting must be the last plugin!
-    zsh-syntax-highlighting # provide syntax highlighting
+    # zsh-syntax-highlighting # provide syntax highlighting
+    fast-syntax-highlighting
 )
 
 # plugin config
