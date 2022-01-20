@@ -245,7 +245,7 @@ compinit
 HISTFILE="$ZSH_CACHE_DIR/.zsh_history"
 HISTSIZE=4096
 SAVEHIST=8192
-setopt autocd nomatch notify beep
+setopt autocd nomatch notify beep numericglobsort
 unsetopt extendedglob
 bindkey -e # -e = emacs mode, -v = vim mode
 # End of lines configured by zsh-newuser-install
