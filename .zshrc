@@ -146,6 +146,8 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # preview directory's content with exa when completing cd
 # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:*' fzf-preview 'if [[ -n $realpath ]]; then if [[ -r $realpath ]]; then /usr/bin/file $realpath; if [[ -d $realpath ]]; then /usr/local/bin/exa -alF1 -g --color-scale --color=always --icons --time-style long-iso --git --extended $realpath; elif [[ $(/usr/bin/file -b $realpath | /usr/bin/grep -i -e "ASCII" -e "UTF-8" -e "JSON") ]]; then /usr/bin/head -n 20 $realpath; else /usr/bin/hexdump -n 256 -C $realpath; fi; else /usr/bin/echo $realpath not readable; fi; else /usr/bin/echo $group: $word; /usr/bin/echo Description:; /usr/bin/echo $desc | sed -e "s/\s\{3,\}/\n/g" | sed -e "s/.\{40\}/&\n/g"; fi'
+# disable fzf-preview for options
+zstyle ':fzf-tab:complete:*:options' fzf-preview ''
 
 # zsh-autosuggestions
 # options: fg=name/#hex bg, underline, bold, italic
