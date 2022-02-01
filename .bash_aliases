@@ -34,7 +34,9 @@ alias mv='mv -v -i'
 alias cd..='cd ..'
 alias quit='exit'
 alias ipython='ipython3'
-alias nmap='nmap --reason --script-args="shodan-api.apikey=AE8hqan6Zibwzk6spvZZVt09VfzPbuHf"'
+if [ -f ".bash_aliases_secret" ]; then
+    source ".bash_aliases_secret"
+fi
 
 if [ $TERM = "xterm-kitty" ]; then
     alias icat='kitty +kitten icat'
