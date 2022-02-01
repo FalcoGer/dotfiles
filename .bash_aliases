@@ -32,6 +32,25 @@ alias rm='rm -v --interactive=once'
 alias cp='cp -v -i'
 alias mv='mv -v -i'
 alias cd..='cd ..'
+
+up () {
+    local d=""
+    local limit="$1"
+
+    # Default to limit 1
+    if [ -z "$limit" -o "$limit" -le 0 ]; then
+        limit=1
+    fi
+
+    for ((i=1;i<=limit;i++)); do
+        d="../$d"
+    done
+
+    if ! cd "$d"; then
+        echo "Couldn't go up $limit directories." >2
+    fi
+}
+
 alias quit='exit'
 alias ipython='ipython3'
 if [ -f ".bash_aliases_secret" ]; then
