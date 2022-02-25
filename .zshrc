@@ -87,7 +87,7 @@ plugins=(
     colored-man-pages       # colored man pages :>
     colorize                # colored output (syntax highlighting using pygmentize)
     command-not-found       # suggest packages to install if a command was not found
-    copydir                 # copy pwd to system clipboard
+    copypath                # copy pwd to system clipboard
     copyfile                # copy file into system clipboard
     dotenv                  # load environment variables from ".env" file when entering a directory containing one.
     encode64                # provides encode64 (e64) and decode64 (d64) commands (aliases)
