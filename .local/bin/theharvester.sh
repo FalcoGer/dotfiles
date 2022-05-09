@@ -2,7 +2,7 @@
 
 # turn list of arguments into string to pass them as they are
 ARGS=$(echo "$@")
-WD='/home/paul/repositories/theHarvester/'
+WD='/home/paul/repositories/hacking/theHarvester/'
 
 CMD="cd $WD"
 # activate virtualenv

@@ -2,7 +2,7 @@
 
 # turn list of arguments into string to pass them as they are
 ARGS=$(echo "$@")
-WD='/home/paul/repositories/pwncat/'
+WD='/home/paul/repositories/hacking/pwncat/'
 
 # activate virtualenv
 CMD='source '"$WD"'pwncat_venv/bin/activate'

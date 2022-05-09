@@ -5,10 +5,10 @@
 	path = repositories/z
 	url = /home/paul/repositories/z
 [submodule "repositories/peda"]
-	path = repositories/peda
+	path = repositories/hacking/peda
 	url = /home/paul/repositories/peda
 [submodule "repositories/exploitable"]
-	path = repositories/exploitable
+	path = repositories/hacking/exploitable
 	url = /home/paul/repositories/exploitable
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
