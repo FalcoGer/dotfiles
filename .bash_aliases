@@ -20,15 +20,21 @@ fi
 #alias la='ls -A'
 #alias l='ls -CF'
 #alias ls='ls -alF --color=auto | grep "^d";ls -alF --color=auto | grep "^-";ls -alF --color=auto | grep "^l"'
-which exa > /dev/null
-if [ $? -eq 0 ]; then
+if [ `which exa` ]; then
     # we have exa
     alias ls='exa -alF -g --group-directories-first --color-scale --icons --time-style long-iso --git --extended'
 else
     alias ls='ls -alhF --color=auto --group-directories-first'
 fi
+
 alias rmdir='rmdir -v'
-alias rm='rm -v --interactive=once'
+
+if [ `which trash` ]; then
+    alias rm='trash -v --interactive=once'
+else
+    alias rm='rm -v --interactive=once'
+fi
+
 alias cp='cp -v -i'
 alias mv='mv -v -i'
 alias cd..='cd ..'
@@ -64,12 +70,12 @@ if [ $TERM = "xterm-kitty" ]; then
     export TERM="xterm-256color"
 fi
 
-if [ -f $HOME/repositories/john/run/john ]; then
-    alias john="$HOME/repositories/john/run/john"
+if [ -f $HOME/repositories/hackng/john/run/john ]; then
+    alias john="$HOME/repositories/hacking/john/run/john"
 fi
 
-if [ -f $HOME/repositories/wesng/wes.py ]; then
-    alias wes.py='$HOME/repositories/wesng/wes.py --color --definitions $HOME/repositories/wesng/definitions.zip'
+if [ -f $HOME/repositories/hacking/wesng/wes.py ]; then
+    alias wes.py='$HOME/repositories/hacking/wesng/wes.py --color --definitions $HOME/repositories/wesng/definitions.zip'
 fi
 
 # g++ enable warnings and treat special warnings as errors
