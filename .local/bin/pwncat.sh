@@ -5,9 +5,9 @@ ARGS=$(echo "$@")
 WD='/home/paul/repositories/hacking/pwncat/'
 
 # activate virtualenv
-CMD='source '"$WD"'pwncat_venv/bin/activate'
+CMD='source '"$WD"'bin/activate'
 # append command
-CMD="$CMD"' && python -m pwncat --config '"$WD"'data/pwncatrc '"$ARGS"
+CMD="$CMD"' && python -m pwncat --config '"$WD"'pwncatrc '"$ARGS"
 
 echo
 echo "Run on Victim"
@@ -16,7 +16,7 @@ echo
 echo
 
 # execute in own bash instance
-# this prevents the virtualenv
+# this prevents the virtualenv to stick
 echo running \""$CMD"\" in $(pwd)
 echo ---------------start---------------
 /bin/bash -c "$CMD"
