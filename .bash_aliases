@@ -70,7 +70,7 @@ if [ $TERM = "xterm-kitty" ]; then
     export TERM="xterm-256color"
 fi
 
-if [ -f $HOME/repositories/hackng/john/run/john ]; then
+if [ -f $HOME/repositories/hacking/john/run/john ]; then
     alias john="$HOME/repositories/hacking/john/run/john"
 fi
 
