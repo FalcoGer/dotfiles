@@ -4,5 +4,6 @@ define hook-stop
     x /64wx $rsp
     x /3i $rip
 end
-source ~/repositories/hacking/peda/peda.py
+# source ~/repositories/hacking/peda/peda.py
 source ~/repositories/hacking/exploitable/exploitable/exploitable.py
+source ~/repositories/hacking/gef/gef.py

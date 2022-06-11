@@ -30,7 +30,7 @@ fi
 alias rmdir='rmdir -v'
 
 if [ `which trash` ]; then
-    alias rm='trash -v --interactive=once'
+    alias rm='trash -v'
 else
     alias rm='rm -v --interactive=once'
 fi
