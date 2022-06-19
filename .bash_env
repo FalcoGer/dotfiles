@@ -4,6 +4,10 @@ export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/repositories/john/run"
 
+if [ -f ".bash_env_secret" ]; then
+    source ".bash_env_secret"
+fi
+
 # export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib"
 
 # qt5
