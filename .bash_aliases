@@ -117,7 +117,7 @@ GPP_ERR="$GPP_ERR -Werror=multistatement-macros" # warn if macro with multiple s
 GPP_ERR="$GPP_ERR -Werror=sequence-point" # undefined behavior for things like a = a++ or a[n] = n++ or a[n++] = n
 GPP_ERR="$GPP_ERR -Werror=return-type" # undefined behavior if returning function does not return a value. also if non-returning function returns a value.
 GPP_ERR="$GPP_ERR -Werror=multichar" # char c = 'ABCD';
-GPP_STD="-std=c++17"
+GPP_STD="-std=c++20"
 alias g++="g++ $GPP_STD $GPP_WARN $GPP_ERR"
 
 # Add an "alert" alias for long running commands.  Use like so:
