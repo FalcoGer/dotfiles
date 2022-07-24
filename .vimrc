@@ -243,3 +243,6 @@ noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
+" allow saving with sudo by typing w!!
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
