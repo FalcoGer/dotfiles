@@ -1,24 +1,24 @@
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
-	url = /home/paul/.vim/bundle/Vundle.vim
+	url = git@github.com:VundleVim/Vundle.vim.git
 [submodule "repositories/z"]
 	path = repositories/z
-	url = /home/paul/repositories/z
+	url = git@github.com:rupa/z.git
 [submodule "repositories/peda"]
 	path = repositories/hacking/peda
-	url = /home/paul/repositories/peda
+	url = git@github.com:longld/peda.git
 [submodule "repositories/exploitable"]
 	path = repositories/hacking/exploitable
-	url = /home/paul/repositories/exploitable
+	url = git@github.com:jfoote/exploitable.git
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
-	url = /home/paul/.oh-my-zsh
+	url = git@github.com:ohmyzsh/ohmyzsh.git
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
-	url = /home/paul/.vim/bundle/nerdtree
+	url = git@github.com:preservim/nerdtree.git
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
-	url = /home/paul/.vim/bundle/syntastic
+	url = git@github.com:vim-syntastic/syntastic.git
 [submodule ".vim/bundle/YouCompleteMe"]
 	path = .vim/bundle/YouCompleteMe
-	url = /home/paul/.vim/bundle/YouCompleteMe
+	url = git@github.com:ycm-core/YouCompleteMe.git
