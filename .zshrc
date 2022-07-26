@@ -1,10 +1,13 @@
 # repositories
+# 
 # custom plugins:
 # git@github.com:zdharma-continuum/fast-syntax-highlighting
 # git@github.com:Aloxaf/fzf-tab
 # git@github.com:zsh-users/zsh-autosuggestions.git
 # git@github.com:zsh-users/zsh-syntax-highlighting.git
-
+#
+# custom themes
+# git@github.com:romkatv/powerlevel10k.git
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
