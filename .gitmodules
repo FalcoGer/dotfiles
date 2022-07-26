@@ -1,24 +1,32 @@
 [submodule ".vim/bundle/Vundle.vim"]
-	path = .vim/bundle/Vundle.vim
-	url = git@github.com:VundleVim/Vundle.vim.git
+    path = .vim/bundle/Vundle.vim
+    url = git@github.com:VundleVim/Vundle.vim.git
+    branch = master
 [submodule "repositories/z"]
-	path = repositories/z
-	url = git@github.com:rupa/z.git
+    path = repositories/z
+    url = git@github.com:rupa/z.git
+    branch = master
 [submodule "repositories/peda"]
-	path = repositories/hacking/peda
-	url = git@github.com:longld/peda.git
+    path = repositories/hacking/peda
+    url = git@github.com:longld/peda.git
+    branch = master
 [submodule "repositories/exploitable"]
-	path = repositories/hacking/exploitable
-	url = git@github.com:jfoote/exploitable.git
+    path = repositories/hacking/exploitable
+    url = git@github.com:jfoote/exploitable.git
+    branch = master
 [submodule ".oh-my-zsh"]
-	path = .oh-my-zsh
-	url = git@github.com:ohmyzsh/ohmyzsh.git
+    path = .oh-my-zsh
+    url = git@github.com:ohmyzsh/ohmyzsh.git
+    branch = master
 [submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
-	url = git@github.com:preservim/nerdtree.git
+    path = .vim/bundle/nerdtree
+    url = git@github.com:preservim/nerdtree.git
+    branch = master
 [submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
-	url = git@github.com:vim-syntastic/syntastic.git
+    path = .vim/bundle/syntastic
+    url = git@github.com:vim-syntastic/syntastic.git
+    branch = master
 [submodule ".vim/bundle/YouCompleteMe"]
-	path = .vim/bundle/YouCompleteMe
-	url = git@github.com:ycm-core/YouCompleteMe.git
+    path = .vim/bundle/YouCompleteMe
+    url = git@github.com:ycm-core/YouCompleteMe.git
+    branch = master
