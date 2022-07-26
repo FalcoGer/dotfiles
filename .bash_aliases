@@ -22,7 +22,7 @@ fi
 #alias ls='ls -alF --color=auto | grep "^d";ls -alF --color=auto | grep "^-";ls -alF --color=auto | grep "^l"'
 if [ `which exa` ]; then
     # we have exa
-    alias ls='exa -alF -g --group-directories-first --color-scale --icons --time-style long-iso --git --extended'
+    alias ls='exa -aalF -g --group-directories-first --color-scale --icons --time-style long-iso --git --extended'
 else
     alias ls='ls -alhF --color=auto --group-directories-first'
 fi
