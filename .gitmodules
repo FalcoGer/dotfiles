@@ -6,14 +6,18 @@
     path = repositories/z
     url = git@github.com:rupa/z.git
     branch = master
-[submodule "repositories/peda"]
+[submodule "repositories/hacking/peda"]
     path = repositories/hacking/peda
     url = git@github.com:longld/peda.git
     branch = master
-[submodule "repositories/exploitable"]
+[submodule "repositories/hacking/exploitable"]
     path = repositories/hacking/exploitable
     url = git@github.com:jfoote/exploitable.git
     branch = master
+[submodule "repositories/hacking/pwndbg"]
+    path = repositories/hacking/pwndbg
+    url = git@github.com:pwndbg/pwndbg.git
+    branch = dev
 [submodule ".oh-my-zsh"]
     path = .oh-my-zsh
     url = git@github.com:ohmyzsh/ohmyzsh.git
@@ -30,3 +34,4 @@
     path = .vim/bundle/YouCompleteMe
     url = git@github.com:ycm-core/YouCompleteMe.git
     branch = master
+

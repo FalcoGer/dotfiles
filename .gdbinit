@@ -19,3 +19,4 @@ end
 # source ~/repositories/hacking/peda/peda.py
 source ~/repositories/hacking/exploitable/exploitable/exploitable.py
 source ~/repositories/hacking/gef/gef.py
+source /home/paul/repositories/hacking/pwndbg/gdbinit.py
