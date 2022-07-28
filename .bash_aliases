@@ -4,8 +4,8 @@ alias sudo='sudo '
 alias config="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/repositories/dotfiles/"
 
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+if [ -x "/usr/bin/dircolors" ]; then
+    test -r "$HOME/.dircolors" && eval "$(dircolors -b "$HOME/.dircolors")" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
@@ -20,7 +20,8 @@ fi
 #alias la='ls -A'
 #alias l='ls -CF'
 #alias ls='ls -alF --color=auto | grep "^d";ls -alF --color=auto | grep "^-";ls -alF --color=auto | grep "^l"'
-if [ `which exa` ]; then
+cmp=`which exa`
+if [ -n "${cmp}" ]; then
     # we have exa
     alias ls='exa -aalF -g --group-directories-first --color-scale --icons --time-style long-iso --git --extended'
 else
@@ -29,7 +30,8 @@ fi
 
 alias rmdir='rmdir -v'
 
-if [ `which trash` ]; then
+cmp=`which trash`
+if [ -n "${cmp}" ]; then
     alias rm='trash -v'
 else
     alias rm='rm -v --interactive=once'
@@ -63,18 +65,18 @@ if [ -f ".bash_aliases_secret" ]; then
     source ".bash_aliases_secret"
 fi
 
-if [ $TERM = "xterm-kitty" ]; then
+if [ "$TERM" = "xterm-kitty" ]; then
     alias icat='kitty +kitten icat'
     alias kitty-diff='kitty +kitten diff'
     # alias ssh='kitty +kitten ssh'
     export TERM="xterm-256color"
 fi
 
-if [ -f $HOME/repositories/hacking/john/run/john ]; then
+if [ -f "$HOME/repositories/hacking/john/run/john" ]; then
     alias john="$HOME/repositories/hacking/john/run/john"
 fi
 
-if [ -f $HOME/repositories/hacking/wesng/wes.py ]; then
+if [ -f "$HOME/repositories/hacking/wesng/wes.py" ]; then
     alias wes.py='$HOME/repositories/hacking/wesng/wes.py --color --definitions $HOME/repositories/wesng/definitions.zip'
 fi
 

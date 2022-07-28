@@ -29,10 +29,10 @@ export ZSH="$HOME/.oh-my-zsh"
 #ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-if [ -f ~/.p10k.zsh ]; then
-    source ~/.p10k.zsh
+if [ -f "$HOME/.p10k.zsh" ]; then
+    source "$HOME/.p10k.zsh"
 else
-    print "404: ~/.p10k.zsh not found."
+    print "404: $HOME/.p10k.zsh not found."
 fi
 
 # Set list of themes to pick from when loading at random
@@ -176,10 +176,10 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 source $ZSH/oh-my-zsh.sh
 
 # prompts
-if [ -f ~/.shell_colors ]; then
-    source ~/.shell_colors
+if [ -f "$HOME/.shell_colors" ]; then
+    source "$HOME/.shell_colors"
 else
-    echo "404: ~/.shell_colors not found."
+    echo "404: $HOME/.shell_colors not found."
 fi
 
 # User configuration
@@ -204,24 +204,24 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-if [ -f ~/.bash_aliases ]; then
-    source ~/.bash_aliases 
+if [ -f "$HOME/.bash_aliases" ]; then
+    source "$HOME/.bash_aliases"
 else
-    print "404: ~/.bash_aliases not found."
+    print "404: $HOME/.bash_aliases not found."
 fi
 
 # zsh-specific aliases
-if [ -f ~/.zsh_aliases ]; then
-    source ~/.zsh_aliases
+if [ -f "$HOME/.zsh_aliases" ]; then
+    source "$HOME/.zsh_aliases"
 else
-    print "404: ~/.zsh_aliases not found."
+    print "404: $HOME/.zsh_aliases not found."
 fi
 
 # exports
-if [ -f ~/.bash_env ]; then
-    source ~/.bash_env
+if [ -f "$HOME/.bash_env" ]; then
+    source "$HOME/.bash_env"
 else
-    print "404: ~/.bash_env not found."
+    print "404: $HOME/.bash_env not found."
 fi
 
 # autocomplete stuff
