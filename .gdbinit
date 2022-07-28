@@ -9,14 +9,16 @@ set history remove-duplicates unlimited
 set disassembly-flavor intel
 
 # show registers, stack and instruction pointer when stopping
-define hook-stop
-    info registers rax rbx rcx rdx rsi rdi rbp rsp rip eflags
-    x /64wx $rsp
-    x /3i $rip
-end
+
+# not required with gef/pwndbg
+# define hook-stop
+#     info registers rax rbx rcx rdx rsi rdi rbp rsp rip eflags
+#     x /64wx $rsp
+#     x /3i $rip
+# end
 
 # load extensions
 # source ~/repositories/hacking/peda/peda.py
 source ~/repositories/hacking/exploitable/exploitable/exploitable.py
 # source ~/repositories/hacking/gef/gef.py
-source ~/repositories/hacking/pwndbg/gdbinit.py
+source /home/paul/repositories/hacking/pwndbg/gdbinit.py

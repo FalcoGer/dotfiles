@@ -15,8 +15,8 @@
     url = git@github.com:jfoote/exploitable.git
     branch = master
 [submodule "repositories/hacking/pwndbg"]
-    path = repositories/hacking/pwndbg
-    url = git@github.com:pwndbg/pwndbg.git
+	path = repositories/hacking/pwndbg
+	url = git@github.com:pwndbg/pwndbg.git
     branch = dev
 [submodule ".oh-my-zsh"]
     path = .oh-my-zsh
@@ -34,4 +34,3 @@
     path = .vim/bundle/YouCompleteMe
     url = git@github.com:ycm-core/YouCompleteMe.git
     branch = master
-
