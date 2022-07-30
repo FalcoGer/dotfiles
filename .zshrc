@@ -159,6 +159,8 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:*' fzf-preview 'if [[ -n $realpath ]]; then if [[ -r $realpath ]]; then /usr/bin/file $realpath; if [[ -d $realpath ]]; then /usr/local/bin/exa -alF1 -g --color-scale --color=always --icons --time-style long-iso --git --extended $realpath; elif [[ $(/usr/bin/file -b $realpath | /usr/bin/grep -i -e "ASCII" -e "UTF-8" -e "JSON") ]]; then /usr/bin/head -n 20 $realpath; else /usr/bin/hexdump -n 256 -C $realpath; fi; else /usr/bin/echo $realpath not readable; fi; else /usr/bin/echo $group: $word; /usr/bin/echo Description:; /usr/bin/echo $desc | sed -e "s/\s\{3,\}/\n/g" | sed -e "s/.\{40\}/&\n/g"; fi'
 # disable fzf-preview for options
 zstyle ':fzf-tab:complete:*:options' fzf-preview ''
+# disable fzf-preview for subcommands
+zstyle ':fzf-tab:complete:*:argument-1' fzf-preview ''
 
 # zsh-autosuggestions
 # options: fg=name/#hex bg, underline, bold, italic
@@ -225,6 +227,11 @@ else
 fi
 
 # autocomplete stuff
+
+# Custom completion files in .oh-my-zsh/custom/plugins/completion
+# put any compdef completion files into that directory and run "compinit"
+fpath=("${HOME}/.oh-my-zsh/custom/plugins/completion" $fpath)
+
 # autocomplete from man pages
 zstyle ':completion:*:manuals'    separate-sections true
 zstyle ':completion:*:manuals.*'  insert-sections   true
@@ -253,11 +260,6 @@ zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-
-# Custom completion files in .oh-my-zsh/custom/plugins/completion
-# put any compdef completion files into that directory and run "compinit"
-fpath=("${HOME}/.oh-my-zsh/custom/plugins/completion" $fpath)
-# End custom completion files
 
 # Lines configured by zsh-newuser-install
 HISTFILE="$ZSH_CACHE_DIR/.zsh_history"
