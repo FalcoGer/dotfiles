@@ -254,6 +254,11 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# Custom completion files in .oh-my-zsh/custom/plugins/completion
+# put any compdef completion files into that directory and run "compinit"
+fpath=("${HOME}/.oh-my-zsh/custom/plugins/completion" $fpath)
+# End custom completion files
+
 # Lines configured by zsh-newuser-install
 HISTFILE="$ZSH_CACHE_DIR/.zsh_history"
 HISTSIZE=4096
