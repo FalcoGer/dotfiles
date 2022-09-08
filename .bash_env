@@ -25,6 +25,9 @@ export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_
 export PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
+# rust/cargo
+export PATH="$PATH:$HOME/.cargo/bin"
+
 # opt out of dotnet telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 
