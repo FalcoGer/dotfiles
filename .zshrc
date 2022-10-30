@@ -230,7 +230,8 @@ fi
 
 # Custom completion files in .oh-my-zsh/custom/plugins/completion
 # put any compdef completion files into that directory and run "compinit"
-fpath=("${HOME}/.oh-my-zsh/custom/plugins/completion" $fpath)
+fpath+="${HOME}/.oh-my-zsh/custom/plugins/completion"
+fpath+="${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src"
 
 # autocomplete from man pages
 zstyle ':completion:*:manuals'    separate-sections true
