@@ -28,10 +28,16 @@ else
     alias ls='ls -alhF --color=auto --group-directories-first'
 fi
 
+cmp=`which batcat`
+if [ -n "${cmp}" ]; then
+    # we have batcat
+    alias cat='batcat --style=auto --paging=auto --tabs=4'
+fi
+
 alias rmdir='rmdir -v'
 
-cmp=`which trash`
-if [ -n "${cmp}" ]; then
+which trash 1> /dev/null
+if [ $? -eq 0 ]; then
     alias rm='trash -v'
 else
     alias rm='rm -v --interactive=once'
