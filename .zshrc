@@ -262,6 +262,9 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# allow bash completions to works as well
+autoload -Uz bashcompinit && bashcompinit
+
 # Lines configured by zsh-newuser-install
 HISTFILE="$ZSH_CACHE_DIR/.zsh_history"
 HISTSIZE=4096
