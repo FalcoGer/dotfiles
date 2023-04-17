@@ -152,7 +152,7 @@ set autowrite       " Automatically save before commands like :next and :make
 set hidden          " Hide buffers when they are abandoned
 set mouse=a         " Enable mouse usage (all modes)
 
-" Highlight EOL
+" Highlight Whitespaces
 set list
 set listchars=tab:<->               " Show tabs as this. xy[z], x always, then y as many as will fit, z as the last one.
 set listchars+=eol:$                " End of line marker.
