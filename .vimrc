@@ -156,6 +156,7 @@ set mouse=a         " Enable mouse usage (all modes)
 set list
 set listchars=tab:<->               " Show tabs as this. xy[z], x always, then y as many as will fit, z as the last one.
 set listchars+=eol:$                " End of line marker.
+set listchars+=lead:-
 set listchars+=leadmultispace:---+  " What to display for leading white space characters.
 set listchars+=trail:+              " What to display for trailing white space characters.
 set listchars+=extends:>            " What to display when wrapped is off and part of the line is past the right edge of the screen.
