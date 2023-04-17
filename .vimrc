@@ -143,14 +143,23 @@ endif
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
-set showcmd		" Show (partial) command in status line.
-set showmatch		" Show matching brackets.
-set ignorecase		" Do case insensitive matching
-set smartcase		" Do smart case matching
-set incsearch		" Incremental search, shows partial matches
-set autowrite		" Automatically save before commands like :next and :make
-set hidden		" Hide buffers when they are abandoned
-set mouse=a		" Enable mouse usage (all modes)
+set showcmd         " Show (partial) command in status line.
+set showmatch       " Show matching brackets.
+set ignorecase      " Do case insensitive matching
+set smartcase       " Do smart case matching
+set incsearch       " Incremental search, shows partial matches
+set autowrite       " Automatically save before commands like :next and :make
+set hidden          " Hide buffers when they are abandoned
+set mouse=a         " Enable mouse usage (all modes)
+
+" Highlight EOL
+set list
+set listchars=tab:<->               " Show tabs as this. xy[z], x always, then y as many as will fit, z as the last one.
+set listchars+=eol:$                " End of line marker.
+set listchars+=leadmultispace:---+  " What to display for leading white space characters.
+set listchars+=trail:+              " What to display for trailing white space characters.
+set listchars+=extends:>            " What to display when wrapped is off and part of the line is past the right edge of the screen.
+set listchars+=precedes:<           " What to display when wrapped is off and part of the line is past the left edge of the screen.
 
 " Set relative numbers automatically in normal mode and when buffer is out
 " focus
@@ -180,9 +189,6 @@ set wrapscan
 " command line height
 set cmdheight=2
 
-" allow backspace to delete cr/lf and such
-" set backspace=2
-
 " Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
 
@@ -206,7 +212,6 @@ set history=1000
 " auto tab
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
-
 set foldmethod=indent       " Fold based on indention levels.
 set foldnestmax=3           " Only fold up to three nested levels.
 set nofoldenable            " Disable folding by default.
@@ -225,14 +230,15 @@ set sidescrolloff=10
 " highlight current line
 set cursorline
 
+" Wrap long lines
 set linebreak
 
 " Useful mappings
- 
+
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
 map Y y$
- 
+
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 noremap <C-L> :nohl<CR><C-L>
