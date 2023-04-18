@@ -146,6 +146,7 @@ export ZSH_DOTENV_FILE=".env"  # the file name to look for
 # git-auto-fetch
 GIT_AUTO_FETCH_INTERVAL=900 # in seconds
 
+
 # fzf-tab
 # https://github.com/Aloxaf/fzf-tab
 # disable sort when completing `git checkout`
@@ -156,7 +157,16 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # preview directory's content with exa when completing cd
 # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-zstyle ':fzf-tab:complete:*' fzf-preview 'if [[ -n $realpath ]]; then if [[ -r $realpath ]]; then /usr/bin/file $realpath; if [[ -d $realpath ]]; then /usr/local/bin/exa -alF1 -g --color-scale --color=always --icons --time-style long-iso --git --extended $realpath; elif [[ $(/usr/bin/file -b $realpath | /usr/bin/grep -i -e "ASCII" -e "UTF-8" -e "JSON") ]]; then /usr/bin/head -n 20 $realpath; else /usr/bin/hexdump -n 256 -C $realpath; fi; else /usr/bin/echo $realpath not readable; fi; else /usr/bin/echo $group: $word; /usr/bin/echo Description:; /usr/bin/echo $desc | sed -e "s/\s\{3,\}/\n/g" | sed -e "s/.\{40\}/&\n/g"; fi'
+
+# Find which ls to use for the preview of directories
+lspath=`which exa`
+if [ -e $lspath ]
+then
+    # we have exa
+    zstyle ':fzf-tab:complete:*' fzf-preview 'if [[ -n $realpath ]]; then if [[ -r $realpath ]]; then /usr/bin/file $realpath; if [[ -d $realpath ]]; then `which exa` -aalF -g --color-scale --color=always --icons --time-style long-iso --git --extended $realpath; elif [[ $(/usr/bin/file -b $realpath | /usr/bin/grep -i -e "ASCII" -e "UTF-8" -e "JSON") ]]; then /usr/bin/head -n 20 $realpath; else /usr/bin/hexdump -n 256 -C $realpath; fi; else /usr/bin/echo $realpath not readable; fi; else /usr/bin/echo $group: $word; /usr/bin/echo Description:; /usr/bin/echo $desc | sed -e "s/\s\{3,\}/\n/g" | sed -e "s/.\{40\}/&\n/g"; fi'
+else
+    zstyle ':fzf-tab:complete:*' fzf-preview 'if [[ -n $realpath ]]; then if [[ -r $realpath ]]; then /usr/bin/file $realpath; if [[ -d $realpath ]]; then ls -alh --group-directories-first --color=always $realpath; elif [[ $(/usr/bin/file -b $realpath | /usr/bin/grep -i -e "ASCII" -e "UTF-8" -e "JSON") ]]; then /usr/bin/head -n 20 $realpath; else /usr/bin/hexdump -n 256 -C $realpath; fi; else /usr/bin/echo $realpath not readable; fi; else /usr/bin/echo $group: $word; /usr/bin/echo Description:; /usr/bin/echo $desc | sed -e "s/\s\{3,\}/\n/g" | sed -e "s/.\{40\}/&\n/g"; fi'
+fi
 # disable fzf-preview for options
 zstyle ':fzf-tab:complete:*:options' fzf-preview ''
 # disable fzf-preview for subcommands
