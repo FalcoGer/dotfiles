@@ -240,6 +240,9 @@ set linebreak
 " which is the default
 map Y y$
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 noremap <C-L> :nohl<CR><C-L>
