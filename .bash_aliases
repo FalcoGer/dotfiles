@@ -1,5 +1,8 @@
 # allow sudo aliases!
-alias sudo='sudo '
+if [ $SHELL = "/bin/bash" ]
+then
+    alias sudo='sudo '
+fi
 
 alias config="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/repositories/dotfiles/"
 

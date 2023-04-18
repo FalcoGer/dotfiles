@@ -1,2 +1,2 @@
-# prevent autocorrect...
-alias sudo='nocorrect sudo '
+# allow autocorrections with sudo
+alias sudo="nocorrect sudo"
