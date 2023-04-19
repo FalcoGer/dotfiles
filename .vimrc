@@ -125,7 +125,7 @@ set background=dark
 highlight Normal guifg=white guibg=black
 
 " clipboard support
-" register "+ (clipboard) and 
+" register "+ (clipboard) and
 " "* primary
 set guioptions+=a
 
@@ -260,6 +260,24 @@ noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
 " Easy hex editor
-cnoreabbrev hex execute 'silent %!xxd -g 4 -c 16 -u' <bar> redir => snapshot <bar> silent set <bar> redir END <bar> set ft=xxd <bar> set nospell
-cnoreabbrev unhex execute 'silent %!xxd -g 4 -c 16 -u -r' <bar> for opt in split(snapshot,'\n')[1:] <bar> exe "silent set " . opt <bar> endfor
+let bin=0
+cnoreabbrev hex execute 'silent %!xxd -g 4 -c 16 -u' <bar> redir => snapshot <bar> silent set <bar> redir END <bar> set ft=xxd <bar> set nospell <bar> let bin=1 <bar> set nomod
+cnoreabbrev unhex execute 'silent %!xxd -g 4 -c 16 -u -r' <bar> for opt in split(snapshot,'\n')[1:] <bar> exe "silent set " . opt <bar> endfor <bar> let bin=0 <bar> set nomod
 
+augroup Binary
+    autocmd!
+    " Automatic loading of bin files in hex
+    autocmd BufReadPre      *.bin   let &bin=1
+    autocmd BufReadPost     *.bin   if &bin | %!xxd -g 4 -c 16 -u
+    autocmd BufReadPost     *.bin   set ft=xxd | set nospell | endif
+    " Automatic writing in not hex
+    autocmd BufWritePre     *       if &bin | %!xxd -g 4 -c 16 -u -r
+    autocmd BufWritePre     *       endif
+    autocmd BufWritePost    *       if &bin | %!xxd -g 4 -c 16 -u
+    autocmd BufWritePost    *       set nomod | endif
+augroup END
+
+" store settings in local variable
+redir => snapshot
+    silent set
+redir END
