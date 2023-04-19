@@ -260,16 +260,17 @@ noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
 " Easy hex editor
-let bin=0
-cnoreabbrev hex execute 'silent %!xxd -g 4 -c 16 -u' <bar> redir => snapshot <bar> silent set <bar> redir END <bar> set ft=xxd <bar> set nospell <bar> let bin=1 <bar> set nomod
-cnoreabbrev unhex execute 'silent %!xxd -g 4 -c 16 -u -r' <bar> for opt in split(snapshot,'\n')[1:] <bar> exe "silent set " . opt <bar> endfor <bar> let bin=0 <bar> set nomod
+let &bin=0
+cnoreabbrev hex if ! &bin <bar> redir => modi <bar> silent set modified? <bar> redir END <bar> execute 'silent %!xxd -g 4 -c 16 -u' <bar> redir => snapshot <bar> silent set spell? <bar> silent set filetype? <bar> redir END <bar> silent set filetype=xxd <bar> silent set nospell <bar> let &bin=1 <bar> execute "silent set " . modi[1:] <bar> else <bar> echo "Is already hexed." <bar> endif
+
+cnoreabbrev unhex if &bin <bar> redir => modi <bar> silent set nomod? <bar> redir END <bar> execute 'silent %!xxd -g 4 -c 16 -u -r' <bar> for opt in split(snapshot,'\n') <bar> execute "silent set " . opt <bar> endfor <bar> let &bin=0 <bar> execute ("silent set " . modi[1:]) <bar> else <bar> echo "Is already unhexed." <bar> endif
 
 augroup Binary
     autocmd!
     " Automatic loading of bin files in hex
     autocmd BufReadPre      *.bin   let &bin=1
     autocmd BufReadPost     *.bin   if &bin | %!xxd -g 4 -c 16 -u
-    autocmd BufReadPost     *.bin   set ft=xxd | set nospell | endif
+    autocmd BufReadPost     *.bin   set ft=xxd | set nospell | redir => snapshot | silent set filetype? | silent set spell? | redir END | endif
     " Automatic writing in not hex
     autocmd BufWritePre     *       if &bin | %!xxd -g 4 -c 16 -u -r
     autocmd BufWritePre     *       endif
@@ -279,5 +280,6 @@ augroup END
 
 " store settings in local variable
 redir => snapshot
-    silent set
+    silent set filetype?
+    silent set spell?
 redir END
