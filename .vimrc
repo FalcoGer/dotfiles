@@ -280,8 +280,3 @@ augroup Binary
     autocmd BufWritePost    *       set nomod | endif
 augroup END
 
-" store settings in local variable
-redir => snapshot
-    silent set filetype?
-    silent set spell?
-redir END
