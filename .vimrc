@@ -263,7 +263,7 @@ noremap <Leader>P "+p
 let &bin=0
 cnoreabbrev hex if ! &bin <bar> redir => modi <bar> silent set modified? <bar> redir END <bar> execute 'silent %!xxd -g 4 -c 16 -u' <bar> redir => snapshot <bar> silent set spell? <bar> silent set filetype? <bar> redir END <bar> silent set filetype=xxd <bar> silent set nospell <bar> let &bin=1 <bar> execute "silent set " . modi[1:] <bar> else <bar> echo "Is already hexed." <bar> endif
 
-cnoreabbrev unhex if &bin <bar> redir => modi <bar> silent set nomod? <bar> redir END <bar> execute 'silent %!xxd -g 4 -c 16 -u -r' <bar> for opt in split(snapshot,'\n') <bar> execute "silent set " . opt <bar> endfor <bar> let &bin=0 <bar> execute ("silent set " . modi[1:]) <bar> else <bar> echo "Is already unhexed." <bar> endif
+cnoreabbrev unhex if &bin <bar> redir => modi <bar> silent set modified? <bar> redir END <bar> execute 'silent %!xxd -g 4 -c 16 -u -r' <bar> for opt in split(snapshot,'\n') <bar> execute "silent set " . opt <bar> endfor <bar> let &bin=0 <bar> execute ("silent set " . modi[1:]) <bar> else <bar> echo "Is already unhexed." <bar> endif
 
 augroup Binary
     autocmd!
