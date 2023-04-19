@@ -162,6 +162,12 @@ set listchars+=trail:+              " What to display for trailing white space c
 set listchars+=extends:>            " What to display when wrapped is off and part of the line is past the right edge of the screen.
 set listchars+=precedes:<           " What to display when wrapped is off and part of the line is past the left edge of the screen.
 
+" Make it less cluttery
+" Default term=bold ctermfg=12 gui=bold guifg=Blue
+" For which highlight group goes where, check the end of ":help listchars"
+highlight NonText term=bold ctermfg=237 gui=bold guifg=Gray23
+highlight SpecialKey term=bold ctermfg=237 gui=bold guifg=Gray23
+
 " Set relative numbers automatically in normal mode and when buffer is out
 " focus
 set number
