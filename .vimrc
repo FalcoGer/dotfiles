@@ -246,7 +246,8 @@ set linebreak
 map Y y$
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
+" cmap w!! w !sudo tee > /dev/null %
+cmap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
@@ -258,6 +259,7 @@ noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
-" allow saving with sudo by typing w!!
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+" Easy hex editor
+cnoreabbrev hex execute 'silent %!xxd -g 4 -c 16 -u' <bar> redir => snapshot <bar> silent set <bar> redir END <bar> set ft=xxd <bar> set nospell
+cnoreabbrev unhex execute 'silent %!xxd -g 4 -c 16 -u -r' <bar> for opt in split(snapshot,'\n')[1:] <bar> exe "silent set " . opt <bar> endfor
 
