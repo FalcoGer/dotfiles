@@ -82,6 +82,12 @@ filetype plugin indent on       " required
 
 " =============================================================================
 
+" Add color table script
+source "~/.vim/xtermColorTable/xterm-color-table.vim"
+
+" =============================================================================
+" NerdTree stuff here. See :help NERD_tree.txt
+
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
@@ -89,6 +95,12 @@ autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
             \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
+" Automatically show hidden files
+" Toggle with Shift + I
+let NERDTreeShowHidden=1
+
+" =============================================================================
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -152,6 +164,7 @@ set autowrite       " Automatically save before commands like :next and :make
 set hidden          " Hide buffers when they are abandoned
 set mouse=a         " Enable mouse usage (all modes)
 
+" =============================================================================
 " Highlight Whitespaces
 set list
 set listchars=tab:<->               " Show tabs as this. xy[z], x always, then y as many as will fit, z as the last one.
@@ -167,6 +180,8 @@ set listchars+=precedes:<           " What to display when wrapped is off and pa
 highlight NonText term=bold ctermfg=237 gui=bold guifg=Gray23
 highlight SpecialKey term=bold ctermfg=237 gui=bold guifg=Gray23
 
+" =============================================================================
+
 " Set relative numbers automatically in normal mode and when buffer is out
 " focus
 set number
@@ -177,6 +192,8 @@ augroup numbertoggle
     autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
+" =============================================================================
 
 set synmaxcol=2048
 
@@ -215,6 +232,8 @@ set laststatus=2
 " history size
 set history=1000
 
+" =============================================================================
+
 " auto tab
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
@@ -222,12 +241,13 @@ set foldmethod=indent       " Fold based on indention levels.
 set foldnestmax=3           " Only fold up to three nested levels.
 set nofoldenable            " Disable folding by default.
 
-
 " Indentation settings for using 4 spaces instead of tabs.
 " Do not change 'tabstop' from its default value of 8 with this setup.
 set shiftwidth=4            " Indent using 4 spaces
 set softtabstop=4           " Inserts tabstop number of spaces when tab is pressed
 set expandtab               " Converts tabs to spaces
+
+" =============================================================================
 
 " keep cursor off the edge when scrolling
 set scrolloff=4
@@ -238,6 +258,8 @@ set cursorline
 
 " Wrap long lines
 set linebreak
+
+" =============================================================================
 
 " Useful mappings
 
@@ -258,6 +280,11 @@ noremap <Leader>y "*y
 noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
+
+" Easy toggle for NerdTree
+cnoreabbrev nt NERDTreeToggle
+
+" =============================================================================
 
 " Easy hex editor
 let &bin=0
