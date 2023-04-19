@@ -269,8 +269,10 @@ augroup Binary
     autocmd!
     " Automatic loading of bin files in hex
     autocmd BufReadPre      *.bin   let &bin=1
-    autocmd BufReadPost     *.bin   if &bin | %!xxd -g 4 -c 16 -u
-    autocmd BufReadPost     *.bin   set ft=xxd | set nospell | redir => snapshot | silent set filetype? | silent set spell? | redir END | endif
+    autocmd BufReadPre      *.img   let &bin=1
+    
+    autocmd BufReadPost     *       if &bin | %!xxd -g 4 -c 16 -u
+    autocmd BufReadPost     *       set ft=xxd | set nospell | redir => snapshot | silent set filetype? | silent set spell? | redir END | endif
     " Automatic writing in not hex
     autocmd BufWritePre     *       if &bin | %!xxd -g 4 -c 16 -u -r
     autocmd BufWritePre     *       endif
