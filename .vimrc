@@ -83,7 +83,9 @@ filetype plugin indent on       " required
 " =============================================================================
 
 " Add color table script
-source "~/.vim/xtermColorTable/xterm-color-table.vim"
+if filereadable("/home/paul/.vim/xterm-color-table/plugin/xterm-color-table.vim")
+    source ~/.vim/xterm-color-table/plugin/xterm-color-table.vim
+endif
 
 " =============================================================================
 " NerdTree stuff here. See :help NERD_tree.txt
@@ -177,8 +179,8 @@ set listchars+=precedes:<           " What to display when wrapped is off and pa
 
 " Make it less clutter-y
 " For which highlight group goes where, check the end of ":help listchars"
-highlight NonText term=bold ctermfg=237 gui=bold guifg=Gray23
-highlight SpecialKey term=bold ctermfg=237 gui=bold guifg=Gray23
+highlight NonText term=bold ctermfg=244 gui=bold guifg=#808080
+highlight SpecialKey term=bold ctermfg=244 gui=bold guifg=#808080
 
 " =============================================================================
 
@@ -283,6 +285,13 @@ noremap <Leader>P "+p
 
 " Easy toggle for NerdTree
 cnoreabbrev nt NERDTreeToggle
+
+" =============================================================================
+" Auto remove whitespace at EOL in certain scripts
+augroup AutoremoveWhitespace
+    autocmd!
+    autocmd BufWritePre *.py    silent :%s/\s\+$//g
+augroup END
 
 " =============================================================================
 
