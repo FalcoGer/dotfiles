@@ -23,6 +23,47 @@ runtime! debian.vim
 set nocompatible
 
 " =============================================================================
+" ALE setting
+
+" Lint when...
+let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_filetype_changed = 1
+
+" How to display...
+let g:ale_use_neovim_diagnostics_api = 0
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_set_highlights = 1
+let g:ale_set_signs = 1
+let g:ale_echo_cursor = 0
+let g:ale_virtualtext_cursor = 0
+let g:ale_cursor_detail = 1
+let g:ale_set_balloons = 1
+
+" Options
+let g:ale_close_preview_on_insert = 1               " Close preview window in insert mode
+let g:ale_floating_preview = 1                      " :help ale_floating_preview
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
+let g:ale_hover_to_preview = 1                      " Display hover tips in preview window.
+let g:ale_lsp_suggestions = 1                       " Display suggestions in addition to warnings and errors
+let g:ale_popup_menu_enabled = 1                    " For GUI, allow RMB refactoring.
+
+" Automatically open and close lists
+let g:ale_open_list = 1
+let g:ale_keep_list_window_open = 0
+
+" GCC options
+let g:ale_cpp_cc_options = '-std=c++17 -Wall -Wextra -Wpedantic -Wdouble-promotion -Wformat=2 -Wformat-nonliteral -Wformat-signedness -Wformat-y2k -Wnull-dereference -Wimplicit-fallthrough=2 -Wmissing-include-dirs -Wswitch-default -Wunused-parameter -Wuninitialized -Wsuggest-attribute=const -Walloc-zero -Walloca -Wconversion -Wfloat-conversion -Wsign-conversion -Wduplicated-branches -Wduplicated-cond -Wtrampolines -Wfloat-equal -Wshadow=compatible-local -Wundef -Wunused-macros -Wcast-qual -Wcast-align=strict -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wstack-protector -fstack-protector -pedantic-errors -Werror=pedantic -Werror=char-subscripts -Werror=null-dereference -Werror=init-self -Werror=implicit-fallthrough=2 -Werror=misleading-indentation -Werror=missing-braces -Werror=multistatement-macros -Werror=sequence-point -Werror=return-type -Werror=multichar'
+
+" Highlights
+highlight ALEError     term=reverse ctermbg=9  gui=undercurl guisp=Red
+highlight ALEWarning   term=reverse ctermbg=11 gui=undercurl guisp=Yellow
+highlight ALEInfo      term=reverse ctermbg=12 gui=undercurl guisp=Blue
+
+" =============================================================================
 
 " Set up Vundle (Vim Bundle - Plugin Manager)
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -46,22 +87,12 @@ Plugin 'VundleVim/Vundle.vim'
 " Autocomplete
 Plugin 'Valloric/YouCompleteMe'
 
-" Syntax Checking
-" see :help syntastic
-Plugin 'vim-syntastic/syntastic'
-
 " File Tree View
 Plugin 'preservim/nerdtree'
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_cpp_compiler_options = '-std=c++17 -Wall -Wextra -Wpedantic -Wdouble-promotion -Wformat=2 -Wformat-nonliteral -Wformat-signedness -Wformat-y2k -Wnull-dereference -Wimplicit-fallthrough=2 -Wmissing-include-dirs -Wswitch-default -Wunused-parameter -Wuninitialized -Wsuggest-attribute=const -Walloc-zero -Walloca -Wconversion -Wfloat-conversion -Wsign-conversion -Wduplicated-branches -Wduplicated-cond -Wtrampolines -Wfloat-equal -Wshadow=compatible-local -Wundef -Wunused-macros -Wcast-qual -Wcast-align=strict -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wstack-protector -fstack-protector -pedantic-errors -Werror=pedantic -Werror=char-subscripts -Werror=null-dereference -Werror=init-self -Werror=implicit-fallthrough=2 -Werror=misleading-indentation -Werror=missing-braces -Werror=multistatement-macros -Werror=sequence-point -Werror=return-type -Werror=multichar'
+" Syntax Checking
+" see :help ale
+Plugin 'dense-analysis/ale'
 
 call vundle#end()               " required
 filetype plugin indent on       " required
@@ -79,6 +110,20 @@ filetype plugin indent on       " required
 " Put your non-Plugin stuff after this line
 
 " End Vundle Setup
+
+" =============================================================================
+" Syntastic settings
+"
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" 
+" let g:syntastic_always_populate_loc_list = 1        " Update location list
+" let g:syntastic_auto_jump = 3                       " Jump cursor to first error detected, if there are only warnings, don't jump
+" let g:syntastic_auto_loc_list = 1                   " Open and close error list automatically
+" let g:syntastic_check_on_open = 0                   " Do not check when opening a file to reduce lag.
+" let g:syntastic_check_on_wq = 0                     " Don't check when buffer is about to close.
+" let g:syntastic_cpp_compiler_options = '-std=c++17 -Wall -Wextra -Wpedantic -Wdouble-promotion -Wformat=2 -Wformat-nonliteral -Wformat-signedness -Wformat-y2k -Wnull-dereference -Wimplicit-fallthrough=2 -Wmissing-include-dirs -Wswitch-default -Wunused-parameter -Wuninitialized -Wsuggest-attribute=const -Walloc-zero -Walloca -Wconversion -Wfloat-conversion -Wsign-conversion -Wduplicated-branches -Wduplicated-cond -Wtrampolines -Wfloat-equal -Wshadow=compatible-local -Wundef -Wunused-macros -Wcast-qual -Wcast-align=strict -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wstack-protector -fstack-protector -pedantic-errors -Werror=pedantic -Werror=char-subscripts -Werror=null-dereference -Werror=init-self -Werror=implicit-fallthrough=2 -Werror=misleading-indentation -Werror=missing-braces -Werror=multistatement-macros -Werror=sequence-point -Werror=return-type -Werror=multichar'
 
 " =============================================================================
 
@@ -293,6 +338,14 @@ augroup AutoremoveWhitespace
     autocmd BufWritePre *.py    silent :%s/\s\+$//g
 augroup END
 
+" =============================================================================
+" Automatically open files in a new buffer
+
+augroup AutoNewTab
+    autocmd!
+    " autocmd BufAdd,BufNewFile * nested tab sball
+    autocmd BufNewFile * nested tab sball
+augroup END
 " =============================================================================
 
 " Easy hex editor
