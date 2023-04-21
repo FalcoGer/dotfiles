@@ -34,8 +34,8 @@ let g:ale_lint_on_filetype_changed = 1
 
 " How to display...
 let g:ale_use_neovim_diagnostics_api = 0
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
 let g:ale_set_highlights = 1
 let g:ale_set_signs = 1
 let g:ale_echo_cursor = 0
@@ -55,8 +55,19 @@ let g:ale_popup_menu_enabled = 1                    " For GUI, allow RMB refacto
 let g:ale_open_list = 1
 let g:ale_keep_list_window_open = 0
 
+augroup AutoCloseCList
+    autocmd!
+    " TODO: how?
+augroup END
+
+" cpp and c options
+" help ale_cpp
+let g:ale_c_cppcheck_options = '--enable=style,warning,performance'
+
 " GCC options
-let g:ale_cpp_cc_options = '-std=c++17 -Wall -Wextra -Wpedantic -Wdouble-promotion -Wformat=2 -Wformat-nonliteral -Wformat-signedness -Wformat-y2k -Wnull-dereference -Wimplicit-fallthrough=2 -Wmissing-include-dirs -Wswitch-default -Wunused-parameter -Wuninitialized -Wsuggest-attribute=const -Walloc-zero -Walloca -Wconversion -Wfloat-conversion -Wsign-conversion -Wduplicated-branches -Wduplicated-cond -Wtrampolines -Wfloat-equal -Wshadow=compatible-local -Wundef -Wunused-macros -Wcast-qual -Wcast-align=strict -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wstack-protector -fstack-protector -pedantic-errors -Werror=pedantic -Werror=char-subscripts -Werror=null-dereference -Werror=init-self -Werror=implicit-fallthrough=2 -Werror=misleading-indentation -Werror=missing-braces -Werror=multistatement-macros -Werror=sequence-point -Werror=return-type -Werror=multichar'
+" Compiler flags
+let g:ale_cpp_clangd_options = '--clang-tidy --enable-config'
+let g:ale_cpp_cc_options = '-std=c++20 -fstack-protector -Wall -Wextra -Wpedantic -Wdouble-promotion -Wformat=2 -Wformat-nonliteral -Wformat-signedness -Wformat-y2k -Wnull-dereference -Wimplicit-fallthrough=2 -Wmissing-include-dirs -Wswitch-default -Wunused-parameter -Wuninitialized -Wsuggest-attribute=const -Walloc-zero -Walloca -Wconversion -Wfloat-conversion -Wsign-conversion -Wduplicated-branches -Wduplicated-cond -Wtrampolines -Wfloat-equal -Wshadow=compatible-local -Wundef -Wunused-macros -Wcast-qual -Wcast-align=strict -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wstack-protector -pedantic-errors -Werror=pedantic -Werror=char-subscripts -Werror=null-dereference -Werror=init-self -Werror=implicit-fallthrough=2 -Werror=misleading-indentation -Werror=missing-braces -Werror=multistatement-macros -Werror=sequence-point -Werror=return-type -Werror=multichar -Wno-unknown-warning-option'
 
 " Highlights
 highlight ALEError     term=reverse ctermbg=9  gui=undercurl guisp=Red
@@ -112,20 +123,6 @@ filetype plugin indent on       " required
 " End Vundle Setup
 
 " =============================================================================
-" Syntastic settings
-"
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" 
-" let g:syntastic_always_populate_loc_list = 1        " Update location list
-" let g:syntastic_auto_jump = 3                       " Jump cursor to first error detected, if there are only warnings, don't jump
-" let g:syntastic_auto_loc_list = 1                   " Open and close error list automatically
-" let g:syntastic_check_on_open = 0                   " Do not check when opening a file to reduce lag.
-" let g:syntastic_check_on_wq = 0                     " Don't check when buffer is about to close.
-" let g:syntastic_cpp_compiler_options = '-std=c++17 -Wall -Wextra -Wpedantic -Wdouble-promotion -Wformat=2 -Wformat-nonliteral -Wformat-signedness -Wformat-y2k -Wnull-dereference -Wimplicit-fallthrough=2 -Wmissing-include-dirs -Wswitch-default -Wunused-parameter -Wuninitialized -Wsuggest-attribute=const -Walloc-zero -Walloca -Wconversion -Wfloat-conversion -Wsign-conversion -Wduplicated-branches -Wduplicated-cond -Wtrampolines -Wfloat-equal -Wshadow=compatible-local -Wundef -Wunused-macros -Wcast-qual -Wcast-align=strict -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wstack-protector -fstack-protector -pedantic-errors -Werror=pedantic -Werror=char-subscripts -Werror=null-dereference -Werror=init-self -Werror=implicit-fallthrough=2 -Werror=misleading-indentation -Werror=missing-braces -Werror=multistatement-macros -Werror=sequence-point -Werror=return-type -Werror=multichar'
-
-" =============================================================================
 
 " Add color table script
 if filereadable("/home/paul/.vim/xterm-color-table/plugin/xterm-color-table.vim")
@@ -136,16 +133,21 @@ endif
 " NerdTree stuff here. See :help NERD_tree.txt
 
 " Start NERDTree when Vim is started without file arguments.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+augroup NerdTreeAuto
+    autocmd!
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+    autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
             \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-
+augroup END
 " Automatically show hidden files
 " Toggle with Shift + I
 let NERDTreeShowHidden=1
+
+" Easy toggle command for NerdTree
+cnoreabbrev nt NERDTreeToggle
 
 " =============================================================================
 
@@ -191,7 +193,7 @@ set guioptions+=a
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " Uncomment the following to have Vim load indentation rules and plugins
@@ -328,9 +330,6 @@ noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
-" Easy toggle for NerdTree
-cnoreabbrev nt NERDTreeToggle
-
 " =============================================================================
 " Auto remove whitespace at EOL in certain scripts
 augroup AutoremoveWhitespace
@@ -350,9 +349,11 @@ augroup END
 
 " Easy hex editor
 let &bin=0
-cnoreabbrev hex if ! &bin <bar> redir => modi <bar> silent set modified? <bar> redir END <bar> execute 'silent %!xxd -g 4 -c 16 -u' <bar> redir => snapshot <bar> silent set spell? <bar> silent set filetype? <bar> redir END <bar> silent set filetype=xxd <bar> silent set nospell <bar> let &bin=1 <bar> execute "silent set " . modi[1:] <bar> else <bar> echo "Is already hexed." <bar> endif
+let hexGroupSize=1
+let hexColumnSize=16
+cnoreabbrev hex if ! &bin <bar> redir => modi <bar> silent set modified? <bar> redir END <bar> execute 'silent %!xxd -g ' . hexGroupSize . ' -c ' . hexColumnSize . ' -u' <bar> redir => snapshot <bar> silent set spell? <bar> silent set filetype? <bar> redir END <bar> silent set filetype=xxd <bar> silent set nospell <bar> let &bin=1 <bar> execute "silent set " . modi[1:] <bar> else <bar> echo "Is already hexed." <bar> endif
 
-cnoreabbrev unhex if &bin <bar> redir => modi <bar> silent set modified? <bar> redir END <bar> execute 'silent %!xxd -g 4 -c 16 -u -r' <bar> for opt in split(snapshot,'\n') <bar> execute "silent set " . opt <bar> endfor <bar> let &bin=0 <bar> execute ("silent set " . modi[1:]) <bar> else <bar> echo "Is already unhexed." <bar> endif
+cnoreabbrev unhex if &bin <bar> redir => modi <bar> silent set modified? <bar> redir END <bar> execute 'silent %!xxd -g ' . hexGroupSize . ' -c ' . hexColumnSize . ' -u -r' <bar> for opt in split(snapshot,'\n') <bar> execute "silent set " . opt <bar> endfor <bar> let &bin=0 <bar> execute ("silent set " . modi[1:]) <bar> else <bar> echo "Is already unhexed." <bar> endif
 
 augroup Binary
     autocmd!
