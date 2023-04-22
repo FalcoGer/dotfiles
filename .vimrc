@@ -322,7 +322,7 @@ cmap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
-noremap <C-L> :nohl<CR><C-L>
+noremap <C-L> :nohl<CR>:cclose<CR>:lclose<CR>:helpclose<CR><C-L>
 
 " copy to PRIMARY or to CLIPBOARD
 noremap <Leader>y "*y
@@ -334,7 +334,7 @@ noremap <Leader>P "+p
 " Auto remove whitespace at EOL in certain scripts
 augroup AutoremoveWhitespace
     autocmd!
-    autocmd BufWritePre *.py    silent :%s/\s\+$//g
+    autocmd BufWritePre *.py    silent if(search('\s\+$', 'w')) | :%s/\s\+$//g | fi
 augroup END
 
 " =============================================================================
