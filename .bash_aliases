@@ -38,7 +38,7 @@ if [ -n "${cmp}" ]; then
 fi
 
 cmp=`which nvim`
-if [ -n "${cmp}"]; then
+if [ -n "${cmp}" ]; then
     # we have neovim
     alias vim='nvim -p'
 else
