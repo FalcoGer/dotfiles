@@ -23,89 +23,39 @@ runtime! debian.vim
 set nocompatible
 
 " =============================================================================
-" ALE setting
-
-" Lint when...
-let g:ale_lint_on_text_changed = 1
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_filetype_changed = 1
-
-" How to display...
-let g:ale_use_neovim_diagnostics_api = 0
-let g:ale_set_loclist = 1
-let g:ale_set_quickfix = 0
-let g:ale_set_highlights = 1
-let g:ale_set_signs = 1
-let g:ale_echo_cursor = 0
-let g:ale_virtualtext_cursor = 0
-let g:ale_cursor_detail = 1
-let g:ale_set_balloons = 1
-
-" Options
-let g:ale_close_preview_on_insert = 1               " Close preview window in insert mode
-let g:ale_floating_preview = 1                      " :help ale_floating_preview
-let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
-let g:ale_hover_to_preview = 1                      " Display hover tips in preview window.
-let g:ale_lsp_suggestions = 1                       " Display suggestions in addition to warnings and errors
-let g:ale_popup_menu_enabled = 1                    " For GUI, allow RMB refactoring.
-
-" Automatically open and close lists
-let g:ale_open_list = 1
-let g:ale_keep_list_window_open = 0
-
-augroup AutoCloseCList
-    autocmd!
-    " TODO: how?
-augroup END
-
-" cpp and c options
-" help ale_cpp
-let g:ale_c_cppcheck_options = '--enable=style,warning,performance'
-
-" GCC options
-" Compiler flags
-let g:ale_cpp_clangd_options = '--clang-tidy --enable-config'
-let g:ale_cpp_cc_options = '-std=c++20 -fstack-protector -Wall -Wextra -Wpedantic -Wdouble-promotion -Wformat=2 -Wformat-nonliteral -Wformat-signedness -Wformat-y2k -Wnull-dereference -Wimplicit-fallthrough=2 -Wmissing-include-dirs -Wswitch-default -Wunused-parameter -Wuninitialized -Wsuggest-attribute=const -Walloc-zero -Walloca -Wconversion -Wfloat-conversion -Wsign-conversion -Wduplicated-branches -Wduplicated-cond -Wtrampolines -Wfloat-equal -Wshadow=compatible-local -Wundef -Wunused-macros -Wcast-qual -Wcast-align=strict -Wlogical-op -Wmissing-declarations -Wredundant-decls -Wstack-protector -pedantic-errors -Werror=pedantic -Werror=char-subscripts -Werror=null-dereference -Werror=init-self -Werror=implicit-fallthrough=2 -Werror=misleading-indentation -Werror=missing-braces -Werror=multistatement-macros -Werror=sequence-point -Werror=return-type -Werror=multichar -Wno-unknown-warning-option'
-
-" Highlights
-highlight ALEError     term=reverse ctermbg=9  gui=undercurl guisp=Red
-highlight ALEWarning   term=reverse ctermbg=11 gui=undercurl guisp=Yellow
-highlight ALEInfo      term=reverse ctermbg=12 gui=undercurl guisp=Blue
-
+if filereadable(expand("~/.vim/ale.vim"))
+    " source ~/.vim/ale.vim
+endif
 " =============================================================================
 
-" Set up Vundle (Vim Bundle - Plugin Manager)
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-" Installing plugins:
-" 1. Clone the plugin repository to your ~/.vim/bundle/ directory
-" 2. Update your ~/.vimrc file with the new plugin details
-" 3. Install the plugin by launching Vim and running :PluginInstall
+" Set up vim-plug (Plugin Manager), supersedes vundle
+" Setup steps here: https://github.com/junegunn/vim-plug
 
 filetype off                    " disable file type detection
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Put plugins between begin and end calls
+" Shorthand with org/repo to fetch it from github
+" Full URL allowed
+" | separators allowed for multiple plugins
+" use { on: command, for: language } for on demand loading
+" Directory path for manual plugin loading
+" More examples on the vim-plug repo readme.
 
-" All plugins to load will be added here
-" Autocomplete
-Plugin 'Valloric/YouCompleteMe'
+" vim-plug commands:
+" - PlugUpgrade                 Upgrade vim-plug itself
+" - PlugInstall [name ...]      Install all plugins or the specific one(s)
+" - PlugUpdate [name ...]       Upgrade plugins
+" - PlugStatus                  Check Status of plugin
+" - PlugDiff                    Check diff between previous updates and pending changes
+call plug#begin(expand('~/.vim/plugged'))
+
+" Auto completion and syntax checking
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " File Tree View
-Plugin 'preservim/nerdtree'
+Plug 'preservim/nerdtree'
 
-" Syntax Checking
-" see :help ale
-Plugin 'dense-analysis/ale'
-
-call vundle#end()               " required
+call plug#end()                 " required
 filetype plugin indent on       " required
 
 " To ignore plugin indent changes, instead use:
@@ -120,37 +70,25 @@ filetype plugin indent on       " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" End Vundle Setup
+" End vim-plug Setup
 
 " =============================================================================
+" Plugin configurations
 
 " Add color table script
-if filereadable("/home/paul/.vim/xterm-color-table/plugin/xterm-color-table.vim")
+if filereadable(expand("~/.vim/xterm-color-table/plugin/xterm-color-table.vim"))
     source ~/.vim/xterm-color-table/plugin/xterm-color-table.vim
 endif
 
-" =============================================================================
-" NerdTree stuff here. See :help NERD_tree.txt
+if filereadable(expand("~/.vim/nerdtree.vim"))
+    source ~/.vim/nerdtree.vim
+endif
 
-" Start NERDTree when Vim is started without file arguments.
-augroup NerdTreeAuto
-    autocmd!
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-
-    " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-    autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-            \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-augroup END
-" Automatically show hidden files
-" Toggle with Shift + I
-let NERDTreeShowHidden=1
-
-" Easy toggle command for NerdTree
-cnoreabbrev nt NERDTreeToggle
+if filereadable(expand("~/.vim/coc.vim"))
+    source ~/.vim/coc.vim
+endif
 
 " =============================================================================
-
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
@@ -357,26 +295,6 @@ augroup AutoNewTab
 augroup END
 " =============================================================================
 
-" Easy hex editor
-let &bin=0
-let hexGroupSize=1
-let hexColumnSize=16
-cnoreabbrev hex if ! &bin <bar> redir => modi <bar> silent set modified? <bar> redir END <bar> execute 'silent %!xxd -g ' . hexGroupSize . ' -c ' . hexColumnSize . ' -u' <bar> redir => snapshot <bar> silent set spell? <bar> silent set filetype? <bar> redir END <bar> silent set filetype=xxd <bar> silent set nospell <bar> let &bin=1 <bar> execute "silent set " . modi[1:] <bar> else <bar> echo "Is already hexed." <bar> endif
-
-cnoreabbrev unhex if &bin <bar> redir => modi <bar> silent set modified? <bar> redir END <bar> execute 'silent %!xxd -g ' . hexGroupSize . ' -c ' . hexColumnSize . ' -u -r' <bar> for opt in split(snapshot,'\n') <bar> execute "silent set " . opt <bar> endfor <bar> let &bin=0 <bar> execute ("silent set " . modi[1:]) <bar> else <bar> echo "Is already unhexed." <bar> endif
-
-augroup Binary
-    autocmd!
-    " Automatic loading of bin files in hex
-    autocmd BufReadPre      *.bin   let &bin=1
-    autocmd BufReadPre      *.img   let &bin=1
-    
-    autocmd BufReadPost     *       if &bin | %!xxd -g 4 -c 16 -u
-    autocmd BufReadPost     *       set ft=xxd | set nospell | redir => snapshot | silent set filetype? | silent set spell? | redir END | endif
-    " Automatic writing in not hex
-    autocmd BufWritePre     *       if &bin | %!xxd -g 4 -c 16 -u -r
-    autocmd BufWritePre     *       endif
-    autocmd BufWritePost    *       if &bin | %!xxd -g 4 -c 16 -u
-    autocmd BufWritePost    *       set nomod | endif
-augroup END
-
+if filereadable(expand('~/.vim/hexeditor.vim'))
+    source ~/.vim/hexeditor.vim
+endif
