@@ -226,8 +226,18 @@ set listchars+=precedes:<           " What to display when wrapped is off and pa
 
 " Make it less clutter-y
 " For which highlight group goes where, check the end of ":help listchars"
-highlight NonText term=bold ctermfg=244 gui=bold guifg=#808080
-highlight SpecialKey term=bold ctermfg=244 gui=bold guifg=#808080
+highlight NonText       term=bold ctermfg=244 gui=bold guifg=#808080
+highlight SpecialKey    term=bold ctermfg=244 gui=bold guifg=#808080
+
+" Do not have pink background for completion menues and ALE error/warning popups
+" Main text - Light gray on very dark gray
+highlight Pmenu         ctermbg=236 guibg=#303030 ctermfg=248 guifg=#A8A8A8
+" Selected text - light yellow on even darker gray
+highlight PmenuSel      ctermbg=235 guibg=#262626 ctermfg=228 guifg=#FFFF87
+" Scrollbar - gray
+highlight PmenuSbar     ctermbg=244 guibg=#808080
+" Scrollbar thumb - lighter than medium gray
+highlight PmenuThumb    ctermbg=247 guibg=#9E9E9E
 
 " =============================================================================
 
