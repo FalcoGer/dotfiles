@@ -37,6 +37,15 @@ if [ -n "${cmp}" ]; then
     alias cat='batcat --style=auto --paging=auto --tabs=4'
 fi
 
+cmp=`which nvim`
+if [ -n "${cmp}"]; then
+    # we have neovim
+    alias vim='nvim -p'
+else
+    # we do not have neovim
+    alias vim='vim -p'
+fi
+
 alias rmdir='rmdir -v'
 
 which trash 1> /dev/null
