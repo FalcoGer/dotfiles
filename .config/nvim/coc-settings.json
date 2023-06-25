@@ -1,0 +1,29 @@
+{
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [],
+            "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        },
+        "clangd": {
+            "command": "clangd",
+            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
+            "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+            "args": [
+                "--enable-config",
+                "--clang-tidy",
+                "--all-scopes-completion",
+                "--background-index",
+                "--completion-style=bundled",
+                "--header-insertion=iwyu",
+                "--header-insertion-decorators"
+            ]
+        }
+  },
+  "python.linting.pylintEnabled": true
+}
