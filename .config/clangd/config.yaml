@@ -1,0 +1,93 @@
+CompileFlags:
+  Add: [-std=c++20, -Wall, -Wextra, -Wpedantic, -Wdouble-promotion, -Wformat=2, -Wformat-nonliteral, -Wformat-y2k, -Wnull-dereference, -Wimplicit-fallthrough, -Wmissing-include-dirs, -Wswitch-default, -Wunused-parameter, -Wuninitialized, -Wsuggest-attribute=const, -Walloc-zero, -Walloca, -Wconversion, -Wfloat-conversion, -Wsign-conversion, -Wduplicated-branches, -Wduplicated-cond, -Wtrampolines, -Wfloat-equal, -Wshadow=compatible-local, -Wundef, -Wunused-macros, -Wcast-qual, -Wcast-align=strict, -Wlogical-op, -Wmissing-declarations, -Wredundant-decls, -Wstack-protector, -fstack-protector, -pedantic-errors, -Werror=pedantic, -Werror=char-subscripts, -Werror=null-dereference, -Werror=init-self, -Werror=implicit-fallthrough=2, -Werror=misleading-indentation, -Werror=missing-braces, -Werror=multistatement-macros, -Werror=sequence-point, -Werror=return-type, -Werror=multichar, -Wno-unknown-warning-option]
+
+Index:
+  StandardLibrary: Yes
+
+Diagnostics:
+  ClangTidy:
+    Add: [
+      bugprone*,
+      boost-use-to-string,
+      concurrency-mt-unsafe,
+      concurrency-thread-canceltype-asynchronous,
+      cppcoreguidelines-*,
+      modernize-*,
+      performance-*,
+      portability-std-allocator-const,
+      readability-*
+    ]
+    Remove: [
+      cppcoreguidelines-avoid-do-while,
+      bugprone-easily-swappable-parameters
+    ]
+    CheckOptions:
+      modernize-use-auto.MinTypeNameLength: 10
+      modernize-use-auto.RemoveStars: 0
+      readability-identifier-length.MinimumVariableNameLength: 0
+      readability-identifier-length.MinimumLoopCounterNameLength: 2
+      readability-identifier-length.IgnoredLoopCounterNames: "^[ijkxyz_]$"
+      readability-identifier-length.MinimumExceptionNameLength: 2
+      readability-identifier-length.IgnoredExceptionVariableNames: "^[e]$"
+      readability-identifier-naming.AbstractClassCase: CamelCase
+      readability-identifier-naming.ClassCase: CamelCase
+      readability-identifier-naming.ClassConstantCase: UPPER_CASE
+      readability-identifier-naming.ClassMemberCase: camelBack
+      readability-identifier-naming.ClassMethodCase: CamelCase
+      readability-identifier-naming.ConstantCase: UPPER_CASE
+      readability-identifier-naming.ConstantMemberCase: UPPER_CASE
+      readability-identifier-naming.ConstantParameterCase: UPPER_CASE
+      readability-identifier-naming.ConstantPointerParameterCase: camelBack
+      readability-identifier-naming.ConstexprFunctionCase: camelBack
+      readability-identifier-naming.ConstexprMethodCase: CamelCase
+      readability-identifier-naming.ConstexprVariableCase: camelBack
+      readability-identifier-naming.EnumCase: UPPER_CASE
+      readability-identifier-naming.EnumPrefix: "E"
+      readability-identifier-naming.EnumConstantCase: UPPER_CASE
+      readability-identifier-naming.FunctionCase: camelBack
+      readability-identifier-naming.GlobalConstantCase: UPPER_CASE
+      readability-identifier-naming.GlobalConstantPointerCase: camelBack
+      readability-identifier-naming.GlobalFunctionCase: camelBack
+      readability-identifier-naming.GlobalPointerCase: camelBack
+      readability-identifier-naming.GlobalVariableCase: camelBack
+      readability-identifier-naming.InlineNamespaceCase: CamelCase
+      readability-identifier-naming.LocalConstantCase: UPPER_CASE
+      readability-identifier-naming.LocalConstantPointerCase: camelBack
+      readability-identifier-naming.LocalPointerCase: camelBack
+      readability-identifier-naming.LocalVariableCase: camelBack
+      readability-identifier-naming.MacroDefinitionCase: UPPER_CASE
+      readability-identifier-naming.MemberCase: camelBack
+      readability-identifier-naming.MethodCase: CamelCase
+      readability-identifier-naming.NamespaceCase: CamelCase
+      readability-identifier-naming.ParameterCase: camelBack
+      readability-identifier-naming.ParameterPackCase: camelBack
+      readability-identifier-naming.PointerParameterCase: camelBack
+      readability-identifier-naming.PrivateMemberCase: camelBack
+      readability-identifier-naming.PrivateMemberPrefix: "m_"
+      readability-identifier-naming.PrivateMemberHungarianPrefix: On
+      readability-identifier-naming.PrivateMethodCase: CamelCase
+      readability-identifier-naming.ProtectedMemberCase: camelBack
+      readability-identifier-naming.ProtectedMethodCase: CamelCase
+      readability-identifier-naming.PublicMemberCase: camelBack
+      readability-identifier-naming.PublicMethodCase: CamelCase
+      readability-identifier-naming.ScopedEnumConstantCase: UPPER_CASE
+      readability-identifier-naming.StaticConstantCase: UPPER_CASE
+      readability-identifier-naming.StaticVariableCase: camelBack
+      readability-identifier-naming.StructCase: CamelCase
+      readability-identifier-naming.TemplateParameterCase: CamelCase
+      readability-identifier-naming.TypeAliasCase: CamelCase
+      readability-identifier-naming.TypedefCase: CamelCase
+      readability-identifier-naming.TypeTemplateParameterCase: CamelCase
+      readability-identifier-naming.UnionCase: CamelCase
+      readability-identifier-naming.ValueTemplateParameterCase: camelBack
+      readability-identifier-naming.VariableCase: camelBack
+      readability-identifier-naming.VirtualMethodCase: CamelCase
+
+Completion:
+  AllScopes: Yes
+
+InlayHints:
+  Designators: Yes
+  Enabled: Yes
+  ParameterNames: Yes
+  DeducedTypes: Yes

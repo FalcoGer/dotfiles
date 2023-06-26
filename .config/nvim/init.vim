@@ -22,10 +22,9 @@ runtime! debian.vim
 "set compatible
 set nocompatible
 
-" =============================================================================
-if filereadable(expand("~/.vim/ale.vim"))
-    " source ~/.vim/ale.vim
-endif
+" see :help leader
+let mapleader=','
+
 " =============================================================================
 
 " Set up vim-plug (Plugin Manager), supersedes vundle
@@ -257,8 +256,6 @@ set cursorline
 set linebreak
 
 " =============================================================================
-
-" Useful mappings
 
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
