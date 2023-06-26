@@ -3,7 +3,12 @@
         "ccls": {
             "command": "ccls",
             "filetypes": [],
-            "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".git/",
+                ".hg/"
+            ],
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/ccls"
@@ -12,8 +17,18 @@
         },
         "clangd": {
             "command": "clangd",
-            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
-            "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+            "filetypes": [
+                "c",
+                "cc",
+                "cpp",
+                "c++",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                "compile_flags.txt",
+                "compile_commands.json"
+            ],
             "args": [
                 "--enable-config",
                 "--clang-tidy",
@@ -23,7 +38,64 @@
                 "--header-insertion=iwyu",
                 "--header-insertion-decorators"
             ]
+        },
+        "bash": {
+            "command": "bash-language-server",
+            "args": [
+                "start"
+            ],
+            "filetypes": [
+                "sh"
+            ]
+        },
+        "dockerfile": {
+            "command": "docker-langserver",
+            "filetypes": [
+                "dockerfile"
+            ],
+            "args": [
+                "--stdio"
+            ]
+        },
+        "lua": {
+            "command": "lua-lsp",
+            "filetypes": [
+                "lua"
+            ]
+        },
+        "intelephense": {
+            "command": "intelephense",
+            "args": [
+                "--stdio"
+            ],
+            "filetypes": [
+                "php"
+            ],
+            "initializationOptions": {
+                "storagePath": "/tmp/intelephense"
+            }
+        },
+        "sql": {
+            "module": "/path/to/node_modules/sql-language-server/dist/bin/cli.js",
+            "args": [
+                "up",
+                "--method",
+                "node-ipc"
+            ],
+            "filetypes": [
+                "sql",
+                "mysql"
+            ]
         }
-  },
-  "python.linting.pylintEnabled": true
+    },
+    "pylsp.plugins.pylint.enabled": true,
+    "pylsp.builtin.installExtrasArgs": [
+        "flake8",
+        "mccabe",
+        "pycodestyle",
+        "pydocstyle",
+        "pyflakes",
+        "pylint",
+        "rope"
+    ]
 }
