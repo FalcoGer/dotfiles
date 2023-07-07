@@ -40,7 +40,7 @@ fi
 cmp=`which nvim`
 if [ -n "${cmp}" ]; then
     # we have neovim
-    alias vim='nvim -p'
+    alias vim='nvim'
 else
     # we do not have neovim
     alias vim='vim -p'
@@ -87,7 +87,8 @@ if [ "$TERM" = "xterm-kitty" ]; then
     alias icat='kitty +kitten icat'
     alias kitty-diff='kitty +kitten diff'
     # alias ssh='kitty +kitten ssh'
-    export TERM="xterm-256color"
+    
+    # export TERM="xterm-256color"
 fi
 
 if [ -f "$HOME/repositories/hacking/john/run/john" ]; then
