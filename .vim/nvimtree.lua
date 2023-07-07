@@ -106,8 +106,12 @@ options = {
             enable = true
         },
         icons = {
-            git_placement = "before",           -- place git icons before file name
-            modified_placement = "signcolumn",  -- place modified icon into the sign column
+            show = {
+                git = true,
+                modified = true,
+            },
+            git_placement = "before",
+            modified_placement = "before",
         },
         special_files = {                       -- these files get highlighted with the NvimTreeSpecialFile highlight group
             "Cargo.toml",
@@ -117,8 +121,15 @@ options = {
         },
         symlink_destination = true,
     },
+    git = {
+        enable = true, -- enable git integration
+        ignore = false, -- show files ignored by gitignore
+        show_on_dirs = true, -- show status of children on directories when directory has none
+        show_on_open_dirs = true, -- show status of children on open directories
+        timeout = 800, -- kills git after this many ms, if this happens 10 times, git integration is disabled
+    },
     filters = {
-        dotfiles = false -- display dotfiles
+        dotfiles = false, -- display dotfiles
     },
     trash = {
         cmd = "trash"
