@@ -158,16 +158,16 @@ highlight Normal ctermfg=34 ctermbg=233 guifg=#00DF00 guibg=#101010
 " "* primary
 set guioptions+=a
 
+if (exists("g:neovide"))
+    if filereadable(expand("~/.vim/neovide.vim")) 
+        source ~/.vim/neovide.vim
+    endif
+endif
+
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
 if has("autocmd")
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-if has("autocmd")
-  filetype plugin indent on
 endif
 
 " The following are commented out as they cause vim to behave a lot
@@ -324,10 +324,17 @@ cmap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 noremap <C-L> :nohl<CR>:cclose<CR>:lclose<CR><C-L>
 
 " copy to PRIMARY or to CLIPBOARD
-noremap <Leader>y "*y
-noremap <Leader>p "*p
-noremap <Leader>Y "+y
-noremap <Leader>P "+p
+noremap <Leader>y "+y
+noremap <Leader>p "+p
+noremap <Leader>Y "*y
+noremap <Leader>P "*p
+
+" Copy text in normal mode
+nmap <C-C> "+yy
+" Copy text in visual mode
+vmap <C-C> "+y
+" Pasting is provided by the terminal and need not be done.
+" See GUI section above for paste configuration for neovide
 
 " Switch buffers with alt + left/right
 noremap <M-Left> :bprevious<CR>
