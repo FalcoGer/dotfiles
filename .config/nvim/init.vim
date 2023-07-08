@@ -159,7 +159,7 @@ highlight Normal ctermfg=34 ctermbg=233 guifg=#00DF00 guibg=#101010
 set guioptions+=a
 
 if (exists("g:neovide"))
-    if filereadable(expand("~/.vim/neovide.vim")) 
+    if filereadable(expand("~/.vim/neovide.vim"))
         source ~/.vim/neovide.vim
     endif
 endif
@@ -350,6 +350,7 @@ augroup AutoremoveWhitespace
     autocmd BufWritePre *.h     silent if(search('\s\+$', 'w')) | :%s/\s\+$//g | fi
     autocmd BufWritePre *.hpp   silent if(search('\s\+$', 'w')) | :%s/\s\+$//g | fi
     autocmd BufWritePre *.lua   silent if(search('\s\+$', 'w')) | :%s/\s\+$//g | fi
+    autocmd BufWritePre *.vim   silent if(search('\s\+$', 'w')) | :%s/\s\+$//g | fi
 augroup END
 
 " =============================================================================
