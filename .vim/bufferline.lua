@@ -47,6 +47,9 @@ bufferline.setup(
         -- luacheck: push ignore 212
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
             -- luacheck: pop
+            if (count == 0) then
+                return ""
+            end
             --[[
             if context.buffer:current() then
                 return ""
