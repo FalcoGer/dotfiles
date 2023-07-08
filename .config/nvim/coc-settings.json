@@ -59,9 +59,19 @@
         },
         "lua": {
             "command": "lua-lsp",
-            "filetypes": [
-                "lua"
-            ]
+            "filetypes": [],
+            "settings": {
+                "workspace.library": {
+                    "/usr/share/nvim/runtime/lua": true,
+                    "/usr/share/nvim/runtime/lua/vim": true,
+                    "/usr/share/nvim/runtime/lua/vim/lsp": true
+                },
+                "diagnostics": {
+                    "globals": [
+                        "vim"
+                    ]
+                }
+            }
         },
         "intelephense": {
             "command": "intelephense",
@@ -97,5 +107,16 @@
         "pyflakes",
         "pylint",
         "rope"
-    ]
+    ],
+    "Lua.workspace.library": [
+        "/usr/share/nvim/runtime/lua",
+        "/usr/share/nvim/runtime/lua/vim",
+        "/usr/share/nvim/runtime/lua/vim/lsp"
+    ],
+    "Lua.diagnostics.globals": ["vim"],
+    "Lua.codeLens.enable": true,
+    "Lua.diagnostics.workspaceRate": 25,
+    "Lua.doc.privateName": ["m_*"],
+    "Lua.hint.enable": true,
+    "Lua.workspace.ignoreDir": [".vscode", ".git"]
 }
