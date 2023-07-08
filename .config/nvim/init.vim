@@ -330,9 +330,9 @@ noremap <Leader>Y "*y
 noremap <Leader>P "*p
 
 " Copy text in normal mode
-nmap <C-C> "+yy
+nnoremap <C-C> "+yy
 " Copy text in visual mode
-vmap <C-C> "+y
+vnoremap <C-C> "+y
 " Pasting is provided by the terminal and need not be done.
 " See GUI section above for paste configuration for neovide
 
