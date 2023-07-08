@@ -12,10 +12,8 @@ local function myAttach(bufnr)
             nowait = true
         }
     end
-
     -- default mappings
     api.config.mappings.default_on_attach(bufnr)
-
     -- Custom mappings
     vim.keymap.set('n', '<C-CR>',   api.tree.change_root_to_node,           opts('CD'))
     vim.keymap.set('n', '<F1>',     api.tree.toggle_help,                   opts('Help'))
@@ -41,8 +39,7 @@ local function myAttach(bufnr)
     -- remove weird 2 sequence stroke for copy path, replace with modifier key
     vim.keymap.del('n', 'gy', { buffer = bufnr }) -- remove copy absolute path (C-y)
     vim.keymap.set('n', '<C-y>',    api.fs.copy.absolute_path,              opts('Paste'))
-
-    -- swap trash and delete to be safer and in line with OS
+    -- swap trash and delete to be safer
     vim.keymap.set('n', 'd',    api.fs.trash,                               opts('Trash'))
     vim.keymap.set('n', 'D',    api.fs.remove,                              opts('Delete'))
 
@@ -51,6 +48,13 @@ local function myAttach(bufnr)
 
     -- info on i, it's not editable anyway
     vim.keymap.set('n', 'i', api.node.show_info_popup,                      opts('Info'))
+
+    -- control + up and down arrows for siblings
+    vim.keymap.del('n', '<', { buffer = bufnr }) -- remove prev sibling
+    vim.keymap.del('n', '>', { buffer = bufnr }) -- remove next sibling
+    vim.keymap.set('n', '<C-UP>',   api.node.navigate.sibling.prev,         opts('Previous Sibling'))
+    vim.keymap.set('n', '<C-DOWN>', api.node.navigate.sibling.next,         opts('Next Sibling'))
+
 
     -- remove redundant and weird keys
     vim.keymap.del('n', '<C-]>', { buffer = bufnr }) -- remove CD (C-CR)
@@ -87,7 +91,7 @@ local customSort = function(nodes)
 end
 
 -- :help nvim-tree-setup
-options = {
+local options = {
     hijack_cursor = true, -- keep cursor on first letter
     sort_by = customSort, -- group directories first
     disable_netrw = true, -- does nothing?
