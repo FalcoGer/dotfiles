@@ -126,6 +126,8 @@
         "pylint",
         "rope"
     ],
+    "pylsp.plugins.pycodestyle.maxLineLength": 120,
+    "pylsp.plugins.pycodestyle.ignore": ["E221"],
     
     "Lua.workspace.library": [
         "/usr/share/nvim/runtime/lua",

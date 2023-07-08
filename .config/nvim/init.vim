@@ -191,6 +191,10 @@ set hidden          " Hide buffers when they are abandoned
 set mouse=a         " Enable mouse usage (all modes)
 
 " =============================================================================
+" Right column marker
+set colorcolumn=121
+highlight ColorColumn gui=underdashed guisp=#800000 ctermbg=1 guibg=None
+
 " Highlight Whitespaces
 set list
 set listchars=tab:<->               " Show tabs as this. xy[z], x always, then y as many as will fit, z as the last one.
