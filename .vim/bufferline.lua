@@ -57,6 +57,8 @@ bufferline.setup(
                 icon = ''
             elseif level:match("warning") then
                 icon = ''
+            elseif level:match("info") or level:match("hint") then
+                icon = ''
             end
             -- kitty scales down the icon if there is no space on the right
             return icon .. " " .. count
@@ -167,7 +169,7 @@ bufferline.setup(
         duplicate = {
             strikethrough = true
         },
-        duplicate_visible = 
+        duplicate_visible =
         {
             strikethrough = true
         },

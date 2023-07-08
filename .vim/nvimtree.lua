@@ -156,6 +156,21 @@ options = {
             open = true, -- sync tree being opened in all tabs
             close = true, -- sync tree being closed in all tabs
         }
+    },
+    diagnostics = {
+        enable = true,
+        show_on_dirs = true,
+        show_on_open_dirs = true,
+        severity = {
+          min = vim.diagnostic.severity.HINT,
+          max = vim.diagnostic.severity.ERROR,
+        },
+        icons = {
+          hint = "",
+          info = "",
+          warning = "",
+          error = "",
+        },
     }
 }
 
