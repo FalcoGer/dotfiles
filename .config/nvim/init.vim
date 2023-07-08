@@ -297,8 +297,18 @@ if has('nvim')
 else
     set foldmethod=indent       " Fold based on indention levels.
 endif
-set foldnestmax=3           " Only fold up to three nested levels.
-set foldminlines=3          " Only fold if there are at least 3 lines.
+set foldnestmax=3               " Only fold up to three nested levels.
+set foldminlines=3              " Only fold if there are at least 3 lines.
+
+function MyFoldText()
+    let line = getline(v:foldstart)
+    let numberOfLines = 1 + v:foldend - v:foldstart
+    let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+    return v:folddashes .. sub .. ' (' .. numberOfLines .. ' Lines)'
+endfunction
+
+set foldtext=MyFoldText()
+
 set nofoldenable            " Disable folding
 highlight Folded ctermfg=14 ctermbg=236 gui=underdouble guisp=#008080 guifg=#00FFFF guibg=#303030
 
