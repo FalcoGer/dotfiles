@@ -69,4 +69,4 @@ nnoremap <C-V> "+p
 inoremap <C-V> <c-r>+
 " Paste text in command mode
 cnoremap <C-V> <c-r>+
-
+nnoremap <C-v>

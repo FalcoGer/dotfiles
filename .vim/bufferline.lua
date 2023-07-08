@@ -45,6 +45,7 @@ bufferline.setup(
         diagnostics = "coc",
         -- ignore unused parameter
         -- luacheck: push ignore 212
+        ---@diagnostic disable-next-line
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
             -- luacheck: pop
             if (count == 0) then
@@ -188,18 +189,6 @@ bufferline.setup(
             ctermbg = visibleterm
         },
         diagnostic_selected = {
-            bg = selected,
-            ctermbg = selectedterm
-        },
-        modified = {
-            bg = normal,
-            ctermbg = normalterm
-        },
-        modified_visible = {
-            bg = visible,
-            ctermbg = visibleterm
-        },
-        modified_selected = {
             bg = selected,
             ctermbg = selectedterm
         },
