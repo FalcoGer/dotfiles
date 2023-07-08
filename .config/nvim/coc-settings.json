@@ -57,22 +57,6 @@
                 "--stdio"
             ]
         },
-        "lua": {
-            "command": "lua-lsp",
-            "filetypes": [],
-            "settings": {
-                "workspace.library": {
-                    "/usr/share/nvim/runtime/lua": true,
-                    "/usr/share/nvim/runtime/lua/vim": true,
-                    "/usr/share/nvim/runtime/lua/vim/lsp": true
-                },
-                "diagnostics": {
-                    "globals": [
-                        "vim"
-                    ]
-                }
-            }
-        },
         "intelephense": {
             "command": "intelephense",
             "args": [
@@ -86,16 +70,58 @@
             }
         },
         "sql": {
-            "module": "/path/to/node_modules/sql-language-server/dist/bin/cli.js",
+            "command": "/usr/local/bin/sql-language-server",
             "args": [
                 "up",
                 "--method",
-                "node-ipc"
+                "stdio"
             ],
             "filetypes": [
                 "sql",
                 "mysql"
-            ]
+            ],
+            "settings": {
+                "sqlLanguageServer": {
+                    "connections": [
+                        {
+                            "name": "pi.lan",
+                            "adapter": "mysql",
+                            "host": "localhost",
+                            "port": 3306,
+                            "__comment_GRANTS__": [
+                                "SHOW DATABASES ON *.*",
+                                "SHOW VIEW ON *.*",
+                                "SHOW_ROUTINE ON *.*"
+                            ],
+                            "user": "sqlls",
+                            "password": "nnywQmCXKhp3xTAAttLg",
+                            "database": "mysql",
+                            "projectPaths": ["/"],
+                            "ssh": {
+                                "user": "ubuntu",
+                                "remoteHost": "pi.lan",
+                                "dbHost": "127.0.0.1",
+                                "port": 3306,
+                                "identityFile": "~/.ssh/id_rsa"
+                            }
+                        }
+                    ],
+                    "lint": {
+                        "rules": {
+                            "align-column-to-the-first": "error",
+                            "column-new-line": "error",
+                            "linebreak-after-clause-keyword": "off",
+                            "reserved-word-case": [
+                                "error",
+                                "upper"
+                            ],
+                            "space-surrounding-operators": "error",
+                            "where-clause-new-line": "error",
+                            "align-where-clause-to-the-first": "error"
+                        }
+                    }
+                }
+            }
         }
     },
     "pylsp.plugins.pylint.enabled": true,

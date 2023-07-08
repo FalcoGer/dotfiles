@@ -62,9 +62,6 @@ filetype off                    " disable file type detection
 " - PlugStatus                  Check Status of plugin
 " - PlugDiff                    Check diff between previous updates and pending changes
 call plug#begin(expand('~/.vim/plugged'))
-
-Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons, used by nvim-tree and bufferline)
-
 " Auto completion and syntax checking
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -72,11 +69,18 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 if !has('nvim')
     Plug 'preservim/nerdtree'
 else
+    " Recommended (for coloured icons, used by nvim-tree and bufferline)
+    Plug 'nvim-tree/nvim-web-devicons'
+
+    " Replaces NTree and NerdTree
     Plug 'nvim-tree/nvim-tree.lua'
 
     " Buffers as tabs
     " Plug 'ryanoasis/vim-devicons' Icons without colours
     Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+
+    " Better syntax highlighting
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
 
 call plug#end()                 " required
@@ -115,12 +119,15 @@ if filereadable(expand("~/.vim/coc.vim"))
 endif
 
 " bufferline plugin
-if has("nvim")
-    if filereadable(expand("~/.vim/bufferline.lua"))
-        set mousemoveevent
-        source ~/.vim/bufferline.lua
-    endif
+if has("nvim") && filereadable(expand("~/.vim/bufferline.lua"))
+    set mousemoveevent
+    source ~/.vim/bufferline.lua
 endif
+
+if has("nvim") && filereadable(expand("~/.vim/treesitter.lua"))
+    source ~/.vim/treesitter.lua
+endif
+
 " =============================================================================
 
 " Use gui colors, even in terminal.
@@ -236,11 +243,7 @@ set relativenumber
 
 augroup numbertoggle
     autocmd!
-    if has('nvim')
-        autocmd BufEnter,FocusGained,InsertLeave * if (!(bufname('%') =~ "^NvimTree_\\d\\+")) | set relativenumber | endif
-    else
-        autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    endif
+    autocmd BufEnter,FocusGained,InsertLeave * if (!(bufname('%') =~ "^NvimTree_\\d\\+")) | set relativenumber | endif
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
@@ -287,9 +290,16 @@ set history=1000
 " auto tab
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
-set foldmethod=indent       " Fold based on indention levels.
+if has('nvim')
+    " Treesitter folding
+    set foldmethod=expr
+    set foldexpr=nvim_treesitter#foldexpr()
+else
+    set foldmethod=indent       " Fold based on indention levels.
+endif
 set foldnestmax=3           " Only fold up to three nested levels.
-set nofoldenable            " Disable folding by default.
+set foldminlines=3          " Only fold if there are at least 3 lines.
+set nofoldenable            " Disable folding
 
 " Indentation settings for using 4 spaces instead of tabs.
 " Do not change 'tabstop' from its default value of 8 with this setup.
@@ -331,7 +341,7 @@ noremap <Leader>p "+p
 noremap <Leader>Y "*y
 noremap <Leader>P "*p
 
-" Copy text in normal mode
+" Copy text in normal mode, note that terminal can't distinguish between C and S-C
 nnoremap <C-C> "+yy
 " Copy text in visual mode
 vnoremap <C-C> "+y

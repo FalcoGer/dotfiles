@@ -16,9 +16,7 @@ let g:neovide_floating_blur_amount_x = 3.0
 let g:neovide_floating_blur_amount_y = 3.0
 
 " Animations
-" This causes the screen to not redraw on startup, see
-" https://github.com/neovide/neovide/issues/1928
-" let g:neovide_scroll_animation_length = .400
+let g:neovide_scroll_animation_length = 0.400
 let g:neovide_hide_mouse_when_typing = v:true
 " not yet available
 " let g:neovide_theme = 'auto'
@@ -59,14 +57,16 @@ let g:neovide_profiler = v:false
 
 " Bindings
 
+" Copy with Ctrl + Shift + C like the terminal provides
+nnoremap <C-S-V> "+yy
+vnoremap <C-S-V> "+y
+
 " Paste text in terminal mode
 " TODO, doesn't work
-" tnoremap <C-V> <ESC>"+pi
-
+" tnoremap <C-S-V> <ESC>"+pi
 " Paste text in normal mode
-nnoremap <C-V> "+p
+nnoremap <C-S-V> "+p
 " Paste text in insert mode
-inoremap <C-V> <c-r>+
+inoremap <C-S-V> <c-r>+
 " Paste text in command mode
-cnoremap <C-V> <c-r>+
-nnoremap <C-v>
+cnoremap <C-S-V> <c-r>+
