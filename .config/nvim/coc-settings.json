@@ -1,20 +1,5 @@
 {
     "languageserver": {
-        "ccls": {
-            "command": "ccls",
-            "filetypes": [],
-            "rootPatterns": [
-                ".ccls",
-                "compile_commands.json",
-                ".git/",
-                ".hg/"
-            ],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/ccls"
-                }
-            }
-        },
         "clangd": {
             "command": "clangd",
             "filetypes": [
@@ -124,6 +109,13 @@
             }
         }
     },
+    
+    "workspace.ignoredFolders": [
+        "$HOME",
+        "$HOME/.cargo/**",
+        "$HOME/.rustup/**"
+    ],
+    
     "pylsp.plugins.pylint.enabled": true,
     "pylsp.builtin.installExtrasArgs": [
         "flake8",
@@ -134,6 +126,7 @@
         "pylint",
         "rope"
     ],
+    
     "Lua.workspace.library": [
         "/usr/share/nvim/runtime/lua",
         "/usr/share/nvim/runtime/lua/vim",
@@ -144,5 +137,22 @@
     "Lua.diagnostics.workspaceRate": 25,
     "Lua.doc.privateName": ["m_*"],
     "Lua.hint.enable": true,
-    "Lua.workspace.ignoreDir": [".vscode", ".git"]
+    "Lua.workspace.ignoreDir": [".vscode", ".git"],
+    
+    "rust-analyzer.enable": true,
+    
+    "html.format.enable": true,
+    
+    "javascript.format.enable": true,
+    "typescript.format.enable": true,
+    
+    "java.enabled": true,
+    
+    "cmake.lsp.enable": true,
+    
+    "json.enable": true,
+    
+    "perl.enable": true,
+    
+    "yaml.enable": true
 }
