@@ -45,6 +45,11 @@ else
     # we do not have neovim
     alias vim='vim -p'
 fi
+cmp=`which neovide`
+if [ -n "${cmp}" ]; then
+    # we have neovim
+    alias neovide='neovide --notabs'
+fi
 
 alias rmdir='rmdir -v'
 

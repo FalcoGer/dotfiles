@@ -35,10 +35,5 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # opt out of dotnet telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 
-# neovide / nvim gui
-export NEOVIDE_FRAME="full"
-export NEOVIDE_MAXIMIZED=1
-export NEOVIDE_MULTIGRID=1
-
 # Byond
 source /home/paul/Documents/software/games/byond/bin/byondsetup
