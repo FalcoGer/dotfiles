@@ -65,8 +65,8 @@ call plug#begin(expand('~/.vim/plugged'))
 " Auto completion and syntax checking
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" File Tree View
 if !has('nvim')
+    " File Tree View
     Plug 'preservim/nerdtree'
 else
     " Recommended (for coloured icons, used by nvim-tree and bufferline)
@@ -300,6 +300,7 @@ endif
 set foldnestmax=3           " Only fold up to three nested levels.
 set foldminlines=3          " Only fold if there are at least 3 lines.
 set nofoldenable            " Disable folding
+highlight Folded ctermfg=14 ctermbg=236 gui=underdouble guisp=#008080 guifg=#00FFFF guibg=#303030
 
 " Indentation settings for using 4 spaces instead of tabs.
 " Do not change 'tabstop' from its default value of 8 with this setup.
