@@ -8,6 +8,8 @@ if [ -f ".bash_env_secret" ]; then
     source ".bash_env_secret"
 fi
 
+export EDITOR="/usr/bin/editor"
+
 # export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib"
 
 # qt5
