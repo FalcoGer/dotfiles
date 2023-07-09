@@ -360,6 +360,9 @@ noremap <Leader>P "*p
 nnoremap <C-C> "+yy
 " Copy text in visual mode
 vnoremap <C-C> "+y
+" Paste text with ctrl + v in insert and command mode, but keep visual block mapping
+inoremap <C-V> <c-r>+
+cnoremap <C-V> <c-r>+
 " Pasting is provided by the terminal and need not be done.
 " See GUI section above for paste configuration for neovide
 
