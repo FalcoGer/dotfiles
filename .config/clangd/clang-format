@@ -418,8 +418,9 @@ BinPackArguments: false
 BinPackParameters: false
 
 # Regex to describe comments with special meaning, which should not be messed with by the formatter
-# exclude doxygen comments like /// @param
-CommentPragmas: '^/ +@.+$'
+# exclude doxygen comments like /// @param and * @param
+# https://www.mitk.org/images/1/1c/BugSquashingSeminars$2013-07-17-DoxyReference.pdf
+CommentPragmas: 'NOLINT|(@|\\)(attention|author|brief|bug|cond|date|deprecated|else(if|cond)?|end(cond|if)|exception|if(not)?|invariant|note|par|t?param|post|pre|return|retval|sa|see|since|test|throw|todo|version|warning|xrefitem)|^!'
 
 # Adds missing and fixes wrong namespace ending comments for namespaces longer than ShortNamespaceLines
 FixNamespaceComments: true
