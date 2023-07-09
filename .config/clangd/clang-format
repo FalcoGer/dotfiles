@@ -1,90 +1,494 @@
 ﻿---
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+
+DisableFormat: false
+
+# LLVM style defaults
 BasedOnStyle: LLVM
-AccessModifierOffset: '-2'
-AlignAfterOpenBracket: Align
-AlignConsecutiveMacros: 'true'
-AlignConsecutiveAssignments: 'true'
-AlignConsecutiveDeclarations: 'true'
-AlignEscapedNewlines: Left
-AlignOperands: 'true'
-AlignTrailingComments: 'true'
-AllowAllArgumentsOnNextLine: 'true'
-AllowAllConstructorInitializersOnNextLine: 'true'
-AllowAllParametersOfDeclarationOnNextLine: 'true'
-AllowShortBlocksOnASingleLine: 'true'
-AllowShortCaseLabelsOnASingleLine: 'false'
-AllowShortFunctionsOnASingleLine: InlineOnly
-AllowShortIfStatementsOnASingleLine: WithoutElse
-AllowShortLambdasOnASingleLine: All
-AllowShortLoopsOnASingleLine: 'false'
-AlwaysBreakAfterDefinitionReturnType: None
-AlwaysBreakAfterReturnType: None
-AlwaysBreakBeforeMultilineStrings: 'false'
-AlwaysBreakTemplateDeclarations: 'Yes'
-BinPackArguments: 'false'
-BinPackParameters: 'false'
-BreakAfterAttributes: Always
-BreakAfterJavaFieldAnnotations: 'true'
-BreakBeforeBinaryOperators: None
-BreakBeforeBraces: Custom
-BraceWrapping:
-    AfterCaseLabel: 'true'
-    AfterClass: 'true'
-    AfterControlStatement: MultiLine
-    AfterEnum: 'true'
-    AfterFunction: 'true'
-    AfterNamespace: 'true'
-    AfterObjCDeclaration: 'true'
-    AfterStruct: 'true'
-    AfterUnion: 'true'
-    AfterExternBlock: 'true'
-    BeforeCatch: 'true'
-    BeforeElse: 'true'
-    BeforeLambdaBody: 'false'
-    BeforeWhile: 'false'
-    IndentBraces: 'false'
-    SplitEmptyFunction: 'false'
-    SplitEmptyRecord: 'false'
-    SplitEmptyNamespace: 'false'
-BreakBeforeTernaryOperators: 'false'
-BreakConstructorInitializers: BeforeColon
-BreakInheritanceList: BeforeColon
-BreakStringLiterals: 'true'
-ColumnLimit: '120'
-CompactNamespaces: 'false'
-ConstructorInitializerAllOnOneLineOrOnePerLine: 'true'
-ConstructorInitializerIndentWidth: '2'
-ContinuationIndentWidth: '2'
-Cpp11BracedListStyle: 'true'
-FixNamespaceComments: 'true'
-IndentCaseLabels: 'true'
-IndentPPDirectives: AfterHash
-IndentWidth: '4'
-IndentWrappedFunctionNames: 'true'
-KeepEmptyLinesAtTheStartOfBlocks: 'false'
-NamespaceIndentation: All
-PointerAlignment: Left
-ReflowComments: 'true'
-SortIncludes: 'false'
-SortUsingDeclarations: 'true'
-SpaceAfterCStyleCast: 'false'
-SpaceAfterLogicalNot: 'false'
-SpaceAfterTemplateKeyword: 'true'
-SpaceBeforeAssignmentOperators: 'true'
-SpaceBeforeCpp11BracedList: 'true'
-SpaceBeforeCtorInitializerColon: 'true'
-SpaceBeforeInheritanceColon: 'true'
-SpaceBeforeParens: ControlStatements
-SpaceBeforeRangeBasedForLoopColon: 'true'
-SpaceInEmptyParentheses: 'false'
-SpacesBeforeTrailingComments: '4'
-SpacesInAngles: 'false'
-SpacesInCStyleCastParentheses: 'false'
-SpacesInContainerLiterals: 'false'
-SpacesInParentheses: 'false'
-SpacesInSquareBrackets: 'false'
-Standard: Auto
-TabWidth: '4'
+
+ColumnLimit: 120
+
+# Use tabs: Never, ForIndentation, ForContinuationAndIndentation, AlignWithSpaces, Always
 UseTab: Never
+TabWidth: '4'
+
+# See https://clang.llvm.org/docs/ClangFormatStyleOptions.html#language
+Language: Cpp
+Standard: Auto
+
+# LF, CRLF, DeriveLF, DeriveCRLF
+# Derive option uses what's specified, unless there are already more lines with the other ending
+LineEnding: LF
+
+##############################################################################
+# Alignment
+
+# ----------------------------------------------------------------------------
+# Consecutive Alignment
+
+# AlignConsecutiveStyle
+#   None:                           No effort to align
+#   Consecutive:                    Only if the statements follow each other
+#   AcrossEmptyLines:               Only if there are no non whitespace characters between elements
+#   AcrossComments:                 Allow comments to be between elements, but no commands
+#   AcrossEmptyLinesAndComments:    Both empty lines and comments allowed
+
+AlignConsecutiveAssignments:
+    Enabled: true
+    AcrossEmptyLines: true
+    AcrossComments: true
+    # These two options are for Assignments only
+    # Align operators like += on the =
+    AlignCompound: true
+    # leftpad long operators like >>= to match the = signs on the right
+    PadOperators: true
+
+AlignConsecutiveMacros: AcrossEmptyLinesAndComments
+AlignConsecutiveBitFields: AcrossEmptyLinesAndComments
+
+# leftalign identifiers after type
+AlignConsecutiveDeclarations: AcrossEmptyLinesAndComments
+
+# -----------------------------------------------------------------------------
+
+# Bracket Alignment
+# BracketAlignmentStyle:
+#    Align:         Align on the next line, closing bracket on the same line as last element
+#    DontAlign:     Use ContinuationIndentWidth
+#    AlwaysBreak:   Always break after opening bracket, closing bracket on last line
+#    BlockIndent:   Always break, closing bracket on new line
+
+# Function parameters are indented by 1 block, closing bracket on new line
+AlignAfterOpenBracket: BlockIndent
+
+# -----------------------------------------------------------------------------
+# Special Alignments
+
+# AlignEscapedNewlines:
+#   DontAlign:  No effort
+#   Left:       Escaped new lines are aligned as left as possible
+#   Right:      Placed on the rightmost column
+AlignEscapedNewlines: Left
+
+# Array of structures is left aligned on the commas
+# ArrayInitializerAlignmentStyle:
+#   None:   No alignment
+#   Left:   Left justify columns
+#   Right:  Right justify columns
+AlignArrayOfStructures: Left
+
+# OperandAlignmentStyle:
+#   DontAlign:          Use ContinuationIndentWidth, operators are not aligned
+#   Align:              Align continuation of broken line on operand, if BreakBeforeBinaryOperators is set, operator is aligned instead
+#   AlignAfterOperator: Operators are aligned instead of operands
+AlignOperands: Align
+
+# Kind: Leave - Don't touch, Always - Align, Never - use other formatters
+# OverEmptyLines: align over how many empty lines. Makes no sense to be higher than MaxEmptyLinesToKeep
+AlignTrailingComments:
+    Kind: Always
+    OverEmptyLines: 1
+
+# Left: int* a, Middle: int * a, Right: int *a
+PointerAlignment: Left
+
+# Align reference symbol: Left, Right, Middle or like the pointer
+ReferenceAlignment: Pointer
+
+# Anything other than Leave might break code on formatting
+# See https://clang.llvm.org/docs/ClangFormatStyleOptions.html#qualifieralignment
+# Align Qualifiers Leave, Left, Right or Custom - Custom uses QualifierOrder
+QualifierAlignment: Custom
+
+# Items to the left of type will be sorted left of the type according to this order
+# Items to the right of type will be sorted right of the type according to this order
+QualifierOrder: ['static', 'friend', 'inline', 'constexpr', 'const', 'type', 'volatile', 'restrict']
+
+########################################################################################
+# AllowAllOnNextLine and AllowOnASingleLine
+
+# If all elements fit on the next line, put them there, otherwise use other format rules like BinPackArguments or BinPackParameters
+AllowAllArgumentsOnNextLine: true
+
+AllowAllParametersOfDeclarationOnNextLine: true
+
+# ShortBlockStyle: Never, Empty, Always - Allow single statement blocks to be put on the same line as control flow keyword
+AllowShortBlocksOnASingleLine: Empty
+
+# Allow single statements and break statement on the same line as a case statement
+AllowShortCaseLabelsOnASingleLine: false
+
+AllowShortEnumsOnASingleLine: false
+
+# ShortFunctionStyle:
+#   None:           Never put a function on a single line
+#   InlineOnly:     Only put short functions in a class on a single line
+#   Empty:          Allow only empty functions to be put on a single line
+#   Inline:         Empty or inside a class
+#   All:            Always permit short functions on a single line
+AllowShortFunctionsOnASingleLine: InlineOnly
+
+# ShortIfStyle:
+#   Never:          Never put short ifs in the same line
+#   WithoutElse:    Only if there is no else statement
+#   OnlyFirstIf:    not for "else if" or "else"
+#   AllIfsAndElse:  All ifs, else ifs and elses
+AllowShortIfStatementsOnASingleLine: WithoutElse
+
+# ShortLambdaStyle
+#   None:           Never put lambdas on a single line
+#   Empty:          Only put empty lambdas on a single line
+#   Inline:         Only if the lambda is an argument to a function call
+#   All:            Always put short lambdas on a single line
+AllowShortLambdasOnASingleLine: All
+
+AllowShortLoopsOnASingleLine: false
+
+########################################################################################
+# Line Break behavior
+
+# Deprecated, see AlwaysBreakAfterReturnType
+# AlwaysBreakAfterDefinitionReturnType: None
+
+# ReturnTypeBreakingStyle: None, All, TopLevel - None uses PenaltyReturnTypeOnItsOwnLine
+# Also AllDefinitions and TopLevelDefinitions - Breaks for definitions only
+# Breaks after return type of a function declarations, top level ignores that in classes
+AlwaysBreakAfterReturnType: None
+
+# If true uses ContinuationIndentWidth, if false aligns next line on the " mark
+AlwaysBreakBeforeMultilineStrings: false
+
+# BreakTemplateDeclarationsStyle:
+#   No:             Don't force, uses PenaltyBreakTemplateDeclaration
+#   MultiLine:      Only if the following declaration spans multiple lines (for example multiple lines of function arguments)
+#   Yes:            Force line break after template declaration
+AlwaysBreakTemplateDeclarations: 'Yes'
+
+# AttributeBreakingStyle: Always, Leave, Never - Break after attributes like [[nodiscard]]
+BreakAfterAttributes: Always
+
+# Break after each annotation in java files
+BreakAfterJavaFieldAnnotations: true
+
+# Add newline for each item in an array
+BreakArrays: false
+
+# BinaryOperatorStyle
+#   None:           Leave operators on the back of lines
+#   NonAssignmen:   Only leave assignment operators on the back of lines
+#   All:            Always put operators on the beginning of the next line
+BreakBeforeBinaryOperators: None
+
+# BreakBeforeConceptDeclarationsStyle
+#   Never:          Keep template and concept on the same line
+#   Allowed:        Use penalty rules
+#   Always:         Always break between template and concept
+BreakBeforeConceptDeclarations: Always
+
+# BreakBeforeInlineASMColonStyle
+#   Never:          No break before inline ASM colon
+#   OnlyMultiline:  Break before inline ASM colon if the line length is longer than column limit
+#   Always:         Always break before inline ASM colon
+BreakBeforeInlineASMColon: OnlyMultiline
+
+# If true, put ternary operators ? and : on the front of the line, otherwise on the back
+BreakBeforeTernaryOperators: true
+
+# BreakConstructorInitializersStyle
+#   BeforeColon:    Colon is on new line, comma at the end of each line
+#   BeforeComma:    Colon is on new line, comma is also on new line aligned with the colon
+#   AfterComma:     Colon is at the end of the ctor identifier line, colons are at the end of each individual line
+BreakConstructorInitializers: BeforeColon
+
+# BreakInheritanceListStyle
+#   BeforeColon:    Colon on new line, commas at the end of each line
+#   BeforeComma:    Colon on new line, commas also on new line aligned with colon
+#   AfterColon:     Colon on class identifier line, comma at the end of each line
+#   AfterComma:     Colon and first element on class identifier line, commas at the end of each element, each element in new line
+BreakInheritanceList: AfterComma
+
+# Allow breaking string literals when formatting
+BreakStringLiterals: true
+
+# If true, Place multiple namespace declarations on the same line, if they fit. Otherwise one line for each.
+CompactNamespaces: false
+
+# PackConstructorInitializersStyle
+#   Never:          Always put each constructor initializer on it's own line
+#   BinPack:        Put as many onto one line as fit
+#   CurrentLine:    Put them on the current line if they fit, otherwise one line for each
+#   NextLine:       Put them on the current line if they fit, otherwise try to fit them on the next line, if that doesn't work, one line each
+#   NextLineOnly:   Put them on the next line if they fit, otherwise one line for each
+PackConstructorInitializers: NextLine
+
+# if true, will turn comments past ColumnLimit to multiple lines
+ReflowComments: true
+
+# -------------------------------------------------------------------------------------
+# Braces
+
+# When to put a brace on a new line
+# See: BraceBreakingStyle
+BreakBeforeBraces: Custom
+
+# Only used when BreakBeforeBraces is Custom
+BraceWrapping:
+    AfterCaseLabel: true
+    AfterClass: true
+    # BraceWrappingAfterControlStatementStyle: Never, MultiLine, Always - For if/while/switch/etc
+    AfterControlStatement: MultiLine
+    AfterEnum: true
+    AfterFunction: true
+    AfterNamespace: true
+    AfterObjCDeclaration: true
+    AfterStruct: true
+    AfterUnion: true
+    AfterExternBlock: true
+    BeforeCatch: true
+    BeforeElse: true
+    BeforeLambdaBody: true
+    # For do-while loops
+    BeforeWhile: false
+    # if the braces are indented themselves
+    IndentBraces: false
+    # If empty, place opening and closing brace on different lines for functons, class/struct/union or namespaces
+    SplitEmptyFunction: false
+    SplitEmptyRecord: false
+    SplitEmptyNamespace: false
+
+########################################################################################
+# Spacing
+
+# BitFieldColonSpacingStyle
+#   Both:           One space on either side
+#   None:           No spaces
+#   Before:         Space before only
+#   After:          Space after only
+BitFieldColonSpacing: Both
+
+# If true, format braced lists like {1, 2, 3, 4} like function call parameters
+# If false, extra spaces are added like { 1, 2, 3, 4 } or { {}, {}, {}, {} }
+# If true: No spaces, No line break before closing brace, continuation indent instead of block indent
+Cpp11BracedListStyle: true
+
+# --------------------------------------------------------------------------------------
+# Spaces
+
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: true
+
+# Spaces around pointer qualifiers: Default (use PointerAlignment), Before, After, Both
+SpaceAroundPointerQualifiers: Default
+
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCaseColon: false
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+
+# Json only, for JS it uses SpacesInContainerLiterals
+SpaceBeforeJsonColon: false
+
+# SpaceBeforeParensStyle
+#   Never:                                  Never place a space before an opening parentheses
+#   ControlStatements:                      Always, but only after control statement keyword (if/while/switch)
+#   ControlStatementsExceptControlMacros:   Same as ControlStatements but not ForEach- and If-Macros
+#   NonEmptyParentheses:                    Always place a space if the the parentheses are not empty
+#   Always:                                 Always place a space before parentheses
+#   Custom:                                 Use SpaceBeforeParensOptions
+SpaceBeforeParens: Custom
+SpaceBeforeParensOptions:
+    AfterControlStatements: true
+    AfterForeachMacros: false
+    AfterFunctionDeclarationName: false
+    AfterFunctionDefinitionName: false
+    AfterIfMacros: false
+    AfterOverloadedOperator: true
+    AfterRequiresInClause: true
+    AfterRequiresInExpression: false
+    BeforeNonEmptyParentheses: false
+
+SpaceBeforeRangeBasedForLoopColon: true
+
+# Lambdas not affected, only the first [ gets the space, like x = a [1][2] instead of x = a[1][2]
+SpaceBeforeSquareBrackets:false
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+
+# Doesn't affect /* block comments */, minimum amount of spaces before a trailing comment starts
+SpacesBeforeTrailingComments: '4'
+
+# How many spaces a comment must start with. Maximum takes precedence. -1 means no limit.
+# Relative indents are preserved.
+# Requires ReflowComments to be set true
+SpacesInLineCommentPrefix:
+    Minimum: 1
+    Maximum: -1
+
+# SpacesInAnglesStyle: Never, Always, Leave
+SpacesInAngles: Never
+
+SpacesInCStyleCastParentheses: false
+
+# true: if ( a < b ) {} - false: if (a < b)
+SpacesInConditionalStatement: false
+
+# For JSON: SpaceBeforeJsonColon
+SpacesInContainerLiterals: false
+
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+# --------------------------------------------------------------------------------------
+# Empty lines
+
+# EmptyLineAfterAccessModifierStyle: Never, Leave, Always - Empty line after access modifier
+EmptyLineAfterAccessModifier: Never
+
+# EmptyLineBeforeAccessModifierStyle: Never, Leave, LogicalBlock, Always - Empty line after access modifier
+#   LogicalBlock: Only if there is stuff in there, otherwise no empty line.
+EmptyLineBeforeAccessModifier: LogicalBlock
+
+# Add empty line at end of file
+InsertNewlineAtEOF: true
+
+# Keep up to MaxEmptyLinesToKeep at end of file, false to set 1 if InsertNewlineAtEOF, otherwise none
+KeepEmptyLinesAtEOF: false
+
+# Keep or delete empty lines at the start of a block
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+# How many consecutive empty lines to keep
+MaxEmptyLinesToKeep: 2
+
+# --------------------------------------------------------------------------------------
+# Indent
+
+IndentWidth: '4'
+ContinuationIndentWidth: '2'
+# Preprocessor indent width, -1 uses IndentWidth
+PPIndentWidth: 2
+
+# Unset to use ContinuationIndentWidth
+# BracedInitializerIndentWidth
+
+# For CTOR initializer lists and inheritance lists
+ConstructorInitializerIndentWidth: 8
+
+# Indent access modifiers (public, protected, private) 2 spaces to the left
+AccessModifierOffset: -2
+# If access modifies should have their own indent level.
+# If false use AccessModifierOffset, otherwise struct/class/union members always get 2 indents.
+IndentAccessModifiers: false
+
+# If true, case blocks get indented, otherwise they use the same indent as the case label
+IndentCaseBlocks: false
+
+# Indent the case labels relative to the switch statement
+IndentCaseLabels: true
+
+# IndentExternBlockStyle: AfterExternBlock, NoIndent, Indent - AfterExternBlock depends on BraceWrapping.AfterExternBlock
+IndentExternBlock: Indent
+
+# If false labels get flushed left
+IndentGotoLabels: false
+
+# PPDirectiveIndentStyle: None, AfterHash, BeforeHash - Indent preprocessor. AfterHash: Hash stays left
+IndentPPDirectives: AfterHash
+
+# Indent requires clause when RequiresClausePosition is OwnLine or WithFollowing
+IndentRequiresClause: true
+
+# Indent function name after type if they get a line break between each other
+IndentWrappedFunctionNames: true
+
+# Align lambda body to 'Signature' or 'OuterScope'
+LambdaBodyIndentation: Signature
+
+# NamespaceIndentationKind: None, Inner, All - Indent namespace definitions
+NamespaceIndentation: Inner
+
+########################################################################################
+# Others
+
+# BinPack means that if false all elements are together on one line or have each one line to themselves
+# if true there maybe multiple else sharing a line, even if they are spread over multiple lines
+BinPackArguments: false
+BinPackParameters: false
+
+# Regex to describe comments with special meaning, which should not be messed with by the formatter
+# exclude doxygen comments like /// @param
+CommentPragmas: '^/ +@.+$'
+
+# Adds missing and fixes wrong namespace ending comments for namespaces longer than ShortNamespaceLines
+FixNamespaceComments: true
+ShortNamespaceLines: 5
+
+# Sort includes: Never, CaseSensitive, CaseInsensitive
+SortIncludes: CaseInsensitive
+
+# IncludeBlocksStyle
+#   Preserve:       Preserve include blocks when sorting them
+#   Merge:          Put all include blocks into one before sorting
+#   Regroup:        Group includes based on IncludeCategories, then sort those
+IncludeBlocks: Regroup
+
+# See https://clang.llvm.org/docs/ClangFormatStyleOptions.html#includecategories
+# Define categories into which to re-group includes when formatting them. Items with the same Priority and SortPriority get grouped
+#   Regex: Regex to match, first one that matches is used to assign priorities
+#   Priority: Same priority goes into the same block.
+#   SortPriority: IDFK
+#   CaseSensitive: Regex matching case sensitive, default is false.
+
+IncludeCategories:
+    # Precompiled header first always
+    - Regex: '"pch.h(pp)?"'
+      Priority: -1
+    # Priority 2 is guideline support library
+    - Regex: '/gsl/'
+      Priority: 2
+    # spdlog & fmt in one group
+    - Regex: '<(spdlog|fmt)/'
+      Priority: 3
+    # Priority 4 is game engine stuff
+    - Regex: '^<SDL/'
+      Priority: 4
+      CaseSensitive: true
+    - Regex: '^<SFML/'
+      Priority: 4
+      CaseSensitive: true
+    # Standard library
+    - Regex: '^<.+>'
+      Priority: 1
+    # User libraries last
+    - Regex: '".*'
+      Priority: 999
+
+# Insert braces into one line if/while/do/for etc statements.
+# MAY BREAK CODE, REVIEW CHANGES MADE BY THIS
+InsertBraces: true
+
+# Insert trailing commas for container literals like [ a, b, c ]. Only works for javascript
+# TrailingCommaStyle
+#   None:       Do not insert trailing commas (Default)
+#   Wrapped:    Insert trailing commas when elements are spread over multiple lines. BinPackArguments must be false
+InsertTrailingCommas: Wrapped
+
+# Format integer literals with separators. ' for c++ and _ for c#, java and javascript
+# IntegerLiteralSeparatorStyle
+IntegerLiteralSeparator:
+    Binary: 4
+    Decimal: 3
+    DecimalMinDigits: 5
+    Hex: 2
+    HexMinDigits: 5
+
+# Remove the semicolon after the closing brace of a non empty function
+# Error prone
+RemoveSemicolon: false
+
+# Sort using declarations: Never, Lexicographic, LexicographicNumeric
+SortUsingDeclarations: Lexicographic
 
 ...
