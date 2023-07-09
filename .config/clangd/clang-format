@@ -312,7 +312,7 @@ SpaceBeforeParensOptions:
 SpaceBeforeRangeBasedForLoopColon: true
 
 # Lambdas not affected, only the first [ gets the space, like x = a [1][2] instead of x = a[1][2]
-SpaceBeforeSquareBrackets:false
+SpaceBeforeSquareBrackets: false
 SpaceInEmptyBlock: false
 SpaceInEmptyParentheses: false
 
