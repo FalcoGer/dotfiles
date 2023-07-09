@@ -5,6 +5,7 @@ CompileFlags:
 Index:
   StandardLibrary: Yes
 
+# https://clang.llvm.org/extra/clang-tidy/#suppressing-undesired-diagnostics
 Diagnostics:
   ClangTidy:
     Add: [
@@ -26,13 +27,13 @@ Diagnostics:
       modernize-use-auto.MinTypeNameLength: 10
       modernize-use-auto.RemoveStars: 0
       readability-identifier-length.MinimumVariableNameLength: 0
-      readability-identifier-length.IgnoredVariableNames: "^[xyzit]$"
+      readability-identifier-length.IgnoredVariableNames: "^([xyzit]|id)$"
       readability-identifier-length.MinimumLoopCounterNameLength: 2
       readability-identifier-length.IgnoredLoopCounterNames: "^[ijkxyz_]$"
       readability-identifier-length.MinimumExceptionNameLength: 2
       readability-identifier-length.IgnoredExceptionVariableNames: "^[e]$"
       readability-identifier-length.MinimumParameterNameLength: 3
-      readability-identifier-length.IgnoredParameterNames: "^[xyzit]$"
+      readability-identifier-length.IgnoredParameterNames: "^([xyzit]|id)$"
       readability-identifier-naming.AbstractClassCase: CamelCase
       readability-identifier-naming.ClassCase: CamelCase
       readability-identifier-naming.ClassConstantCase: UPPER_CASE
