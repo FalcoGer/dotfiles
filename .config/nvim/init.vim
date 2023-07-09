@@ -228,11 +228,16 @@ highlight FloatTitle    ctermbg=234 guibg=#1C1C1C ctermfg=11 guifg=#FFFF00 cterm
 set spell
 highlight SpellBad      ctermbg=9 cterm=NONE gui=undercurl guisp=#FF0000
 " Wrong capitalization
-highlight link SpellCap SpellBad
+" highlight link SpellCap SpellBad
 " Rarely used
-highlight link SpellRare SpellBad
+" highlight link SpellRare SpellBad
 " Used in another region
-highlight link SpellLocal SpellBad
+" highlight link SpellLocal SpellBad
+
+highlight DiagnosticUnderlineError gui=underline cterm=underline guisp=#FF0000
+highlight DiagnosticUnderlineWarn gui=underline cterm=underline guisp=#FFFF00
+highlight DiagnosticUnderlineInfo gui=underdotted cterm=underdotted guisp=#0000FF
+highlight DiagnosticUnderlineHint gui=underdotted cterm=underdotted guisp=#00FFFF
 
 " Highlight search results
 set hlsearch
@@ -304,7 +309,8 @@ endif
 set foldnestmax=3               " Only fold up to three nested levels.
 set foldminlines=3              " Only fold if there are at least 3 lines.
 
-function MyFoldText()
+" use ! to allow reloading of this file with source
+function! MyFoldText()
     let line = getline(v:foldstart)
     let numberOfLines = 1 + v:foldend - v:foldstart
     let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
@@ -369,6 +375,13 @@ cnoremap <C-V> <c-r>+
 " Switch buffers with alt + left/right
 noremap <M-Left> :bprevious<CR>
 noremap <M-Right> :bnext<CR>
+
+" Keybind to find out why something is highlighted the way it is.
+nm <silent> <S-F1> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+    \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
+    \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
+    \ . ">"<CR>
+
 
 " =============================================================================
 " Auto remove whitespace at EOL in certain scripts
