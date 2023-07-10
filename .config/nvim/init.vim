@@ -62,25 +62,44 @@ filetype off                    " disable file type detection
 " - PlugStatus                  Check Status of plugin
 " - PlugDiff                    Check diff between previous updates and pending changes
 call plug#begin(expand('~/.vim/plugged'))
-" Auto completion and syntax checking
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Full language server integration.
+" Provides autocomplete and syntax checking among other things
+Plug 'neoclide/coc.nvim', {'branch': 'release'} | let g:user_loaded_coc = 1
+
+" Provides XtermColorTable command to check 256 color terminal colors
+" For example for use in vimscript highlights
+Plug 'guns/xterm-color-table.vim' | let g:user_loaded_colortable = 1
+
+" Provides :Dox command to add doxygen comments to c++ code
+Plug 'vim-scripts/DoxygenToolkit.vim' | let g:user_loaded_doxytoolkit = 1
+
+" Provides commands to switch between source and header files
+Plug 'derekwyatt/vim-fswitch' | let g:user_loaded_fswitch = 1
+
+" Provides fuzzy search, :FZF command, ctrl + X and ctrl + V to open in
+" split/vertical split
+" https://github.com/junegunn/fzf/blob/master/README-VIM.md
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } | let g:user_loaded_fzf = 1
+
+" Snippets, Snippet engine provided by coc-snippets
+Plug 'honza/vim-snippets' | let g:user_loaded_vimsnippets = 1
 
 if !has('nvim')
     " File Tree View
-    Plug 'preservim/nerdtree'
+    Plug 'preservim/nerdtree' | let g:user_loaded_nerdtree = 1
 else
-    " Recommended (for coloured icons, used by nvim-tree and bufferline)
-    Plug 'nvim-tree/nvim-web-devicons'
+    " Coloured icons, used by nvim-tree and bufferline
+    Plug 'nvim-tree/nvim-web-devicons' | let g:user_loaded_devicons = 1
+    " Plug 'ryanoasis/vim-devicons' Icons without colours
 
     " Replaces NTree and NerdTree
-    Plug 'nvim-tree/nvim-tree.lua'
+    Plug 'nvim-tree/nvim-tree.lua' | let g:user_loaded_nvimtree = 1
 
     " Buffers as tabs
-    " Plug 'ryanoasis/vim-devicons' Icons without colours
-    Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+    Plug 'akinsho/bufferline.nvim', { 'tag': '*' } | let g:user_loaded_bufferline = 1
 
     " Better syntax highlighting
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | let g:user_loaded_treesitter = 1
 endif
 
 call plug#end()                 " required
@@ -99,7 +118,6 @@ filetype plugin indent on       " required
 " Put your non-Plugin stuff after this line
 
 " End vim-plug Setup
-
 
 " =============================================================================
 
@@ -140,11 +158,6 @@ highlight Visual ctermbg=237 guibg=#3A3A3A
 " "* primary
 set guioptions+=a
 
-if (exists("g:neovide"))
-    if filereadable(expand("~/.vim/neovide.vim"))
-        source ~/.vim/neovide.vim
-    endif
-endif
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -324,7 +337,10 @@ map Y y$
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 " cmap w!! w !sudo tee > /dev/null %
-cmap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" When typing help on the command line, expand to :vertical help automatically
+cnoremap help vertical help
 
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
@@ -375,43 +391,43 @@ augroup AutoremoveWhitespace
 augroup END
 
 " =============================================================================
-" Automatically open files in a new buffer
-
-augroup AutoNewTab
-    autocmd!
-    " autocmd BufAdd,BufNewFile * nested tab sball
-    autocmd BufNewFile * nested tab sball
-augroup END
-" =============================================================================
 
 if filereadable(expand('~/.vim/hexeditor.vim'))
     source ~/.vim/hexeditor.vim
 endif
 
+if (exists("g:neovide"))
+    if filereadable(expand("~/.vim/neovide.vim"))
+        source ~/.vim/neovide.vim
+    endif
+endif
+
 " =============================================================================
 " Plugin configurations
 
-" Add color table script
-if filereadable(expand("~/.vim/xterm-color-table/plugin/xterm-color-table.vim"))
-    source ~/.vim/xterm-color-table/plugin/xterm-color-table.vim
+if exists('g:user_loaded_nerdtree')
+    source ~/.vim/nerdtree.vim
 endif
 
-if !has('nvim') && filereadable(expand("~/.vim/nerdtree.vim"))
-    source ~/.vim/nerdtree.vim
-elseif has('nvim') && filereadable(expand("~/.vim/nvimtree.vim"))
+if exists('g:user_loaded_nvimtree')
     source ~/.vim/nvimtree.vim
 endif
 
-if filereadable(expand("~/.vim/coc.vim"))
-    source ~/.vim/coc.vim
+if exists('g:user_loaded_fswitch')
+    source ~/.vim/fswitch.vim
 endif
 
-" bufferline plugin
-if has("nvim") && filereadable(expand("~/.vim/bufferline.lua"))
+if exists('g:user_loaded_coc')
+    source ~/.vim/coc.vim
+    source ~/.vim/coc-snippets.vim
+endif
+
+if exists('g:user_loaded_bufferline')
     set mousemoveevent
     source ~/.vim/bufferline.lua
 endif
 
-if has("nvim") && filereadable(expand("~/.vim/treesitter.lua"))
+if exists('g:user_loaded_treesitter')
     source ~/.vim/treesitter.lua
 endif
+
