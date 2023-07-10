@@ -373,11 +373,14 @@ cnoremap <C-V> <c-r>+
 " See GUI section above for paste configuration for neovide
 
 " Switch buffers with alt + left/right
-noremap <M-Left> :bprevious<CR>
-noremap <M-Right> :bnext<CR>
+noremap <silent> <M-Left> :bprevious<CR>
+noremap <silent> <M-Right> :bnext<CR>
+
+" Close buffers with C-W
+nnoremap <silent> <C-W> :bdelete<CR>
 
 " Keybind to find out why something is highlighted the way it is.
-nm <silent> <S-F1> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+nmap <silent> <S-F1> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
     \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
     \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
     \ . ">"<CR>
