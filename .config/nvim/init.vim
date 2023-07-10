@@ -100,33 +100,6 @@ filetype plugin indent on       " required
 
 " End vim-plug Setup
 
-" =============================================================================
-" Plugin configurations
-
-" Add color table script
-if filereadable(expand("~/.vim/xterm-color-table/plugin/xterm-color-table.vim"))
-    source ~/.vim/xterm-color-table/plugin/xterm-color-table.vim
-endif
-
-if !has('nvim') && filereadable(expand("~/.vim/nerdtree.vim"))
-    source ~/.vim/nerdtree.vim
-elseif has('nvim') && filereadable(expand("~/.vim/nvimtree.vim"))
-    source ~/.vim/nvimtree.vim
-endif
-
-if filereadable(expand("~/.vim/coc.vim"))
-    source ~/.vim/coc.vim
-endif
-
-" bufferline plugin
-if has("nvim") && filereadable(expand("~/.vim/bufferline.lua"))
-    set mousemoveevent
-    source ~/.vim/bufferline.lua
-endif
-
-if has("nvim") && filereadable(expand("~/.vim/treesitter.lua"))
-    source ~/.vim/treesitter.lua
-endif
 
 " =============================================================================
 
@@ -266,6 +239,8 @@ set confirm             " Ask user to save instead of failing command to quit
 
 " Do not update display while executing macros
 set lazyredraw
+
+" Shows the current mode in the last line
 set showmode
 
 " wrap around while searching
@@ -411,4 +386,32 @@ augroup END
 
 if filereadable(expand('~/.vim/hexeditor.vim'))
     source ~/.vim/hexeditor.vim
+endif
+
+" =============================================================================
+" Plugin configurations
+
+" Add color table script
+if filereadable(expand("~/.vim/xterm-color-table/plugin/xterm-color-table.vim"))
+    source ~/.vim/xterm-color-table/plugin/xterm-color-table.vim
+endif
+
+if !has('nvim') && filereadable(expand("~/.vim/nerdtree.vim"))
+    source ~/.vim/nerdtree.vim
+elseif has('nvim') && filereadable(expand("~/.vim/nvimtree.vim"))
+    source ~/.vim/nvimtree.vim
+endif
+
+if filereadable(expand("~/.vim/coc.vim"))
+    source ~/.vim/coc.vim
+endif
+
+" bufferline plugin
+if has("nvim") && filereadable(expand("~/.vim/bufferline.lua"))
+    set mousemoveevent
+    source ~/.vim/bufferline.lua
+endif
+
+if has("nvim") && filereadable(expand("~/.vim/treesitter.lua"))
+    source ~/.vim/treesitter.lua
 endif
