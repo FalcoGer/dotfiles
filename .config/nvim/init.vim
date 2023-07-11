@@ -237,7 +237,7 @@ set mouse=a         " Enable mouse usage (all modes)
 " =============================================================================
 " Right column marker
 set colorcolumn=121
-highlight ColorColumn gui=underdashed guisp=#800000 ctermbg=1 guibg=None
+highlight ColorColumn gui=underdashed guisp=#800000 ctermbg=1 guibg=NONE
 
 " Highlight Whitespaces
 set list
