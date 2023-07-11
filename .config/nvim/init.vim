@@ -332,14 +332,15 @@ set laststatus=2                        " 0: off, 1: only if 2 windows, 2: alway
 
 " Status Line
 set statusline=
-set statusline+=%f                      " File Name, max 20 characters
-set statusline+=\ %m                    " Modifiable [+] or [-]
-set statusline+=\ %{4}.{4}{r}           " Readonly [RO] or nothing
-set statusline+=\ Line:\ %l/%L[%p%%]    " Line: CurLine/LastLine[Percent%]
-set statusline+=\ Col:\ %c              " Current column
-set statusline+=\ Buf:\ #%n             " Current buffer number
-set statusline+=\ [%b][0x%B]            " current character under cursor
-
+if !exists("g:user_loaded_vimairline")
+    set statusline+=%f                      " File Name, max 20 characters
+    set statusline+=\ %m                    " Modifiable [+] or [-]
+    set statusline+=\ %{4}.{4}{r}           " Readonly [RO] or nothing
+    set statusline+=\ Line:\ %l/%L[%p%%]    " Line: CurLine/LastLine[Percent%]
+    set statusline+=\ Col:\ %c              " Current column
+    set statusline+=\ Buf:\ #%n             " Current buffer number
+    set statusline+=\ [%b][0x%B]            " current character under cursor
+endif
 " history size
 set history=1000
 
