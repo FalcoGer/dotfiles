@@ -62,8 +62,7 @@ nnoremap <C-S-V> "+yy
 vnoremap <C-S-V> "+y
 
 " Paste text in terminal mode
-" TODO, doesn't work
-" tnoremap <C-S-V> <ESC>"+pi
+tnoremap <C-S-V> <C-\><C-o>"+p
 " Paste text in normal mode
 nnoremap <C-S-V> "+p
 " Paste text in insert mode

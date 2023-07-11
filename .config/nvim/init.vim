@@ -84,6 +84,44 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } | let g:user_loaded_fzf = 1
 " Snippets, Snippet engine provided by coc-snippets
 Plug 'honza/vim-snippets' | let g:user_loaded_vimsnippets = 1
 
+" Fancy status line
+Plug 'vim-airline/vim-airline' | let g:user_loaded_vimairline = 1
+
+" Rainbow brackets
+Plug 'luochen1990/rainbow' | let g:user_loaded_rainbow = 1
+
+" Git integration
+" fugitive adds :Git commands and a status line indicator, integrates with
+" vim-airline
+Plug 'tpope/vim-fugitive' | let g:user_loaded_fugitive = 1
+" flog provides a git branch viewer with :Flog or :Flogsplit
+Plug 'rbong/vim-flog' | let g:user_loaded_flog = 1
+" git gutter provides indicators in the left bar to show changes since the
+" last commit
+" Plug 'airblade/vim-gitgutter' | let g:user_loaded_gitgutter = 1
+
+" signify shows VCS changes (like git) in the sign column. More lightweight
+" than gitgutter with less features. Just does the sign column.
+if has('nvim') || has('patch-8.0.902')
+    Plug 'mhinz/vim-signify' | let g:user_loaded_signify = 1
+else
+    Plug 'mhinz/vim-signify', { 'tag': 'legacy' } | let g:user_loaded_signify = 1
+endif
+
+" Python virtualenv support. Provides :VirtualEnv commands. Integrates with
+" vimairline
+Plug 'jmcantrell/vim-virtualenv' | let g:user_loaded_virtualenv = 1
+
+" Search through buffers, files, recently opened, etc. Provides :Unite command
+Plug 'Shougo/unite.vim' | let g:user_loaded_unite = 1
+
+" Show undo tree of vim visually
+" Plug 'sjl/gundo.vim' | let g:user_loaded_gundo = 1
+Plug 'mbbill/undotree' | let g:user_loaded_undotree = 1
+
+" Tag bar, showing for example classes and members in a tree view
+Plug 'preservim/tagbar' | let g:user_loaded_tagbar = 1
+
 if !has('nvim')
     " File Tree View
     Plug 'preservim/nerdtree' | let g:user_loaded_nerdtree = 1
@@ -128,12 +166,28 @@ set termguicolors
 " Set the title to reflect the file being edited
 set title
 
+function! MakeProtectedDir(target_path)
+    if !isdirectory(a:target_path)
+        call mkdir(a:target_path, "p", "0700")
+    endif
+endfunction
+
 " Directory for swap and backup files
 " // at the end makes sure file locations are saved in the file name
-set dir=~/.vim/swp//,/tmp//
+let targetPath = expand('~/.vim/swp//')
+call MakeProtectedDir(targetPath)
+let &directory = targetPath
+
+let targetPath = expand('~/.vim/backup//')
+call MakeProtectedDir(targetPath)
+let &backupdir = targetPath
 set backup
-set backupdir=~/.vim/backup//,/tmp//
-set undodir=~/.vim/undo//,/tmp//
+
+let targetPath = expand('~/.vim/undo//')
+call MakeProtectedDir(targetPath)
+let &undodir = targetPath
+set undofile
+
 " patchmode will keep the first version of a file and not write it anymore
 " after that
 " set patchmode=.orig
@@ -165,8 +219,7 @@ if has("autocmd")
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
+" These make vim VI incompatible
 set showcmd         " Show (partial) command in status line.
 set showmatch       " Show matching brackets.
 set ignorecase      " Do case insensitive matching
@@ -227,7 +280,7 @@ highlight DiagnosticUnderlineHint gui=underdotted cterm=underdotted guisp=#00FFF
 
 " Highlight search results
 set hlsearch
-highlight Search ctermfg=NONE guifg=NONE guibg=NONE ctermbg=11 cterm=underdashed gui=underdashed guisp=#FFFF00
+highlight Search ctermfg=0 guifg=NONE guibg=NONE ctermbg=11 cterm=bold gui=underdashed guisp=#FFFF00
 
 " =============================================================================
 
@@ -238,30 +291,28 @@ set relativenumber
 
 augroup numbertoggle
     autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave * if (!(bufname('%') =~ "^NvimTree_\\d\\+")) | set relativenumber | endif
+    autocmd BufEnter,FocusGained,InsertLeave * if(getbufinfo('%')[0]['listed'] == 1) | set relativenumber | endif
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
 " =============================================================================
+" Behavior
 
 set synmaxcol=2048
 
 set wildmenu            " Enable command autocompletion to be a menu
-
 set confirm             " Ask user to save instead of failing command to quit
-
-" Do not update display while executing macros
-set lazyredraw
-
-" Shows the current mode in the last line
-set showmode
-
-" wrap around while searching
-set wrapscan
-
-" command line height
-set cmdheight=2
-
+set lazyredraw          " Do not update display while executing macros
+set showmode            " Shows the current mode in the last line
+set wrapscan            " wrap around while searching
+set cmdheight=2         " command line height
+set emoji               " Smartly allocate 2 cells for emojis
+set ambiwidth="single"  " East Asian Width Class Ambiguous (special characters) take a single cell only.
+if has('nvim')
+    set signcolumn=auto:1-2
+else
+    set signcolumn=yes
+endif
 " Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
 
@@ -270,21 +321,27 @@ set backspace=indent,eol,start
 set whichwrap=<,>,[,],h,l
 
 " Stop certain movements from always going to the first character of a line.
-" While this behaviour deviates from that of Vi, it does what most users
-" coming from other editors would expect.
 set nostartofline
 
-" status line
-set stl=%f\ %m\ %r\ Line:\ %l/%L[%p%%]\ Col:\ %c\ Buf:\ #%n\ [%b][0x%B]
-" always put a status line
-set laststatus=2
+set laststatus=2                        " 0: off, 1: only if 2 windows, 2: always, 3: only the last window
+
+" Status Line
+set statusline=
+set statusline+=%f                      " File Name, max 20 characters
+set statusline+=\ %m                    " Modifiable [+] or [-]
+set statusline+=\ %{4}.{4}{r}           " Readonly [RO] or nothing
+set statusline+=\ Line:\ %l/%L[%p%%]    " Line: CurLine/LastLine[Percent%]
+set statusline+=\ Col:\ %c              " Current column
+set statusline+=\ Buf:\ #%n             " Current buffer number
+set statusline+=\ [%b][0x%B]            " current character under cursor
 
 " history size
 set history=1000
 
 " =============================================================================
+" Folding
 
-" auto tab
+" auto open folds in these conditions
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
 if has('nvim')
@@ -310,10 +367,15 @@ set foldtext=MyFoldText()
 set nofoldenable            " Disable folding
 highlight Folded ctermfg=14 ctermbg=236 gui=underdouble guisp=#008080 guifg=#00FFFF guibg=#303030
 
+highlight SignColumn ctermfg=51 ctermbg=236 guifg=#00FFFF guibg=#303030
+" =============================================================================
+" Indentation
+
 " Indentation settings for using 4 spaces instead of tabs.
 " Do not change 'tabstop' from its default value of 8 with this setup.
 set shiftwidth=4            " Indent using 4 spaces
 set softtabstop=4           " Inserts tabstop number of spaces when tab is pressed
+set smarttab                " Indent by shiftwidth at start of line, otherwise softtabstop
 set expandtab               " Converts tabs to spaces
 
 " =============================================================================
@@ -329,7 +391,10 @@ highlight CursorLine ctermbg=234 guibg=#1C1C1C cterm=NONE gui=NONE
 " Wrap long lines
 set linebreak
 
+" allow selection of virtual text in block mode
+set virtualedit=block
 " =============================================================================
+" Mapping
 
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
@@ -357,8 +422,15 @@ noremap <Leader>P "*p
 nnoremap <C-C> "+yy
 " Copy text in visual mode
 vnoremap <C-C> "+y
-" Paste text with ctrl + v in insert and command mode, but keep visual block mapping
+" Paste text with ctrl + v in insert and command mode, but keep visual block mapping (normal mode C-V)
+
+" C-O switches to temporary normal mode
+
+" this version doesn't cause formatting like indents or auto comment markers to be automatically applied, but pastes one space behind the cursor
+" inoremap <C-V> <c-o>"+p
+" This version pastes where the cursor is, but applies formatting
 inoremap <C-V> <c-r>+
+
 cnoremap <C-V> <c-r>+
 " Pasting is provided by the terminal and need not be done.
 " See GUI section above for paste configuration for neovide
@@ -431,3 +503,26 @@ if exists('g:user_loaded_treesitter')
     source ~/.vim/treesitter.lua
 endif
 
+if exists('g:user_loaded_rainbow')
+    source ~/.vim/rainbow.vim
+endif
+
+if exists('g:user_loaded_vimairline')
+   source ~/.vim/vimairline.vim
+endif
+
+if exists('g:user_loaded_flog')
+    source ~/.vim/flog.vim
+endif
+
+if exists('g:user_loaded_unite')
+    source ~/.vim/unite.vim
+endif
+
+if exists('g:user_loaded_undotree')
+    source ~/.vim/undotree.vim
+endif
+
+if exists('g:user_loaded_tagbar')
+    nmap <silent><C-t> :TagbarToggle<CR>
+endif
