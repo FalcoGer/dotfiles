@@ -1,3 +1,3 @@
 " https://github.com/rbong/vim-flog/
 
-nnoremap <silent><M-g> :Flog<CR>
+nnoremap <silent><C-g> :Flog<CR>

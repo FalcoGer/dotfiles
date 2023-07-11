@@ -102,11 +102,16 @@ Plug 'rbong/vim-flog' | let g:user_loaded_flog = 1
 
 " signify shows VCS changes (like git) in the sign column. More lightweight
 " than gitgutter with less features. Just does the sign column.
-if has('nvim') || has('patch-8.0.902')
-    Plug 'mhinz/vim-signify' | let g:user_loaded_signify = 1
-else
-    Plug 'mhinz/vim-signify', { 'tag': 'legacy' } | let g:user_loaded_signify = 1
-endif
+" if has('nvim') || has('patch-8.0.902')
+"     Plug 'mhinz/vim-signify' | let g:user_loaded_signify = 1
+" else
+"     Plug 'mhinz/vim-signify', { 'tag': 'legacy' } | let g:user_loaded_signify = 1
+" endif
+
+" Puts signs into the sign colum where users has changed file since last save
+" Also for VCS
+" integrates with vim-airline
+Plug 'chrisbra/changesPlugin' | let g:user_loaded_changesplugin = 1
 
 " Python virtualenv support. Provides :VirtualEnv commands. Integrates with
 " vimairline
@@ -367,7 +372,7 @@ set foldtext=MyFoldText()
 set nofoldenable            " Disable folding
 highlight Folded ctermfg=14 ctermbg=236 gui=underdouble guisp=#008080 guifg=#00FFFF guibg=#303030
 
-highlight SignColumn ctermfg=51 ctermbg=236 guifg=#00FFFF guibg=#303030
+highlight SignColumn ctermfg=51 ctermbg=234 guifg=#00FFFF guibg=#1C1C1C
 " =============================================================================
 " Indentation
 
@@ -525,4 +530,8 @@ endif
 
 if exists('g:user_loaded_tagbar')
     nmap <silent><C-t> :TagbarToggle<CR>
+endif
+
+if exists('g:user_loaded_changesplugin')
+    source ~/.vim/changesplugin.vim
 endif
