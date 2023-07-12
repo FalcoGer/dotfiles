@@ -1,2 +1,2 @@
-nmap <silent><F4> echo FSHere
+nmap <silent><F4> :FSHere<CR>
 
