@@ -119,6 +119,8 @@ Plug 'jmcantrell/vim-virtualenv' | let g:user_loaded_virtualenv = 1
 
 " Search through buffers, files, recently opened, etc. Provides :Unite command
 Plug 'Shougo/unite.vim' | let g:user_loaded_unite = 1
+" Allows command execution from unite
+Plug 'Shougo/vimproc.vim', {'do' : 'make'} | let g:user_loaded_vimproc = 1
 
 " Show undo tree of vim visually
 " Plug 'sjl/gundo.vim' | let g:user_loaded_gundo = 1
@@ -296,7 +298,7 @@ set relativenumber
 
 augroup numbertoggle
     autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave * if(getbufinfo('%')[0]['listed'] == 1) | set relativenumber | endif
+    autocmd BufEnter,FocusGained,InsertLeave * if(getbufinfo('%')[0]['listed'] == 1 || &buftype == 'help') | set relativenumber | endif
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
