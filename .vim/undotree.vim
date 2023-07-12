@@ -7,7 +7,7 @@ if exists('g:loaded_undotree')
 endif
 let g:loaded_undotree = 0
 
-nnoremap <C-u> :UndotreeToggle<CR>
+nnoremap <silent><C-u> :UndotreeToggle<CR>
 
 if v:version < 703
     command! -n=0 -bar UndotreeToggle :echoerr "undotree.vim needs Vim version >= 7.3"
