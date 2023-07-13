@@ -210,7 +210,7 @@ endif
 set background=dark
 
 " Normal text color is green on very dark gray
-highlight Normal ctermfg=34 ctermbg=233 guifg=#00DF00 guibg=#101010
+highlight Normal ctermfg=34 ctermbg=233 guifg=#00DF00 guibg=#121212
 " Selected text in visual mode
 highlight Visual ctermbg=237 guibg=#3A3A3A
 
