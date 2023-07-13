@@ -87,9 +87,6 @@ Plug 'honza/vim-snippets' | let g:user_loaded_vimsnippets = 1
 " Fancy status line
 Plug 'vim-airline/vim-airline' | let g:user_loaded_vimairline = 1
 
-" Rainbow brackets - works with treesitter
-Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim' | let g:user_loaded_rainbowdelim = 1
-
 " Git integration
 " fugitive adds :Git commands and a status line indicator, integrates with
 " vim-airline
@@ -132,6 +129,11 @@ Plug 'preservim/tagbar' | let g:user_loaded_tagbar = 1
 if !has('nvim')
     " File Tree View
     Plug 'preservim/nerdtree' | let g:user_loaded_nerdtree = 1
+
+    " Rainbow brackets - does not work with treesitter
+    Plug 'luochen1990/rainbow' | let g:user_loaded_rainbow = 1
+" Rainbow brackets - works with treesitter
+Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim' | let g:user_loaded_rainbowdelim = 1
 else
     " Coloured icons, used by nvim-tree and bufferline
     Plug 'nvim-tree/nvim-web-devicons' | let g:user_loaded_devicons = 1
@@ -145,6 +147,9 @@ else
 
     " Better syntax highlighting
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | let g:user_loaded_treesitter = 1
+    
+    " Rainbow brackets - works with treesitter
+    Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim' | let g:user_loaded_rainbowdelim = 1
 endif
 
 call plug#end()                 " required
@@ -509,6 +514,10 @@ endif
 
 if exists('g:user_loaded_treesitter')
     source ~/.vim/treesitter.lua
+endif
+
+if exists('g:user_loaded_rainbow')
+    source ~/.vim/rainbow.vim
 endif
 
 if exists('g:user_loaded_rainbowdelim')
