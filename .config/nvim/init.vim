@@ -87,8 +87,8 @@ Plug 'honza/vim-snippets' | let g:user_loaded_vimsnippets = 1
 " Fancy status line
 Plug 'vim-airline/vim-airline' | let g:user_loaded_vimairline = 1
 
-" Rainbow brackets
-Plug 'luochen1990/rainbow' | let g:user_loaded_rainbow = 1
+" Rainbow brackets - works with treesitter
+Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim' | let g:user_loaded_rainbowdelim = 1
 
 " Git integration
 " fugitive adds :Git commands and a status line indicator, integrates with
@@ -511,8 +511,8 @@ if exists('g:user_loaded_treesitter')
     source ~/.vim/treesitter.lua
 endif
 
-if exists('g:user_loaded_rainbow')
-    source ~/.vim/rainbow.vim
+if exists('g:user_loaded_rainbowdelim')
+    source ~/.vim/rainbowdelim.lua
 endif
 
 if exists('g:user_loaded_vimairline')
