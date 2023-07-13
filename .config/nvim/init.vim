@@ -132,8 +132,6 @@ if !has('nvim')
 
     " Rainbow brackets - does not work with treesitter
     Plug 'luochen1990/rainbow' | let g:user_loaded_rainbow = 1
-" Rainbow brackets - works with treesitter
-Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim' | let g:user_loaded_rainbowdelim = 1
 else
     " Coloured icons, used by nvim-tree and bufferline
     Plug 'nvim-tree/nvim-web-devicons' | let g:user_loaded_devicons = 1
