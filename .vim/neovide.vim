@@ -1,6 +1,6 @@
 " See: https://neovide.dev/configuration.html
 
-set guifont=FiraMono\ Nerd\ Font:h10.5,MesloLGS\ Nerd\ Font:h10.5,Ubuntu\ Mono,Unifont
+set guifont=FiraCode\ Nerd\ Font:h10.5
 set linespace=0
 let g:neovide_scale_factor=1.0
 
