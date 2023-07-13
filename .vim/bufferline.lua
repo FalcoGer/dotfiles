@@ -37,7 +37,7 @@ bufferline.setup(
         },
         ]] --
             numbers = function(opts)
-                return string.format('%s|%s', opts.raise(opts.ordinal), opts.raise(opts.id))
+                return string.format('[%d]', opts.id)
             end,
             indicator = {
                 style = "underline"
