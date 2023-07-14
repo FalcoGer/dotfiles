@@ -64,7 +64,9 @@ filetype off                    " disable file type detection
 call plug#begin(expand('~/.vim/plugged'))
 " Full language server integration.
 " Provides autocomplete and syntax checking among other things
-Plug 'neoclide/coc.nvim', {'branch': 'release'} | let g:user_loaded_coc = 1
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocUpdate'} | let g:user_loaded_coc = 1
+
+Plug 'Raimondi/delimitMate' | let g:user_loaded_delimitmate = 1
 
 " Provides XtermColorTable command to check 256 color terminal colors
 " For example for use in vimscript highlights
@@ -249,7 +251,7 @@ set list
 set listchars=tab:<->               " Show tabs as this. xy[z], x always, then y as many as will fit, z as the last one.
 set listchars+=eol:$                " End of line marker.
 set listchars+=lead:-
-set listchars+=leadmultispace:---+  " What to display for leading white space characters.
+set listchars+=leadmultispace:\|-->  " What to display for leading white space characters.
 set listchars+=trail:+              " What to display for trailing white space characters.
 set listchars+=extends:>            " What to display when wrapped is off and part of the line is past the right edge of the screen.
 set listchars+=precedes:<           " What to display when wrapped is off and part of the line is past the left edge of the screen.
@@ -446,6 +448,9 @@ cnoremap <C-V> <c-r>+
 " Pasting is provided by the terminal and need not be done.
 " See GUI section above for paste configuration for neovide
 
+" Highlight everything with <C-a>
+nnoremap <silent><C-a> gg<S-v><S-g>
+
 " Switch buffers with alt + left/right
 noremap <silent> <M-Left> :bprevious<CR>
 noremap <silent> <M-Right> :bnext<CR>
@@ -544,4 +549,8 @@ endif
 
 if exists('g:user_loaded_changesplugin')
     source ~/.vim/changesplugin.vim
+endif
+
+if exists('g:user_loaded_delimitmate')
+    source ~/.vim/delimitMate.vim
 endif
