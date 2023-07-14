@@ -96,10 +96,11 @@ Diagnostics:
       readability-identifier-naming.VirtualMethodCase: CamelCase
 
 Completion:
-  AllScopes: Yes
+  AllScopes: true
 
 InlayHints:
-  Designators: Yes
-  Enabled: Yes
-  ParameterNames: Yes
-  DeducedTypes: Yes
+  Designators: true
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true
+
