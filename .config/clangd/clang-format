@@ -236,7 +236,8 @@ BraceWrapping:
     AfterCaseLabel: true
     AfterClass: true
     # BraceWrappingAfterControlStatementStyle: Never, MultiLine, Always - For if/while/switch/etc
-    AfterControlStatement: MultiLine
+    # AfterControlStatement: MultiLine
+    AfterControlStatement: Always
     AfterEnum: true
     AfterFunction: true
     AfterNamespace: true
