@@ -1,3 +1,4 @@
 " https://github.com/rbong/vim-flog/
 
-nnoremap <silent><C-g> :Flog<CR>
+nnoremap <silent><M-g> :Flogsplit<CR>
+nnoremap <silent><C-g> :vertical Floggit<CR>
