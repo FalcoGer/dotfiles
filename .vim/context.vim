@@ -22,18 +22,24 @@ nnoremap <silent> <expr> H  context#util#map_H()
 " create autocmds for groups that might scroll the buffer (like cursor moved)
 let g:context_add_autocmds = 0
 
+" Disable cursormoved and winscrolled because of extremely poor performance in
+" certain languages. CursorHold will update once updatetime has elapsed.
+" Workaround with timers doesn't work.
+" https://github.com/wellle/context.vim/issues/123
 augroup ContextUpdateAutocmds
     autocmd!
     autocmd VimEnter     * ContextActivate
     autocmd BufAdd       * call context#update('BufAdd')
     autocmd BufEnter     * call context#update('BufEnter')
-    autocmd CursorMoved  * call context#update('CursorMoved')
+    " autocmd CursorMoved  * if exists('b:timer_context_cursormoved') | call timer_stop(b:timer_context_cursormoved) | endif | let b:timer_context_cursormoved = timer_start(700, context#update('CursorMoved'))
+    " autocmd CursorMoved  * context#update('CursorMoved')
     autocmd VimResized   * call context#update('VimResized')
     autocmd CursorHold   * call context#update('CursorHold')
     autocmd User GitGutter call context#update('GitGutter')
     autocmd OptionSet number,relativenumber,numberwidth,signcolumn,tabstop,list call context#update('OptionSet')
     if exists('##WinScrolled')
-        autocmd WinScrolled * call context#update('WinScrolled')
+        " autocmd WinScrolled  * if exists('b:timer_context_winscrolled') | call timer_stop(b:timer_context_winscrolled) | endif | let b:timer_context_winscrolled = timer_start(700, context#update('CursorMoved'))
+        " autocmd WinScrolled * call context#update('WinScrolled')
     endif
 augroup END
 
