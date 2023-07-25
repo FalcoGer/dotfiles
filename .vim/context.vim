@@ -24,22 +24,37 @@ let g:context_add_autocmds = 0
 
 " Disable cursormoved and winscrolled because of extremely poor performance in
 " certain languages. CursorHold will update once updatetime has elapsed.
-" Workaround with timers doesn't work.
 " https://github.com/wellle/context.vim/issues/123
+let g:user_context_enable_update = 0
+
+function! SetContextEnableUpdate()
+    let g:user_context_enable_update = 1
+endfunction
+
+function! ContextUpdateExpensive(eventname)
+    if g:user_context_enable_update == 0 || &filetype =~ 'ruby\|python'
+        return
+    endif
+
+    let g:user_context_enable_update = 0
+    call context#update(a:eventname)
+    call timer_start(500, SetContextEnableUpdate())
+endfunction
+
 augroup ContextUpdateAutocmds
     autocmd!
     autocmd VimEnter     * ContextActivate
     autocmd BufAdd       * call context#update('BufAdd')
     autocmd BufEnter     * call context#update('BufEnter')
-    " autocmd CursorMoved  * if exists('b:timer_context_cursormoved') | call timer_stop(b:timer_context_cursormoved) | endif | let b:timer_context_cursormoved = timer_start(700, context#update('CursorMoved'))
-    " autocmd CursorMoved  * context#update('CursorMoved')
+    " autocmd CursorMoved  * call context#update('CursorMoved')
+    autocmd CursorMoved  * call ContextUpdateExpensive('CursorMoved')
     autocmd VimResized   * call context#update('VimResized')
     autocmd CursorHold   * call context#update('CursorHold')
     autocmd User GitGutter call context#update('GitGutter')
     autocmd OptionSet number,relativenumber,numberwidth,signcolumn,tabstop,list call context#update('OptionSet')
     if exists('##WinScrolled')
-        " autocmd WinScrolled  * if exists('b:timer_context_winscrolled') | call timer_stop(b:timer_context_winscrolled) | endif | let b:timer_context_winscrolled = timer_start(700, context#update('CursorMoved'))
         " autocmd WinScrolled * call context#update('WinScrolled')
+        autocmd WinScrolled * call ContextUpdateExpensive('WinScrolled')
     endif
 augroup END
 
