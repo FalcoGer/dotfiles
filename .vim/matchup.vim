@@ -37,8 +37,8 @@ let g:matchup_motion_override_Npercent = 0 " Custom keybind <M-Up/Down>
 let g:matchup_motion_cursor_end = 1
 
 " Highlights.
-highlight MatchParen ctermbg=blue cterm=underdashed gui=underdashed guisp=yellow
-highlight MatchWord ctermfg=blue cterm=underdashed gui=underdashed guisp=yellow
-highlight MatchParenCur cterm=underdashed gui=underdashed guisp=yellow
-highlight MatchWordCur cterm=underdashed gui=underdashed guisp=yellow
+highlight MatchParen ctermbg=blue ctermfg=NONE cterm=underdashed guibg=NONE guifg=NONE gui=underdashed guisp=yellow
+highlight MatchWord ctermbg=NONE ctermfg=blue cterm=underdashed guibg=NONE guifg=NONE gui=underdashed guisp=yellow
+highlight MatchParenCur ctermbg=NONE ctermfg=NONE cterm=underdashed guibg=NONE guifg=NONE gui=underdashed guisp=yellow
+highlight MatchWordCur ctermbg=NONE ctermfg=NONE cterm=underdashed guibg=NONE guifg=NONE gui=underdashed guisp=yellow
 
