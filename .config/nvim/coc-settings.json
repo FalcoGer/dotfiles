@@ -115,6 +115,8 @@
         "$HOME/.cargo/**",
         "$HOME/.rustup/**"
     ],
+
+    "suggest.snippetIndicator": "~",
     
     "pylsp.plugins.pylint.enabled": true,
     "pylsp.builtin.installExtrasArgs": [
