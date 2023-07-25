@@ -89,6 +89,10 @@ Plug 'honza/vim-snippets' | let g:user_loaded_vimsnippets = 1
 " Fancy status line
 Plug 'vim-airline/vim-airline' | let g:user_loaded_vimairline = 1
 
+" Pin context (current function, if block header, etc) to the top of the
+" buffer window
+Plug 'wellle/context.vim' | let g:user_loaded_context = 1
+
 " Git integration
 " fugitive adds :Git commands and a status line indicator, integrates with
 " vim-airline
@@ -394,7 +398,7 @@ set expandtab               " Converts tabs to spaces
 " =============================================================================
 
 " keep cursor off the edge when scrolling
-set scrolloff=4
+set scrolloff=8
 set sidescrolloff=10
 
 " highlight current line with a lighter background
@@ -553,4 +557,8 @@ endif
 
 if exists('g:user_loaded_delimitmate')
     source ~/.vim/delimitMate.vim
+endif
+
+if exists('g:user_loaded_context')
+    source ~/.vim/context.vim
 endif
