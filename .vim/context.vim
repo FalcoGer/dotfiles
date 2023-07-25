@@ -7,10 +7,36 @@ let g:context_enabled = 1
 let g:context_filetype_blacklist = []
 
 " create default mappings for all commands that scroll the buffer
-let g:context_add_mappings = 1
+let g:context_add_mappings = 0
+
+if !exists('##WinScrolled')
+    nnoremap <silent> <expr> <C-Y> context#util#map('<C-Y>')
+    nnoremap <silent> <expr> <C-E> context#util#map('<C-E>')
+    nnoremap <silent> <expr> zz    context#util#map('zz')
+    nnoremap <silent> <expr> zb    context#util#map('zb')
+endif
+
+nnoremap <silent> <expr> zt context#util#map_zt()
+nnoremap <silent> <expr> H  context#util#map_H()
 
 " create autocmds for groups that might scroll the buffer (like cursor moved)
-let g:context_add_autocmds = 1
+let g:context_add_autocmds = 0
+
+augroup ContextUpdateAutocmds
+    autocmd!
+    autocmd VimEnter     * ContextActivate
+    autocmd BufAdd       * call context#update('BufAdd')
+    autocmd BufEnter     * call context#update('BufEnter')
+    autocmd CursorMoved  * call context#update('CursorMoved')
+    autocmd VimResized   * call context#update('VimResized')
+    autocmd CursorHold   * call context#update('CursorHold')
+    autocmd User GitGutter call context#update('GitGutter')
+    autocmd OptionSet number,relativenumber,numberwidth,signcolumn,tabstop,list call context#update('OptionSet')
+    if exists('##WinScrolled')
+        autocmd WinScrolled * call context#update('WinScrolled')
+    endif
+augroup END
+
 
 " how context is presented. "nvim-float", "vim-popup" or "preview"
 if has('nvim')
