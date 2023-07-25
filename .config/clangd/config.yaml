@@ -1,5 +1,5 @@
 CompileFlags:
-  Add: [-std=c++23, -Wall, -Wextra, -Wpedantic, -Wdouble-promotion, -Wformat=2, -Wformat-nonliteral, -Wformat-y2k, -Wnull-dereference, -Wimplicit-fallthrough, -Wmissing-include-dirs, -Wswitch-default, -Wunused-parameter, -Wuninitialized, -Walloca, -Wconversion, -Wfloat-conversion, -Wsign-conversion, -Wfloat-equal, -Wshadow-all, -Wundef, -Wunused-macros, -Wcast-qual, -Wcast-align, -Wmissing-declarations, -Wredundant-decls, -Wstack-protector, -fstack-protector, -pedantic-errors, -Werror=pedantic, -Werror=char-subscripts, -Werror=null-dereference, -Werror=init-self, -Werror=implicit-fallthrough, -Werror=misleading-indentation, -Werror=missing-braces, -Werror=sequence-point, -Werror=return-type, -Werror=multichar]
+  Add: [-std=c++23, -stdlib=libc++, -fexperimental-library, -L/usr/lib/llvm-17/lib, -Wall, -Wextra, -Wpedantic, -Wdouble-promotion, -Wformat=2, -Wformat-nonliteral, -Wformat-y2k, -Wnull-dereference, -Wimplicit-fallthrough, -Wmissing-include-dirs, -Wswitch-default, -Wswitch-enum, -Wswitch-bool, -Wunused-parameter, -Wuninitialized, -Walloca, -Wconversion, -Wfloat-conversion, -Wsign-conversion, -Wfloat-equal, -Wshadow-all, -Wundef, -Wunused-macros, -Wcast-qual, -Wcast-align, -Wmissing-declarations, -Wredundant-decls, -Wstack-protector, -fstack-protector, -pedantic-errors, -Werror=pedantic, -Werror=char-subscripts, -Werror=null-dereference, -Werror=init-self, -Werror=implicit-fallthrough, -Werror=misleading-indentation, -Werror=missing-braces, -Werror=sequence-point, -Werror=return-type, -Werror=multichar]
 
 
 Index:
@@ -21,7 +21,8 @@ Diagnostics:
     ]
     Remove: [
       cppcoreguidelines-avoid-do-while,
-      bugprone-easily-swappable-parameters
+      bugprone-easily-swappable-parameters,
+      readability-magic-numbers
     ]
     CheckOptions:
       modernize-use-auto.MinTypeNameLength: 10
