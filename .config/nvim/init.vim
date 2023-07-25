@@ -156,6 +156,9 @@ else
     Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim' | let g:user_loaded_rainbowdelim = 1
 endif
 
+" Provides matching pair controls for braces and keywords like if/else, etc
+Plug 'andymass/vim-matchup' | let g:user_loaded_matchup = 1
+
 call plug#end()                 " required
 filetype plugin indent on       " required
 
@@ -561,4 +564,8 @@ endif
 
 if exists('g:user_loaded_context')
     source ~/.vim/context.vim
+endif
+
+if exists('g:user_loaded_matchup')
+    source ~/.vim/matchup.vim
 endif

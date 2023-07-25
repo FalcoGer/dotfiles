@@ -25,6 +25,12 @@ local options = {
             node_decremental = "grm",
         },
     },
+    matchup = {
+        enabled = true,               -- enable matchup integration
+        disable = {},                 -- list of languages as strings for which matchup is disabled
+        disable_virtual_text = false, -- disable virtual text for languages without explicit end markers (python)
+        -- include_match_words = "",  -- match these regular expressions that are not detected by treesitter (like /* */)
+    },
 }
 
 ts_config.setup(options)
