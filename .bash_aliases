@@ -104,6 +104,47 @@ if [ -f "$HOME/repositories/hacking/wesng/wes.py" ]; then
     alias wes.py='$HOME/repositories/hacking/wesng/wes.py --color --definitions $HOME/repositories/wesng/definitions.zip'
 fi
 
+CLANG_OPT="-std=c++23"
+CLANG_OPT="$CLANG_OPT -stdlib=libc++ -fexperimental-library -L/usr/lib/llvm-17/lib"
+CLANG_WARN="-Wall -Wextra -Wpedantic"
+CLANG_WARN="$CLANG_WARN -Wdouble-promotion" # implicit float->double
+CLANG_WARN="$CLANG_WARN -Wformat=2"
+CLANG_WARN="$CLANG_WARN -Wformat-nonliteral"
+CLANG_WARN="$CLANG_WARN -Wformat-y2k"
+CLANG_WARN="$CLANG_WARN -Wnull-dereference"
+CLANG_WARN="$CLANG_WARN -Wimplicit-fallthrough"
+CLANG_WARN="$CLANG_WARN -Wmissing-include-dirs"
+CLANG_WARN="$CLANG_WARN -Wswitch-default"
+CLANG_WARN="$CLANG_WARN -Wswitch-enum"
+CLANG_WARN="$CLANG_WARN -Wswitch-bool"
+CLANG_WARN="$CLANG_WARN -Wunused-parameter"
+CLANG_WARN="$CLANG_WARN -Wuninitialized"
+CLANG_WARN="$CLANG_WARN -Walloca"
+CLANG_WARN="$CLANG_WARN -Wconversion"
+CLANG_WARN="$CLANG_WARN -Wfloat-conversion"
+CLANG_WARN="$CLANG_WARN -Wsign-conversion"
+CLANG_WARN="$CLANG_WARN -Wfloat-equal"
+CLANG_WARN="$CLANG_WARN -Wshadow-all"
+CLANG_WARN="$CLANG_WARN -Wundef"
+CLANG_WARN="$CLANG_WARN -Wunused-macros"
+CLANG_WARN="$CLANG_WARN -Wcast-qual"
+CLANG_WARN="$CLANG_WARN -Wcast-align"
+CLANG_WARN="$CLANG_WARN -Wmissing-declarations"
+CLANG_WARN="$CLANG_WARN -Wredundant-decls"
+CLANG_WARN="$CLANG_WARN -Wstack-protector -fstack-protector"
+CLANG_WARN="$CLANG_WARN -pedantic-errors"
+CLANG_ERROR="-Werror=pedantic"
+CLANG_ERROR="$CLANG_ERROR -Werror=char-subscripts"
+CLANG_ERROR="$CLANG_ERROR -Werror=null-dereference"
+CLANG_ERROR="$CLANG_ERROR -Werror=init-self"
+CLANG_ERROR="$CLANG_ERROR -Werror=implicit-fallthrough"
+CLANG_ERROR="$CLANG_ERROR -Werror=misleading-indentation"
+CLANG_ERROR="$CLANG_ERROR -Werror=missing-braces"
+CLANG_ERROR="$CLANG_ERROR -Werror=sequence-point"
+CLANG_ERROR="$CLANG_ERROR -Werror=return-type"
+CLANG_ERROR="$CLANG_ERROR -Werror=multichar"
+alias clang++="clang++ $CLANG_OPT $CLANG_WARN $CLANG_ERROR"
+
 # g++ enable warnings and treat special warnings as errors
 # default warnings, extra warnings and ISO-C++ deviations
 GPP_WARN="-Wall -Wextra -Wpedantic"
@@ -151,3 +192,4 @@ alias g++="g++ $GPP_STD $GPP_WARN $GPP_ERR"
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 alias viless='/usr/local/share/vim/vim82/macros/less.sh'
+
