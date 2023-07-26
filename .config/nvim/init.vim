@@ -89,9 +89,6 @@ Plug 'honza/vim-snippets' | let g:user_loaded_vimsnippets = 1
 " Fancy status line
 Plug 'vim-airline/vim-airline' | let g:user_loaded_vimairline = 1
 
-" Pin context (current function, if block header, etc) to the top of the
-" buffer window
-Plug 'wellle/context.vim' | let g:user_loaded_context = 1
 
 " Git integration
 " fugitive adds :Git commands and a status line indicator, integrates with
@@ -138,6 +135,11 @@ if !has('nvim')
 
     " Rainbow brackets - does not work with treesitter
     Plug 'luochen1990/rainbow' | let g:user_loaded_rainbow = 1
+
+    " Pin context (current function, if block header, etc) to the top of the
+    " buffer window. Somewhat slow. nvim-treesitter-context is more lightweight and
+    " uses nvim-treesitter.
+    Plug 'wellle/context.vim' | let g:user_loaded_context = 1
 else
     " Coloured icons, used by nvim-tree and bufferline
     Plug 'nvim-tree/nvim-web-devicons' | let g:user_loaded_devicons = 1
@@ -152,6 +154,11 @@ else
     " Better syntax highlighting
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | let g:user_loaded_treesitter = 1
     
+    " More lightweight version of context.vim
+    if exists('g:user_loaded_treesitter')
+        Plug 'nvim-treesitter/nvim-treesitter-context' | let g:user_loaded_treesitter_context = 1
+    endif
+
     " Rainbow brackets - works with treesitter
     Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim' | let g:user_loaded_rainbowdelim = 1
 endif
@@ -524,6 +531,10 @@ endif
 
 if exists('g:user_loaded_treesitter')
     source ~/.vim/treesitter.lua
+endif
+
+if exists('g:user_loaded_treesitter_context')
+    source ~/.vim/treesitter-context.lua
 endif
 
 if exists('g:user_loaded_rainbow')
