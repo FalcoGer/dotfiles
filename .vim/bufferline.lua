@@ -51,22 +51,27 @@ bufferline.setup(
                 if (count == 0) then
                     return ""
                 end
-                local ret = ""
+                -- needs different variables because I want them in this particular order
+                local errorstr = ""
+                local warningstr = ""
+                local infostr = ""
+                local hintstr = ""
+                local mysterystr = ""
+                -- kitty scales down the icon if there is no space on the right
                 for e, n in pairs(diagnostics_dict) do
-                    local icon = '' .. ' ' .. level
                     if e:match("error") then
-                        icon = ''
+                        errorstr = '󰡅 ' .. n
                     elseif e:match("warning") then
-                        icon = ''
+                        infostr = ' ' .. n
                     elseif e:match("info") then
-                        icon = ''
+                        infostr = ' ' .. n
                     elseif e:match("hint") then
-                        icon = ''
+                        hintstr = '󰠗 ' .. n
+                    else
+                        mysterystr = ' ' .. level .. ' ' .. n
                     end
-                    -- kitty scales down the icon if there is no space on the right
-                    ret = ret .. icon .. " " .. n
                 end
-                return ret
+                return errorstr .. warningstr .. infostr .. hintstr .. mysterystr
             end,
             hover = {
                 enabled = true,
