@@ -51,22 +51,22 @@ bufferline.setup(
                 if (count == 0) then
                     return ""
                 end
-                --[[
-            if context.buffer:current() then
-                return ""
-            end
-            ]]
-                --
-                local icon = '' .. ' ' .. level
-                if level:match("error") then
-                    icon = ''
-                elseif level:match("warning") then
-                    icon = ''
-                elseif level:match("info") or level:match("hint") then
-                    icon = ''
+                local ret = ""
+                for e, n in pairs(diagnostics_dict) do
+                    local icon = '' .. ' ' .. level
+                    if e:match("error") then
+                        icon = ''
+                    elseif e:match("warning") then
+                        icon = ''
+                    elseif e:match("info") then
+                        icon = ''
+                    elseif e:match("hint") then
+                        icon = ''
+                    end
+                    -- kitty scales down the icon if there is no space on the right
+                    ret = ret .. icon .. " " .. n
                 end
-                -- kitty scales down the icon if there is no space on the right
-                return icon .. " " .. count
+                return ret
             end,
             hover = {
                 enabled = true,
