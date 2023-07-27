@@ -10,7 +10,7 @@ ColumnLimit: 120
 
 # Use tabs: Never, ForIndentation, ForContinuationAndIndentation, AlignWithSpaces, Always
 UseTab: Never
-TabWidth: '4'
+TabWidth: 4
 
 # See https://clang.llvm.org/docs/ClangFormatStyleOptions.html#language
 Language: Cpp
@@ -318,7 +318,7 @@ SpaceInEmptyBlock: false
 SpaceInEmptyParentheses: false
 
 # Doesn't affect /* block comments */, minimum amount of spaces before a trailing comment starts
-SpacesBeforeTrailingComments: '4'
+SpacesBeforeTrailingComments: 4
 
 # How many spaces a comment must start with. Maximum takes precedence. -1 means no limit.
 # Relative indents are preserved.
@@ -366,8 +366,8 @@ MaxEmptyLinesToKeep: 2
 # --------------------------------------------------------------------------------------
 # Indent
 
-IndentWidth: '4'
-ContinuationIndentWidth: '2'
+IndentWidth: 4
+ContinuationIndentWidth: 2
 # Preprocessor indent width, -1 uses IndentWidth
 PPIndentWidth: 2
 
