@@ -17,17 +17,17 @@ local options = {
         enable = false,
     },
     incremental_selection = {
-        enable = false,
+        enable = true,
         keymaps = {
-            init_selection = "gnn", -- set to `false` to disable one of the mappings
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
+            init_selection = "gti", -- set to `false` to disable one of the mappings
+            node_incremental = "gtn",
+            scope_incremental = "gts",
+            node_decremental = "gtp",
         },
     },
     matchup = {
         enabled = true,               -- enable matchup integration
-        disable = {},                 -- list of languages as strings for which matchup is disabled
+        disable = {"text"},           -- list of languages as strings for which matchup is disabled
         disable_virtual_text = false, -- disable virtual text for languages without explicit end markers (python)
         -- include_match_words = "",  -- match these regular expressions that are not detected by treesitter (like /* */)
     },
