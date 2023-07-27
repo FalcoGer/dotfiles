@@ -9,7 +9,8 @@ let g:context_filetype_blacklist = []
 " create default mappings for all commands that scroll the buffer
 let g:context_add_mappings = 0
 
-if !exists('##WinScrolled')
+" true because WinScrolled disabled for performance reasons
+if 1 == 1 || !exists('##WinScrolled')
     nnoremap <silent> <expr> <C-Y> context#util#map('<C-Y>')
     nnoremap <silent> <expr> <C-E> context#util#map('<C-E>')
     nnoremap <silent> <expr> zz    context#util#map('zz')
@@ -25,20 +26,15 @@ let g:context_add_autocmds = 0
 " Disable cursormoved and winscrolled because of extremely poor performance in
 " certain languages. CursorHold will update once updatetime has elapsed.
 " https://github.com/wellle/context.vim/issues/123
+" Disabled for all for performance reasons.
 let g:user_context_enable_update = 0
-
-function! SetContextEnableUpdate()
-    let g:user_context_enable_update = 1
-endfunction
 
 function! ContextUpdateExpensive(eventname)
     if g:user_context_enable_update == 0 || &filetype =~ 'ruby\|python'
         return
     endif
 
-    let g:user_context_enable_update = 0
     call context#update(a:eventname)
-    call timer_start(500, SetContextEnableUpdate())
 endfunction
 
 augroup ContextUpdateAutocmds
