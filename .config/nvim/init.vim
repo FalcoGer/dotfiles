@@ -151,12 +151,20 @@ else
     " Buffers as tabs
     Plug 'akinsho/bufferline.nvim', { 'tag': '*' } | let g:user_loaded_bufferline = 1
 
+    " Not as performant as treesitter-context
+    " But until https://github.com/nvim-treesitter/nvim-treesitter-context/issues/300
+    " is resolved, this will replace it for neovim.
+    " It also has poor performance, but at least one can configure the
+    " autocmds to not update all the time but only on cursor halted.
+    Plug 'wellle/context.vim' | let g:user_loaded_context = 1
+
     " Better syntax highlighting
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | let g:user_loaded_treesitter = 1
     
     " More lightweight version of context.vim
     if exists('g:user_loaded_treesitter')
-        Plug 'nvim-treesitter/nvim-treesitter-context' | let g:user_loaded_treesitter_context = 1
+        " See note for context.vim
+        " Plug 'nvim-treesitter/nvim-treesitter-context' | let g:user_loaded_treesitter_context = 1
     endif
 
     " Rainbow brackets - works with treesitter
@@ -429,10 +437,10 @@ map Y y$
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 " cmap w!! w !sudo tee > /dev/null %
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+cnoreabbrev w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " When typing help on the command line, expand to :vertical help automatically
-cnoremap help vertical help
+cnoreabbrev help vertical help
 
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
