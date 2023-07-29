@@ -9,7 +9,11 @@
                 "cpp",
                 "c++",
                 "objc",
-                "objcpp"
+                "objcpp",
+                "h",
+                "hpp",
+                "hxx",
+                "h++"
             ],
             "rootPatterns": [
                 "compile_flags.txt",
