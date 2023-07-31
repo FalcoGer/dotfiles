@@ -104,8 +104,10 @@ if [ -f "$HOME/repositories/hacking/wesng/wes.py" ]; then
     alias wes.py='$HOME/repositories/hacking/wesng/wes.py --color --definitions $HOME/repositories/wesng/definitions.zip'
 fi
 
+CLANG_VERSION=`clang --version | head -n1 | cut -d' ' -f 4 | cut -d'.' -f 1`
+
 CLANG_OPT="-std=c++23"
-CLANG_OPT="$CLANG_OPT -stdlib=libc++ -fexperimental-library -L/usr/lib/llvm-17/lib"
+CLANG_OPT="$CLANG_OPT -stdlib=libc++ -fexperimental-library -L/usr/lib/llvm-${CLANG_VERSION}/lib"
 CLANG_WARN="-Wall -Wextra -Wpedantic"
 CLANG_WARN="$CLANG_WARN -Wdouble-promotion" # implicit float->double
 CLANG_WARN="$CLANG_WARN -Wformat=2"
