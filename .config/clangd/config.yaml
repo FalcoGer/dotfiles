@@ -1,9 +1,58 @@
 CompileFlags:
-  Add: [-std=c++23, -stdlib=libc++, -fexperimental-library, -L/usr/lib/llvm-17/lib, -Wall, -Wextra, -Wpedantic, -Wdouble-promotion, -Wformat=2, -Wformat-nonliteral, -Wformat-y2k, -Wnull-dereference, -Wimplicit-fallthrough, -Wmissing-include-dirs, -Wswitch-default, -Wswitch-enum, -Wswitch-bool, -Wunused-parameter, -Wuninitialized, -Walloca, -Wconversion, -Wfloat-conversion, -Wsign-conversion, -Wfloat-equal, -Wshadow-all, -Wundef, -Wunused-macros, -Wcast-qual, -Wcast-align, -Wmissing-declarations, -Wredundant-decls, -Wstack-protector, -fstack-protector, -pedantic-errors, -Werror=pedantic, -Werror=char-subscripts, -Werror=null-dereference, -Werror=init-self, -Werror=implicit-fallthrough, -Werror=misleading-indentation, -Werror=missing-braces, -Werror=sequence-point, -Werror=return-type, -Werror=multichar]
+  Add: [
+    -std=c++23,
+    -stdlib=libc++,
+    -fexperimental-library,
+    -L/usr/lib/llvm-18/lib,
+    -mavx2,
+    -fopenmp,
+    -Wall,
+    -Wextra,
+    -Wpedantic,
+    -Wdouble-promotion,
+    -Wformat=2,
+    -Wformat-nonliteral,
+    -Wformat-y2k,
+    -Wnull-dereference,
+    -Wimplicit-fallthrough,
+    -Wmissing-include-dirs,
+    -Wswitch-default,
+    -Wswitch-enum,
+    -Wswitch-bool,
+    -Wunused-parameter,
+    -Wuninitialized,
+    -Walloca,
+    -Wconversion,
+    -Wfloat-conversion,
+    -Wsign-conversion,
+    -Wfloat-equal,
+    -Wshadow-all,
+    -Wundef,
+    -Wunused-macros,
+    -Wcast-qual,
+    -Wcast-align,
+    -Wmissing-declarations,
+    -Wredundant-decls,
+    -Wstack-protector,
+    -fstack-protector,
+    -pedantic-errors,
+    -Werror=pedantic,
+    -Werror=char-subscripts,
+    -Werror=null-dereference,
+    -Werror=init-self,
+    -Werror=implicit-fallthrough,
+    -Werror=misleading-indentation,
+    -Werror=missing-braces,
+    -Werror=sequence-point,
+    -Werror=return-type,
+    -Werror=multichar
+  ]
 
 
 Index:
   StandardLibrary: Yes
+
+
 
 # https://clang.llvm.org/extra/clang-tidy/#suppressing-undesired-diagnostics
 Diagnostics:
@@ -101,13 +150,13 @@ Diagnostics:
       modernize-use-auto.MinTypeNameLength: 10
       modernize-use-auto.RemoveStars: 0
       readability-identifier-length.MinimumVariableNameLength: 0
-      readability-identifier-length.IgnoredVariableNames: "^([xyzit]|id)$"
+      readability-identifier-length.IgnoredVariableNames: "^([XYZxyzit]|id)$"
       readability-identifier-length.MinimumLoopCounterNameLength: 2
       readability-identifier-length.IgnoredLoopCounterNames: "^[ijkxyz_]$"
       readability-identifier-length.MinimumExceptionNameLength: 2
       readability-identifier-length.IgnoredExceptionVariableNames: "^[e]$"
       readability-identifier-length.MinimumParameterNameLength: 3
-      readability-identifier-length.IgnoredParameterNames: "^([xyzit]|id)$"
+      readability-identifier-length.IgnoredParameterNames: "^([XYZxyzit]|id)$"
       readability-identifier-naming.AbstractClassCase: CamelCase
       readability-identifier-naming.ClassCase: CamelCase
       readability-identifier-naming.ClassConstantCase: UPPER_CASE
