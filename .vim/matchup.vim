@@ -6,7 +6,12 @@ let g:matchup_matchparen_enabled = 1
 
 " one of "status", "popup", "status_manual", "scrolloff" or empty dictionary
 " for disabled.
-let g:matchup_matchparen_offscreen = {'method': 'popup'}
+" popup causes issues with context
+if exists('g:user_loaded_context') || exists('g:user_loaded_treesitter_context')
+    let g:matchup_matchparen_offscreen = {'method': 'scrolloff'}
+else
+    let g:matchup_matchparen_offscreen = {'method': 'popup'}
+endif
 
 " How many lines to search for matching words in either direction.
 " Default 400
