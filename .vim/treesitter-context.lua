@@ -26,7 +26,22 @@ tsc.setup(options)
 vim.g["user_tscontext_enabled"] = 1
 -- workaround for https://github.com/nvim-treesitter/nvim-treesitter-context/issues/300
 -- don't open context when tagbar is open, just mark it as open and let tagbar config handle opening it when tagbar closes
-vim.keymap.set("n", "<S-c>", ':if g:user_tscontext_enabled == 1<CR>  TSContextDisable<CR>  let g:user_tscontext_enabled=0<CR>  if exists("g:user_tagbar_open") && g:user_tagbar_open == 1<CR>    echo "Context will not be restored when TagBar closes"<CR>  endif<CR>else<CR>  if exists("g:user_tagbar_open") && g:user_tagbar_open == 0<CR>    TSContextEnable<CR>  else<CR>    echo "Context will be restored when TagBar closes."<CR>  endif<CR>  let g:user_tscontext_enabled=1<CR>endif<CR>', { silent = true })
+vim.keymap.set("n", "<S-c>",
+    ':if g:user_tscontext_enabled == 1'                                     .. '<CR>' ..
+    '  TSContextDisable'                                                    .. '<CR>' ..
+    '  let g:user_tscontext_enabled=0'                                      .. '<CR>' ..
+    '  if exists("g:user_tagbar_open") && g:user_tagbar_open == 1'          .. '<CR>' ..
+    '    echo "Context will not be restored when TagBar closes"'            .. '<CR>' ..
+    '  endif'                                                               .. '<CR>' ..
+    'else'                                                                  .. '<CR>' ..
+    '  if exists("g:user_tagbar_open") && g:user_tagbar_open == 0'          .. '<CR>' ..
+    '    TSContextEnable'                                                   .. '<CR>' ..
+    '  else'                                                                .. '<CR>' ..
+    '    echo "Context will be restored when TagBar closes."'               .. '<CR>' ..
+    '  endif'                                                               .. '<CR>' ..
+    '  let g:user_tscontext_enabled=1'                                      .. '<CR>' ..
+    'endif'                                                                 .. '<CR>',
+    { silent = true })
 
 -- Highlights (Default):
 --   TreesitterContext (NormalFloat)
