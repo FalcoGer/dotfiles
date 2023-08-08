@@ -156,7 +156,7 @@ else
     " is resolved, this will replace it for neovim.
     " It also has poor performance, but at least one can configure the
     " autocmds to not update all the time but only on cursor halted.
-    Plug 'wellle/context.vim' | let g:user_loaded_context = 1
+    " Plug 'wellle/context.vim' | let g:user_loaded_context = 1
 
     " Better syntax highlighting
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | let g:user_loaded_treesitter = 1
@@ -164,7 +164,7 @@ else
     " More lightweight version of context.vim
     if exists('g:user_loaded_treesitter')
         " See note for context.vim
-        " Plug 'nvim-treesitter/nvim-treesitter-context' | let g:user_loaded_treesitter_context = 1
+        Plug 'nvim-treesitter/nvim-treesitter-context' | let g:user_loaded_treesitter_context = 1
     endif
 
     " Rainbow brackets - works with treesitter
