@@ -8,9 +8,9 @@ let g:matchup_matchparen_enabled = 1
 " for disabled.
 " popup causes issues with context
 if exists('g:user_loaded_context') || exists('g:user_loaded_treesitter_context')
-    let g:matchup_matchparen_offscreen = {'method': 'scrolloff'}
+    let g:matchup_matchparen_offscreen = {'method': 'status', 'syntax_hl': 1}
 else
-    let g:matchup_matchparen_offscreen = {'method': 'popup'}
+    let g:matchup_matchparen_offscreen = {'method': 'popup', 'fullwidth': 1, 'syntax_hl': 1, 'border': 1}
 endif
 
 " How many lines to search for matching words in either direction.
