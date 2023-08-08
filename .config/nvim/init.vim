@@ -570,7 +570,7 @@ if exists('g:user_loaded_undotree')
 endif
 
 if exists('g:user_loaded_tagbar')
-    nmap <silent><C-t> :TagbarToggle<CR>
+    source ~/.vim/tagbar.vim
 endif
 
 if exists('g:user_loaded_changesplugin')
