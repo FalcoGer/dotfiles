@@ -5,7 +5,7 @@
 " When opening tagbar, close the context.
 if exists('g:user_loaded_treesitter_context')
     let g:user_tagbar_open=0
-    function UserToggleTagbar()
+    function! UserToggleTagbar()
         if g:user_tagbar_open==0
             TagbarOpen
             let g:user_tagbar_open=1
