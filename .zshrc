@@ -163,9 +163,53 @@ lspath=`which exa`
 if [ -e $lspath ]
 then
     # we have exa
-    zstyle ':fzf-tab:complete:*' fzf-preview 'if [[ -n $realpath ]]; then if [[ -r $realpath ]]; then /usr/bin/file $realpath; if [[ -d $realpath ]]; then `which exa` -aalF -g --color-scale --color=always --icons --time-style long-iso --git --extended $realpath; elif [[ $(/usr/bin/file -b $realpath | /usr/bin/grep -i -e "ASCII" -e "UTF-8" -e "JSON") ]]; then /usr/bin/head -n 20 $realpath; else /usr/bin/hexdump -n 256 -C $realpath; fi; else /usr/bin/echo $realpath not readable; fi; else /usr/bin/echo $group: $word; /usr/bin/echo Description:; /usr/bin/echo $desc | sed -e "s/\s\{3,\}/\n/g" | sed -e "s/.\{40\}/&\n/g"; fi'
+    zstyle ':fzf-tab:complete:*' fzf-preview                                                                        \
+        'if [[ -n $realpath ]]; then '                                                                              \
+            'if [[ -r $realpath ]]; then '                                                                          \
+                '/usr/bin/file $realpath;'                                                                          \
+                'if [[ -d $realpath ]]; then '                                                                      \
+                    '`which exa` -aalF -g --color-scale --color=always --icons --time-style long-iso --git --extended $realpath;' \
+                'elif [[ $(/usr/bin/file -b $realpath | /usr/bin/grep -i -e "ASCII" -e "UTF-8" -e "JSON") ]]; then ' \
+                    '/usr/bin/head -n 20 $realpath;'                                                                \
+                'else /usr/bin/hexdump -n 256 -C $realpath;'                                                        \
+                'fi;'                                                                                               \
+            'else '                                                                                                 \
+                '/usr/bin/echo $realpath not readable;'                                                             \
+            'fi;'                                                                                                   \
+        'else '                                                                                                     \
+            '/usr/bin/echo $group: $word;'                                                                          \
+            '/usr/bin/echo Description:;'                                                                           \
+            'if [[ $group = "Completing external command" || $group = "Completing internal command" ]]; then '      \
+                '/usr/bin/whatis $word;'                                                                            \
+                '/usr/bin/man $word;'                                                                               \
+            'else '                                                                                                 \
+                '/usr/bin/echo $desc | sed -e "s/\s\{3,\}/\n/g" | sed -e "s/.\{40\}/&\n/g";'                        \
+            'fi;'                                                                                                   \
+        'fi'
 else
-    zstyle ':fzf-tab:complete:*' fzf-preview 'if [[ -n $realpath ]]; then if [[ -r $realpath ]]; then /usr/bin/file $realpath; if [[ -d $realpath ]]; then ls -alh --group-directories-first --color=always $realpath; elif [[ $(/usr/bin/file -b $realpath | /usr/bin/grep -i -e "ASCII" -e "UTF-8" -e "JSON") ]]; then /usr/bin/head -n 20 $realpath; else /usr/bin/hexdump -n 256 -C $realpath; fi; else /usr/bin/echo $realpath not readable; fi; else /usr/bin/echo $group: $word; /usr/bin/echo Description:; /usr/bin/echo $desc | sed -e "s/\s\{3,\}/\n/g" | sed -e "s/.\{40\}/&\n/g"; fi'
+    zstyle ':fzf-tab:complete:*' fzf-preview                                                                        \
+        'if [[ -n $realpath ]]; then '                                                                              \
+            'if [[ -r $realpath ]]; then '                                                                          \
+                '/usr/bin/file $realpath;'                                                                          \
+                'if [[ -d $realpath ]]; then '                                                                      \
+                    'ls -alh --group-directories-first --color=always $realpath;'                                   \
+                'elif [[ $(/usr/bin/file -b $realpath | /usr/bin/grep -i -e "ASCII" -e "UTF-8" -e "JSON") ]]; then ' \
+                    '/usr/bin/head -n 20 $realpath;'                                                                \
+                'else /usr/bin/hexdump -n 256 -C $realpath;'                                                        \
+                'fi;'                                                                                               \
+            'else '                                                                                                 \
+                '/usr/bin/echo $realpath not readable;'                                                             \
+            'fi;'                                                                                                   \
+        'else '                                                                                                     \
+            '/usr/bin/echo $group: $word;'                                                                          \
+            '/usr/bin/echo Description:;'                                                                           \
+            'if [[ $group = "Completing external command" || $group = "Completing internal command" ]]; then '      \
+                '/usr/bin/whatis $word;'                                                                            \
+                '/usr/bin/man $word;'                                                                               \
+            'else '                                                                                                 \
+                '/usr/bin/echo $desc | sed -e "s/\s\{3,\}/\n/g" | sed -e "s/.\{40\}/&\n/g";'                        \
+            'fi;'                                                                                                   \
+        'fi'
 fi
 # disable fzf-preview for options
 zstyle ':fzf-tab:complete:*:options' fzf-preview ''
