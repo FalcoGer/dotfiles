@@ -179,7 +179,7 @@ then
         'else '                                                                                                     \
             '/usr/bin/echo $group: $word;'                                                                          \
             '/usr/bin/echo Description:;'                                                                           \
-            'if [[ $group = "Completing external command" || $group = "Completing internal command" ]]; then '      \
+            'if [[ $group = "Completing external command" || $group = "Completing builtin command" ]]; then '      \
                 '/usr/bin/whatis $word;'                                                                            \
                 '/usr/bin/man $word;'                                                                               \
             'else '                                                                                                 \
@@ -203,7 +203,7 @@ else
         'else '                                                                                                     \
             '/usr/bin/echo $group: $word;'                                                                          \
             '/usr/bin/echo Description:;'                                                                           \
-            'if [[ $group = "Completing external command" || $group = "Completing internal command" ]]; then '      \
+            'if [[ $group = "Completing external command" || $group = "Completing builtin command" ]]; then '      \
                 '/usr/bin/whatis $word;'                                                                            \
                 '/usr/bin/man $word;'                                                                               \
             'else '                                                                                                 \
