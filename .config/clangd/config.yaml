@@ -2,8 +2,8 @@ CompileFlags:
   Add: [
     -std=c++23,
     -stdlib=libc++,
-    -fexperimental-library,
     -L/usr/lib/llvm-18/lib,
+    -fexperimental-library,
     -mavx2,
     -fopenmp,
     -Wall,
