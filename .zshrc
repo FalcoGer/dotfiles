@@ -323,7 +323,7 @@ autoload -Uz bashcompinit && bashcompinit
 HISTFILE="$ZSH_CACHE_DIR/.zsh_history"
 HISTSIZE=4096
 SAVEHIST=8192
-setopt autocd nomatch notify beep numericglobsort
+setopt autocd nomatch notify beep numericglobsort histignorespace histignoredups
 unsetopt extendedglob
 bindkey -e # -e = emacs mode, -v = vim mode
 # End of lines configured by zsh-newuser-install
