@@ -1,0 +1,55 @@
+## start rpc server for armitage and such
+load msgrpc ServerHost=127.0.0.1 User=msf Pass=msf SSL=n
+
+## Start web service
+# msfdb --component webservice start
+
+## load plugins
+# core plugins explanations: https://docs.metasploit.com/docs/using-metasploit/intermediate/how-to-use-plugins.html#available-plugins
+
+### alias allows the creation of aliases
+load alias
+
+### automatically adds new routes for subnet when a session opens
+load auto_add_route
+
+### capture screenshots, webcam images and keystrokes
+load beholder
+
+### load credential capture plugin
+load capture
+
+### load plugins to automatically fill the database
+load db_credcollect
+load db_tracker
+
+## vulnerability scanner plugins
+### nessus, nexpose, openvas
+
+# load openvas plugin
+# load openvas
+# openvas_connect admin admin 127.0.0.1 9390 ok
+
+### request plugin can make http/s requests
+load request
+
+### play sounds when events occur
+load sounds
+
+### load sqlmap plugin
+load sqlmap
+
+### load wmap web vulnerability scanner (https://www.offensive-security.com/metasploit-unleashed/wmap-web-scanner/)
+load wmap
+
+### load honeybadger post exploitation plugin
+load honeybadger
+
+## Settings
+
+set SessionLogging true
+
+# Set default values for some modules
+setg LHOST 0.0.0.0
+setg PEASS_URL /home/paul/repositories/hacking/linpeas/linPEAS/linpeas.sh
+
