@@ -104,8 +104,6 @@ fi
 which cgdb 1> /dev/null
 if [ $? -eq 0 ]; then
     alias gdb='cgdb'
-else
-    # alias gdb=
 fi
 
 if [ -f "$HOME/repositories/hacking/wesng/wes.py" ]; then
