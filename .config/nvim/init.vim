@@ -299,7 +299,7 @@ highlight FloatTitle    ctermbg=234 guibg=#1C1C1C ctermfg=11 guifg=#FFFF00 cterm
 
 " Enable spell checking
 set spell
-highlight SpellBad      ctermbg=9 cterm=NONE gui=undercurl guisp=#FF0000
+highlight SpellBad      ctermbg=5 cterm=NONE gui=undercurl guisp=#800080
 " Wrong capitalization
 " highlight link SpellCap SpellBad
 " Rarely used
