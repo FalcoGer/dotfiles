@@ -112,6 +112,8 @@ fi
 
 CLANG_VERSION=`clang --version | head -n1 | sed -E 's/.* version ([[:digit:]]+)\.[[:digit:]]+\.[[:digit:]]+.*$/\1/'`
 
+# https://clang.llvm.org/docs/DiagnosticsReference.html
+
 CLANG_OPT="-std=c++23"
 CLANG_OPT="$CLANG_OPT -stdlib=libc++ -fexperimental-library -L/usr/lib/llvm-${CLANG_VERSION}/lib"
 CLANG_WARN="-Wall -Wextra -Wpedantic"
@@ -125,6 +127,7 @@ CLANG_WARN="$CLANG_WARN -Wmissing-include-dirs"
 CLANG_WARN="$CLANG_WARN -Wswitch-default"
 CLANG_WARN="$CLANG_WARN -Wswitch-enum"
 CLANG_WARN="$CLANG_WARN -Wswitch-bool"
+CLANG_WARN="$CLANG_WARN -Wcovered-switch-default"
 CLANG_WARN="$CLANG_WARN -Wunused-parameter"
 CLANG_WARN="$CLANG_WARN -Wuninitialized"
 CLANG_WARN="$CLANG_WARN -Walloca"
@@ -146,6 +149,7 @@ CLANG_ERROR="$CLANG_ERROR -Werror=char-subscripts"
 CLANG_ERROR="$CLANG_ERROR -Werror=null-dereference"
 CLANG_ERROR="$CLANG_ERROR -Werror=init-self"
 CLANG_ERROR="$CLANG_ERROR -Werror=implicit-fallthrough"
+CLANG_ERROR="$CLANG_ERROR -Werror=switch-enum"
 CLANG_ERROR="$CLANG_ERROR -Werror=misleading-indentation"
 CLANG_ERROR="$CLANG_ERROR -Werror=missing-braces"
 CLANG_ERROR="$CLANG_ERROR -Werror=sequence-point"
@@ -161,7 +165,9 @@ GPP_WARN="$GPP_WARN -Wformat=2 -Wformat-nonliteral -Wformat-signedness -Wformat-
 GPP_WARN="$GPP_WARN -Wnull-dereference" # check if a code path can lead to null pointer dereferencing
 GPP_WARN="$GPP_WARN -Wimplicit-fallthrough=2" # warn about switch-case-fallthrough unless comment matches regex ".*falls?[ \t-]*thr(ough|u).*" IMPLICIT-FALLTHROUGH=3 IS ENABLED BY WEXTRA!
 GPP_WARN="$GPP_WARN -Wmissing-include-dirs"
+GPP_WARN="$GPP_WARN -Wswitch" # warn about enum value not present if also no default branch, also warns about values outside enum scope
 GPP_WARN="$GPP_WARN -Wswitch-default" # warn about switch statement not having a default
+GPP_WARN="$GPP_WARN -Wswitch-enum" # warn about switch statement not having a case for every enum, even with default.
 GPP_WARN="$GPP_WARN -Wunused-parameter" # warn about a function parameter is unused aside from it's declaration
 GPP_WARN="$GPP_WARN -Wuninitialized" # warn if auto-var is used uninitialized also warn if ref or const appear in class without ctor.
 GPP_WARN="$GPP_WARN -Wsuggest-attribute=const" # warn where an attribute might be a good idea
@@ -186,13 +192,14 @@ GPP_ERR="$GPP_ERR -Werror=char-subscripts" # chars are signed, using char type a
 GPP_ERR="$GPP_ERR -Werror=null-dereference" # null pointer dereferencing is undef. behavior
 GPP_ERR="$GPP_ERR -Werror=init-self" # self initialization is bad.
 GPP_ERR="$GPP_ERR -Werror=implicit-fallthrough=2" # requires comment in fallthrough cases, otherwise error
+GPP_ERR="$GPP_ERR -Werror=switch-enum" # require all enum value to be handled in switch statements
 GPP_ERR="$GPP_ERR -Werror=misleading-indentation" # enforce good style
 GPP_ERR="$GPP_ERR -Werror=missing-braces" # enforce braces (int a[2][2] = {1,2,3,4} -> {{1,2},{3,4}})
 GPP_ERR="$GPP_ERR -Werror=multistatement-macros" # warn if macro with multiple statements is not guarded as expected. #define DOIT x++; y++ -> if(c) DOIT; // leads to y++ being executed unconditionally
 GPP_ERR="$GPP_ERR -Werror=sequence-point" # undefined behavior for things like a = a++ or a[n] = n++ or a[n++] = n
 GPP_ERR="$GPP_ERR -Werror=return-type" # undefined behavior if returning function does not return a value. also if non-returning function returns a value.
 GPP_ERR="$GPP_ERR -Werror=multichar" # char c = 'ABCD';
-GPP_STD="-std=c++20"
+GPP_STD="-std=c++23"
 alias g++="g++ $GPP_STD $GPP_WARN $GPP_ERR"
 
 # Add an "alert" alias for long running commands.  Use like so:
