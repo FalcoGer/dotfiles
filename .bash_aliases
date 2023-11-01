@@ -116,6 +116,8 @@ CLANG_VERSION=`clang --version | head -n1 | sed -E 's/.* version ([[:digit:]]+)\
 
 CLANG_OPT="-std=c++23"
 CLANG_OPT="$CLANG_OPT -stdlib=libc++ -fexperimental-library -L/usr/lib/llvm-${CLANG_VERSION}/lib"
+CLANG_OPT="$CLANG_OPT -flto=full"
+CLANG_OPT="$CLANG_OPT -fvirtual-function-elimination" # requires -flto=full, removes unused virtual functions
 CLANG_WARN="-Wall -Wextra -Wpedantic"
 CLANG_WARN="$CLANG_WARN -Wdouble-promotion" # implicit float->double
 CLANG_WARN="$CLANG_WARN -Wformat=2"
@@ -124,6 +126,7 @@ CLANG_WARN="$CLANG_WARN -Wformat-y2k"
 CLANG_WARN="$CLANG_WARN -Wnull-dereference"
 CLANG_WARN="$CLANG_WARN -Wimplicit-fallthrough"
 CLANG_WARN="$CLANG_WARN -Wmissing-include-dirs"
+CLANG_WARN="$CLANG_WARN -Wswitch"
 CLANG_WARN="$CLANG_WARN -Wswitch-default"
 CLANG_WARN="$CLANG_WARN -Wswitch-enum"
 CLANG_WARN="$CLANG_WARN -Wswitch-bool"
@@ -149,7 +152,7 @@ CLANG_ERROR="$CLANG_ERROR -Werror=char-subscripts"
 CLANG_ERROR="$CLANG_ERROR -Werror=null-dereference"
 CLANG_ERROR="$CLANG_ERROR -Werror=init-self"
 CLANG_ERROR="$CLANG_ERROR -Werror=implicit-fallthrough"
-CLANG_ERROR="$CLANG_ERROR -Werror=switch-enum"
+CLANG_ERROR="$CLANG_ERROR -Werror=switch -Werror=switch-enum"
 CLANG_ERROR="$CLANG_ERROR -Werror=misleading-indentation"
 CLANG_ERROR="$CLANG_ERROR -Werror=missing-braces"
 CLANG_ERROR="$CLANG_ERROR -Werror=sequence-point"
@@ -192,7 +195,7 @@ GPP_ERR="$GPP_ERR -Werror=char-subscripts" # chars are signed, using char type a
 GPP_ERR="$GPP_ERR -Werror=null-dereference" # null pointer dereferencing is undef. behavior
 GPP_ERR="$GPP_ERR -Werror=init-self" # self initialization is bad.
 GPP_ERR="$GPP_ERR -Werror=implicit-fallthrough=2" # requires comment in fallthrough cases, otherwise error
-GPP_ERR="$GPP_ERR -Werror=switch-enum" # require all enum value to be handled in switch statements
+GPP_ERR="$GPP_ERR -Werror=switch -Werror=switch-enum" # require all enum value to be handled in switch statements
 GPP_ERR="$GPP_ERR -Werror=misleading-indentation" # enforce good style
 GPP_ERR="$GPP_ERR -Werror=missing-braces" # enforce braces (int a[2][2] = {1,2,3,4} -> {{1,2},{3,4}})
 GPP_ERR="$GPP_ERR -Werror=multistatement-macros" # warn if macro with multiple statements is not guarded as expected. #define DOIT x++; y++ -> if(c) DOIT; // leads to y++ being executed unconditionally
@@ -200,7 +203,8 @@ GPP_ERR="$GPP_ERR -Werror=sequence-point" # undefined behavior for things like a
 GPP_ERR="$GPP_ERR -Werror=return-type" # undefined behavior if returning function does not return a value. also if non-returning function returns a value.
 GPP_ERR="$GPP_ERR -Werror=multichar" # char c = 'ABCD';
 GPP_STD="-std=c++23"
-alias g++="g++ $GPP_STD $GPP_WARN $GPP_ERR"
+GPP_OPT="-flto -fuse-linker-plugin" # enable link time optimization
+alias g++="g++ $GPP_STD $GPP_OPT $GPP_WARN $GPP_ERR"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
