@@ -1,6 +1,6 @@
 style "chat"
 {
-  font_name = "FiraCode Nerd Font"
+  font_name = "Monospace"
 	base[NORMAL] = "#000011"
 	bg[NORMAL] = "#000011"
 	GtkTreeView::odd_row_color = ""
