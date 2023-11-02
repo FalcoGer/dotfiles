@@ -122,8 +122,65 @@
         "$HOME/.rustup/**"
     ],
 
+    "diagnostic-languageserver.enable": true,
+    "diagnostic-languageserver.trace.server": "verbose",
+    "diagnostic-languageserver.mergeConfig": false,
+    "diagnostic-languageserver.filetypes": {
+        "sh": "shellcheck",
+        "systemd": "systemd-analyze"
+    },
+    "diagnostic-languageserver.linters": {
+        "shellcheck": {
+            "sourceName": "shellcheck",
+            "command": "shellcheck",
+            "args": [ "--format=json", "--enable=all", "--severity=style", "--shell=bash", "%file"],
+            "rootPatterns": [],
+            "isStdout": true,
+            "isStderr": false,
+            "debounce": 100,
+            "onSaveOnly": false,
+            "offsetLine": 0,
+            "offsetColumn": 0,
+            "ignore": [],
+            "parseJson": {
+                "errorsRoot": "",
+                "sourceName": null,
+                "sourceNameFilter": false,
+                "line": "line",
+                "endLine": "endLine",
+                "column": "column",
+                "endColumn": "endColumn",
+                "security": "level",
+                "message": "${message} [${code}]"
+            },
+            "securities": {
+                "error": "error",
+                "warning": "warning",
+                "note": "info",
+                "style": "hint"
+            }
+        }
+    },
+    "diagnostic-languageserver.formatFiletypes": {
+        "sh": "shfmt"
+    },
+    "diagnostic-languageserver.formatters": {
+        "shfmt":
+        {
+            "command": "shfmt",
+            "args": [ "-i", "4", "-s", "-bn", "-ci", "-sr", "-fn", "-kp", "-" ],
+            "rootPatterns": [],
+            "isStdout": true,
+            "isStderr": false,
+            "doesWriteToFile": false,
+            "requiredFiles": [],
+            "ignoreExitCode": false,
+            "ignore": []
+        }
+    },
+
     "suggest.snippetIndicator": "~",
-    
+
     "pylsp.plugins.pylint.enabled": true,
     "pylsp.builtin.installExtrasArgs": [
         "flake8",
@@ -136,7 +193,7 @@
     ],
     "pylsp.plugins.pycodestyle.maxLineLength": 120,
     "pylsp.plugins.pycodestyle.ignore": ["E221", "W504"],
-    
+
     "Lua.workspace.library": [
         "/usr/share/nvim/runtime/lua",
         "/usr/share/nvim/runtime/lua/vim",
