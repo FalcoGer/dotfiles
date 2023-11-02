@@ -123,7 +123,7 @@
     ],
 
     "diagnostic-languageserver.enable": true,
-    "diagnostic-languageserver.trace.server": "verbose",
+    "diagnostic-languageserver.trace.server": "off",
     "diagnostic-languageserver.mergeConfig": false,
     "diagnostic-languageserver.filetypes": {
         "sh": "shellcheck",
