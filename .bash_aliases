@@ -82,6 +82,13 @@ up () {
     fi
 }
 
+update-repo() {
+    for source in "$@"; do
+        sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/${source}" \
+        -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"
+    done
+}
+
 alias quit='exit'
 alias ipython='ipython3'
 if [ -f ".bash_aliases_secret" ]; then
