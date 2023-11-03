@@ -1,0 +1,5 @@
+#compdef update-repo
+
+local -a sourcesFiles
+sourcesFiles=(/etc/apt/sources.list.d/**/*.list)
+_values 'sources file' ${sourcesFiles}
