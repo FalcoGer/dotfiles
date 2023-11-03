@@ -1,5 +1,10 @@
 #compdef update-repo
 
 local -a sourcesFiles
-sourcesFiles=(/etc/apt/sources.list.d/**/*.list)
+sourcesFiles=(/etc/apt/sources.list.d/*.list)
+
+for ((idx = 1; idx <= $#sourcesFiles; idx++)); do
+    sourcesFiles[${idx}]=$(echo ${sourcesFiles[${idx}]} | sed -E s/'^.*?\/(.*)$'/'\1'/)
+done
+
 _values 'sources file' ${sourcesFiles}
