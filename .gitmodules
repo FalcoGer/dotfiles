@@ -11,9 +11,13 @@
     url = git@github.com:jfoote/exploitable.git
     branch = master
 [submodule "repositories/hacking/pwndbg"]
-	path = repositories/hacking/pwndbg
-	url = git@github.com:pwndbg/pwndbg.git
+    path = repositories/hacking/pwndbg
+    url = git@github.com:pwndbg/pwndbg.git
     branch = dev
+[submodul "repositories/zshcompletions"]
+    path = repositories/zshcompletions
+    url = git@github.com:rsherstnev/zshcompletions
+    branch = master
 [submodule ".oh-my-zsh"]
     path = .oh-my-zsh
     url = git@github.com:ohmyzsh/ohmyzsh.git
