@@ -1,3 +1,5 @@
+# https://clangd.llvm.org/config.html
+
 CompileFlags:
   Add: [
     -std=c++23,
@@ -53,15 +55,28 @@ CompileFlags:
     -Werror=multichar
   ]
 
-
 Index:
   StandardLibrary: Yes
+  Background: Build
 
+Completion:
+  AllScopes: true
 
+Hover:
+  ShowAKA: true
+
+InlayHints:
+  Designators: true
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true
+  BlockEnd: true
 
 # https://clang.llvm.org/extra/clang-tidy/#suppressing-undesired-diagnostics
 Diagnostics:
+  UnusedIncludes: Strict
   ClangTidy:
+    FastCheckFilter: None
     Add: [
       bugprone*,
       boost-use-to-string,
@@ -82,11 +97,9 @@ Diagnostics:
     Remove: [
       misc-unused-parameters, # caught by -Wunused-parameter
       cppcoreguidelines-avoid-do-while, # annoying, do-while might be useful.
-      bugprone-easily-swappable-parameters, # annoying. setPos(int x, int y) is flagged
+      # bugprone-easily-swappable-parameters, # annoying. setPos(int x, int y) is flagged
       cert-msc50-cpp, # allow the use of std::rand()
       google-readability-todo, # todos don't need a username or bug number in my code
-      google-readability-avoid-underscore-in-googletest-name, # not using google tests
-      google-upgrade-googletest-case, # not using google tests
       cert-dcl03-c, # alias for misc-static-assert
       cert-dcl16-c, # alias for readability-uppercase-literal-suffix
       cert-dcl37-c, # alias for bugprone-reserved-identifier
@@ -227,13 +240,4 @@ Diagnostics:
       llvm-namespace-comment.ShortNamespaceLines: 10
       misc-non-private-member-variables-in-classes.IgnorePublicMemberVariables: true
       misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic: false
-
-Completion:
-  AllScopes: true
-
-InlayHints:
-  Designators: true
-  Enabled: true
-  ParameterNames: true
-  DeducedTypes: true
 

@@ -49,6 +49,13 @@ AlignConsecutiveBitFields: AcrossEmptyLinesAndComments
 # leftalign identifiers after type
 AlignConsecutiveDeclarations: AcrossEmptyLinesAndComments
 
+# only valid for if AllowShortCaseLabelsOnASingleLine is true
+AlignConsecutiveShortCaseStatements:
+    Enabled: true
+    AcrossEmptyLines: true
+    AcrossComments: true
+    AlignCaseColons: false
+
 # -----------------------------------------------------------------------------
 
 # Bracket Alignment
@@ -102,7 +109,7 @@ QualifierAlignment: Custom
 
 # Items to the left of type will be sorted left of the type according to this order
 # Items to the right of type will be sorted right of the type according to this order
-QualifierOrder: ['static', 'friend', 'inline', 'constexpr', 'const', 'type', 'volatile', 'restrict']
+QualifierOrder: ['static', 'friend', 'inline', 'constexpr', 'const', 'volatile', 'type', 'restrict']
 
 ########################################################################################
 # AllowAllOnNextLine and AllowOnASingleLine
@@ -112,13 +119,22 @@ AllowAllArgumentsOnNextLine: true
 
 AllowAllParametersOfDeclarationOnNextLine: true
 
+# BreakBeforeNoexceptSpecifierStyle: Never, OnlyWithParen, Always
+# Never: Never allow a break before noexcept
+# OnlyWithParen: Allow (but don't force) a break when noexcept has a condition in parentheses
+# Always: Always allow (but don't force) a break before noexcept
+AllowBreakBeforeNoexceptSpecifier: OnlyWithParen
+
+# Allow short compound requirement on a single line.
+AllowShortCompoundRequirementOnASingleLine: true
+
 # ShortBlockStyle: Never, Empty, Always - Allow single statement blocks to be put on the same line as control flow keyword
 AllowShortBlocksOnASingleLine: Empty
 
 # Allow single statements and break statement on the same line as a case statement
-AllowShortCaseLabelsOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: true
 
-AllowShortEnumsOnASingleLine: false
+AllowShortEnumsOnASingleLine: true
 
 # ShortFunctionStyle:
 #   None:           Never put a function on a single line
@@ -126,7 +142,7 @@ AllowShortEnumsOnASingleLine: false
 #   Empty:          Allow only empty functions to be put on a single line
 #   Inline:         Empty or inside a class
 #   All:            Always permit short functions on a single line
-AllowShortFunctionsOnASingleLine: InlineOnly
+AllowShortFunctionsOnASingleLine: Inline
 
 # ShortIfStyle:
 #   Never:          Never put short ifs in the same line
@@ -162,7 +178,7 @@ AlwaysBreakBeforeMultilineStrings: false
 #   No:             Don't force, uses PenaltyBreakTemplateDeclaration
 #   MultiLine:      Only if the following declaration spans multiple lines (for example multiple lines of function arguments)
 #   Yes:            Force line break after template declaration
-AlwaysBreakTemplateDeclarations: 'Yes'
+AlwaysBreakTemplateDeclarations: Yes
 
 # AttributeBreakingStyle: Always, Leave, Never - Break after attributes like [[nodiscard]]
 BreakAfterAttributes: Always
@@ -175,9 +191,9 @@ BreakArrays: false
 
 # BinaryOperatorStyle
 #   None:           Leave operators on the back of lines
-#   NonAssignmen:   Only leave assignment operators on the back of lines
+#   NonAssignment:  Only leave assignment operators on the back of lines
 #   All:            Always put operators on the beginning of the next line
-BreakBeforeBinaryOperators: None
+BreakBeforeBinaryOperators: NonAssignment
 
 # BreakBeforeConceptDeclarationsStyle
 #   Never:          Keep template and concept on the same line
@@ -205,7 +221,7 @@ BreakConstructorInitializers: BeforeColon
 #   BeforeComma:    Colon on new line, commas also on new line aligned with colon
 #   AfterColon:     Colon on class identifier line, comma at the end of each line
 #   AfterComma:     Colon and first element on class identifier line, commas at the end of each element, each element in new line
-BreakInheritanceList: AfterComma
+BreakInheritanceList: AfterColon
 
 # Allow breaking string literals when formatting
 BreakStringLiterals: true
@@ -224,6 +240,20 @@ PackConstructorInitializers: NextLine
 # if true, will turn comments past ColumnLimit to multiple lines
 ReflowComments: true
 
+# Regex to describe comments with special meaning, which should not be messed with by the formatter
+# exclude doxygen comments like /// @param and * @param
+# https://www.mitk.org/images/1/1c/BugSquashingSeminars$2013-07-17-DoxyReference.pdf
+CommentPragmas: 'NOLINT|(@|\\)(attention|author|brief|bug|cond|date|deprecated|else(if|cond)?|end(cond|if)|exception|if(not)?|invariant|note|par|t?param|post|pre|return|retval|sa|see|since|test|throw|todo|version|warning|xrefitem)|^!'
+
+# RequiresClausePositionStyle
+#   OwnLine: Always put requires clause on it's own line
+#   WithPreceding: Try to put the requires clause on the same line as the preceeding item
+#     For templates, the template definition
+#     For functions, stick to the parameter list
+#   WithFollowing: Try to put the requires clause on the same line as the class or function declaration
+#   SingleLine: Try to place everything on a single line, if not possible, normal breaking rules
+RequiresClausePosition: OwnLine
+
 # -------------------------------------------------------------------------------------
 # Braces
 
@@ -236,7 +266,6 @@ BraceWrapping:
     AfterCaseLabel: true
     AfterClass: true
     # BraceWrappingAfterControlStatementStyle: Never, MultiLine, Always - For if/while/switch/etc
-    # AfterControlStatement: MultiLine
     AfterControlStatement: Always
     AfterEnum: true
     AfterFunction: true
@@ -306,6 +335,9 @@ SpaceBeforeParensOptions:
     AfterFunctionDefinitionName: false
     AfterIfMacros: false
     AfterOverloadedOperator: true
+    # AfterPlacementOperatorStyle: Never, Always, Leave
+    # Add or don't add a space after new and delete followed by (): new (buf) T
+    AfterPlacementOperator: Always
     AfterRequiresInClause: true
     AfterRequiresInExpression: false
     BeforeNonEmptyParentheses: false
@@ -315,7 +347,6 @@ SpaceBeforeRangeBasedForLoopColon: true
 # Lambdas not affected, only the first [ gets the space, like x = a [1][2] instead of x = a[1][2]
 SpaceBeforeSquareBrackets: false
 SpaceInEmptyBlock: false
-SpaceInEmptyParentheses: false
 
 # Doesn't affect /* block comments */, minimum amount of spaces before a trailing comment starts
 SpacesBeforeTrailingComments: 4
@@ -338,8 +369,15 @@ SpacesInConditionalStatement: false
 # For JSON: SpaceBeforeJsonColon
 SpacesInContainerLiterals: false
 
-SpacesInParentheses: false
+SpacesInParens: Custom
+SpacesInParensOptions:
+  InConditionalStatements: false
+  InCStyleCasts: false
+  InEmptyParentheses: false
+  Other: false
+
 SpacesInSquareBrackets: false
+
 
 # --------------------------------------------------------------------------------------
 # Empty lines
@@ -362,6 +400,11 @@ KeepEmptyLinesAtTheStartOfBlocks: false
 
 # How many consecutive empty lines to keep
 MaxEmptyLinesToKeep: 2
+
+# SeparateDefinitionStyle: Leave, Always, Never
+# Leaves as is, always adds or always removes empty lines
+# between definitions like classes, structs, enums and functions.
+SeparateDefinitionBlocks: Always
 
 # --------------------------------------------------------------------------------------
 # Indent
@@ -410,18 +453,19 @@ LambdaBodyIndentation: Signature
 # NamespaceIndentationKind: None, Inner, All - Indent namespace definitions
 NamespaceIndentation: Inner
 
+# RequiresExpressionIndentationKind
+#   OuterScope: align requires expression with the scope the expression is in (default)
+#   Keyword: align the requires expression with the requires keyword
+RequiresExpressionIndentation: OuterScope
+
 ########################################################################################
 # Others
 
 # BinPack means that if false all elements are together on one line or have each one line to themselves
-# if true there maybe multiple else sharing a line, even if they are spread over multiple lines
+# if true there maybe multiple items sharing a line, even if they are spread over multiple lines
+# if false, each gets their own line
 BinPackArguments: false
 BinPackParameters: false
-
-# Regex to describe comments with special meaning, which should not be messed with by the formatter
-# exclude doxygen comments like /// @param and * @param
-# https://www.mitk.org/images/1/1c/BugSquashingSeminars$2013-07-17-DoxyReference.pdf
-CommentPragmas: 'NOLINT|(@|\\)(attention|author|brief|bug|cond|date|deprecated|else(if|cond)?|end(cond|if)|exception|if(not)?|invariant|note|par|t?param|post|pre|return|retval|sa|see|since|test|throw|todo|version|warning|xrefitem)|^!'
 
 # Adds missing and fixes wrong namespace ending comments for namespaces longer than ShortNamespaceLines
 FixNamespaceComments: true
@@ -482,13 +526,9 @@ InsertTrailingCommas: Wrapped
 IntegerLiteralSeparator:
     Binary: 4
     Decimal: 3
-    DecimalMinDigits: 5
+    DecimalMinDigits: 4
     Hex: 2
-    HexMinDigits: 5
-
-# Remove the semicolon after the closing brace of a non empty function
-# Error prone
-RemoveSemicolon: false
+    HexMinDigits: 4
 
 # Sort using declarations: Never, Lexicographic, LexicographicNumeric
 SortUsingDeclarations: Lexicographic
