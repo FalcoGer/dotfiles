@@ -1,0 +1,10 @@
+# Rizin Silhouette Server
+e silhouette.psk=19f5a8e7-9b4e-4f6a-83bc-6a7db5014c3d
+e silhouette.host=eu-symbols.rizin.re
+e silhouette.port=25000
+e silhouette.enable=true
+
+# works only when rizin is compiled against openssl
+# e silhouette.tls=true
+
+sil test
