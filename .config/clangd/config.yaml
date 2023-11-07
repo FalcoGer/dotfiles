@@ -78,28 +78,37 @@ Diagnostics:
   ClangTidy:
     FastCheckFilter: None
     Add: [
+      abseil-*,
+      altera-*,
       bugprone*,
-      boost-use-to-string,
+      boost-*,
       concurrency-*,
       cppcoreguidelines-*,
       modernize-*,
       performance-*,
-      portability-std-allocator-const,
+      portability-*,
       readability-*,
       cert-*,
       clang-analyzer-*,
       google-*,
       hicpp-*,
-      llvm-namespace-comment,
+      linuxkernel-*,
+      llvm-*,
       misc-*,
-      openmp-*
+      openmp-*,
+      mpi-*
     ]
     Remove: [
       misc-unused-parameters, # caught by -Wunused-parameter
       cppcoreguidelines-avoid-do-while, # annoying, do-while might be useful.
       # bugprone-easily-swappable-parameters, # annoying. setPos(int x, int y) is flagged
-      cert-msc50-cpp, # allow the use of std::rand()
+
+      # keep it in, use c++ random number generation facilities.
+      # cert-msc50-cpp, # allow the use of std::rand()
+
       google-readability-todo, # todos don't need a username or bug number in my code
+      portability-restrict-system-includes, # disallows the use of headers specific to one OS
+      fuchsia-*, # disallows many features that are standard in c++ (operator overloading, default arguments)
       cert-dcl03-c, # alias for misc-static-assert
       cert-dcl16-c, # alias for readability-uppercase-literal-suffix
       cert-dcl37-c, # alias for bugprone-reserved-identifier
@@ -167,6 +176,18 @@ Diagnostics:
     CheckOptions:
       modernize-use-auto.MinTypeNameLength: 10
       modernize-use-auto.RemoveStars: 0
+      hicpp-multiway-paths-covered.WarnOnMissingElse: true
+      hicpp-signed-bitwise.IgnorePositiveIntegerLiterals: true
+      llvm-namespace-comment.ShortNamespaceLines: 10
+      misc-non-private-member-variables-in-classes.IgnorePublicMemberVariables: true
+      misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic: false
+      portability-simd-intrinsics.Suggest: true
+      misc-const-correctness.AnalyzeValues: true
+      misc-const-correctness.AnalyzeReferences: true
+      misc-const-correctness.WarnPointersAsValues: true
+      misc-const-correctness.TransformValues: true
+      misc-const-correctness.TransformReferences: true
+      misc-const-correctness.TransformPointersAsValues: true
       readability-identifier-length.MinimumVariableNameLength: 0
       readability-identifier-length.IgnoredVariableNames: "^([XYZxyzit]|id)$"
       readability-identifier-length.MinimumLoopCounterNameLength: 2
@@ -235,9 +256,3 @@ Diagnostics:
       readability-identifier-naming.ValueTemplateParameterCase: camelBack
       readability-identifier-naming.VariableCase: camelBack
       readability-identifier-naming.VirtualMethodCase: CamelCase
-      hicpp-multiway-paths-covered.WarnOnMissingElse: true
-      hicpp-signed-bitwise.IgnorePositiveIntegerLiterals: true
-      llvm-namespace-comment.ShortNamespaceLines: 10
-      misc-non-private-member-variables-in-classes.IgnorePublicMemberVariables: true
-      misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic: false
-
