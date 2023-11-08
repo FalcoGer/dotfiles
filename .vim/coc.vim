@@ -22,6 +22,7 @@ inoremap <silent><expr> <TAB>
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ CheckBackspace() ? "\<TAB>" :
       \ coc#refresh()
+
 " Old setting, without coc-snippets
 " inoremap <silent><expr> <TAB>
 "       \ coc#pum#visible() ? coc#pum#next(1) :
@@ -169,6 +170,9 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" Yank List (coc-yank plugin)
+" nnoremap <silent><nowait> <space>y  :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent><nowait> <space>y  :<C-u>CocList -A yank<cr>
 
 " :help coc-highlight
 " Unused code, etc

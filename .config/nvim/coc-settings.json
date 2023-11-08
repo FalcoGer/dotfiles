@@ -222,5 +222,18 @@
     "perl.enable": true,
     
     "yaml.enable": true,
-    "snippets.ultisnips.pythonPrompt": false
+    "snippets.ultisnips.pythonPrompt": false,
+
+    "yank.enableCompletion": true,
+    "yank.priority": 80,
+    "yank.limit": 50,
+    "yank.highlight.enable": true,
+    "yank.highlight.duration": 150,
+    "yank.list.maxsize": 200,
+
+    "tabnine.priority": 999,
+    "tabnine.limit": 10,
+    "tabnine.shortcut": "TN",
+    "tabnine.binary_path": "",
+    "tabnine.enablePreselect": true
 }

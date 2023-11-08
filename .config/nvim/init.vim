@@ -169,6 +169,9 @@ else
 
     " Rainbow brackets - works with treesitter
     Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim' | let g:user_loaded_rainbowdelim = 1
+
+    " Keep stores files in a redis server for backup
+    Plug 'neoclide/keep.nvim', {'do': 'npm install'} | let g:user_loaded_keep = 1
 endif
 
 " Provides matching pair controls for braces and keywords like if/else, etc
@@ -211,6 +214,7 @@ endfunction
 let targetPath = expand('~/.vim/swp//')
 call MakeProtectedDir(targetPath)
 let &directory = targetPath
+set swapfile
 
 let targetPath = expand('~/.vim/backup//')
 call MakeProtectedDir(targetPath)
@@ -587,4 +591,8 @@ endif
 
 if exists('g:user_loaded_matchup')
     source ~/.vim/matchup.vim
+endif
+
+if exists('g:user_loaded_keep')
+    source ~/.vim/keep.vim
 endif
