@@ -79,7 +79,6 @@ Diagnostics:
     FastCheckFilter: None
     Add: [
       abseil-*,
-      altera-*,
       bugprone*,
       boost-*,
       concurrency-*,
