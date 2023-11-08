@@ -98,6 +98,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <C-Space>  <Plug>(coc-codeaction-cursor)
 xmap <C-Space>  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction-cursor)
+nmap <leader>ca  <Plug>(coc-codeaction-cursor)
 " Remap keys for apply code actions affect whole buffer
 nmap <leader>as  <Plug>(coc-codeaction-source)
 " Apply the most preferred quickfix action to fix diagnostic on the current line
@@ -173,6 +174,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " Yank List (coc-yank plugin)
 " nnoremap <silent><nowait> <space>y  :<C-u>CocList -A --normal yank<cr>
 nnoremap <silent><nowait> <space>y  :<C-u>CocList -A yank<cr>
+nnoremap <silent><nowait> <C-y>     :<C-u>CocList -A yank<cr>
 
 " :help coc-highlight
 " Unused code, etc
