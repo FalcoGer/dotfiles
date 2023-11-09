@@ -3,6 +3,47 @@ local ts_config = require'nvim-treesitter.configs'
 -- see https://github.com/nvim-treesitter/nvim-treesitter#available-modules
 -- see :help treesitter
 local options = {
+    -- list of names or "all", for which parsers should be automatically
+    -- installed when the plugin is loaded
+    ensure_installed = {
+        "vim",
+        "bash",
+        "c",
+        "cpp",
+        "cmake",
+        "diff",
+        "lua",
+        "make",
+        "markdown",
+        "python",
+        "yaml",
+        "c_sharp",
+        "css",
+        "dockerfile",
+        "git_config",
+        "git_rebase",
+        "gitattributes",
+        "gitcommit",
+        "gitignore",
+        "html",
+        "http",
+        "ini",
+        "javascript",
+        "json",
+        "json5",
+        "latex",
+        "markdown_inline",
+        "meson",
+        "ninja",
+        "passwd",
+        "regex",
+        "sql",
+        "vimdoc"
+    },
+    -- install synchronously (only ensure_installed)
+    sync_install = true,
+    -- automatically install missing parsers when entering buffer
+    auto_install = true,
     highlight = {
         enable = true,
         -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
