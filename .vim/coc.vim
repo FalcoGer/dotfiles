@@ -80,6 +80,7 @@ nmap <leader>rn <Plug>(coc-rename)
 " Formatting selected code
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>ff <Plug>(coc-format)
 
 augroup CocConfigGroup
   autocmd!
@@ -144,6 +145,7 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 command! -nargs=0 Format :call CocActionAsync('format')
 
 " Add `:Fold` command to fold current buffer
+" This switches foldmethod to manual
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer
@@ -155,6 +157,7 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
+nnoremap <silent><nowait> <space>l  :<C-u>CocList<cr>
 " Show all diagnostics
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
@@ -175,6 +178,8 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " nnoremap <silent><nowait> <space>y  :<C-u>CocList -A --normal yank<cr>
 nnoremap <silent><nowait> <space>y  :<C-u>CocList -A yank<cr>
 nnoremap <silent><nowait> <C-y>     :<C-u>CocList -A yank<cr>
+" git list (coc-git)
+nnoremap <silent><nowait> <space>g  :<C-u>CocList gchunks<cr>
 
 " :help coc-highlight
 " Unused code, etc
