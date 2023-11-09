@@ -88,7 +88,9 @@
                             "user": "sqlls",
                             "password": "nnywQmCXKhp3xTAAttLg",
                             "database": "mysql",
-                            "projectPaths": ["/"],
+                            "projectPaths": [
+                                "/"
+                            ],
                             "ssh": {
                                 "user": "ubuntu",
                                 "remoteHost": "pi.lan",
@@ -121,7 +123,6 @@
         "$HOME/.cargo/**",
         "$HOME/.rustup/**"
     ],
-
     "diagnostic-languageserver.enable": true,
     "diagnostic-languageserver.trace.server": "off",
     "diagnostic-languageserver.mergeConfig": false,
@@ -133,7 +134,13 @@
         "shellcheck": {
             "sourceName": "shellcheck",
             "command": "shellcheck",
-            "args": [ "--format=json", "--enable=all", "--severity=style", "--shell=bash", "%file"],
+            "args": [
+                "--format=json",
+                "--enable=all",
+                "--severity=style",
+                "--shell=bash",
+                "%file"
+            ],
             "rootPatterns": [],
             "isStdout": true,
             "isStderr": false,
@@ -165,10 +172,19 @@
         "sh": "shfmt"
     },
     "diagnostic-languageserver.formatters": {
-        "shfmt":
-        {
+        "shfmt": {
             "command": "shfmt",
-            "args": [ "-i", "4", "-s", "-bn", "-ci", "-sr", "-fn", "-kp", "-" ],
+            "args": [
+                "-i",
+                "4",
+                "-s",
+                "-bn",
+                "-ci",
+                "-sr",
+                "-fn",
+                "-kp",
+                "-"
+            ],
             "rootPatterns": [],
             "isStdout": true,
             "isStderr": false,
@@ -178,9 +194,7 @@
             "ignore": []
         }
     },
-
     "suggest.snippetIndicator": "~",
-
     "pylsp.plugins.pylint.enabled": true,
     "pylsp.builtin.installExtrasArgs": [
         "flake8",
@@ -192,48 +206,76 @@
         "rope"
     ],
     "pylsp.plugins.pycodestyle.maxLineLength": 120,
-    "pylsp.plugins.pycodestyle.ignore": ["E221", "W504"],
-
+    "pylsp.plugins.pycodestyle.ignore": [
+        "E221",
+        "W504"
+    ],
     "Lua.workspace.library": [
         "/usr/share/nvim/runtime/lua",
         "/usr/share/nvim/runtime/lua/vim",
         "/usr/share/nvim/runtime/lua/vim/lsp"
     ],
-    "Lua.diagnostics.globals": ["vim"],
+    "Lua.diagnostics.globals": [
+        "vim"
+    ],
     "Lua.codeLens.enable": true,
     "Lua.diagnostics.workspaceRate": 25,
-    "Lua.doc.privateName": ["m_*"],
+    "Lua.doc.privateName": [
+        "m_*"
+    ],
     "Lua.hint.enable": true,
-    "Lua.workspace.ignoreDir": [".vscode", ".git"],
-    
+    "Lua.workspace.ignoreDir": [
+        ".vscode",
+        ".git"
+    ],
     "rust-analyzer.enable": true,
-    
     "html.format.enable": true,
-    
     "javascript.format.enable": true,
     "typescript.format.enable": true,
-    
     "java.enabled": true,
-    
     "cmake.lsp.enable": true,
-    
     "json.enable": true,
-    
     "perl.enable": true,
-    
     "yaml.enable": true,
     "snippets.ultisnips.pythonPrompt": false,
-
     "yank.enableCompletion": true,
     "yank.priority": 80,
     "yank.limit": 50,
     "yank.highlight.enable": true,
     "yank.highlight.duration": 150,
     "yank.list.maxsize": 200,
-
     "tabnine.priority": 999,
     "tabnine.limit": 10,
     "tabnine.shortcut": "TN",
     "tabnine.binary_path": "",
-    "tabnine.enablePreselect": true
+    "tabnine.enablePreselect": true,
+    "git.gitlab.hosts": [
+        "gitlab.com"
+    ],
+    "git.remoteName": "origin",
+    "git.issueFormat": "[%o/%r] #%i: \"%b\" by %a",
+    "git.enableGutters": false,
+    "git.realtimeGutters": true,
+    "git.signPriority": 10,
+    "git.changedSign.text": " ",
+    "git.addedSign.text": " ",
+    "git.removedSign.text": " ",
+    "git.topRemovedSign.text": "‾",
+    "git.changeRemovedSign.text": "≃",
+    "git.addedSign.hlGroup": "GitGutterAdd",
+    "git.changedSign.hlGroup": "GitGutterChange",
+    "git.removedSign.hlGroup": "GitGutterDelete",
+    "git.topRemovedSign.hlGroup": "GitGutterDelete",
+    "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+    "git.stagedDecorator": "●",
+    "git.changedDecorator": "*",
+    "git.untrackedDecorator": "…",
+    "git.conflictedDecorator": "x",
+    "git.addGBlameToVirtualText": false,
+    "git.branchCharacter": "",
+    "git.conflict.enabled": true,
+    "git.conflict.current.hlGroup": "DiffChange",
+    "git.conflict.incoming.hlGroup": "DiffAdd",
+    "git.blameUseRealTime": true,
+    "git.addGBlameToBufferVar": true
 }
