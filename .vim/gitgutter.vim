@@ -1,6 +1,6 @@
 " https://github.com/airblade/vim-gitgutter
 
-nnoremap <silent><C-g> :GitGutterBufferToggle<CR>
+" nnoremap <silent><C-g> :GitGutterBufferToggle<CR>
 
 let g:gitgutter_enabled = 1
 let g:gitgutter_signs = 1
