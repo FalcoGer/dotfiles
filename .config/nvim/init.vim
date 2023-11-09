@@ -96,18 +96,6 @@ Plug 'vim-airline/vim-airline' | let g:user_loaded_vimairline = 1
 Plug 'tpope/vim-fugitive' | let g:user_loaded_fugitive = 1
 " flog provides a git branch viewer with :Flog or :Flogsplit
 Plug 'rbong/vim-flog' | let g:user_loaded_flog = 1
-" git gutter provides indicators in the left bar to show changes since the
-" last commit
-" Plug 'airblade/vim-gitgutter' | let g:user_loaded_gitgutter = 1
-
-" signify shows VCS changes (like git) in the sign column. More lightweight
-" than gitgutter with less features. Just does the sign column.
-" if has('nvim') || has('patch-8.0.902')
-"     Plug 'mhinz/vim-signify' | let g:user_loaded_signify = 1
-" else
-"     Plug 'mhinz/vim-signify', { 'tag': 'legacy' } | let g:user_loaded_signify = 1
-" endif
-
 " Puts signs into the sign colum where users has changed file since last save
 " Also for VCS
 " integrates with vim-airline
@@ -386,12 +374,22 @@ set foldenable
 " auto open folds in these conditions
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
-if has('nvim' && exists('g:user_loaded_treesitter'))
+if has('nvim')
     " Treesitter folding
+    " https://www.reddit.com/r/neovim/comments/16xz3q9/treesitter_highlighted_folds_are_now_in_neovim/
     set foldmethod=expr
-    set foldexpr=nvim_treesitter#foldexpr()
+    set foldexpr=v:lua.vim.treesitter.foldexpr()
+    set foldtext=v:lua.vim.treesitter.foldtext()
 else
     set foldmethod=syntax       " Fold based on indention levels.
+    function! MyFoldText()
+        let line = getline(v:foldstart)
+        let numberOfLines = 1 + v:foldend - v:foldstart
+        let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+        return v:folddashes .. sub .. ' (' .. numberOfLines .. ' Lines)'
+    endfunction
+
+    set foldtext=MyFoldText()
 endif
 
 " Folds with a level > foldlevel will be closed
@@ -401,17 +399,7 @@ set foldlevel=99
 set foldlevelstart=-1
 set foldnestmax=5               " Only fold up to this many nested levels.
 set foldminlines=1              " Only fold if there are at least this many lines.
-
-" use ! to allow reloading of this file with source
-function! MyFoldText()
-    let line = getline(v:foldstart)
-    let numberOfLines = 1 + v:foldend - v:foldstart
-    let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
-    return v:folddashes .. sub .. ' (' .. numberOfLines .. ' Lines)'
-endfunction
-
-set foldtext=MyFoldText()
-
+set fillchars=fold:·,foldopen:,foldclose:
 
 " alias for fold current cursor position for convenience
 nnoremap <silent> zz  za
