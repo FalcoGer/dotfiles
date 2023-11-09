@@ -404,7 +404,7 @@ MaxEmptyLinesToKeep: 2
 # SeparateDefinitionStyle: Leave, Always, Never
 # Leaves as is, always adds or always removes empty lines
 # between definitions like classes, structs, enums and functions.
-SeparateDefinitionBlocks: Always
+SeparateDefinitionBlocks: Leave
 
 # --------------------------------------------------------------------------------------
 # Indent
