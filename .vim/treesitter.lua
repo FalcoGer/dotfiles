@@ -1,4 +1,4 @@
-local ts_config = require'nvim-treesitter.configs'
+local ts_config = require 'nvim-treesitter.configs'
 
 -- see https://github.com/nvim-treesitter/nvim-treesitter#available-modules
 -- see :help treesitter
@@ -68,7 +68,7 @@ local options = {
     },
     matchup = {
         enabled = true,               -- enable matchup integration
-        disable = {"text"},           -- list of languages as strings for which matchup is disabled
+        disable = { "text" },         -- list of languages as strings for which matchup is disabled
         disable_virtual_text = false, -- disable virtual text for languages without explicit end markers (python)
         -- include_match_words = "",  -- match these regular expressions that are not detected by treesitter (like /* */)
     },
