@@ -9,8 +9,13 @@ vim.g.rainbow_delimiters = {
         vim = rainbow_delimiters.strategy['local'],
     },
     query = {
+        -- [''] = 'rainbow-delimiters',
         [''] = 'rainbow-delimiters',
+        latex = 'rainbow-blocks',
         lua = 'rainbow-blocks',
+        javascript = 'rainbow-delimiters-react',
+        tsx = 'rainbow-parens',
+        verilog = 'rainbow-blocks',
     },
     highlight = {
         'RainbowDelimiterRed',
