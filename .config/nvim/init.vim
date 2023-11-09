@@ -368,7 +368,8 @@ set statusline=
 if !exists("g:user_loaded_vimairline")
     set statusline+=%f                      " File Name, max 20 characters
     set statusline+=\ %m                    " Modifiable [+] or [-]
-    set statusline+=\ %{4}.{4}{r}           " Readonly [RO] or nothing
+    " set statusline+=\ %{4}.{4}{r}           " Readonly [RO] or nothing
+    set statusline+=\ %r                    " Readonly [RO] or nothing
     set statusline+=\ Line:\ %l/%L[%p%%]    " Line: CurLine/LastLine[Percent%]
     set statusline+=\ Col:\ %c              " Current column
     set statusline+=\ Buf:\ #%n             " Current buffer number
@@ -378,20 +379,28 @@ endif
 set history=1000
 
 " =============================================================================
-" Folding
+" Folding, :help fold -> All fold commands start with z
+" Options for folds start at :help fcl
+set foldenable
 
 " auto open folds in these conditions
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
-if has('nvim')
+if has('nvim' && exists('g:user_loaded_treesitter'))
     " Treesitter folding
     set foldmethod=expr
     set foldexpr=nvim_treesitter#foldexpr()
 else
-    set foldmethod=indent       " Fold based on indention levels.
+    set foldmethod=syntax       " Fold based on indention levels.
 endif
-set foldnestmax=3               " Only fold up to three nested levels.
-set foldminlines=3              " Only fold if there are at least 3 lines.
+
+" Folds with a level > foldlevel will be closed
+" Setting 0 will close all folds
+" Setting 99 ensures folds are open by default
+set foldlevel=99
+set foldlevelstart=-1
+set foldnestmax=5               " Only fold up to this many nested levels.
+set foldminlines=1              " Only fold if there are at least this many lines.
 
 " use ! to allow reloading of this file with source
 function! MyFoldText()
@@ -403,7 +412,10 @@ endfunction
 
 set foldtext=MyFoldText()
 
-set nofoldenable            " Disable folding
+
+" alias for fold current cursor position for convenience
+nnoremap <silent> zz  za
+
 highlight Folded ctermfg=14 ctermbg=236 gui=underdouble guisp=#008080 guifg=#00FFFF guibg=#303030
 
 highlight SignColumn ctermfg=51 ctermbg=234 guifg=#00FFFF guibg=#1C1C1C
