@@ -153,6 +153,8 @@ else
     if exists('g:user_loaded_treesitter')
         " See note for context.vim
         Plug 'nvim-treesitter/nvim-treesitter-context' | let g:user_loaded_treesitter_context = 1
+        " Closes tags such as HTML tags automatically
+        Plug 'windwp/nvim-ts-autotag' | let g:user_loaded_ts_autotag = 1
     endif
 
     " Rainbow brackets - works with treesitter

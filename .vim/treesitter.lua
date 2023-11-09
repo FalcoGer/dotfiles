@@ -6,39 +6,10 @@ local options = {
     -- list of names or "all", for which parsers should be automatically
     -- installed when the plugin is loaded
     ensure_installed = {
-        "vim",
-        "bash",
-        "c",
-        "cpp",
-        "cmake",
-        "diff",
-        "lua",
-        "make",
-        "markdown",
-        "python",
-        "yaml",
-        "c_sharp",
-        "css",
-        "dockerfile",
-        "git_config",
-        "git_rebase",
-        "gitattributes",
-        "gitcommit",
-        "gitignore",
-        "html",
-        "http",
-        "ini",
-        "javascript",
-        "json",
-        "json5",
-        "latex",
-        "markdown_inline",
-        "meson",
-        "ninja",
-        "passwd",
-        "regex",
-        "sql",
-        "vimdoc"
+        "vim", "bash", "c", "cpp", "cmake", "diff", "lua", "make", "markdown", "python", "yaml",
+        "c_sharp", "css", "dockerfile", "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore", "html",
+        "http", "ini", "javascript", "json", "json5", "latex", "markdown_inline", "meson", "ninja", "passwd", "regex",
+        "sql", "vimdoc"
     },
     -- install synchronously (only ensure_installed)
     sync_install = true,
@@ -71,6 +42,16 @@ local options = {
         disable = { "text" },         -- list of languages as strings for which matchup is disabled
         disable_virtual_text = false, -- disable virtual text for languages without explicit end markers (python)
         -- include_match_words = "",  -- match these regular expressions that are not detected by treesitter (like /* */)
+    },
+    autotag = {
+        enable = true,
+        enable_rename = true,
+        enable_close = true,
+        enable_close_on_slash = true,
+        filetypes = {
+            'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx',
+            'rescript', 'xml', 'php', 'markdown', 'astro', 'glimmer', 'handlebars', 'hbs',
+        },
     },
 }
 
