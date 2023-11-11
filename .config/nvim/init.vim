@@ -176,6 +176,8 @@ else
         Plug 'mfussenegger/nvim-dap-python' | let g:user_loaded_nvim_dap_python = 1
         " Provides easy UI for debugging
         Plug 'rcarriga/nvim-dap-ui' | let g:user_loaded_nvim_dap_ui = 1
+        " Provides persistent storage for breakpoints
+        Plug 'Weissle/persistent-breakpoints.nvim' | let g:user_loaded_persistent_breakpoints = 1
     endif
 
     " allows to move windows around easily, provides WinShift command
@@ -631,6 +633,10 @@ endif
 
 if exists('g:user_loaded_nvim_dap_ui')
     source ~/.vim/nvim_dap_ui.lua
+endif
+
+if exists('g:user_loaded_persistent_breakpoints')
+    source ~/.vim/nvim_dap_persistent_breakpoints.lua
 endif
 
 if exists ('g:user_loaded_winshift')

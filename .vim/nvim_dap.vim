@@ -123,15 +123,18 @@ lua <<EOF
     -- --------------------------------------------------------------
     -- GDB, requires gdb 14.0 or higher
 
+    -- local env = {"PWNDBG_DISABLE_COLORS=1"}
     dap.adapters.gdb = {
         type = "executable",
-        command = "gdb",
-        args = { "-i", "dap" }
+        command = "/usr/local/bin/gdb",
+        args = { "--interpreter", "dap" },
+        options = {
+        --    env = env,
+        },
     }
 
     -- debugee configuration
-    dap.configurations.c =
-    {
+    dap.configurations.c = {
         {
         name = "Launch",
         type = "gdb",
@@ -147,8 +150,7 @@ lua <<EOF
 
     -- --------------------------------------------------------------
     -- PHP
-    dap.adapters.php =
-    {
+    dap.adapters.php = {
         type = 'executable',
         command = 'node',
         args = { '/home/paul/repositories/vim/vscode-php-debug/out/phpDebug.js' }
