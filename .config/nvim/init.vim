@@ -78,11 +78,6 @@ Plug 'vim-scripts/DoxygenToolkit.vim' | let g:user_loaded_doxytoolkit = 1
 " Provides commands to switch between source and header files
 Plug 'derekwyatt/vim-fswitch' | let g:user_loaded_fswitch = 1
 
-" Provides fuzzy search, :FZF command, ctrl + X and ctrl + V to open in
-" split/vertical split
-" https://github.com/junegunn/fzf/blob/master/README-VIM.md
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } | let g:user_loaded_fzf = 1
-
 " Snippets, Snippet engine provided by coc-snippets
 Plug 'honza/vim-snippets' | let g:user_loaded_vimsnippets = 1
 
@@ -118,6 +113,11 @@ Plug 'mbbill/undotree' | let g:user_loaded_undotree = 1
 Plug 'preservim/tagbar' | let g:user_loaded_tagbar = 1
 
 if !has('nvim')
+    " Provides fuzzy search, :FZF command, ctrl + X and ctrl + V to open in
+    " split/vertical split
+    " https://github.com/junegunn/fzf/blob/master/README-VIM.md
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } | let g:user_loaded_fzf = 1
+
     " File Tree View
     Plug 'preservim/nerdtree' | let g:user_loaded_nerdtree = 1
 
@@ -129,6 +129,10 @@ if !has('nvim')
     " uses nvim-treesitter.
     Plug 'wellle/context.vim' | let g:user_loaded_context = 1
 else
+    " Provides fuzzy search, like the fzf plugin for regular vim
+    " fzf-vim is backwards compatible with the setup for fzf-vim
+    " Provides the :FzfLua command, use auto completion
+    Plug 'ibhagwan/fzf-lua', { 'do': ':FzfLua setup_fzfvim_cmds', 'branch': 'main' } | let g:user_loaded_fzf = 2
     " Coloured icons, used by nvim-tree and bufferline
     Plug 'nvim-tree/nvim-web-devicons' | let g:user_loaded_devicons = 1
     " Plug 'ryanoasis/vim-devicons' Icons without colours
@@ -162,6 +166,15 @@ else
 
     " Keep stores files in a redis server for backup
     Plug 'neoclide/keep.nvim', {'do': 'npm install'} | let g:user_loaded_keep = 1
+
+    " neovim debug adapter
+    Plug 'mfussenegger/nvim-dap' | let g:user_loaded_nvim_dap = 1
+    if (exists('g:user_loaded_nvim_dap'))
+        " Provides vitual texts for nvim-dap
+        Plug 'theHamsta/nvim-dap-virtual-text' | let g:user_loaded_nvim_dap_virtual_text = 1
+        " Provides configuration for debugpy/treesitter
+        Plug 'mfussenegger/nvim-dap-python' | let g:user_loaded_nvim_dap_python = 1
+    endif
 endif
 
 " Provides matching pair controls for braces and keywords like if/else, etc
@@ -597,4 +610,16 @@ endif
 
 if exists('g:user_loaded_keep')
     source ~/.vim/keep.vim
+endif
+
+if exists ('g:user_loaded_nvim_dap')
+    source ~/.vim/nvim_dap.vim
+endif
+
+if exists ('g:user_loaded_nvim_dap_virtual_text')
+    source ~/.vim/nvim_dap_virtual_text.lua
+endif
+
+if exists ('g:user_loaded_nvim_dap_python')
+    lua require('dap-python').setup('~/repositories/debugpy/bin/python')
 endif
