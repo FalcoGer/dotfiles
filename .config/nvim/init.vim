@@ -175,6 +175,9 @@ else
         " Provides configuration for debugpy/treesitter
         Plug 'mfussenegger/nvim-dap-python' | let g:user_loaded_nvim_dap_python = 1
     endif
+
+    " allows to move windows around easily, provides WinShift command
+    Plug 'sindrets/winshift.nvim' | let g:user_loaded_winshift = 1
 endif
 
 " Provides matching pair controls for braces and keywords like if/else, etc
@@ -622,4 +625,8 @@ endif
 
 if exists ('g:user_loaded_nvim_dap_python')
     lua require('dap-python').setup('~/repositories/debugpy/bin/python')
+endif
+
+if exists ('g:user_loaded_winshift')
+    source ~/.vim/winshift.lua
 endif
