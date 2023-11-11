@@ -39,7 +39,7 @@ highlight DapLogPointText ctermfg=12 cterm=bold guifg=#0000ff gui=bold
 highlight link DapLogPointNum DapLogPointText
 highlight DapLogPointLine ctermbg=17 guibg=#00005f
 
-highlight DapStoppedText ctermbg=11 cterm=bold guibg=#ffff00 gui=bold
+highlight DapStoppedText ctermfg=9 ctermbg=3 cterm=bold guifg=#ff0000 guibg=#808000 gui=bold
 highlight link DapStoppedNum DapStoppedText
 highlight DapStoppedLine ctermbg=23 cterm=underline guibg=#005f5f guisp=#875f00 gui=underdouble
 
@@ -65,21 +65,39 @@ lua <<EOF
     vim.keymap.set('n', '<Leader>cb', function() require('dap').toggle_breakpoint(vim.fn.input('Breakpoint condtion:')) end)
     vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
     vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
-    vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+    -- vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
     vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
       require('dap.ui.widgets').hover()
     end)
-    vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
-      require('dap.ui.widgets').preview()
-    end)
+    --vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+    --  require('dap.ui.widgets').preview()
+    --end)
     vim.keymap.set('n', '<Leader>df', function()
       local widgets = require('dap.ui.widgets')
-      widgets.centered_float(widgets.frames)
+      local sidebar = widgets.sidebar(widgets.frames)
+      sidebar.open()
     end)
     vim.keymap.set('n', '<Leader>ds', function()
       local widgets = require('dap.ui.widgets')
-      widgets.centered_float(widgets.scopes)
+      local sidebar = widgets.sidebar(widgets.scopes)
+      sidebar.open()
     end)
+    vim.keymap.set('n', '<Leader>dt', function()
+      local widgets = require('dap.ui.widgets')
+      local sidebar = widgets.sidebar(widgets.threads)
+      sidebar.open()
+    end)
+    vim.keymap.set('n', '<Leader>dd', function()
+      local widgets = require('dap.ui.widgets')
+      local sidebar = widgets.sidebar(widgets.sessions)
+      sidebar.open()
+    end)
+    vim.keymap.set('n', '<Leader>de', function()
+      local widgets = require('dap.ui.widgets')
+      local sidebar = widgets.sidebar(widgets.expression)
+      sidebar.open()
+    end)
+
 
     -- ==============================================================
     -- Sign configs
