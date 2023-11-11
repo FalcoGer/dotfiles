@@ -10,34 +10,59 @@
 " command! -nargs=0 StepInto      :lua require('dap').step_into()
 " command! -nargs=0 StepOut       :lua require('dap').step_out()
 " command! -nargs=0 REPL          :lua require('dap').repl.open()
-command! -nargs=0 DapRunLast       :lua require('dap').run_last()
+command! -nargs=0 DapRunLast                :lua require('dap').run_last()
+command! -nargs=? DapPause                  :lua require('dap').pause(<f-args>)
+command! -nargs=0 DapStepBack               :lua require('dap').step_back()
+command! -nargs=0 DapStepIntoInstruction    :lua require('dap').step_into('instruction')
+command! -nargs=0 DapStepOutInstruction     :lua require('dap').step_out('instruction')
+command! -nargs=0 DapStepBackInstruction    :lua require('dap').step_back('instruction')
+command! -nargs=0 DapReverseContinue        :lua require('dap').reverse_continue()
+command! -nargs=0 DapUp                     :lua require('dap').up()
+command! -nargs=0 DapDown                   :lua require('dap').down()
+command! -nargs=? DapGotoLine               :lua require('dap').goto_(<f-args>)
+command! -nargs=0 DapFocusFrame             :lua require('dap').focus_frame()
+command! -nargs=0 DapRunToCursor            :lua require('dap').run_to_cursor()
+command! -nargs=0 DapListBreakpoints        :lua require('dap').list_breakpoints(0)
+command! -nargs=0 DapClearBreakpoints       :lua require('dap').clear_breakpoints()
 
 " Highlights for sign config
 
 highlight BreakpointText ctermfg=9 cterm=bold guifg=#FF0000 gui=bold
 highlight link BreakpointNum BreakpointText
 highlight BreakPointLine ctermbg=52 guibg=#5f0000
+
 highlight BreakpointCondText ctermfg=5 cterm=bold guifg=#800080 gui=bold
 highlight link BreakPointCondNum BreakpointCondText
-highlight BreakPointCondLine ctermbg=53 guibg=#5f0000
+highlight BreakPointCondLine ctermbg=53 guibg=#5f005f
+
 highlight DapLogPointText ctermfg=12 cterm=bold guifg=#0000ff gui=bold
 highlight link DapLogPointNum DapLogPointText
 highlight DapLogPointLine ctermbg=17 guibg=#00005f
+
 highlight DapStoppedText ctermbg=11 cterm=bold guibg=#ffff00 gui=bold
 highlight link DapStoppedNum DapStoppedText
 highlight DapStoppedLine ctermbg=23 cterm=underline guibg=#005f5f guisp=#875f00 gui=underdouble
+
 highlight DapBreapointRejectedText ctermbg=9 ctermfg=11 cterm=bold,undercurl guifg=#ffff00 guisp=#FF0000 gui=bold,undercurl
 
 lua <<EOF
+    -- behavior
+    local dap = require('dap')
 
+    -- :help dap.set_exception_breakpoints()
+    -- dap.defaults.fallback.exception_breakpoints = {'raised', 'uncaught'}
+    dap.defaults.fallback.exception_breakpoints = 'default'
     -- Key mappings
 
     vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
     vim.keymap.set('n', '<F6>', function() require('dap').step_over() end)
     vim.keymap.set('n', '<F7>', function() require('dap').step_into() end)
     vim.keymap.set('n', '<F8>', function() require('dap').step_out() end)
+    vim.keymap.set('n', '<F9>', function() require('dap').up() end)
+    vim.keymap.set('n', '<F10>', function() require('dap').down() end)
+    vim.keymap.set('n', '<Leader>lb', function() require('dap').list_breakpoints(0) end)
     vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
-    vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
+    vim.keymap.set('n', '<Leader>cb', function() require('dap').toggle_breakpoint(vim.fn.input('Breakpoint condtion:')) end)
     vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
     vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
     vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
@@ -72,7 +97,6 @@ lua <<EOF
 
     -- --------------------------------------------------------------
     -- GDB, requires gdb 14.0 or higher
-    local dap = require("dap")
 
     dap.adapters.gdb = {
         type = "executable",
@@ -149,8 +173,8 @@ lua <<EOF
                 file = '${file}',
             },
             args = {},
-    },
-}
+        },
+    }
 
 
 EOF
