@@ -33,5 +33,7 @@ source /tmp/gdbinit_source
 # source ~/repositories/hacking/pwndbg/gdbinit.py
 shell if test -f ~/repositories/hacking/pwndbg/gdbinit.py; then echo source ~/repositories/hacking/pwndbg/gdbinit.py; fi > /tmp/gdbinit_source
 source /tmp/gdbinit_source
+shell if test -f ~/repositories/hacking/pwndbg/gdbinit.py; then echo set context-ghidra if-no-source; fi > /tmp/gdbinit_source
+source /tmp/gdbinit_source
 
 shell rm /tmp/gdbinit_source
