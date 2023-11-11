@@ -14,6 +14,7 @@ command! -nargs=0 DapRunLast                :lua require('dap').run_last()
 command! -nargs=? DapPause                  :lua require('dap').pause(<f-args>)
 command! -nargs=0 DapStepBack               :lua require('dap').step_back()
 command! -nargs=0 DapStepIntoInstruction    :lua require('dap').step_into('instruction')
+command! -nargs=0 DapStepOverInstruction    :lua require('dap').step_over('instruction')
 command! -nargs=0 DapStepOutInstruction     :lua require('dap').step_out('instruction')
 command! -nargs=0 DapStepBackInstruction    :lua require('dap').step_back('instruction')
 command! -nargs=0 DapReverseContinue        :lua require('dap').reverse_continue()
@@ -66,9 +67,15 @@ lua <<EOF
     vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
     vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
     -- vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
-    vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
-      require('dap.ui.widgets').hover()
-    end)
+
+    if not (vim.g.user_loaded_nvim_dap_ui ~= nil) then
+        -- use dap hover only when dap_ui not loaded
+        vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
+            require('dap.ui.widgets').hover()
+        end)
+    end
+
+
     --vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
     --  require('dap.ui.widgets').preview()
     --end)

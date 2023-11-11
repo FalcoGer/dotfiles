@@ -174,6 +174,8 @@ else
         Plug 'theHamsta/nvim-dap-virtual-text' | let g:user_loaded_nvim_dap_virtual_text = 1
         " Provides configuration for debugpy/treesitter
         Plug 'mfussenegger/nvim-dap-python' | let g:user_loaded_nvim_dap_python = 1
+        " Provides easy UI for debugging
+        Plug 'rcarriga/nvim-dap-ui' | let g:user_loaded_nvim_dap_ui = 1
     endif
 
     " allows to move windows around easily, provides WinShift command
@@ -625,6 +627,10 @@ endif
 
 if exists ('g:user_loaded_nvim_dap_python')
     lua require('dap-python').setup('~/repositories/debugpy/bin/python')
+endif
+
+if exists('g:user_loaded_nvim_dap_ui')
+    source ~/.vim/nvim_dap_ui.lua
 endif
 
 if exists ('g:user_loaded_winshift')
