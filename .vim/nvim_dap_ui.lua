@@ -63,16 +63,16 @@ local options =
         {
             elements = {
                 {
-                    id = "repl",
-                    size = 0.5
+                    id = "console",
+                    size = 0.3
                 },
                 {
-                    id = "console",
-                    size = 0.5
+                    id = "repl",
+                    size = 0.7
                 },
             },
             position = "bottom",
-            size = 10
+            size = 13
         },
     },
     mappings = {
