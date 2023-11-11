@@ -2,14 +2,15 @@
 " help dap.txt
 
 " commands
+" Dap provides commands starting with Dap
 
-command! -nargs=0 Run           :lua require('dap').continue()
-command! -nargs=0 BreakPoint    :lua require('dap').toggle_breakpoint()
-command! -nargs=0 StepOver      :lua require('dap').step_over()
-command! -nargs=0 StepInto      :lua require('dap').step_into()
-command! -nargs=0 StepOut       :lua require('dap').step_out()
-command! -nargs=0 REPL          :lua require('dap').repl.open()
-command! -nargs=0 RunLast       :lua require('dap').run_last()
+" command! -nargs=0 Run           :lua require('dap').continue()
+" command! -nargs=0 BreakPoint    :lua require('dap').toggle_breakpoint()
+" command! -nargs=0 StepOver      :lua require('dap').step_over()
+" command! -nargs=0 StepInto      :lua require('dap').step_into()
+" command! -nargs=0 StepOut       :lua require('dap').step_out()
+" command! -nargs=0 REPL          :lua require('dap').repl.open()
+command! -nargs=0 DapRunLast       :lua require('dap').run_last()
 
 " Highlights for sign config
 
@@ -32,9 +33,9 @@ lua <<EOF
     -- Key mappings
 
     vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-    vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
-    vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-    vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+    vim.keymap.set('n', '<F6>', function() require('dap').step_over() end)
+    vim.keymap.set('n', '<F7>', function() require('dap').step_into() end)
+    vim.keymap.set('n', '<F8>', function() require('dap').step_out() end)
     vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
     vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
     vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
@@ -55,7 +56,7 @@ lua <<EOF
       widgets.centered_float(widgets.scopes)
     end)
 
-    -- ============================================================
+    -- ==============================================================
     -- Sign configs
 
     vim.fn.sign_define('DapBreakpoint', {text='', texthl='BreakpointText', linehl='BreakPointLine', numhl='BreakpointNum'})
@@ -64,12 +65,12 @@ lua <<EOF
     vim.fn.sign_define('DapStopped', {text='', texthl='DapStoppedText', linehl='DapStoppedLine', numhl='DapStoppedNum'})
     vim.fn.sign_define('DapBreakpointRejected', {text='', texthl='DapBreakpointRejectedText', linehl='', numhl=''})
 
-    -- ============================================================
+    -- ==============================================================
     -- Adapter confguration
     -- :help dap-adapter
     -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#contents
 
-    -- ------------------------------------------------------------
+    -- --------------------------------------------------------------
     -- GDB, requires gdb 14.0 or higher
     local dap = require("dap")
 
@@ -94,6 +95,62 @@ lua <<EOF
     }
     dap.configurations.cpp = dap.configurations.c
     dap.configurations.rust = dap.configurations.c
+
+    -- --------------------------------------------------------------
+    -- PHP
+    dap.adapters.php =
+    {
+        type = 'executable',
+        command = 'node',
+        args = { '/home/paul/repositories/vim/vscode-php-debug/out/phpDebug.js' }
+    }
+
+    dap.configurations.php =
+    {
+        {
+            type = 'php',
+            request = 'launch',
+            name = 'Listen for Xdebug',
+            port = 9003
+        }
+    }
+
+    -- --------------------------------------------------------------
+    -- LUA
+    dap.adapters["local-lua"] = {
+      type = "executable",
+      command = "node",
+      args = {
+        "/home/paul/repositories/vim/local-lua-debugger-vscode/extension/debugAdapter.js"
+      },
+      enrich_config = function(config, on_config)
+        if not config["extensionPath"] then
+          local c = vim.deepcopy(config)
+          -- 💀 If this is missing or wrong you'll see
+          -- "module 'lldebugger' not found" errors in the dap-repl when trying to launch a debug session
+          c.extensionPath = "/home/paul/repositories/vim/local-lua-debugger-vscode/"
+          on_config(c)
+        else
+          on_config(config)
+        end
+      end,
+    }
+
+    dap.configurations.lua =
+    {
+        {
+            name = 'Current file (local-lua-dbg, lua)',
+            type = 'local-lua',
+            request = 'launch',
+            cwd = '${workspaceFolder}',
+            program =
+            {
+                lua = '/usr/bin/lua',
+                file = '${file}',
+            },
+            args = {},
+    },
+}
 
 
 EOF
