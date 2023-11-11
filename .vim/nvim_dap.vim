@@ -42,7 +42,7 @@ highlight DapLogPointLine ctermbg=17 guibg=#00005f
 
 highlight DapStoppedText ctermfg=9 ctermbg=3 cterm=bold guifg=#ff0000 guibg=#808000 gui=bold
 highlight link DapStoppedNum DapStoppedText
-highlight DapStoppedLine ctermbg=23 cterm=underline guibg=#005f5f guisp=#875f00 gui=underdouble
+highlight DapStoppedLine ctermbg=23 cterm=underline guisp=#875f00 gui=underdouble
 
 highlight DapBreapointRejectedText ctermbg=9 ctermfg=11 cterm=bold,undercurl guifg=#ffff00 guisp=#FF0000 gui=bold,undercurl
 
