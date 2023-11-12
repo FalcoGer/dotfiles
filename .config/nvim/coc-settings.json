@@ -1,5 +1,11 @@
 {
     "coc.preferences.formatOnType": true,
+    "coc.preferences.promptInput": true,
+    "coc.preferences.enableMarkdown": true,
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "coc.preferences.silentAutoupdate": false,
+    "coc.preferences.enableMessageDialog": true,
+    "coc.preferences.enableLinkedEditing": true,
     "languageserver": {
         "clangd": {
             "command": "clangd",
@@ -123,6 +129,7 @@
         "$HOME/.cargo/**",
         "$HOME/.rustup/**"
     ],
+    
     "diagnostic-languageserver.enable": true,
     "diagnostic-languageserver.trace.server": "off",
     "diagnostic-languageserver.mergeConfig": false,
@@ -195,6 +202,7 @@
         }
     },
     "suggest.snippetIndicator": "~",
+    
     "pylsp.plugins.pylint.enabled": true,
     "pylsp.builtin.installExtrasArgs": [
         "flake8",
@@ -210,24 +218,33 @@
         "E221",
         "W504"
     ],
+
+    "Lua.addonManager.enable": true,
+    "Lua.codeLens.enable": true,
+    "Lua.completion.enable": true,
+    "Lua.completion.keywordSnippet": "Both",
+    "Lua.completion.displayContext": 10,
+    "Lua.format.enable": true,
     "Lua.workspace.library": [
         "/usr/share/nvim/runtime/lua",
         "/usr/share/nvim/runtime/lua/vim",
-        "/usr/share/nvim/runtime/lua/vim/lsp"
+        "/usr/share/nvim/runtime/lua/vim/lsp",
+        "~/.vim/plugged/**/lua"
+    ],
+    "Lua.workspace.ignoreDir": [
+        ".vscode",
+        "plugged",
+        ".git"
     ],
     "Lua.diagnostics.globals": [
         "vim"
     ],
-    "Lua.codeLens.enable": true,
-    "Lua.diagnostics.workspaceRate": 25,
+    "Lua.diagnostics.workspaceRate": 100,
     "Lua.doc.privateName": [
         "m_*"
     ],
     "Lua.hint.enable": true,
-    "Lua.workspace.ignoreDir": [
-        ".vscode",
-        ".git"
-    ],
+
     "rust-analyzer.enable": true,
     "html.format.enable": true,
     "javascript.format.enable": true,
@@ -249,6 +266,7 @@
     "tabnine.shortcut": "TN",
     "tabnine.binary_path": "",
     "tabnine.enablePreselect": true,
+    
     "git.gitlab.hosts": [
         "gitlab.com"
     ],
@@ -267,10 +285,10 @@
     "git.removedSign.hlGroup": "DiffDelete",
     "git.topRemovedSign.hlGroup": "DiffDelete",
     "git.changeRemovedSign.hlGroup": "DiffChange",
-    "git.stagedDecorator": "●",
-    "git.changedDecorator": "*",
-    "git.untrackedDecorator": "…",
-    "git.conflictedDecorator": "x",
+    "git.stagedDecorator": " ",
+    "git.changedDecorator": " ",
+    "git.untrackedDecorator": " ",
+    "git.conflictedDecorator": " ",
     "git.addGBlameToVirtualText": false,
     "git.branchCharacter": "",
     "git.conflict.enabled": true,
