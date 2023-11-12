@@ -147,7 +147,9 @@ else
         " Lua function library for UI elements
         Plug 'MunifTanjim/nui.nvim'
         " optional, allows image previews
-        Plug '3rd/image.nvim' | let g:user_loaded_3rd_image = 1
+        if !exists('g:neovide')
+            Plug '3rd/image.nvim' | let g:user_loaded_3rd_image = 1
+        endif
     endif
 
     " Provides network file editing capability
@@ -544,15 +546,15 @@ augroup END
 
 " =============================================================================
 
-if !exists('g:user_loaded_nvim_hex') && filereadable(expand('~/.vim/hexeditor.vim'))
-    source ~/.vim/hexeditor.vim
+if !exists('g:user_loaded_nvim_hex') && filereadable(expand('~/.vim/config/hexeditor.vim'))
+    source ~/.vim/config/hexeditor.vim
 elseif exists('g:user_loaded_nvim_hex')
     lua require('hex').setup()
 endif
 
 if (exists("g:neovide"))
-    if filereadable(expand("~/.vim/neovide.vim"))
-        source ~/.vim/neovide.vim
+    if filereadable(expand("~/.vim/config/neovide.vim"))
+        source ~/.vim/config/neovide.vim
     endif
 endif
 
@@ -560,97 +562,97 @@ endif
 " Plugin configurations
 
 if exists('g:user_loaded_nerdtree')
-    source ~/.vim/nerdtree.vim
+    source ~/.vim/config/nerdtree.vim
 endif
 
 if exists('g:user_loaded_3rd_image')
-    source ~/.vim/image.lua
+    source ~/.vim/config/image.lua
 endif
 
 if exists('g:user_loaded_neotree')
-    source ~/.vim/neotree.lua
+    source ~/.vim/config/neotree.lua
 endif
 
 if exists('g:user_loaded_netman')
-    source ~/.vim/netman.lua
+    source ~/.vim/config/netman.lua
 endif
 
 if exists('g:user_loaded_fswitch')
-    source ~/.vim/fswitch.vim
+    source ~/.vim/config/fswitch.vim
 endif
 
 if exists('g:user_loaded_coc')
-    source ~/.vim/coc.vim
-    source ~/.vim/coc-snippets.vim
+    source ~/.vim/config/coc.vim
+    source ~/.vim/config/coc-snippets.vim
 endif
 
 if exists('g:user_loaded_bufferline')
     set mousemoveevent
-    source ~/.vim/bufferline.lua
+    source ~/.vim/config/bufferline.lua
 endif
 
 if exists('g:user_loaded_treesitter')
-    source ~/.vim/treesitter.lua
+    source ~/.vim/config/treesitter.lua
 endif
 
 if exists('g:user_loaded_treesitter_context')
-    source ~/.vim/treesitter-context.lua
+    source ~/.vim/config/treesitter-context.lua
 endif
 
 if exists('g:user_loaded_rainbow')
-    source ~/.vim/rainbow.vim
+    source ~/.vim/config/rainbow.vim
 endif
 
 if exists('g:user_loaded_rainbowdelim')
-    source ~/.vim/rainbowdelim.lua
+    source ~/.vim/config/rainbowdelim.lua
 endif
 
 if exists('g:user_loaded_vimairline')
-   source ~/.vim/vimairline.vim
+   source ~/.vim/config/vimairline.vim
 endif
 
 if exists('g:user_loaded_flog')
-    source ~/.vim/flog.vim
+    source ~/.vim/config/flog.vim
 endif
 
 if exists('g:user_loaded_unite')
-    source ~/.vim/unite.vim
+    source ~/.vim/config/unite.vim
 endif
 
 if exists('g:user_loaded_undotree')
-    source ~/.vim/undotree.vim
+    source ~/.vim/config/undotree.vim
 endif
 
 if exists('g:user_loaded_tagbar')
-    source ~/.vim/tagbar.vim
+    source ~/.vim/config/tagbar.vim
 endif
 
 if exists('g:user_loaded_changesplugin')
-    source ~/.vim/changesplugin.vim
+    source ~/.vim/config/changesplugin.vim
 endif
 
 if exists('g:user_loaded_delimitmate')
-    source ~/.vim/delimitMate.vim
+    source ~/.vim/config/delimitMate.vim
 endif
 
 if exists('g:user_loaded_context')
-    source ~/.vim/context.vim
+    source ~/.vim/config/context.vim
 endif
 
 if exists('g:user_loaded_matchup')
-    source ~/.vim/matchup.vim
+    source ~/.vim/config/matchup.vim
 endif
 
 if exists('g:user_loaded_keep')
-    source ~/.vim/keep.vim
+    source ~/.vim/config/keep.vim
 endif
 
 if exists ('g:user_loaded_nvim_dap')
-    source ~/.vim/nvim_dap.vim
+    source ~/.vim/config/nvim_dap.vim
 endif
 
 if exists ('g:user_loaded_nvim_dap_virtual_text')
-    source ~/.vim/nvim_dap_virtual_text.lua
+    source ~/.vim/config/nvim_dap_virtual_text.lua
 endif
 
 if exists ('g:user_loaded_nvim_dap_python')
@@ -658,13 +660,13 @@ if exists ('g:user_loaded_nvim_dap_python')
 endif
 
 if exists('g:user_loaded_nvim_dap_ui')
-    source ~/.vim/nvim_dap_ui.lua
+    source ~/.vim/config/nvim_dap_ui.lua
 endif
 
 if exists('g:user_loaded_persistent_breakpoints')
-    source ~/.vim/nvim_dap_persistent_breakpoints.lua
+    source ~/.vim/config/nvim_dap_persistent_breakpoints.lua
 endif
 
 if exists ('g:user_loaded_winshift')
-    source ~/.vim/winshift.lua
+    source ~/.vim/config/winshift.lua
 endif
