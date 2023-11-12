@@ -137,8 +137,19 @@ else
     Plug 'nvim-tree/nvim-web-devicons' | let g:user_loaded_devicons = 1
     " Plug 'ryanoasis/vim-devicons' Icons without colours
 
-    " Replaces NTree and NerdTree
-    Plug 'nvim-tree/nvim-tree.lua' | let g:user_loaded_nvimtree = 1
+    " Replaces NTree, NerdTree and Nvim-tree
+    Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' } | let g:user_loaded_neotree = 1
+
+    if exists('g:user_loaded_neotree')
+        " Dependencies for neotree
+        Plug 'nvim-lua/plenary.nvim'
+        Plug 'MunifTanjim/nui.nvim'
+        " optional, allows image previews
+        Plug '3rd/image.nvim' | let g:user_loaded_3rd_image = 1
+    endif
+
+    " Provides network file editing capability
+    Plug 'miversen33/netman.nvim' | let g:user_loaded_netman = 1
 
     " Buffers as tabs
     Plug 'akinsho/bufferline.nvim', { 'tag': '*' } | let g:user_loaded_bufferline = 1
@@ -545,8 +556,16 @@ if exists('g:user_loaded_nerdtree')
     source ~/.vim/nerdtree.vim
 endif
 
-if exists('g:user_loaded_nvimtree')
-    source ~/.vim/nvimtree.vim
+if exists('g:user_loaded_3rd_image')
+    source ~/.vim/image.lua
+endif
+
+if exists('g:user_loaded_neotree')
+    source ~/.vim/neotree.lua
+endif
+
+if exists('g:user_loaded_netman')
+    source ~/.vim/netman.lua
 endif
 
 if exists('g:user_loaded_fswitch')
