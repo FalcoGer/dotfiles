@@ -43,6 +43,7 @@ local open_files_do_not_replace_types = {
     "fugitive",
     "floggraph",
     "git",
+    "list",
 }
 
 
@@ -65,9 +66,9 @@ local window_mapping_mappings = {
     ["<esc>"] = "cancel", -- close preview or floating neo-tree window
     ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
     ["l"] = "focus_preview",
-    ["S"] = "open_split",
+    ["s"] = "open_split",
     -- ["S"] = "split_with_window_picker",
-    ["s"] = "open_vsplit",
+    ["v"] = "open_vsplit",
     -- ["s"] = "vsplit_with_window_picker",
     ["t"] = "open_tabnew",
     -- ["<cr>"] = "open_drop",
@@ -109,7 +110,7 @@ local filesystem_window = {
         ["#"] = "fuzzy_sorter", -- fuzzy sorting using the fzy algorithm
         ["D"] = "fuzzy_sorter_directory",
         ["f"] = "filter_on_submit",
-        ["<C-x>"] = "clear_filter",
+        ["F"] = "clear_filter",
         ["<bs>"] = "navigate_up",
         ["."] = "set_root",
         ["<C-CR>"] = "set_root",
@@ -618,7 +619,7 @@ local config = {
         position = "left", -- left, right, top, bottom, float, current
         width = 70, -- applies to left and right positions
         height = 15, -- applies to top and bottom positions
-        auto_expand_width = false, -- expand the window when file exceeds the window width. does not work with position = "float"
+        auto_expand_width = true, -- expand the window when file exceeds the window width. does not work with position = "float"
         popup = { -- settings that apply to float position only
             size = {
                 height = "80%",
@@ -690,7 +691,7 @@ local config = {
         -- search with space as an implicit ".*", so
         -- `fi init`
         -- will match: `./sources/filesystem/init.lua
-        --find_command = "fd", -- this is determined automatically, you probably don't need to set it
+        find_command = "find", -- this is determined automatically, you probably don't need to set it
         --find_args = {  -- you can specify extra args to pass to the find command.
         --  fd = {
         --  "--exclude", ".git",
@@ -698,30 +699,120 @@ local config = {
         --  }
         --},
         ---- or use a function instead of list of strings
-        --find_args = function(cmd, path, search_term, args)
-        --  if cmd ~= "fd" then
-        --    return args
-        --  end
-        --  --maybe you want to force the filter to always include hidden files:
-        --  table.insert(args, "--hidden")
-        --  -- but no one ever wants to see .git files
-        --  table.insert(args, "--exclude")
-        --  table.insert(args, ".git")
-        --  -- or node_modules
-        --  table.insert(args, "--exclude")
-        --  table.insert(args, "node_modules")
-        --  --here is where it pays to use the function, you can exclude more for
-        --  --short search terms, or vary based on the directory
-        --  if string.len(search_term) < 4 and path == "/home/cseickel" then
-        --    table.insert(args, "--exclude")
-        --    table.insert(args, "Library")
-        --  end
-        --  return args
-        --end,
+        find_args = function(cmd, path, search_term, args)
+            local file = io.open("/home/paul/Desktop/lualog.txt", "w")
+            io.output(file)
+            io.write("find function\n")
+            if cmd == "fd" then
+                --maybe you want to force the filter to always include hidden files:
+                table.insert(args, "--hidden")
+                -- but no one ever wants to see .git files
+                table.insert(args, "--exclude")
+                table.insert(args, ".git")
+                -- or node_modules
+                table.insert(args, "--exclude")
+                table.insert(args, "node_modules")
+            elseif cmd == "find" then
+                -- io.write("calling find for \"" .. tostring(search_term) .. "\" in " .. tostring(path) .. "\n")
+                -- io.write("Default arguments: ")
+
+                -- for k,v in pairs(args) do
+                --     if k ~= 1 then
+                --         io.write(" ")
+                --     end
+                --     io.write(tostring(v))
+                -- end
+                -- -- io.write("\n")
+                -- io.flush()
+
+                -- remove default arguments, they're in the wrong positions
+                local defaultArgs = args
+                args = {}
+
+                -- enable the query optimizer
+                table.insert(args, "-O3")
+
+                -- where to search
+                table.insert(args, tostring(path))
+
+                -- can't remove stars because if search term contains stars
+                -- it doesn't append stars automatically to be removed
+                -- -- remove leading star from search_term
+                -- search_term = string.gsub(search_term, "^*", "")
+                -- -- remove trailing star from search term
+                -- search_term = string.gsub(search_term, "*$", "")
+
+                -- only search current directory for short search terms
+                -- two stars are appended
+                if search_term ~= nil and (string.len(search_term) - 2) < 3 then
+                    table.insert(args, "-maxdepth")
+                    table.insert(args, "0")
+                end
+
+                -- prune unwanted directories
+                table.insert(args, "-type")
+                table.insert(args, "d")
+
+                table.insert(args, "(")
+
+                -- ignore dotdirectories
+                table.insert(args, "-name")
+                table.insert(args, ".*")
+
+                table.insert(args, "-o")
+                table.insert(args, "-name")
+                table.insert(args, ".git")
+
+                table.insert(args, "-o")
+                table.insert(args, "-name")
+                table.insert(args, ".svn")
+
+                table.insert(args, "-o")
+                table.insert(args, "-name")
+                table.insert(args, "node_modules")
+
+                table.insert(args, "-o")
+                table.insert(args, "-name")
+                table.insert(args, "__pycache__")
+
+                table.insert(args, ")")
+                table.insert(args, "-prune")
+
+                table.insert(args, "-o")
+
+                if search_term == nil then
+                    -- fuzzy search
+                    -- args:
+                    -- /home/paul/ -type f -not -path */.* -regextype sed -regex .*..*b.*a.*s.*h.*r.*c.*
+                    table.insert(args, "-type")
+                    table.insert(args, "f")
+                    table.insert(args, "-regextype")
+                    table.insert(args, "sed")
+                    table.insert(args, "-regex")
+                    table.insert(args, tostring(defaultArgs[#defaultArgs]))
+                else
+                    -- search case insensitive
+                    table.insert(args, "-iname")
+                    table.insert(args, search_term)
+                end
+                table.insert(args, "-print")
+
+            end
+            -- for k, v in pairs(args) do
+            --     if k ~= 1 then
+            --         io.write(" ")
+            --     end
+            --     io.write(tostring(v))
+            -- end
+            -- io.write("\n")
+            -- io.close(file)
+            -- io.output(io.stdout)
+            return args
+        end,
         group_empty_dirs = false, -- when true, empty folders will be grouped together
         search_limit = 50, -- max number of search results when using filters
         follow_current_file = {
-            enabled = false, -- This will find and focus the file in the active buffer every time
+            enabled = true, -- This will find and focus the file in the active buffer every time
             --               -- the current file is changed while the tree is open.
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
         },
