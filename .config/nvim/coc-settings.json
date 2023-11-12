@@ -277,5 +277,6 @@
     "git.conflict.current.hlGroup": "DiffChange",
     "git.conflict.incoming.hlGroup": "DiffAdd",
     "git.blameUseRealTime": true,
-    "git.addGBlameToBufferVar": true
+    "git.addGBlameToBufferVar": true,
+    "perl.p::ls.enable": true
 }
