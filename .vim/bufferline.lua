@@ -66,7 +66,7 @@ bufferline.setup(
                     elseif e:match("info") then
                         infostr = ' ' .. n
                     elseif e:match("hint") then
-                        hintstr = '󰠗 ' .. n
+                        hintstr = '󰌵 ' .. n
                     else
                         mysterystr = ' ' .. level .. ' ' .. n
                     end
