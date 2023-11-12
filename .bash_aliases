@@ -212,5 +212,5 @@ alias g++="g++ $GPP_STD $GPP_OPT $GPP_WARN $GPP_ERR"
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-alias viless='/usr/local/share/vim/vim82/macros/less.sh'
+alias viless='/usr/share/nvim/runtime/macros/less.sh'
 
