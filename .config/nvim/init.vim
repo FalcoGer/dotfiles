@@ -142,7 +142,9 @@ else
 
     if exists('g:user_loaded_neotree')
         " Dependencies for neotree
+        " general purpose lua function library
         Plug 'nvim-lua/plenary.nvim'
+        " Lua function library for UI elements
         Plug 'MunifTanjim/nui.nvim'
         " optional, allows image previews
         Plug '3rd/image.nvim' | let g:user_loaded_3rd_image = 1
@@ -190,6 +192,9 @@ else
         " Provides persistent storage for breakpoints
         Plug 'Weissle/persistent-breakpoints.nvim' | let g:user_loaded_persistent_breakpoints = 1
     endif
+
+    " Allows for easy hex editing
+    Plug 'RaafatTurki/hex.nvim' | let g:user_loaded_nvim_hex = 1
 
     " allows to move windows around easily, provides WinShift command
     Plug 'sindrets/winshift.nvim' | let g:user_loaded_winshift = 1
@@ -324,7 +329,7 @@ highlight FloatTitle    ctermbg=234 guibg=#1C1C1C ctermfg=11 guifg=#FFFF00 cterm
 
 " Enable spell checking
 set spell
-highlight SpellBad      ctermbg=5 cterm=NONE gui=undercurl guisp=#800080
+highlight SpellBad      ctermbg=198 cterm=NONE gui=undercurl guisp=#ff0087
 " Wrong capitalization
 " highlight link SpellCap SpellBad
 " Rarely used
@@ -539,8 +544,10 @@ augroup END
 
 " =============================================================================
 
-if filereadable(expand('~/.vim/hexeditor.vim'))
+if !exists('g:user_loaded_nvim_hex') && filereadable(expand('~/.vim/hexeditor.vim'))
     source ~/.vim/hexeditor.vim
+elseif exists('g:user_loaded_nvim_hex')
+    lua require('hex').setup()
 endif
 
 if (exists("g:neovide"))
