@@ -150,9 +150,12 @@ else
         if !exists('g:neovide')
             Plug '3rd/image.nvim' | let g:user_loaded_3rd_image = 1
         endif
+        " provides diagnostics source
+        Plug 'mrbjarksen/neo-tree-diagnostics.nvim' | let g:user_loaded_neotree_diagnostics = 1
     endif
 
-    " Provides network file editing capability
+    " Provides network file editing capability, standalone, but also works
+    " with neo-tree
     Plug 'miversen33/netman.nvim' | let g:user_loaded_netman = 1
 
     " Buffers as tabs
@@ -555,6 +558,12 @@ endif
 if (exists("g:neovide"))
     if filereadable(expand("~/.vim/config/neovide.vim"))
         source ~/.vim/config/neovide.vim
+    endif
+endif
+
+if has('nvim')
+    if filereadable(expand("~/.vim/config/Table2String.lua"))
+        source ~/.vim/config/Table2String.lua
     endif
 endif
 
