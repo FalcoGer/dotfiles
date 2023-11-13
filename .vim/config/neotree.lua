@@ -3,12 +3,7 @@
 
 local nt = require('neo-tree')
 
-vim.api.nvim_exec(
-    [[
-    cnoreabbrev nt Neotree
-    ]],
-    true
-)
+vim.cmd("cnoreabbrev nt Neotree")
 
 -- ==================================================================
 -- highlights
@@ -44,6 +39,7 @@ local open_files_do_not_replace_types = {
     "floggraph",
     "git",
     "list",
+    "unite",
 }
 
 
@@ -75,10 +71,10 @@ local window_mapping_mappings = {
     -- ["t"] = "open_tab_drop",
     ["w"] = "open_with_window_picker",
     ["C"] = "close_node",
-    ["z"] = "close_all_nodes",
+    ["z"] = "close_all_subnodes",
     --["Z"] = "expand_all_nodes",
     ["R"] = "refresh",
-    ["<F5>"] = "refresh",
+    -- ["<F5>"] = "refresh", -- conflicts debugging
     ["a"] = {
         "add",
         -- some commands may take optional config options, see `:h neo-tree-mappings` for details
@@ -170,7 +166,7 @@ local documents_symbols_window_mappings = {
     ["<cr>"] = "jump_to_symbol",
     ["o"] = "jump_to_symbol",
     ["A"] = "noop", -- also accepts the config.show_path and config.insert_as options.
-    ["d"] = "noop",
+    ["<del>"] = "noop",
     ["y"] = "noop",
     ["x"] = "noop",
     ["p"] = "noop",
@@ -183,12 +179,12 @@ local documents_symbols_window_mappings = {
 
 -- ==================================================================
 -- sources for neo-tree
+local showDocumentSymbolsSource = false
+
 local sources = {
     "filesystem",
     "buffers",
     "git_status",
-    -- "document_symbols",
-    "netman.ui.neo-tree",
 }
 
 local sources_display = {
@@ -204,10 +200,65 @@ local sources_display = {
         source = "git_status",
         display_name = " 󰊢 Git ",
     },
+}
+
+
+if showDocumentSymbolsSource then
+    table.insert(sources, "document_symbols")
+    table.insert(sources_display,{
+        source = "document_symbols",
+        display_name = "  Symbols "
+    })
+end
+
+if vim.g['user_loaded_neotree_diagnostics'] ~= nil then
+    table.insert(sources, "diagnostics")
+    table.insert(sources_display,
+    {
+        source = "diagnostics",
+        display_name = "  Diagnostics "
+    })
+end
+
+if vim.g['user_loaded_netman'] then
+    table.insert(sources, "netman.ui.neo-tree")
+    table.insert(sources_display,
     {
         source = "remote",
         display_name = " 󰲁 NetMan "
-    }
+    })
+end
+
+
+-- ==================================================================
+-- Diagnostics plugin
+local diagnostics = {
+    auto_preview = { -- May also be set to `true` or `false`
+        enabled = true, -- Whether to automatically enable preview mode
+        preview_config = { use_float = true }, -- Config table to pass to auto preview (for example `{ use_float = true }`)
+        event = "neo_tree_buffer_enter", -- The event to enable auto preview upon (for example `"neo_tree_window_after_open"`)
+    },
+    bind_to_cwd = true,
+    diag_sort_function = "severity", -- "severity" means diagnostic items are sorted by severity in addition to their positions.
+    -- "position" means diagnostic items are sorted strictly by their positions.
+    -- May also be a function.
+    follow_current_file = { -- May also be set to `true` or `false`
+        enabled = true, -- This will find and focus the file in the active buffer every time
+        always_focus_file = false, -- Focus the followed file, even when focus is currently on a diagnostic item belonging to that file
+        expand_followed = true, -- Ensure the node of the followed file is expanded
+        leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+        leave_files_open = false, -- `false` closes auto expanded files, such as with `:Neotree reveal`
+    },
+    group_dirs_and_files = true, -- when true, empty folders and files will be grouped together
+    group_empty_dirs = true, -- when true, empty directories will be grouped together
+    show_unloaded = true, -- show diagnostics from unloaded buffers
+    refresh = {
+        delay = 300, -- Time (in ms) to wait before updating diagnostics. Might resolve some issues with Neovim hanging.
+        event = "vim_diagnostic_changed", -- Event to use for updating diagnostics (for example `"neo_tree_buffer_enter"`)
+        -- Set to `false` or `"none"` to disable automatic refreshing
+        max_items = 1000, -- The maximum number of diagnostic items to attempt processing
+        -- Set to `false` for no maximum
+    },
 }
 
 -- ==================================================================
@@ -229,7 +280,7 @@ vim.fn.sign_define(
     { text = "󰌵 ", texthl = "DiagnosticSignHint" }
 )
 
-local diagnostics = {
+local diagnostics_signs = {
     symbols = {
         error = "󰡅 ",
         warn = " ",
@@ -261,6 +312,121 @@ local git_status = {
     },
     align = "right",
 }
+
+-- ==================================================================
+-- custom find
+
+local find_command = "find"
+local find_args = function(cmd, path, search_term, args)
+    -- local file = io.open("/home/paul/Desktop/lualog.txt", "w")
+    -- io.output(file)
+    -- io.write("find function\n")
+    if cmd == "fd" then
+        --maybe you want to force the filter to always include hidden files:
+        table.insert(args, "--hidden")
+        -- but no one ever wants to see .git files
+        table.insert(args, "--exclude")
+        table.insert(args, ".git")
+        -- or node_modules
+        table.insert(args, "--exclude")
+        table.insert(args, "node_modules")
+    elseif cmd == "find" then
+        -- io.write("calling find for \"" .. tostring(search_term) .. "\" in " .. tostring(path) .. "\n")
+        -- io.write("Default arguments: ")
+
+        -- for k,v in pairs(args) do
+        --     if k ~= 1 then
+        --         io.write(" ")
+        --     end
+        --     io.write(tostring(v))
+        -- end
+        -- -- io.write("\n")
+        -- io.flush()
+
+        -- remove default arguments, they're in the wrong positions
+        local defaultArgs = args
+        args = {}
+
+        -- enable the query optimizer
+        table.insert(args, "-O3")
+
+        -- where to search
+        table.insert(args, tostring(path))
+
+        -- can't remove stars because if search term contains stars
+        -- it doesn't append stars automatically to be removed
+        -- -- remove leading star from search_term
+        -- search_term = string.gsub(search_term, "^*", "")
+        -- -- remove trailing star from search term
+        -- search_term = string.gsub(search_term, "*$", "")
+
+        -- only search current directory for short search terms
+        -- two stars are appended
+        if search_term ~= nil and (string.len(search_term) - 2) < 3 then
+            table.insert(args, "-maxdepth")
+            table.insert(args, "0")
+        end
+
+        -- prune unwanted directories
+        table.insert(args, "-type")
+        table.insert(args, "d")
+
+        table.insert(args, "(")
+
+        -- ignore dotdirectories
+        table.insert(args, "-name")
+        table.insert(args, ".*")
+
+        table.insert(args, "-o")
+        table.insert(args, "-name")
+        table.insert(args, ".git")
+
+        table.insert(args, "-o")
+        table.insert(args, "-name")
+        table.insert(args, ".svn")
+
+        table.insert(args, "-o")
+        table.insert(args, "-name")
+        table.insert(args, "node_modules")
+
+        table.insert(args, "-o")
+        table.insert(args, "-name")
+        table.insert(args, "__pycache__")
+
+        table.insert(args, ")")
+        table.insert(args, "-prune")
+
+        table.insert(args, "-o")
+
+        if search_term == nil then
+            -- fuzzy search
+            -- args:
+            -- /home/paul/ -type f -not -path */.* -regextype sed -regex .*..*b.*a.*s.*h.*r.*c.*
+            table.insert(args, "-type")
+            table.insert(args, "f")
+            table.insert(args, "-regextype")
+            table.insert(args, "sed")
+            table.insert(args, "-regex")
+            table.insert(args, tostring(defaultArgs[#defaultArgs]))
+        else
+            -- search case insensitive
+            table.insert(args, "-iname")
+            table.insert(args, search_term)
+        end
+        table.insert(args, "-print")
+
+    end
+    -- for k, v in pairs(args) do
+    --     if k ~= 1 then
+    --         io.write(" ")
+    --     end
+    --     io.write(tostring(v))
+    -- end
+    -- io.write("\n")
+    -- io.close(file)
+    -- io.output(io.stdout)
+    return args
+end
 
 
 -- ==================================================================
@@ -475,7 +641,7 @@ local config = {
             width = "100%",
             right_padding = 0,
         },
-        diagnostics = diagnostics,
+        diagnostics = diagnostics_signs,
         indent = {
             indent_size = 2,
             padding = 1,
@@ -616,16 +782,16 @@ local config = {
 
     window = { -- see https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/popup for
         -- possible options. These can also be functions that return these options.
-        position = "left", -- left, right, top, bottom, float, current
+        position = "float", -- left, right, top, bottom, float, current
         width = 70, -- applies to left and right positions
         height = 15, -- applies to top and bottom positions
-        auto_expand_width = true, -- expand the window when file exceeds the window width. does not work with position = "float"
+        auto_expand_width = false, -- expand the window when file exceeds the window width. does not work with position = "float"
         popup = { -- settings that apply to float position only
             size = {
                 height = "80%",
-                width = "50%",
+                width = "65%",
             },
-            position = "50%", -- 50% means center it
+            position = "15%", -- 50% means center it
             -- you can also specify border here, if you want a different setting from
             -- the global popup_border_style.
         },
@@ -647,7 +813,8 @@ local config = {
         -- "deep": Scan into directories to detect empty or grouped empty directories a priori.
         bind_to_cwd = true, -- true creates a 2-way binding between vim's cwd and neo-tree's root
         cwd_target = {
-            sidebar = "tab",   -- sidebar is when position = left or right
+            -- sidebar = "tab",   -- sidebar is when position = left or right
+            sidebar = "left",
             current = "window" -- current is when position = current
         },
         check_gitignore_in_search = true, -- check gitignore status for files/directories when searching
@@ -691,7 +858,7 @@ local config = {
         -- search with space as an implicit ".*", so
         -- `fi init`
         -- will match: `./sources/filesystem/init.lua
-        find_command = "find", -- this is determined automatically, you probably don't need to set it
+        find_command = find_command, -- this is determined automatically, you probably don't need to set it
         --find_args = {  -- you can specify extra args to pass to the find command.
         --  fd = {
         --  "--exclude", ".git",
@@ -699,116 +866,7 @@ local config = {
         --  }
         --},
         ---- or use a function instead of list of strings
-        find_args = function(cmd, path, search_term, args)
-            local file = io.open("/home/paul/Desktop/lualog.txt", "w")
-            io.output(file)
-            io.write("find function\n")
-            if cmd == "fd" then
-                --maybe you want to force the filter to always include hidden files:
-                table.insert(args, "--hidden")
-                -- but no one ever wants to see .git files
-                table.insert(args, "--exclude")
-                table.insert(args, ".git")
-                -- or node_modules
-                table.insert(args, "--exclude")
-                table.insert(args, "node_modules")
-            elseif cmd == "find" then
-                -- io.write("calling find for \"" .. tostring(search_term) .. "\" in " .. tostring(path) .. "\n")
-                -- io.write("Default arguments: ")
-
-                -- for k,v in pairs(args) do
-                --     if k ~= 1 then
-                --         io.write(" ")
-                --     end
-                --     io.write(tostring(v))
-                -- end
-                -- -- io.write("\n")
-                -- io.flush()
-
-                -- remove default arguments, they're in the wrong positions
-                local defaultArgs = args
-                args = {}
-
-                -- enable the query optimizer
-                table.insert(args, "-O3")
-
-                -- where to search
-                table.insert(args, tostring(path))
-
-                -- can't remove stars because if search term contains stars
-                -- it doesn't append stars automatically to be removed
-                -- -- remove leading star from search_term
-                -- search_term = string.gsub(search_term, "^*", "")
-                -- -- remove trailing star from search term
-                -- search_term = string.gsub(search_term, "*$", "")
-
-                -- only search current directory for short search terms
-                -- two stars are appended
-                if search_term ~= nil and (string.len(search_term) - 2) < 3 then
-                    table.insert(args, "-maxdepth")
-                    table.insert(args, "0")
-                end
-
-                -- prune unwanted directories
-                table.insert(args, "-type")
-                table.insert(args, "d")
-
-                table.insert(args, "(")
-
-                -- ignore dotdirectories
-                table.insert(args, "-name")
-                table.insert(args, ".*")
-
-                table.insert(args, "-o")
-                table.insert(args, "-name")
-                table.insert(args, ".git")
-
-                table.insert(args, "-o")
-                table.insert(args, "-name")
-                table.insert(args, ".svn")
-
-                table.insert(args, "-o")
-                table.insert(args, "-name")
-                table.insert(args, "node_modules")
-
-                table.insert(args, "-o")
-                table.insert(args, "-name")
-                table.insert(args, "__pycache__")
-
-                table.insert(args, ")")
-                table.insert(args, "-prune")
-
-                table.insert(args, "-o")
-
-                if search_term == nil then
-                    -- fuzzy search
-                    -- args:
-                    -- /home/paul/ -type f -not -path */.* -regextype sed -regex .*..*b.*a.*s.*h.*r.*c.*
-                    table.insert(args, "-type")
-                    table.insert(args, "f")
-                    table.insert(args, "-regextype")
-                    table.insert(args, "sed")
-                    table.insert(args, "-regex")
-                    table.insert(args, tostring(defaultArgs[#defaultArgs]))
-                else
-                    -- search case insensitive
-                    table.insert(args, "-iname")
-                    table.insert(args, search_term)
-                end
-                table.insert(args, "-print")
-
-            end
-            -- for k, v in pairs(args) do
-            --     if k ~= 1 then
-            --         io.write(" ")
-            --     end
-            --     io.write(tostring(v))
-            -- end
-            -- io.write("\n")
-            -- io.close(file)
-            -- io.output(io.stdout)
-            return args
-        end,
+        find_args = find_args,
         group_empty_dirs = false, -- when true, empty folders will be grouped together
         search_limit = 50, -- max number of search results when using filters
         follow_current_file = {
@@ -845,7 +903,7 @@ local config = {
         },
     },
     document_symbols = {
-        follow_cursor = false,
+        follow_cursor = true,
         client_filters = "first",
         renderers = {
             root = {
@@ -911,6 +969,7 @@ local config = {
             -- Macro = { icon = ' ', hl = 'Macro' },
         }
     },
+    diagnostics = diagnostics,
     example = {
         renderers = {
             custom = {
@@ -931,6 +990,10 @@ local config = {
 }
 
 -- ==================================================================
+-- optional modules
+
+-- ==================================================================
 -- Setup
+
 
 nt.setup(config)
