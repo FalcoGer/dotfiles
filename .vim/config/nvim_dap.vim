@@ -27,24 +27,24 @@ command! -nargs=0 DapListBreakpoints        :lua require('dap').list_breakpoints
 command! -nargs=0 DapClearBreakpoints       :lua require('dap').clear_breakpoints()
 
 " Highlights for sign config
-
-highlight BreakPointText ctermfg=9 cterm=bold guifg=#FF0000 gui=bold
+" highlight bg for text and number from .vimrc, SignColumn background
+highlight BreakPointText ctermfg=9 ctermbg=234 cterm=bold guifg=#FF0000 guibg=#1C1C1C gui=bold
 highlight BreakPointNum  ctermbg=9 cterm=bold guibg=#FF0000 gui=bold
 highlight BreakPointLine ctermbg=52 guisp=#5F0000 gui=underdashed
 
-highlight BreakPointCondText ctermfg=5 cterm=bold guifg=#800080 gui=bold
+highlight BreakPointCondText ctermfg=5 ctermbg=234 cterm=bold guifg=#800080 guibg=#1C1C1C gui=bold
 highlight BreakPointCondNum  ctermbg=5 cterm=bold guibg=#800080 gui=bold
 highlight BreakPointCondLine ctermbg=91 guisp=#8700AF gui=underdashed
 
-highlight DapLogPointText ctermfg=12 cterm=bold guifg=#0000FF gui=bold
+highlight DapLogPointText ctermfg=12 ctermbg=234 cterm=bold guifg=#0000FF guibg=#1C1C1C gui=bold
 highlight DapLogPointNum  ctermbg=12 cterm=bold guibg=#0000FF
 highlight DapLogPointLine ctermbg=17 guisp=#0000FF gui=underdashed
 
-highlight DapStoppedText ctermfg=9 ctermbg=3 cterm=bold guifg=#FF0000 guibg=#808000 gui=bold
+highlight DapStoppedText ctermfg=9 ctermbg=24 cterm=bold guifg=#FF0000 guibg=#005F78 gui=bold
 highlight link DapStoppedNum DapStoppedText
-highlight DapStoppedLine ctermbg=23 cterm=underline guisp=#875F00 gui=underline
+highlight DapStoppedLine ctermbg=24 cterm=underline guisp=#005F78 gui=underdouble
 
-highlight DapBreaPointRejectedText ctermbg=9 ctermfg=11 cterm=bold,undercurl guifg=#FFFF00 guisp=#FF0000 gui=bold,undercurl
+highlight DapBreaPointRejectedText ctermfg=11 ctermbg=9 cterm=bold,undercurl guifg=#FFFF00 guisp=#FF0000 gui=bold,undercurl
 
 lua <<EOF
     -- behavior
@@ -124,7 +124,7 @@ lua <<EOF
     -- GDB, requires gdb 14.0 or higher
 
     -- Workaround for https://github.com/mfussenegger/nvim-dap/issues/1088
-    -- requires posix (sudo luarocks-5.1 install lposix)
+    -- requires posix (sudo luarocks --lua-version=5.1 install luaposix)
     local posix = require('posix')
     posix.setenv("PWNDBG_DISABLE_COLORS", "1")
 
