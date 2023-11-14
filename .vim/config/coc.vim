@@ -185,22 +185,21 @@ nnoremap <silent><nowait> <space>g  :<C-u>CocList gchunks<cr>
 " Unused code, etc
 highlight CocFadeOut ctermfg=238 guifg=#444444
 
+" sign background from .vimrc SignColumn
 highlight CocErrorLine ctermbg=52 guibg=#5F0000
-highlight CocErrorSign ctermfg=9 guifg=#FF0000
+highlight CocErrorSign ctermfg=9 ctermbg=234 cterm=bold guifg=#FF0000 guibg=#1C1C1C gui=bold
 highlight CocErrorVirtualText ctermfg=9 ctermbg=235 guifg=#FF0000 guibg=#262626 gui=underdotted guisp=#444444
 
 highlight CocWarningLine ctermbg=58 guibg=#262600
-highlight CocWarningSign ctermfg=11 guifg=#FFFF00
+highlight CocWarningSign ctermfg=11 ctermbg=234 cterm=bold guifg=#FFFF00 guibg=#1C1C1C gui=bold
 highlight CocWarningVirtualText ctermfg=11 ctermbg=235 guifg=#FFFF00 guibg=#262626 gui=underdotted guisp=#444444
 
-" highlight CocInfoLine ctermbg=17 guibg=#00005F
 highlight CocInfoLine ctermbg=NONE guibg=#00005F
-highlight CocInfoSign ctermfg=12 guifg=#0000FF
+highlight CocInfoSign ctermfg=12 ctermbg=234 cterm=bold guifg=#0000FF guibg=#1C1C1C gui=bold
 highlight CocInfoVirtualText ctermfg=12 ctermbg=235 guifg=#0000FF guibg=#262626 gui=underdotted guisp=#444444
 
-" highlight CocHintLine ctermfg=23 guibg=#005F5F
 highlight CocHintLine ctermbg=NONE guibg=#002626
-highlight CocHintSign ctermfg=51 guifg=#00FFFF
+highlight CocHintSign ctermfg=51 ctermbg=234 cterm=bold guifg=#00FFFF guibg=#1C1C1C gui=bold
 highlight CocHintVirtualText ctermfg=6 ctermbg=235 guifg=#008080 guibg=#262626 gui=underdotted guisp=#444444
 
 " Highlighting same symbol as the one on cursor position
