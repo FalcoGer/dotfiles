@@ -1,6 +1,6 @@
 -- Turns a table into a string
 
-function TableToStr(val, indentWidth, level, tableKey)
+function Table2String(val, indentWidth, level, tableKey)
     if level == nil then level = 0 end
     if indentWidth == nill then indentWidth = 4 end
     -- get indent for current level
@@ -30,7 +30,7 @@ function TableToStr(val, indentWidth, level, tableKey)
         else
             keyRepr = tostring(k) .. " (" .. tostring(type(k)) .. ")"
         end
-        ret = ret .. (indent .. singleIndent .. keyRepr .. " = " .. Dump(v, indentWidth, level + 1, k))
+        ret = ret .. (indent .. singleIndent .. keyRepr .. " = " .. Table2String(v, indentWidth, level + 1, k))
     end
     ret = ret .. indent .. "}, -- " .. type(val) .. "  /" .. tostring(tableKey) .. "\n"
     return ret
