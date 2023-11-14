@@ -128,7 +128,7 @@ lua <<EOF
     local posix = require('posix')
     posix.setenv("PWNDBG_DISABLE_COLORS", "1")
 
-    -- local env = {"PWNDBG_DISABLE_COLORS=1"}
+    -- local env = {PWNDBG_DISABLE_COLORS = "1"}
     dap.adapters.gdb = {
         type = "executable",
         command = "/usr/local/bin/gdb",
