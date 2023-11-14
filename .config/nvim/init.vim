@@ -455,6 +455,7 @@ nnoremap <silent> zz  za
 highlight Folded ctermfg=14 ctermbg=236 gui=underdouble guisp=#008080 guifg=#00FFFF guibg=#303030
 
 highlight SignColumn ctermfg=51 ctermbg=234 guifg=#00FFFF guibg=#1C1C1C
+highlight LineNr ctermfg=11 ctermbg=234 guifg=#FFFF00 guibg=#1C1C1C
 " =============================================================================
 " Indentation
 
@@ -473,7 +474,8 @@ set sidescrolloff=10
 
 " highlight current line with a lighter background
 set cursorline
-highlight CursorLine ctermbg=234 guibg=#1C1C1C cterm=NONE gui=NONE
+highlight CursorLine ctermbg=236 guibg=#303030 cterm=NONE gui=NONE
+highlight CursorLineNr ctermfg=11 ctermbg=234 cterm=bold guifg=#FFFF00 guibg=#1C1C1C gui=bold
 
 " Wrap long lines
 set linebreak
