@@ -145,6 +145,12 @@ lua <<EOF
         cwd = "${workspaceFolder}",
         },
     }
+
+    if vim.g['user_loaded_nvim_dap_repl_highlight'] ~= nil then
+        -- Needs TS grammar for gdb first: https://github.com/nvim-treesitter/nvim-treesitter/issues/5675
+        -- dap.configurations.c[1]['repl_lang'] = 'gdb'
+    end
+
     dap.configurations.cpp = dap.configurations.c
     dap.configurations.rust = dap.configurations.c
 
