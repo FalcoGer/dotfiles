@@ -178,9 +178,6 @@ else
         " Closes tags such as HTML tags automatically
         Plug 'windwp/nvim-ts-autotag' | let g:user_loaded_ts_autotag = 1
         " Provides repl highlight for DAP, requires treesitter
-        if exists('g:user_loaded_nvim_dap')
-            Plug 'LiadOz/nvim-dap-repl-highlights' | let g:user_loaded_nvim_dap_repl_highlight = 1
-        endif
     endif
 
     " Rainbow brackets - works with treesitter
@@ -200,6 +197,10 @@ else
         Plug 'rcarriga/nvim-dap-ui' | let g:user_loaded_nvim_dap_ui = 1
         " Provides persistent storage for breakpoints
         Plug 'Weissle/persistent-breakpoints.nvim' | let g:user_loaded_persistent_breakpoints = 1
+    endif
+
+    if exists('g:user_loaded_nvim_dap') && exists('g:user_loaded_treesitter')
+        Plug 'LiadOz/nvim-dap-repl-highlights' | let g:user_loaded_nvim_dap_repl_highlight = 1
     endif
 
     " Allows for easy hex editing
