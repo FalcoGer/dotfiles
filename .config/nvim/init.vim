@@ -177,6 +177,10 @@ else
         Plug 'nvim-treesitter/nvim-treesitter-context' | let g:user_loaded_treesitter_context = 1
         " Closes tags such as HTML tags automatically
         Plug 'windwp/nvim-ts-autotag' | let g:user_loaded_ts_autotag = 1
+        " Provides repl highlight for DAP, requires treesitter
+        if exists('g:user_loaded_nvim_dap')
+            Plug 'LiadOz/nvim-dap-repl-highlights' | let g:user_loaded_nvim_dap_repl_highlight = 1
+        endif
     endif
 
     " Rainbow brackets - works with treesitter
@@ -598,6 +602,11 @@ endif
 if exists('g:user_loaded_bufferline')
     set mousemoveevent
     source ~/.vim/config/bufferline.lua
+endif
+
+if exists('g:user_loaded_nvim_dap_repl_highlight')
+    " must be before treesitter!
+    source ~/.vim/config/nvim_dap_repl_highlight.lua
 endif
 
 if exists('g:user_loaded_treesitter')
