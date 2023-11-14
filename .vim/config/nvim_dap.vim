@@ -28,23 +28,23 @@ command! -nargs=0 DapClearBreakpoints       :lua require('dap').clear_breakpoint
 
 " Highlights for sign config
 
-highlight BreakpointText ctermfg=9 cterm=bold guifg=#FF0000 gui=bold
-highlight link BreakpointNum BreakpointText
-highlight BreakPointLine ctermbg=52 guibg=#5f0000
+highlight BreakPointText ctermfg=9 cterm=bold guifg=#FF0000 gui=bold
+highlight BreakPointNum  ctermbg=9 cterm=bold guibg=#FF0000 gui=bold
+highlight BreakPointLine ctermbg=52 guisp=#5F0000 gui=underdashed
 
-highlight BreakpointCondText ctermfg=5 cterm=bold guifg=#800080 gui=bold
-highlight link BreakPointCondNum BreakpointCondText
-highlight BreakPointCondLine ctermbg=53 guibg=#5f005f
+highlight BreakPointCondText ctermfg=5 cterm=bold guifg=#800080 gui=bold
+highlight BreakPointCondNum  ctermbg=5 cterm=bold guibg=#800080 gui=bold
+highlight BreakPointCondLine ctermbg=91 guisp=#8700AF gui=underdashed
 
-highlight DapLogPointText ctermfg=12 cterm=bold guifg=#0000ff gui=bold
-highlight link DapLogPointNum DapLogPointText
-highlight DapLogPointLine ctermbg=17 guibg=#00005f
+highlight DapLogPointText ctermfg=12 cterm=bold guifg=#0000FF gui=bold
+highlight DapLogPointNum  ctermbg=12 cterm=bold guibg=#0000FF
+highlight DapLogPointLine ctermbg=17 guisp=#0000FF gui=underdashed
 
-highlight DapStoppedText ctermfg=9 ctermbg=3 cterm=bold guifg=#ff0000 guibg=#808000 gui=bold
+highlight DapStoppedText ctermfg=9 ctermbg=3 cterm=bold guifg=#FF0000 guibg=#808000 gui=bold
 highlight link DapStoppedNum DapStoppedText
-highlight DapStoppedLine ctermbg=23 cterm=underline guisp=#875f00 gui=underdouble
+highlight DapStoppedLine ctermbg=23 cterm=underline guisp=#875F00 gui=underline
 
-highlight DapBreapointRejectedText ctermbg=9 ctermfg=11 cterm=bold,undercurl guifg=#ffff00 guisp=#FF0000 gui=bold,undercurl
+highlight DapBreaPointRejectedText ctermbg=9 ctermfg=11 cterm=bold,undercurl guifg=#FFFF00 guisp=#FF0000 gui=bold,undercurl
 
 lua <<EOF
     -- behavior
@@ -110,7 +110,7 @@ lua <<EOF
     -- Sign configs
 
     vim.fn.sign_define('DapBreakpoint', {text='', texthl='BreakpointText', linehl='BreakPointLine', numhl='BreakpointNum'})
-    vim.fn.sign_define('DapBreakpointCondition', {text='', texthl='BreakPointCondText', linehl='BreakPointCondLine', numhl='BreakpointNum'})
+    vim.fn.sign_define('DapBreakpointCondition', {text='', texthl='BreakPointCondText', linehl='BreakPointCondLine', numhl='BreakPointCondNum'})
     vim.fn.sign_define('DapLogPoint', {text='', texthl='DapLogPointText', linehl='DapLogPointLine', numhl='DapLogPointNum'})
     vim.fn.sign_define('DapStopped', {text='', texthl='DapStoppedText', linehl='DapStoppedLine', numhl='DapStoppedNum'})
     vim.fn.sign_define('DapBreakpointRejected', {text='', texthl='DapBreakpointRejectedText', linehl='', numhl=''})
