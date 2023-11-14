@@ -813,8 +813,7 @@ local config = {
         -- "deep": Scan into directories to detect empty or grouped empty directories a priori.
         bind_to_cwd = true, -- true creates a 2-way binding between vim's cwd and neo-tree's root
         cwd_target = {
-            -- sidebar = "tab",   -- sidebar is when position = left or right
-            sidebar = "left",
+            sidebar = "tab",   -- sidebar is when position = left or right
             current = "window" -- current is when position = current
         },
         check_gitignore_in_search = true, -- check gitignore status for files/directories when searching
@@ -879,7 +878,7 @@ local config = {
         -- "open_current",-- netrw disabled, opening a directory opens within the
         -- window like netrw would, regardless of window.position
         -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-        use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
+        use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
         -- instead of relying on nvim autocmd events.
     },
     buffers = {
