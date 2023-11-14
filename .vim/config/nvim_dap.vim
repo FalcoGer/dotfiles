@@ -123,6 +123,11 @@ lua <<EOF
     -- --------------------------------------------------------------
     -- GDB, requires gdb 14.0 or higher
 
+    -- Workaround for https://github.com/mfussenegger/nvim-dap/issues/1088
+    -- requires posix (sudo luarocks-5.1 install lposix)
+    local posix = require('posix')
+    posix.setenv("PWNDBG_DISABLE_COLORS", "1")
+
     -- local env = {"PWNDBG_DISABLE_COLORS=1"}
     dap.adapters.gdb = {
         type = "executable",
@@ -142,6 +147,13 @@ lua <<EOF
         program = function()
             return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
         end,
+        -- No docs. Requires debugger to support forwarding
+        -- https://github.com/mfussenegger/nvim-dap/issues/1091
+        -- https://github.com/mfussenegger/nvim-dap/issues/455
+        args = function()
+            return vim.fn.input('Arguments: ', '')
+        end,
+        -- env also no docs
         cwd = "${workspaceFolder}",
         },
     }
