@@ -6,6 +6,20 @@
     "coc.preferences.silentAutoupdate": false,
     "coc.preferences.enableMessageDialog": true,
     "coc.preferences.enableLinkedEditing": true,
+
+    "diagnostic.enable": true,
+    "diagnostic.errorSign": "󰡅 ",
+    "diagnostic.warningSign": " ",
+    "diagnostic.infoSign": " ",
+    "diagnostic.hintSign": "󰌵 ",
+    "diagnostic.messageTarget": "float",
+    "diagnostic.separateRelatedInformationAsDiagnostics": true,
+    "diagnostic.virtualText": false,
+    "diagnostic.virtualTextAlign": "after",
+    "diagnostic.virtualTextPrefix": "// ",
+    "diagnostic.virtualTextLines": 3,
+    "diagnostic.virtualTextCurrentLineOnly": true,
+    
     "languageserver": {
         "clangd": {
             "command": "clangd",

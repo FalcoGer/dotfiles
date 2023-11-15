@@ -82,13 +82,13 @@ let g:changes_sign_text_utf8 = 1
 " let g:changes_delete_sign='-'
 " let g:changes_modified_sign='*'
 
-let g:changes_add_sign = ''
-let g:changes_delete_sign = ''
-let g:changes_modified_sign = ''
+let g:changes_add_sign = ' '
+let g:changes_delete_sign = ' '
+let g:changes_modified_sign = ' '
 
-let g:changes_utf8_add_sign = ''
-let g:changes_utf8_delete_sign = ''
-let g:changes_utf8_modifed_sign = ''
+let g:changes_utf8_add_sign = ' '
+let g:changes_utf8_delete_sign = ' '
+let g:changes_utf8_modifed_sign = ' '
 
 " maximum size in B for a buffer before this plugin doesn't check anymore
 " Seems broken
