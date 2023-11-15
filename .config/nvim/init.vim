@@ -380,7 +380,7 @@ set cmdheight=2         " command line height
 set emoji               " Smartly allocate 2 cells for emojis
 set ambiwidth="single"  " East Asian Width Class Ambiguous (special characters) take a single cell only.
 if has('nvim')
-    set signcolumn=auto:1-2
+    set signcolumn=auto:1-3
 else
     set signcolumn=yes
 endif
