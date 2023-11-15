@@ -37,7 +37,7 @@ highlight BreakPointCondNum  ctermbg=5 cterm=bold guibg=#800080 gui=bold
 highlight BreakPointCondLine ctermbg=91 guisp=#8700AF gui=underdashed
 
 highlight DapLogPointText ctermfg=12 ctermbg=234 cterm=bold guifg=#0000FF guibg=#1C1C1C gui=bold
-highlight DapLogPointNum  ctermbg=12 cterm=bold guibg=#0000FF
+highlight DapLogPointNum  ctermbg=12 cterm=bold guibg=#0000FF gui=bold
 highlight DapLogPointLine ctermbg=17 guisp=#0000FF gui=underdashed
 
 highlight DapStoppedText ctermfg=9 ctermbg=24 cterm=bold guifg=#FF0000 guibg=#005F78 gui=bold
