@@ -202,6 +202,8 @@ highlight CocHintLine ctermbg=NONE guibg=#002626
 highlight CocHintSign ctermfg=51 ctermbg=234 cterm=bold guifg=#00FFFF guibg=#1C1C1C gui=bold
 highlight CocHintVirtualText ctermfg=6 ctermbg=235 guifg=#008080 guibg=#262626 gui=underdotted guisp=#444444
 
+highlight CocDeprecatedHighlight cterm=strikethrough gui=strikethrough,undercurl guisp=#00FFFF
+
 " Highlighting same symbol as the one on cursor position
 highlight CocHighlightText ctermbg=236 guisp=#808080 gui=underdouble
 highlight CocHighlightRead ctermbg=17 guisp=#00FF80 gui=underdouble
