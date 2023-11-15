@@ -183,9 +183,6 @@ else
     " Rainbow brackets - works with treesitter
     Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim' | let g:user_loaded_rainbowdelim = 1
 
-    " Keep stores files in a redis server for backup
-    Plug 'neoclide/keep.nvim', {'do': 'npm install'} | let g:user_loaded_keep = 1
-
     " neovim debug adapter
     Plug 'mfussenegger/nvim-dap' | let g:user_loaded_nvim_dap = 1
     if (exists('g:user_loaded_nvim_dap'))
@@ -662,10 +659,6 @@ endif
 
 if exists('g:user_loaded_matchup')
     source ~/.vim/config/matchup.vim
-endif
-
-if exists('g:user_loaded_keep')
-    source ~/.vim/config/keep.vim
 endif
 
 if exists ('g:user_loaded_nvim_dap')
