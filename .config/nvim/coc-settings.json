@@ -38,10 +38,50 @@
     ],
     "ltex.language": "en-US",
     "ltex.sentenceCacheSize": 2000,
-    "ltex.dictionary": {},
-    "ltex.enabledRules": {},
-    "ltex.disabledRules": {},
-    "ltex.hiddenFalsePositives": {},
+    "ltex.dictionary": {
+        "en-US": [
+            ":~/.vim/ltex/dict/en_US.txt"
+        ],
+        "de-DE": [
+            ":~/.vim/ltex/dict/de_DE.txt"
+        ],
+        "en-GB": [
+            ":~/.vim/ltex/dict/en_GB.txt"
+        ]
+    },
+    "ltex.enabledRules": {
+        "en-US": [
+            ":~/.vim/ltex/enabled/en_US.txt"
+        ],
+        "de-DE": [
+            ":~/.vim/ltex/enabled/de_DE.txt"
+        ],
+        "en-GB": [
+            ":~/.vim/ltex/enabled/en_GB.txt"
+        ]
+    },
+    "ltex.disabledRules": {
+        "en-US": [
+            ":~/.vim/ltex/disabled/en_US.txt"
+        ],
+        "de-DE": [
+            ":~/.vim/ltex/disabled/de_DE.txt"
+        ],
+        "en-GB": [
+            ":~/.vim/ltex/disabled/en_GB.txt"
+        ]
+    },
+    "ltex.hiddenFalsePositives": {
+        "en-US": [
+            ":~/.vim/ltex/hidden/en_US.txt"
+        ],
+        "de-DE": [
+            ":~/.vim/ltex/hidden/de_DE.txt"
+        ],
+        "en-GB": [
+            ":~/.vim/ltex/hidden/en_GB.txt"
+        ]
+    },
     "ltex.configurationTarget": {
         "dictionary": "user",
         "disabledRules": "user",
