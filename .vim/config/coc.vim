@@ -183,26 +183,26 @@ nnoremap <silent><nowait> <space>g  :<C-u>CocList gchunks<cr>
 
 " :help coc-highlight
 " Unused code, etc
-highlight CocFadeOut ctermfg=238 guifg=#444444
+highlight link CocFadeOut DiagnosticUnnecessary
+highlight link CocDeprecatedHighlight DiagnosticDeprecated
 
 " sign background from .vimrc SignColumn
 highlight CocErrorLine ctermbg=52 guibg=#5F0000
-highlight CocErrorSign ctermfg=9 ctermbg=234 cterm=bold guifg=#FF0000 guibg=#1C1C1C gui=bold
-highlight CocErrorVirtualText ctermfg=9 ctermbg=235 guifg=#FF0000 guibg=#262626 gui=underdotted guisp=#444444
+highlight link CocErrorSign DiagnosticSignError
+highlight link CocErrorVirtualText DiagnosticVirtualTextError
 
-highlight CocWarningLine ctermbg=58 guibg=#262600
-highlight CocWarningSign ctermfg=11 ctermbg=234 cterm=bold guifg=#FFFF00 guibg=#1C1C1C gui=bold
-highlight CocWarningVirtualText ctermfg=11 ctermbg=235 guifg=#FFFF00 guibg=#262626 gui=underdotted guisp=#444444
+highlight CocWarningLine ctermbg=58 guibg=#402000
+highlight link CocWarningSign DiagnosticSignWarn
+highlight link CocWarningVirtualText DiagnosticVirtualTextWarn
 
-highlight CocInfoLine ctermbg=NONE guibg=#00005F
-highlight CocInfoSign ctermfg=12 ctermbg=234 cterm=bold guifg=#0000FF guibg=#1C1C1C gui=bold
-highlight CocInfoVirtualText ctermfg=12 ctermbg=235 guifg=#0000FF guibg=#262626 gui=underdotted guisp=#444444
+highlight CocInfoLine ctermbg=17 guibg=#1C1C30
+highlight link CocInfoSign DiagnosticSignInfo
+highlight link CocInfoVirtualText DiagnosticVirtualTextInfo
 
-highlight CocHintLine ctermbg=NONE guibg=#002626
-highlight CocHintSign ctermfg=51 ctermbg=234 cterm=bold guifg=#00FFFF guibg=#1C1C1C gui=bold
-highlight CocHintVirtualText ctermfg=6 ctermbg=235 guifg=#008080 guibg=#262626 gui=underdotted guisp=#444444
+highlight CocHintLine ctermbg=NONE guibg=#1C3030
+highlight link CocHintSign DiagnosticSignHint
+highlight link CocHintVirtualText DiagnosticVirtualTextHint
 
-highlight CocDeprecatedHighlight cterm=strikethrough gui=strikethrough,undercurl guisp=#00FFFF
 
 " Highlighting same symbol as the one on cursor position
 highlight CocHighlightText ctermbg=236 guisp=#808080 gui=underdouble
@@ -221,7 +221,7 @@ highlight CocInlayHintType ctermfg=5 ctermbg=235 guifg=#800080 gui=underdotted g
 
 " Notifications
 " Progress line in progress notifications
-highlight CocNotificationProgress ctermfg=4 guifg=#000080 ctermbg=235 guibg=#262626
+highlight CocNotificationProgress ctermfg=4 guifg=#00FFFF ctermbg=235 guibg=#262626
 " Action buttons in notification windows
 highlight CocNotificationButton ctermfg=7 guifg=#C0C0C0 ctermbg=237 guibg=#3A3A3A
 " Borders for Error/Warning/Info notifications
@@ -230,10 +230,10 @@ highlight link CocNotificationWarning CocWarningSign
 highlight link CocNotificationInfo CocInfoSign
 
 " Selected entry in menu dialogues (only BG)
-highlight CocMenuSel guibg=#402000 ctermbg=58
+highlight link CocMenuSel PmenuSel
 
 " List related
-highlight CocSearch ctermfg=11 guisp=#FFFF00 gui=underdashed
+highlight link CocSearch Search
 highlight CocListLine ctermbg=235 guibg=#262626 ctermfg=228 guisp=#FFFF87 cterm=underline gui=underline
 highlight link CocListSearch CocSearch
 

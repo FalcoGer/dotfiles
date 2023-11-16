@@ -19,8 +19,8 @@ local hintcolor = '#008080'
 local hintcolorterm = 6
 local infocolor = '#0000FF'
 local infocolorterm = 12
-local warningcolor = '#FFFF00'
-local warningcolorterm = 11
+local warningcolor = '#FF8700'
+local warningcolorterm = 208
 local errorcolor = '#FF0000'
 local errorcolorterm = 9
 

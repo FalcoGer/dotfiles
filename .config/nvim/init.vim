@@ -327,15 +327,22 @@ highlight link NormalFloat Pmenu
 " Selected text - light yellow on even darker gray
 highlight PmenuSel      ctermbg=235 guibg=#262626 ctermfg=228 guifg=#FFFF87 cterm=underdotted gui=underline
 " Scrollbar - gray
-highlight PmenuSbar     ctermbg=235 guibg=#262626
+highlight PmenuSbar     ctermbg=243 guibg=#767676
 " Scrollbar thumb - lighter than medium gray
-highlight PmenuThumb    ctermbg=247 guibg=#9E9E9E
+highlight PmenuThumb    ctermbg=250 guibg=#BCBCBC
 
 highlight FloatBoarder  ctermbg=237 guibg=#3A3A3A ctermfg=248 guifg=#A8A8A8
 highlight FloatTitle    ctermbg=234 guibg=#1C1C1C ctermfg=11 guifg=#FFFF00 cterm=bold gui=bold
 
 " Enable spell checking
 set spell
+set spelllang=en_us
+" :help spellfile.vim
+" Download spell info from http://ftp.vim.org/pub/vim/runtime/spell/
+" Put it into runtimepath
+" To download it automatically, only with NETRW
+let g:spellfile_URL='http://ftp.vim.org/vim/runtime/spell'
+
 highlight SpellBad      ctermbg=198 cterm=NONE gui=undercurl guisp=#ff0087
 " Wrong capitalization
 " highlight link SpellCap SpellBad
@@ -343,11 +350,39 @@ highlight SpellBad      ctermbg=198 cterm=NONE gui=undercurl guisp=#ff0087
 " highlight link SpellRare SpellBad
 " Used in another region
 " highlight link SpellLocal SpellBad
-
+highlight DiagnosticError ctermfg=9 guifg=#FF0000
+highlight DiagnosticVirtualTextError ctermfg=9 ctermbg=235 guifg=#FF0000 guibg=#262626 gui=underdotted guisp=#444444
+highlight link DiagnosticFloatingError DiagnosticError
+highlight DiagnosticSignError ctermfg=9 ctermbg=234 cterm=bold guifg=#FF0000 guibg=#1C1C1C gui=bold
 highlight DiagnosticUnderlineError gui=underline cterm=underline guisp=#FF0000
-highlight DiagnosticUnderlineWarn gui=underline cterm=underline guisp=#FFFF00
+
+highlight DiagnosticWarn ctermfg=208 guifg=#FF8700
+highlight DiagnosticVirtualTextWarn ctermfg=208 ctermbg=235 guifg=#FF8700 guibg=#262626 gui=underdotted guisp=#444444
+highlight link DiagnosticFloatingWarn DiagnosticWarn
+highlight DiagnosticSignWarn ctermfg=208 ctermbg=234 cterm=bold guifg=#FF8700 guibg=#1C1C1C gui=bold
+highlight DiagnosticUnderlineWarn gui=underline cterm=underline guisp=#FF8700
+
+highlight DiagnosticInfo ctermfg=12 guifg=#0000FF
+highlight DiagnosticVirtualTextInfo ctermfg=12 ctermbg=235 guifg=#0000FF guibg=#262626 gui=underdotted guisp=#444444
+highlight link DiagnosticFloatingInfo DiagnosticInfo
+highlight DiagnosticSignInfo ctermfg=12 ctermbg=234 cterm=bold guifg=#0000FF guibg=#1C1C1C gui=bold
 highlight DiagnosticUnderlineInfo gui=underdotted cterm=underdotted guisp=#0000FF
+
+highlight DiagnosticHint ctermfg=14 guifg=#00FFFF
+highlight DiagnosticVirtualTextHint ctermfg=6 ctermbg=235 guifg=#008080 guibg=#262626 gui=underdotted guisp=#444444
+highlight link DiagnosticFloatingHint DiagnosticHint
+highlight DiagnosticSignHint ctermfg=14 ctermbg=234 cterm=bold guifg=#00FFFF guibg=#1C1C1C gui=bold
 highlight DiagnosticUnderlineHint gui=underdotted cterm=underdotted guisp=#00FFFF
+
+highlight DiagnosticOk ctermfg=10 guifg=#00FF00
+highlight DiagnosticVirtualTextOk ctermfg=10 ctermbg=235 guifg=#00FF00 guibg=#262626 gui=underdotted guisp=#444444
+highlight link DiagnosticFloatingOk DiagnosticOk
+highlight DiagnosticSignOk ctermfg=10 ctermbg=234 cterm=bold guifg=#00FF00 guibg=#1C1C1C gui=bold
+highlight DiagnosticUnderlineOk gui=underdotted cterm=underdotted guisp=#00FF00
+
+highlight DiagnosticDeprecated cterm=strikethrough gui=strikethrough,underdotted guisp=#00FFFF
+highlight DiagnosticUnnecessary ctermfg=238 guifg=#444444
+
 
 " Highlight search results
 set hlsearch
@@ -684,3 +719,4 @@ endif
 if exists ('g:user_loaded_winshift')
     source ~/.vim/config/winshift.lua
 endif
+
