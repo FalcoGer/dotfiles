@@ -7,6 +7,56 @@
     "coc.preferences.enableMessageDialog": true,
     "coc.preferences.enableLinkedEditing": true,
 
+    "ltex.enabled": [
+        "bibtex",
+        "context",
+        "context.tex",
+        "html",
+        "latex",
+        "markdown",
+        "org",
+        "restructuredtext",
+        "rsweave",
+
+        "text",
+
+        "shellscript",
+        "c",
+        "csharp",
+        "cpp",
+        "javascript",
+        "lua",
+        "perl",
+        "php",
+        "powershell",
+        "python",
+        "ruby",
+        "rust",
+        "sql",
+        "verilog",
+        "vb"
+    ],
+    "ltex.language": "en-US",
+    "ltex.sentenceCacheSize": 2000,
+    "ltex.dictionary": {},
+    "ltex.enabledRules": {},
+    "ltex.disabledRules": {},
+    "ltex.hiddenFalsePositives": {},
+    "ltex.configurationTarget": {
+        "dictionary": "user",
+        "disabledRules": "user",
+        "hiddenFalsePositives": "user"
+    },
+    "ltex.additionalRules.enablePickyRules": true,
+    "ltex.additionalRules.motherTongue": "de-DE",
+    "ltex.ltex-ls.logLevel": "warning",
+    "ltex.completionEnabled": true,
+    "ltex.diagnosticSeverity": {"PASSIVE_VOICE": "hint", "default": "information"},
+    "ltex.checkFrequency": "edit",
+    "ltex.clearDiagnosticsWhenClosingFile": true,
+    "ltex.statusBarItem": false,
+    "ltex.trace.server": "off",
+
     "diagnostic.enable": true,
     "diagnostic.errorSign": "󰡅 ",
     "diagnostic.warningSign": " ",
@@ -141,7 +191,8 @@
     "workspace.ignoredFolders": [
         "$HOME",
         "$HOME/.cargo/**",
-        "$HOME/.rustup/**"
+        "$HOME/.rustup/**",
+        "$HOME/.cache/**"
     ],
     
     "diagnostic-languageserver.enable": true,
