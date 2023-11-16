@@ -1,4 +1,6 @@
-require("winshift").setup({
+vim.keymap.set({"n"}, "<leader>w", ":WinShift<CR>")
+
+local options = {
   highlight_moving_win = true,  -- Highlight the window being moved
   focused_hl_group = "Visual",  -- The highlight group used for the moving window
   moving_win_options = {
@@ -52,7 +54,11 @@ require("winshift").setup({
       ---A function used to filter the list of selectable windows.
       ---@param winids integer[] # The list of selectable window IDs.
       ---@return integer[] filtered # The filtered list of window IDs.
-      filter_func = nil,
+      filter_func = function(winids)
+        return winids
+      end,
     })
   end,
-})
+}
+
+require("winshift").setup(options)
