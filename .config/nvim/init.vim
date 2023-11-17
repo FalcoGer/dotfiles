@@ -180,9 +180,6 @@ else
         " Provides repl highlight for DAP, requires treesitter
     endif
 
-    " Rainbow brackets - works with treesitter
-    Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim' | let g:user_loaded_rainbowdelim = 1
-
     " neovim debug adapter
     Plug 'mfussenegger/nvim-dap' | let g:user_loaded_nvim_dap = 1
     if (exists('g:user_loaded_nvim_dap'))
@@ -454,23 +451,25 @@ set foldenable
 " auto open folds in these conditions
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
+function! MyFoldText()
+    let line = getline(v:foldstart)
+    let numberOfLines = 1 + v:foldend - v:foldstart
+    let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+    return v:folddashes .. sub .. ' (' .. numberOfLines .. ' Lines)'
+endfunction
+
 if has('nvim')
     " Treesitter folding
     " https://www.reddit.com/r/neovim/comments/16xz3q9/treesitter_highlighted_folds_are_now_in_neovim/
     set foldmethod=expr
     set foldexpr=v:lua.vim.treesitter.foldexpr()
-    set foldtext=v:lua.vim.treesitter.foldtext()
+    " set foldtext=v:lua.vim.treesitter.foldtext()
+    set foldtext=MyFoldText()
 else
     set foldmethod=syntax       " Fold based on indention levels.
-    function! MyFoldText()
-        let line = getline(v:foldstart)
-        let numberOfLines = 1 + v:foldend - v:foldstart
-        let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
-        return v:folddashes .. sub .. ' (' .. numberOfLines .. ' Lines)'
-    endfunction
-
     set foldtext=MyFoldText()
 endif
+
 
 " Folds with a level > foldlevel will be closed
 " Setting 0 will close all folds
@@ -656,10 +655,6 @@ endif
 
 if exists('g:user_loaded_rainbow')
     source ~/.vim/config/rainbow.vim
-endif
-
-if exists('g:user_loaded_rainbowdelim')
-    source ~/.vim/config/rainbowdelim.lua
 endif
 
 if exists('g:user_loaded_vimairline')

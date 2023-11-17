@@ -327,12 +327,21 @@
         "W504"
     ],
 
+    "Lua.runtime.version": "Lua 5.4",
+    "Lua.runtime.fileEncoding": "utf8",
     "Lua.addonManager.enable": true,
     "Lua.codeLens.enable": true,
     "Lua.completion.enable": true,
     "Lua.completion.keywordSnippet": "Both",
     "Lua.completion.displayContext": 10,
     "Lua.format.enable": true,
+    "Lua.hover.enable": true,
+    "Lua.hover.enumsLimit": 5,
+    "Lua.hover.viewNumber": true,
+    "Lua.hover.viewString": true,
+    "Lua.hover.expandAlias": true,
+    "Lua.hover.previewFields": 50,
+    "Lua.hover.viewStringMax": 1000,
     "Lua.format.defaultConfig": {
         "indent_style": "space",
         "indent_size": 2,
@@ -384,12 +393,12 @@
         "remove_call_expression_list_finish_comma": true,
         "end_statement_with_semicolon": "same_line"
     },
+    "Lua.workspace.checkThirdParty": false,
     "Lua.workspace.library": [
         "/usr/share/nvim/runtime/lua",
         "/usr/share/nvim/runtime/lua/vim",
         "/usr/share/nvim/runtime/lua/vim/lsp",
-        "${userHome}/.vim/plugged",
-        "${3rd}/luv/library"
+        "${userHome}/.vim/plugged"
     ],
     "Lua.workspace.ignoreDir": [
         ".vscode",
