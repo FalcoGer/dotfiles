@@ -1,5 +1,10 @@
 " Configuration for coc completer
 
+augroup CocAutoExtension
+    autocmd!
+    autocmd FileType text           call CocActionAsync('activeExtension', 'coc-ltex')
+augroup end
+
 if !has('nvim')
     set encoding=utf-8
 endif
@@ -234,7 +239,7 @@ highlight link CocMenuSel PmenuSel
 
 " List related
 highlight link CocSearch Search
-highlight CocListLine ctermbg=235 guibg=#262626 ctermfg=228 guisp=#FFFF87 cterm=underline gui=underline
+highlight link CocListLine CocMenuSel
 highlight link CocListSearch CocSearch
 
 " Popup menu related

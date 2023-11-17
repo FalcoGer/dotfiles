@@ -17,8 +17,8 @@ local selectedterm = 8
 -- foreground colors from Coc for hint, info, warning and error
 local hintcolor = '#008080'
 local hintcolorterm = 6
-local infocolor = '#0000FF'
-local infocolorterm = 12
+local infocolor = '#005FFF'
+local infocolorterm = 27
 local warningcolor = '#FF8700'
 local warningcolorterm = 208
 local errorcolor = '#FF0000'

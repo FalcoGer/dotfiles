@@ -362,11 +362,11 @@ highlight link DiagnosticFloatingWarn DiagnosticWarn
 highlight DiagnosticSignWarn ctermfg=208 ctermbg=234 cterm=bold guifg=#FF8700 guibg=#1C1C1C gui=bold
 highlight DiagnosticUnderlineWarn gui=underline cterm=underline guisp=#FF8700
 
-highlight DiagnosticInfo ctermfg=12 guifg=#0000FF
-highlight DiagnosticVirtualTextInfo ctermfg=12 ctermbg=235 guifg=#0000FF guibg=#262626 gui=underdotted guisp=#444444
+highlight DiagnosticInfo ctermfg=27 guifg=#005FFF
+highlight DiagnosticVirtualTextInfo ctermfg=27 ctermbg=235 guifg=#005FFF guibg=#262626 gui=underdotted guisp=#444444
 highlight link DiagnosticFloatingInfo DiagnosticInfo
-highlight DiagnosticSignInfo ctermfg=12 ctermbg=234 cterm=bold guifg=#0000FF guibg=#1C1C1C gui=bold
-highlight DiagnosticUnderlineInfo gui=underdotted cterm=underdotted guisp=#0000FF
+highlight DiagnosticSignInfo ctermfg=27 ctermbg=234 cterm=bold guifg=#005FFF guibg=#1C1C1C gui=bold
+highlight DiagnosticUnderlineInfo gui=underdotted cterm=underdotted guisp=#005FFF
 
 highlight DiagnosticHint ctermfg=14 guifg=#00FFFF
 highlight DiagnosticVirtualTextHint ctermfg=6 ctermbg=235 guifg=#008080 guibg=#262626 gui=underdotted guisp=#444444
