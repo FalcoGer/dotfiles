@@ -55,30 +55,26 @@ lua <<EOF
     dap.defaults.fallback.exception_breakpoints = 'default'
     -- Key mappings
 
-    vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-    vim.keymap.set('n', '<F6>', function() require('dap').step_into() end)
-    vim.keymap.set('n', '<F7>', function() require('dap').step_over() end)
-    vim.keymap.set('n', '<F8>', function() require('dap').step_out() end)
-    vim.keymap.set('n', '<F9>', function() require('dap').up() end)
-    vim.keymap.set('n', '<F10>', function() require('dap').down() end)
+    vim.keymap.set('n', '<F5>', require('dap').continue)
+    vim.keymap.set('n', '<F6>', require('dap').step_into)
+    vim.keymap.set('n', '<F7>', require('dap').step_over)
+    vim.keymap.set('n', '<F8>', require('dap').step_out)
+    vim.keymap.set('n', '<F9>', require('dap').up)
+    vim.keymap.set('n', '<F10>', require('dap').down)
     vim.keymap.set('n', '<Leader>lb', function() require('dap').list_breakpoints(0) end)
-    vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
+    vim.keymap.set('n', '<Leader>b', require('dap').toggle_breakpoint)
     vim.keymap.set('n', '<Leader>cb', function() require('dap').toggle_breakpoint(vim.fn.input('Breakpoint condtion:')) end)
     vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
-    vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
-    -- vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+    vim.keymap.set('n', '<Leader>dr', require('dap').repl.open)
+    -- vim.keymap.set('n', '<Leader>dl', require('dap').run_last)
 
     if not (vim.g.user_loaded_nvim_dap_ui ~= nil) then
         -- use dap hover only when dap_ui not loaded
-        vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
-            require('dap.ui.widgets').hover()
-        end)
+        vim.keymap.set({'n', 'v'}, '<Leader>dh', require('dap.ui.widgets').hover())
     end
 
 
-    --vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
-    --  require('dap.ui.widgets').preview()
-    --end)
+    --vim.keymap.set({'n', 'v'}, '<Leader>dp', require('dap.ui.widgets').preview())
     vim.keymap.set('n', '<Leader>df', function()
       local widgets = require('dap.ui.widgets')
       local sidebar = widgets.sidebar(widgets.frames)

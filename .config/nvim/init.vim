@@ -7,8 +7,9 @@
 
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
-
+if !has('nvim')
+    runtime! debian.vim
+endif
 " Vim will load $VIMRUNTIME/defaults.vim if the user does not have a vimrc.
 " This happens after /etc/vim/vimrc(.local) are loaded, so it will override
 " any settings in these files.
@@ -142,10 +143,6 @@ else
 
     if exists('g:user_loaded_neotree')
         " Dependencies for neotree
-        " general purpose lua function library
-        Plug 'nvim-lua/plenary.nvim'
-        " Lua function library for UI elements
-        Plug 'MunifTanjim/nui.nvim'
         " optional, allows image previews
         if !exists('g:neovide')
             Plug '3rd/image.nvim' | let g:user_loaded_3rd_image = 1
@@ -202,6 +199,39 @@ else
 
     " allows to move windows around easily, provides WinShift command
     Plug 'sindrets/winshift.nvim' | let g:user_loaded_winshift = 1
+
+    " Fuzzy searcher for all kinds of things
+    Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' } | let g:user_loaded_telescope = 1
+
+    if exists('g:user_loaded_telescope')
+        if exists('g:user_loaded_coc')
+            " CoC extension for telescope
+            Plug 'fannheyward/telescope-coc.nvim' | let g:user_loaded_telescope_coc = 1
+        endif
+        if exists('g:user_loaded_nvim_dap')
+            Plug 'nvim-telescope/telescope-dap.nvim' | let g:user_loaded_telescope_dap = 1
+        endif
+        " ChatGPT extension for telescope
+        Plug 'jackMort/ChatGPT.nvim' | let g:user_loaded_chatgpt = 1
+        " Find HTML status codes
+        Plug 'barrett-ruth/telescope-http.nvim' | let g:user_loaded_telescope_http = 1
+        " Find emojis
+        Plug 'xiyaowong/telescope-emoji.nvim' | let g:user_loaded_telescope_emoji = 1
+        " Find NerdFont glyphs
+        Plug 'ghassan0/telescope-glyph.nvim' | let g:user_loaded_telescope_glyph = 1
+        " Find HTML Color names
+        Plug 'nat-418/telescope-color-names.nvim' | let g:user_loaded_telescope_color_names = 1
+    endif
+
+    if exists('g:user_loaded_neotree') || exists('g:user_loaded_chatgpt')
+        " Lua function library for UI elements
+        Plug 'MunifTanjim/nui.nvim'
+    endif
+
+    if exists('g:user_loaded_neotree') || exists('g:user_loaded_telescope')
+        " general purpose lua function library
+        Plug 'nvim-lua/plenary.nvim'
+    endif
 endif
 
 " Provides matching pair controls for braces and keywords like if/else, etc
@@ -706,6 +736,7 @@ if exists ('g:user_loaded_nvim_dap_python')
 endif
 
 if exists('g:user_loaded_nvim_dap_ui')
+    " Load after nvim_dap as this overloads some keymaps
     source ~/.vim/config/nvim_dap_ui.lua
 endif
 
@@ -715,5 +746,10 @@ endif
 
 if exists ('g:user_loaded_winshift')
     source ~/.vim/config/winshift.lua
+endif
+
+if exists('g:user_loaded_telescope')
+    " should be loaded late as this overloads some keymaps
+    source ~/.vim/config/telescope.lua
 endif
 

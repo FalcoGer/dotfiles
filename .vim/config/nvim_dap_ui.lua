@@ -93,14 +93,9 @@ local options =
 dapui.setup(options)
 
 -- keybinds
-vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end)
-
-vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
-    require('dapui').eval()
-end)
-vim.keymap.set({'n', 'v'}, '<M-k>', function()
-    require('dapui').eval()
-end)
+vim.keymap.set('n', '<Leader>du', require('dapui').toggle)
+vim.keymap.set({'n', 'v'}, '<Leader>dh', require('dapui').eval)
+vim.keymap.set({'n', 'v'}, '<M-k>', require('dapui').eval)
 
 -- commands
 vim.cmd([[command! -nargs=0 DapUI lua require('dapui').toggle()]])
