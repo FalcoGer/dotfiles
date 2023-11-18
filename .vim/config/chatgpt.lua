@@ -42,7 +42,7 @@ local options = {
             },
         },
         keymaps = {
-            close = { "<C-c>", "<ESC>" },
+            close = { "<C-c>" },
             yank_last = "<C-y>",
             yank_last_code = "<C-k>",
             scroll_up = { "<C-u>", "<C-Up>" },

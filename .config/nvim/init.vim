@@ -753,3 +753,7 @@ if exists('g:user_loaded_telescope')
     source ~/.vim/config/telescope.lua
 endif
 
+if exists('g:user_loaded_chatgpt')
+    source ~/.vim/config/chatgpt.lua
+endif
+

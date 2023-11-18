@@ -131,11 +131,6 @@ if vim.g['user_loaded_telescope_color_names'] then
     vim.keymap.set('n', "<Space>C", require('telescope').extensions.color_names.color_names)
 end
 
-if vim.g['user_loaded_chatgpt'] then
-    -- https://github.com/jackMort/ChatGPT.nvim
-    extensions['chatgpt'] = {}
-end
-
 options['extensions'] = extensions
 
 telescope.setup(options)
