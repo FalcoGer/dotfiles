@@ -1,4 +1,4 @@
-local tsc = require 'treesitter-context'
+local tsc = require('treesitter-context')
 local options = {
     enable = true,
     max_lines = 6,           -- how many lines are in the context at maximum
