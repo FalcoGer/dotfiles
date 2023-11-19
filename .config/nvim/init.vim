@@ -30,9 +30,8 @@ endif
 
 if has('nvim')
     " Disable netrw nvim file browser, this is replaced by nvim-tree
-    :let g:loaded_netrw       = 1
-    :let g:loaded_netrwPlugin = 1
-
+    let g:loaded_netrw       = 1
+    let g:loaded_netrwPlugin = 1
 endif
 
 " Set the leader button to , which is easier to press than the default \
