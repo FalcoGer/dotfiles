@@ -118,15 +118,7 @@
             "command": "clangd",
             "filetypes": [
                 "c",
-                "cc",
-                "cpp",
-                "c++",
-                "objc",
-                "objcpp",
-                "h",
-                "hpp",
-                "hxx",
-                "h++"
+                "cpp"
             ],
             "rootPatterns": [
                 "compile_flags.txt",
@@ -321,6 +313,15 @@
         "pylint",
         "rope"
     ],
+    "pylsp.plugins.ruff.exclude": [
+        "**/site-packages/**"
+    ],
+    "pylsp.plugins.flake8.exclude": [
+        "**/site-packages/**"
+    ],
+    "pylsp.plugins.pycodestyle.exclude": [
+        "**/site-packages/**"
+    ],
     "pylsp.plugins.pycodestyle.maxLineLength": 120,
     "pylsp.plugins.pycodestyle.ignore": [
         "E221",
@@ -395,6 +396,7 @@
     },
     "Lua.workspace.checkThirdParty": false,
     "Lua.workspace.library": [
+        // vim.api.nvim_get_runtime_file('', true)
         "/usr/share/nvim/runtime/lua",
         "/usr/share/nvim/runtime/lua/vim",
         "/usr/share/nvim/runtime/lua/vim/lsp",

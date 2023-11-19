@@ -1,17 +1,64 @@
 local chatgpt = require('chatgpt')
 
-local decryptApiKey = function()
-    local cmd = 'openssl enc -d -aes-256-cbc -pbkdf2 -iter 10000 -pass "file:/' ..
-        os.getenv('HOME') ..
-        '/Documents/Machine/NVimChatGptAPIKey_passphrase.txt" -in ' ..
-        os.getenv('HOME') .. '/Documents/Machine/NVimChatGptAPIKey.bin'
-    -- execute cmd and return it's output
-    return "echo " .. vim.fn.systemlist(cmd)[1]
+local localAPI = false
+
+local decryptApiKey = function(useLocalAPI)
+    -- https://github.com/jackMort/ChatGPT.nvim#secrets-management
+    if useLocalAPI then
+        return "echo no-key-no-key-no-key-no-key"
+    else
+        local cmd = 'openssl enc -d -aes-256-cbc -pbkdf2 -iter 10000 -pass "file:/' ..
+            os.getenv('HOME') ..
+            '/Documents/Machine/NVimChatGptAPIKey_passphrase.txt" -in ' ..
+            os.getenv('HOME') .. '/Documents/Machine/NVimChatGptAPIKey.bin'
+        -- execute cmd and return it's output
+        local keyCommand = "echo " .. vim.fn.systemlist(cmd)[1]
+        return keyCommand
+    end
+end
+
+local getGPTModel = function(useLocalAPI)
+    -- https://openai.com/pricing
+    if useLocalAPI then
+        -- Most comprehensive, most expensive
+        return "gpt-4-32k"
+    else
+        -- Cheapest
+        return "gpt-3.5-turbo"
+    end
+end
+
+local getApiHost = function(useLocalAPI)
+    if useLocalAPI then
+        return "http://127.0.0.1:1337"
+    else
+        return "https://api.openai.com"
+    end
+end
+
+local getWelcomeMessage = function(useLocalAPI)
+    local result = "You are using "
+    result = result .. getApiHost(useLocalAPI) .. "\n"
+    result = result .. "With " .. getGPTModel(useLocalAPI) .. "\n"
+    if not (useLocalAPI) then
+        result = result .. "Consider this prompt to save money on tokens:\n\n"
+    else
+        result = result .. "Consider this prompt to make things easier to work with\n\n"
+    end
+    result = result .. "You are my coding assistant. You will answer with code blocks only.\n"
+    result = result .. "You will not explain the code unless asked. You will not include examples.\n"
+    if not useLocalAPI then
+        result = result .. "Minimize comments to what is required.\n"
+    else
+        result = result .. "Do not include emojis in your response.\n"
+        result = result .. "Start each code block with a blank line.\n"
+    end
+    return result
 end
 
 local options = {
-    -- https://github.com/jackMort/ChatGPT.nvim#secrets-management
-    api_key_cmd = decryptApiKey(),
+    api_host_cmd = "echo " .. getApiHost(localAPI),
+    api_key_cmd = decryptApiKey(localAPI),
     yank_register = "+",
     edit_with_instructions = {
         diff = false,
@@ -25,7 +72,7 @@ local options = {
         },
     },
     chat = {
-        welcome_message = WELCOME_MESSAGE,
+        welcome_message = getWelcomeMessage(localAPI),
         loading_text = "Loading, please wait ...",
         question_sign = "",
         answer_sign = "ﮧ",
@@ -137,7 +184,7 @@ local options = {
         },
     },
     openai_params = {
-        model = "gpt-3.5-turbo",
+        model = getGPTModel(localAPI),
         frequency_penalty = 0,
         presence_penalty = 0,
         max_tokens = 300,
