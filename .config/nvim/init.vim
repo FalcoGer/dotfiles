@@ -144,6 +144,7 @@ else
         " Dependencies for neotree
         " optional, allows image previews
         if !exists('g:neovide')
+            " CAUSES NVIM EXIT CODE 1
             Plug '3rd/image.nvim' | let g:user_loaded_3rd_image = 1
         endif
         " provides diagnostics source
@@ -170,6 +171,7 @@ else
     " More lightweight version of context.vim
     if exists('g:user_loaded_treesitter')
         " See note for context.vim
+        " CAUSES NVIM EXIT CODE 1
         Plug 'nvim-treesitter/nvim-treesitter-context' | let g:user_loaded_treesitter_context = 1
         " Closes tags such as HTML tags automatically
         Plug 'windwp/nvim-ts-autotag' | let g:user_loaded_ts_autotag = 1
@@ -211,6 +213,7 @@ else
             Plug 'nvim-telescope/telescope-dap.nvim' | let g:user_loaded_telescope_dap = 1
         endif
         " ChatGPT extension for telescope
+        " CAUSES NVIM EXIT CODE 1
         Plug 'jackMort/ChatGPT.nvim' | let g:user_loaded_chatgpt = 1
         " Find HTML status codes
         Plug 'barrett-ruth/telescope-http.nvim' | let g:user_loaded_telescope_http = 1
@@ -600,6 +603,7 @@ nmap <silent> <S-F1> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
     \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")
     \ . ">"<CR>
 
+command CheckHighlight echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"
 
 " =============================================================================
 " Auto remove whitespace at EOL in certain scripts
@@ -633,8 +637,6 @@ if has('nvim')
         source ~/.vim/config/Table2String.lua
     endif
 endif
-
-command CheckHighlight echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"
 
 " =============================================================================
 " Plugin configurations
