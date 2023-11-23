@@ -144,7 +144,6 @@ else
         " Dependencies for neotree
         " optional, allows image previews
         if !exists('g:neovide')
-            " CAUSES NVIM EXIT CODE 1
             Plug '3rd/image.nvim' | let g:user_loaded_3rd_image = 1
         endif
         " provides diagnostics source
@@ -171,7 +170,6 @@ else
     " More lightweight version of context.vim
     if exists('g:user_loaded_treesitter')
         " See note for context.vim
-        " CAUSES NVIM EXIT CODE 1
         Plug 'nvim-treesitter/nvim-treesitter-context' | let g:user_loaded_treesitter_context = 1
         " Closes tags such as HTML tags automatically
         Plug 'windwp/nvim-ts-autotag' | let g:user_loaded_ts_autotag = 1
@@ -195,11 +193,19 @@ else
         Plug 'LiadOz/nvim-dap-repl-highlights' | let g:user_loaded_nvim_dap_repl_highlight = 1
     endif
 
+    " IDE Breadcrumbs, mouse controllable
+    Plug 'Bekaboo/dropbar.nvim' | let g:user_loaded_dropbar = 1
+
     " Allows for easy hex editing
     Plug 'RaafatTurki/hex.nvim' | let g:user_loaded_nvim_hex = 1
 
     " allows to move windows around easily, provides WinShift command
     Plug 'sindrets/winshift.nvim' | let g:user_loaded_winshift = 1
+
+    " codeium AI assistant for code competion.
+    " Requires coc integration support.
+    " https://github.com/Exafunction/codeium.nvim/issues/114
+    " Plug 'Exafunction/codeium.nvim' | let g:user_loaded_codeium = 1
 
     " Fuzzy searcher for all kinds of things
     Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' } | let g:user_loaded_telescope = 1
@@ -212,8 +218,9 @@ else
         if exists('g:user_loaded_nvim_dap')
             Plug 'nvim-telescope/telescope-dap.nvim' | let g:user_loaded_telescope_dap = 1
         endif
+        " FZF extension
+        Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } | let g:user_loaded_telescope_fzf = 1
         " ChatGPT extension for telescope
-        " CAUSES NVIM EXIT CODE 1
         Plug 'jackMort/ChatGPT.nvim' | let g:user_loaded_chatgpt = 1
         " Find HTML status codes
         Plug 'barrett-ruth/telescope-http.nvim' | let g:user_loaded_telescope_http = 1
@@ -230,7 +237,7 @@ else
         Plug 'MunifTanjim/nui.nvim'
     endif
 
-    if exists('g:user_loaded_neotree') || exists('g:user_loaded_telescope')
+    if exists('g:user_loaded_neotree') || exists('g:user_loaded_telescope') || exists('g:user_loaded_codeium')
         " general purpose lua function library
         Plug 'nvim-lua/plenary.nvim'
     endif
@@ -339,8 +346,8 @@ set list
 set listchars=tab:<->               " Show tabs as this. xy[z], x always, then y as many as will fit, z as the last one.
 set listchars+=eol:$                " End of line marker.
 set listchars+=lead:-
-set listchars+=leadmultispace:\|-->  " What to display for leading white space characters.
-set listchars+=trail:+              " What to display for trailing white space characters.
+set listchars+=leadmultispace:\|--> " What to display for leading white space characters.
+set listchars+=trail:·              " What to display for trailing white space characters.
 set listchars+=extends:>            " What to display when wrapped is off and part of the line is past the right edge of the screen.
 set listchars+=precedes:<           " What to display when wrapped is off and part of the line is past the left edge of the screen.
 
@@ -441,7 +448,9 @@ set lazyredraw          " Do not update display while executing macros
 set showmode            " Shows the current mode in the last line
 set wrapscan            " wrap around while searching
 set cmdheight=2         " command line height
-set emoji               " Smartly allocate 2 cells for emojis
+" Waiting for resolution for
+" https://github.com/neovim/neovim/issues/26160
+set noemoji               " Smartly allocate 2 cells for emojis
 set ambiwidth="single"  " East Asian Width Class Ambiguous (special characters) take a single cell only.
 if has('nvim')
     set signcolumn=auto:1-3
@@ -749,6 +758,10 @@ if exists ('g:user_loaded_winshift')
     source ~/.vim/config/winshift.lua
 endif
 
+if exists ('g:user_loaded_dropbar')
+    source ~/.vim/config/dropbar.lua
+endif
+
 if exists('g:user_loaded_telescope')
     " should be loaded late as this overloads some keymaps
     source ~/.vim/config/telescope.lua
@@ -758,3 +771,6 @@ if exists('g:user_loaded_chatgpt')
     source ~/.vim/config/chatgpt.lua
 endif
 
+if exists ('g:user_loaded_codeium')
+    source ~/.vim/config/codeium.lua
+endif

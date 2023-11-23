@@ -25,7 +25,7 @@ local general_opts = {
     -- setting this option to a number slightly larger than
     -- 1000 / key_repeat_rate
     -- dconf-editor org.gnome.desktop.peripherals.keyboard
-    update_interval = (1000 / 30) + 7,
+    update_interval = 100, -- repeat rate 30 -> 1000 / 30 = 33 -> 100ms
     update_events = {
         win = {
             'CursorMoved',
@@ -554,13 +554,13 @@ local symbol_opts = {
 }
 
 local options = {
-    general = general_opts,
-    icons = icons_opts,
-    symbol = symbol_opts,
-    bar = bar_opts,
-    menu = menu_opts,
-    fzf = fzf_opts,
-    sources = sources_opts,
+    -- general = general_opts,
+    -- icons = icons_opts,
+    -- symbol = symbol_opts,
+    -- bar = bar_opts,
+    -- menu = menu_opts,
+    -- fzf = fzf_opts,
+    -- sources = sources_opts,
 }
 
 dropbar.setup(options)

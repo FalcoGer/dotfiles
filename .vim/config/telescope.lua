@@ -80,6 +80,16 @@ if vim.g['user_loaded_telescope_coc'] ~= nil then
     vim.keymap.set('n', "<Space>i", require('telescope').extensions.coc.implementations)
 end
 
+if vim.g['user_loaded_telescope_fzf'] then
+    extensions['fzf'] = {
+        fuzzy = true,                   -- false will only do exact matching
+        override_generic_sorter = true, -- override the generic sorter
+        override_file_sorter = true,    -- override the file sorter
+        case_mode = "smart_case",       -- "smart_case", "ignore_case" or "respect_case"
+                                        -- the default case_mode is "smart_case"
+    }
+end
+
 if vim.g['user_loaded_telescope_dap'] then
     extensions['dap'] = {
         layout_strategy = "vertical",
@@ -137,6 +147,10 @@ telescope.setup(options)
 
 if vim.g['user_loaded_telescope_coc'] ~= nil then
     telescope.load_extension('coc')
+end
+
+if vim.g['user_loaded_telescope_fzf'] then
+    telescope.load_extension('fzf')
 end
 
 if vim.g['user_loaded_telescope_dap'] then
