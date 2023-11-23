@@ -554,13 +554,13 @@ local symbol_opts = {
 }
 
 local options = {
-    -- general = general_opts,
-    -- icons = icons_opts,
-    -- symbol = symbol_opts,
-    -- bar = bar_opts,
-    -- menu = menu_opts,
-    -- fzf = fzf_opts,
-    -- sources = sources_opts,
+    general = general_opts,
+    icons = icons_opts,
+    symbol = symbol_opts,
+    bar = bar_opts,
+    menu = menu_opts,
+    fzf = fzf_opts,
+    sources = sources_opts,
 }
 
 dropbar.setup(options)
