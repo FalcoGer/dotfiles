@@ -35,3 +35,12 @@ function Table2String(val, indentWidth, level, tableKey)
     ret = ret .. indent .. "}, -- " .. type(val) .. "  /" .. tostring(tableKey) .. "\n"
     return ret
 end
+
+function Table2StringArray(val, indentWidth)
+    local tableString = Table2String(val, indentWidth, nil, nil)
+    local result = {}
+    for s in string.gmatch(tableString, "[^\n]+") do
+        table.insert(result, s)
+    end
+    return result
+end
