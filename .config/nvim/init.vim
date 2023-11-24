@@ -448,9 +448,7 @@ set lazyredraw          " Do not update display while executing macros
 set showmode            " Shows the current mode in the last line
 set wrapscan            " wrap around while searching
 set cmdheight=2         " command line height
-" Waiting for resolution for
-" https://github.com/neovim/neovim/issues/26160
-set noemoji               " Smartly allocate 2 cells for emojis
+set emoji               " Smartly allocate 2 cells for emojis
 set ambiwidth="single"  " East Asian Width Class Ambiguous (special characters) take a single cell only.
 if has('nvim')
     set signcolumn=auto:1-3
