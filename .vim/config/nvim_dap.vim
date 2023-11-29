@@ -50,6 +50,10 @@ lua <<EOF
     -- behavior
     local dap = require('dap')
 
+    local list_breakpoints = function() require('dap').list_breakpoints(0) end
+    local create_conditional_bp = function() require('dap').toggle_breakpoint(vim.fn.input('Breakpoint condtion:')) end
+    local create_log_point = function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end
+
     -- :help dap.set_exception_breakpoints()
     -- dap.defaults.fallback.exception_breakpoints = {'raised', 'uncaught'}
     dap.defaults.fallback.exception_breakpoints = 'default'
@@ -61,10 +65,10 @@ lua <<EOF
     vim.keymap.set('n', '<F8>', require('dap').step_out)
     vim.keymap.set('n', '<F9>', require('dap').up)
     vim.keymap.set('n', '<F10>', require('dap').down)
-    vim.keymap.set('n', '<Leader>lb', function() require('dap').list_breakpoints(0) end)
+    vim.keymap.set('n', '<Leader>lb', list_breakpoints)
     vim.keymap.set('n', '<Leader>b', require('dap').toggle_breakpoint)
-    vim.keymap.set('n', '<Leader>cb', function() require('dap').toggle_breakpoint(vim.fn.input('Breakpoint condtion:')) end)
-    vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+    vim.keymap.set('n', '<Leader>cb', create_conditional_bp)
+    vim.keymap.set('n', '<Leader>lp', create_log_point)
     vim.keymap.set('n', '<Leader>dr', require('dap').repl.open)
     -- vim.keymap.set('n', '<Leader>dl', require('dap').run_last)
 
@@ -75,31 +79,40 @@ lua <<EOF
 
 
     --vim.keymap.set({'n', 'v'}, '<Leader>dp', require('dap.ui.widgets').preview())
-    vim.keymap.set('n', '<Leader>df', function()
+    local sidebar_frames = function()
       local widgets = require('dap.ui.widgets')
       local sidebar = widgets.sidebar(widgets.frames)
       sidebar.open()
-    end)
-    vim.keymap.set('n', '<Leader>ds', function()
+    end
+    vim.keymap.set('n', '<Leader>df', sidebar_frames)
+
+    local sidebar_scopes = function()
       local widgets = require('dap.ui.widgets')
       local sidebar = widgets.sidebar(widgets.scopes)
       sidebar.open()
-    end)
-    vim.keymap.set('n', '<Leader>dt', function()
+    end
+    vim.keymap.set('n', '<Leader>ds', sidebar_scopes)
+
+    local sidebar_threads = function()
       local widgets = require('dap.ui.widgets')
       local sidebar = widgets.sidebar(widgets.threads)
       sidebar.open()
-    end)
-    vim.keymap.set('n', '<Leader>dd', function()
+    end
+    vim.keymap.set('n', '<Leader>dt', sidebar_threads)
+
+    local sidebar_sessions = function()
       local widgets = require('dap.ui.widgets')
       local sidebar = widgets.sidebar(widgets.sessions)
       sidebar.open()
-    end)
-    vim.keymap.set('n', '<Leader>de', function()
+    end
+    vim.keymap.set('n', '<Leader>dd', sidebar_sessions)
+
+    local sidebar_expressions = function()
       local widgets = require('dap.ui.widgets')
       local sidebar = widgets.sidebar(widgets.expression)
       sidebar.open()
-    end)
+    end
+    vim.keymap.set('n', '<Leader>de', sidebar_expressions)
 
 
     -- ==============================================================
