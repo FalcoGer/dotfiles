@@ -155,7 +155,8 @@ else
     Plug 'miversen33/netman.nvim' | let g:user_loaded_netman = 1
 
     " Buffers as tabs
-    Plug 'akinsho/bufferline.nvim', { 'tag': '*' } | let g:user_loaded_bufferline = 1
+    " Plug 'akinsho/bufferline.nvim', { 'tag': '*' } | let g:user_loaded_bufferline = 1
+    Plug 'akinsho/bufferline.nvim' | let g:user_loaded_bufferline = 1
 
     " Not as performant as treesitter-context
     " But until https://github.com/nvim-treesitter/nvim-treesitter-context/issues/300
