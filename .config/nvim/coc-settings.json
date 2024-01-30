@@ -91,7 +91,7 @@
         "hiddenFalsePositives": "user"
     },
     "ltex.additionalRules.enablePickyRules": true,
-    "ltex.additionalRules.motherTongue": "de-DE",
+    // "ltex.additionalRules.motherTongue": "de-DE",
     "ltex.ltex-ls.logLevel": "warning",
     "ltex.completionEnabled": true,
     "ltex.diagnosticSeverity": {"PASSIVE_VOICE": "hint", "default": "information"},
