@@ -6,7 +6,7 @@ CompileFlags:
     -stdlib=libc++,
     -flto=full,
     -fvirtual-function-elimination,
-    -L/usr/lib/llvm-18/lib,
+    -L/usr/lib/llvm-19/lib,
     -fexperimental-library,
     -mavx2,
     -fopenmp,
@@ -98,8 +98,10 @@ Diagnostics:
       mpi-*
     ]
     Remove: [
+      readability-avoid-const-params-in-decls, # const in parameter in function declarations is useful for header files.
       misc-unused-parameters, # caught by -Wunused-parameter
       cppcoreguidelines-avoid-do-while, # annoying, do-while might be useful.
+      google-objc-*, # not doing objc
       # bugprone-easily-swappable-parameters, # annoying. setPos(int x, int y) is flagged
 
       # keep it in, use c++ random number generation facilities.
@@ -187,6 +189,7 @@ Diagnostics:
       misc-const-correctness.TransformValues: true
       misc-const-correctness.TransformReferences: true
       misc-const-correctness.TransformPointersAsValues: true
+      readability-redundant-inline-specifier.StrictMode: true
       readability-identifier-length.MinimumVariableNameLength: 0
       readability-identifier-length.IgnoredVariableNames: "^([XYZxyzit]|id)$"
       readability-identifier-length.MinimumLoopCounterNameLength: 2
