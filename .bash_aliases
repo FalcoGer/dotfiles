@@ -98,7 +98,7 @@ fi
 if [[ "${TERM}" = "xterm-kitty" ]]; then
     alias icat='kitty +kitten icat'
     alias kitty-diff='kitty +kitten diff'
-    alias ssh='kitty +kitten ssh'
+    # alias ssh='kitty +kitten ssh'
     # export TERM="xterm-256color"
 fi
 
@@ -119,7 +119,7 @@ CLANG_OPT="-std=c++23"
 CLANG_OPT="${CLANG_OPT} -stdlib=libc++ -fexperimental-library -L/usr/lib/llvm-${CLANG_VERSION}/lib"
 CLANG_OPT="${CLANG_OPT} -flto=full"
 CLANG_OPT="${CLANG_OPT} -fvirtual-function-elimination" # requires -flto=full, removes unused virtual functions
-CLANG_OPT="${CLANG_OPT} -fmodules -fcxx-modules" # enables module support
+# CLANG_OPT="${CLANG_OPT} -fmodules -fcxx-modules" # enables module support
 CLANG_WARN="-Wall -Wextra -Wpedantic"
 CLANG_WARN="${CLANG_WARN} -Wdouble-promotion" # implicit float->double
 CLANG_WARN="${CLANG_WARN} -Wformat=2"
