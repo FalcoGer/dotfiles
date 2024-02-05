@@ -191,11 +191,11 @@ Diagnostics:
       misc-const-correctness.TransformPointersAsValues: true
       readability-redundant-inline-specifier.StrictMode: true
       readability-identifier-length.MinimumVariableNameLength: 0
-      readability-identifier-length.IgnoredVariableNames: "^([XYZxyzit]|id)$"
-      readability-identifier-length.MinimumLoopCounterNameLength: 2
-      readability-identifier-length.IgnoredLoopCounterNames: "^[ijkxyz_]$"
+      readability-identifier-length.IgnoredVariableNames: "^([XYZxyzit]|id|it)$"
+      readability-identifier-length.MinimumLoopCounterNameLength: 3
+      readability-identifier-length.IgnoredLoopCounterNames: "^([ijkxyz_]|idx|it)$"
       readability-identifier-length.MinimumExceptionNameLength: 2
-      readability-identifier-length.IgnoredExceptionVariableNames: "^[e]$"
+      readability-identifier-length.IgnoredExceptionVariableNames: "^(e|ex)$"
       readability-identifier-length.MinimumParameterNameLength: 3
       readability-identifier-length.IgnoredParameterNames: "^([XYZxyzit]|id)$"
       readability-identifier-naming.AbstractClassCase: CamelCase
@@ -207,9 +207,9 @@ Diagnostics:
       readability-identifier-naming.ConstantMemberCase: UPPER_CASE
       readability-identifier-naming.ConstantParameterCase: UPPER_CASE
       readability-identifier-naming.ConstantPointerParameterCase: camelBack
-      readability-identifier-naming.ConstantPointerParameterPrefix: "p"
+      readability-identifier-naming.ConstantPointerParameterPrefix: "ptr_"
       readability-identifier-naming.ConstexprFunctionCase: camelBack
-      readability-identifier-naming.ConstexprMethodCase: CamelCase
+      readability-identifier-naming.ConstexprMethodCase: camelBack
       readability-identifier-naming.ConstexprVariableCase: UPPER_CASE
       readability-identifier-naming.EnumCase: CamelCase
       readability-identifier-naming.EnumPrefix: "E"
@@ -217,17 +217,17 @@ Diagnostics:
       readability-identifier-naming.FunctionCase: camelBack
       readability-identifier-naming.GlobalConstantCase: UPPER_CASE
       readability-identifier-naming.GlobalConstantPointerCase: UPPER_CASE
-      readability-identifier-naming.GlobalConstantPointerPrefix: "p"
+      readability-identifier-naming.GlobalConstantPointerPrefix: "ptr_"
       readability-identifier-naming.GlobalFunctionCase: camelBack
       readability-identifier-naming.GlobalPointerCase: camelBack
-      readability-identifier-naming.GlobalPointerPrefix: "p"
+      readability-identifier-naming.GlobalPointerPrefix: "ptr_"
       readability-identifier-naming.GlobalVariableCase: camelBack
       readability-identifier-naming.InlineNamespaceCase: CamelCase
       readability-identifier-naming.LocalConstantCase: UPPER_CASE
       readability-identifier-naming.LocalConstantPointerCase: camelBack
-      readability-identifier-naming.LocalConstantPointerPrefix: "p"
+      readability-identifier-naming.LocalConstantPointerPrefix: "ptr_"
       readability-identifier-naming.LocalPointerCase: camelBack
-      readability-identifier-naming.LocalPointerPrefix: "p"
+      readability-identifier-naming.LocalPointerPrefix: "ptr_"
       readability-identifier-naming.LocalVariableCase: camelBack
       readability-identifier-naming.MacroDefinitionCase: UPPER_CASE
       readability-identifier-naming.MemberCase: camelBack
@@ -236,16 +236,16 @@ Diagnostics:
       readability-identifier-naming.ParameterCase: camelBack
       readability-identifier-naming.ParameterPackCase: camelBack
       readability-identifier-naming.PointerParameterCase: camelBack
-      readability-identifier-naming.PointerParameterPrefix: "p"
+      readability-identifier-naming.PointerParameterPrefix: "ptr_"
       readability-identifier-naming.PrivateMemberCase: camelBack
       readability-identifier-naming.PrivateMemberPrefix: "m_"
-      readability-identifier-naming.PrivateMethodCase: CamelCase
+      readability-identifier-naming.PrivateMethodCase: camelBack
       readability-identifier-naming.ProtectedMemberCase: camelBack
       readability-identifier-naming.ProtectedMemberPrefix: "m_"
-      readability-identifier-naming.ProtectedMethodCase: CamelCase
+      readability-identifier-naming.ProtectedMethodCase: camelBack
       readability-identifier-naming.PublicMemberCase: camelBack
       readability-identifier-naming.PublicMemberPrefix: "m_"
-      readability-identifier-naming.PublicMethodCase: CamelCase
+      readability-identifier-naming.PublicMethodCase: camelBack
       readability-identifier-naming.ScopedEnumConstantCase: UPPER_CASE
       readability-identifier-naming.StaticConstantCase: UPPER_CASE
       readability-identifier-naming.StaticVariableCase: camelBack
@@ -257,4 +257,4 @@ Diagnostics:
       readability-identifier-naming.UnionCase: CamelCase
       readability-identifier-naming.ValueTemplateParameterCase: camelBack
       readability-identifier-naming.VariableCase: camelBack
-      readability-identifier-naming.VirtualMethodCase: CamelCase
+      readability-identifier-naming.VirtualMethodCase: camelBack
