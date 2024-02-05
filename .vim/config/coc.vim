@@ -3,6 +3,7 @@
 augroup CocAutoExtension
     autocmd!
     autocmd FileType text           call CocActionAsync('activeExtension', 'coc-ltex')
+    autocmd FileType lua            call coc#config('Lua.workspace.library', nvim_get_runtime_file('', 1))
 augroup end
 
 if !has('nvim')
