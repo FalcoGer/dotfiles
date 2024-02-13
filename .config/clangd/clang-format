@@ -335,9 +335,8 @@ SpaceBeforeParensOptions:
     AfterFunctionDefinitionName: false
     AfterIfMacros: false
     AfterOverloadedOperator: true
-    # AfterPlacementOperatorStyle: Never, Always, Leave
     # Add or don't add a space after new and delete followed by (): new (buf) T
-    AfterPlacementOperator: Always
+    AfterPlacementOperator: true
     AfterRequiresInClause: true
     AfterRequiresInExpression: false
     BeforeNonEmptyParentheses: false
