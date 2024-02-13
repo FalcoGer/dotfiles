@@ -44,6 +44,7 @@ CompileFlags:
     -Werror=pedantic,
     -Werror=char-subscripts,
     -Werror=null-dereference,
+    -Werror=dangling-gsl,
     -Werror=init-self,
     -Werror=switch,
     -Werror=switch-enum,
@@ -217,11 +218,12 @@ Diagnostics:
       readability-identifier-naming.FunctionCase: camelBack
       readability-identifier-naming.GlobalConstantCase: UPPER_CASE
       readability-identifier-naming.GlobalConstantPointerCase: UPPER_CASE
-      readability-identifier-naming.GlobalConstantPointerPrefix: "ptr_"
+      readability-identifier-naming.GlobalConstantPointerPrefix: "gptr_"
       readability-identifier-naming.GlobalFunctionCase: camelBack
       readability-identifier-naming.GlobalPointerCase: camelBack
-      readability-identifier-naming.GlobalPointerPrefix: "ptr_"
+      readability-identifier-naming.GlobalPointerPrefix: "gptr_"
       readability-identifier-naming.GlobalVariableCase: camelBack
+      readability-identifier-naming.GlobalVariablePrefix: "g_"
       readability-identifier-naming.InlineNamespaceCase: CamelCase
       readability-identifier-naming.LocalConstantCase: UPPER_CASE
       readability-identifier-naming.LocalConstantPointerCase: camelBack
