@@ -150,7 +150,7 @@ else
     if exists('g:user_loaded_neotree')
         " Dependencies for neotree
         " optional, allows image previews
-        if !exists('g:neovide')
+        if $TERM ==# 'xterm-kitty'
             Plug '3rd/image.nvim' | let g:user_loaded_3rd_image = 1
         endif
         " provides diagnostics source
