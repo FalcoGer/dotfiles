@@ -6,6 +6,36 @@ local notify = require('notify')
 -- keymaps
 vim.api.nvim_set_keymap('n', '<Leader>n', ':Telescope notify<CR>', { noremap = true, silent = true })
 
+
+-- options
+
+local options = {
+    background_colour = "NotifyBackground",
+    fps = 30,
+    icons = {
+        TRACE = " ",
+        DEBUG = " ",
+        INFO = " ",
+        WARN = " ",
+        ERROR = "󰡅 ",
+    },
+    level = 1,
+    minimum_width = 60,
+    -- one of "default", "minimal", "simple", "compact"
+    render = "default",
+    -- one of "fade_in_slide_out", "fade", "slide", "static"
+    stages = "fade_in_slide_out",
+    time_formats = {
+        notification = "%T",
+        notification_history = "%FT%T"
+    },
+    timeout = 10000,
+    top_down = true,
+}
+
+notify.setup(options);
+
+
 -- highlights
 
 --[[
@@ -36,53 +66,45 @@ for group, attributes in pairs(highlights) do
 end
 --]]
 
-vim.api.nvim_command("highlight link NotifyERRORBorder DiagnosticError")
-vim.api.nvim_command("highlight link NotifyERRORIcon   DiagnosticError")
-vim.api.nvim_command("highlight link NotifyERRORTitle  DiagnosticError")
-vim.api.nvim_command("highlight link NotifyERRORBody   Normal")
-
-vim.api.nvim_command("highlight link NotifyWARNBorder  DiagnosticWarn")
-vim.api.nvim_command("highlight link NotifyWARNIcon    DiagnosticWarn")
-vim.api.nvim_command("highlight link NotifyWARNTitle   DiagnosticWarn")
-vim.api.nvim_command("highlight link NotifyWARNBody    Normal")
-
-vim.api.nvim_command("highlight link NotifyINFOBorder  DiagnosticInfo")
-vim.api.nvim_command("highlight link NotifyINFOIcon    DiagnosticInfo")
-vim.api.nvim_command("highlight link NotifyINFOTitle   DiagnosticInfo")
-vim.api.nvim_command("highlight link NotifyINFOBody    Normal")
-
-vim.api.nvim_command("highlight link NotifyDEBUGBorder DiagnosticHint")
-vim.api.nvim_command("highlight link NotifyDEBUGIcon   DiagnosticHint")
-vim.api.nvim_command("highlight link NotifyDEBUGTitle  DiagnosticHint")
-vim.api.nvim_command("highlight link NotifyDEBUGBody   Normal")
-
-vim.api.nvim_command("highlight link NotifyTRACEBorder DiagnosticOk")
-vim.api.nvim_command("highlight link NotifyTRACEIcon   DiagnosticOk")
-vim.api.nvim_command("highlight link NotifyTRACETitle  DiagnosticOk")
-vim.api.nvim_command("highlight link NotifyTRACEBody   Normal")
-
--- options
-
-local options = {
-    background_colour = "NotifyBackground",
-    fps = 30,
-    icons = {
-        TRACE = " ",
-        DEBUG = " ",
-        INFO = " ",
-        WARN = " ",
-        ERROR = "󰡅 ",
-    },
-    level = 1,
-    minimum_width = 60,
-    render = "default",
-    stages = "fade_in_slide_out",
-    time_formats = {
-        notification = "%T",
-        notification_history = "%FT%T"
-    },
-    timeout = 10000,
-    top_down = true,
+local highlights = {
+"NotifyERRORBorder",
+"NotifyERRORIcon",
+"NotifyERRORTitle",
+"NotifyERRORBody",
+"NotifyWARNBorder",
+"NotifyWARNIcon",
+"NotifyWARNTitle",
+"NotifyWARNBody",
+"NotifyINFOBorder",
+"NotifyINFOIcon",
+"NotifyINFOTitle",
+"NotifyINFOBody",
+"NotifyDEBUGBorder",
+"NotifyDEBUGIcon",
+"NotifyDEBUGTitle",
+"NotifyDEBUGBody",
+"NotifyTRACEBorder",
+"NotifyTRACEIcon",
+"NotifyTRACETitle",
+"NotifyTRACEBody",
 }
 
-notify.setup(options);
+for _, highlight in ipairs(highlights) do
+    vim.api.nvim_command("highlight clear " .. highlight);
+
+    if highlight:sub(-#"Body") == "Body" then
+        vim.api.nvim_command("highlight link " .. highlight .. " Normal")
+    else
+        if string.find(highlight, "ERROR", 1, true) ~= nil then
+            vim.api.nvim_command("highlight link " .. highlight .. " DiagnosticError")
+        elseif string.find(highlight, "WARN", 1, true) ~= nil then
+            vim.api.nvim_command("highlight link " .. highlight .. " DiagnosticWarn")
+        elseif string.find(highlight, "INFO", 1, true) ~= nil then
+            vim.api.nvim_command("highlight link " .. highlight .. " DiagnosticInfo")
+        elseif string.find(highlight, "DEBUG", 1, true) ~= nil then
+            vim.api.nvim_command("highlight link " .. highlight .. " DiagnosticHint")
+        elseif string.find(highlight, "TRACE", 1, true) ~= nil then
+            vim.api.nvim_command("highlight link " .. highlight .. " DiagnosticOk")
+        end
+    end
+end
