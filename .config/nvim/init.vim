@@ -218,6 +218,8 @@ else
     " Fuzzy searcher for all kinds of things
     Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' } | let g:user_loaded_telescope = 1
 
+    Plug 'folke/noice.nvim' | let g:user_loaded_noice = 1
+
     if exists('g:user_loaded_telescope')
         if exists('g:user_loaded_coc')
             " CoC extension for telescope
@@ -240,7 +242,7 @@ else
         Plug 'nat-418/telescope-color-names.nvim' | let g:user_loaded_telescope_color_names = 1
     endif
 
-    if exists('g:user_loaded_neotree') || exists('g:user_loaded_chatgpt')
+    if exists('g:user_loaded_neotree') || exists('g:user_loaded_chatgpt') || exists('g:user_loaded_noice')
         " Lua function library for UI elements
         Plug 'MunifTanjim/nui.nvim'
     endif
@@ -248,6 +250,10 @@ else
     if exists('g:user_loaded_neotree') || exists('g:user_loaded_telescope') || exists('g:user_loaded_codeium')
         " general purpose lua function library
         Plug 'nvim-lua/plenary.nvim'
+    endif
+
+    if exists('g:user_loaded_noice')
+        Plug 'rcarriga/nvim-notify' | let g:user_loaded_nvim_notify = 1
     endif
 endif
 
@@ -783,4 +789,12 @@ endif
 
 if exists ('g:user_loaded_codeium')
     source ~/.vim/config/codeium.lua
+endif
+
+if exists ('g:user_loaded_nvim_notify')
+    source ~/.vim/config/notify.lua
+endif
+
+if exists('g:user_loaded_noice')
+    source ~/.vim/config/noice.lua
 endif
