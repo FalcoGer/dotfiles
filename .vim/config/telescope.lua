@@ -3,10 +3,10 @@
 
 local telescope = require('telescope')
 
-vim.keymap.set('n', "<Space>t", require('telescope.builtin').builtin)
-vim.keymap.set('n', "<Space>h", require('telescope.builtin').help_tags)
-vim.keymap.set('n', "<Space>m", require('telescope.builtin').man_pages)
-vim.keymap.set('n', "<Space>/", require('telescope.builtin').current_buffer_fuzzy_find)
+vim.keymap.set('n', "<Space>t", require('telescope.builtin').builtin, { silent = true, desc = "Open telescope default lists.", noremap = true })
+vim.keymap.set('n', "<Space>h", require('telescope.builtin').help_tags, { silent = true, desc = "Open help topic list in telescope.", noremap = true })
+vim.keymap.set('n', "<Space>m", require('telescope.builtin').man_pages, { silent = true, desc = "Open man page list in telescope.", noremap = true })
+vim.keymap.set('n', "<Space>/", require('telescope.builtin').current_buffer_fuzzy_find, { silent = true, desc = "Open telescope fuzzy finder for current buffer.", noremap = true })
 
 -- :help telescope.setup()
 local options = {
@@ -68,16 +68,16 @@ if vim.g['user_loaded_telescope_coc'] ~= nil then
         prefer_locations = true,
     }
 
-    vim.keymap.set('n', "<Space>a", require('telescope').extensions.coc.diagnostics)
-    vim.keymap.set('n', "<Space>A", require('telescope').extensions.coc.workspace_diagnostics)
-    vim.keymap.set('n', "<Space>s", require('telescope').extensions.coc.document_symbols)
-    vim.keymap.set('n', "<Space>S", require('telescope').extensions.coc.workspace_symbols)
-    vim.keymap.set('n', "<Space>c", require('telescope').extensions.coc.commands)
-    vim.keymap.set('n', "<Space>x", require('telescope').extensions.coc.references)
-    vim.keymap.set('n', "<Space>X", require('telescope').extensions.coc.references_used)
-    vim.keymap.set('n', "<Space>d", require('telescope').extensions.coc.declarations)
-    vim.keymap.set('n', "<Space>D", require('telescope').extensions.coc.definitions)
-    vim.keymap.set('n', "<Space>i", require('telescope').extensions.coc.implementations)
+    vim.keymap.set('n', "<Space>a", require('telescope').extensions.coc.diagnostics, { silent = true, desc = "Open document coc-diagnostics list in telescope.", noremap = true })
+    vim.keymap.set('n', "<Space>A", require('telescope').extensions.coc.workspace_diagnostics, { silent = true, desc = "Open workspace coc-diagnostics list in telescope.", noremap = true })
+    vim.keymap.set('n', "<Space>s", require('telescope').extensions.coc.document_symbols, { silent = true, desc = "Open document coc-symbol list in telescope.", noremap = true })
+    vim.keymap.set('n', "<Space>S", require('telescope').extensions.coc.workspace_symbols, { silent = true, desc = "Open workspace coc-symbol list in telescope.", noremap = true })
+    vim.keymap.set('n', "<Space>c", require('telescope').extensions.coc.commands, { silent = true, desc = "Open coc-extensions list in telescope.", noremap = true })
+    vim.keymap.set('n', "<Space>x", require('telescope').extensions.coc.references, { silent = true, desc = "Open coc-references list in telescope.", noremap = true })
+    vim.keymap.set('n', "<Space>X", require('telescope').extensions.coc.references_used, { silent = true, desc = "Open coc-used-references list in telescope.", noremap = true })
+    vim.keymap.set('n', "<Space>d", require('telescope').extensions.coc.declarations, { silent = true, desc = "Open coc-declarations list in telescope.", noremap = true })
+    vim.keymap.set('n', "<Space>D", require('telescope').extensions.coc.definitions, { silent = true, desc = "Open coc-definitions list in telescope.", noremap = true })
+    vim.keymap.set('n', "<Space>i", require('telescope').extensions.coc.implementations, { silent = true, desc = "Open coc-implemetations list in telescope.", noremap = true })
 end
 
 if vim.g['user_loaded_telescope_fzf'] then
@@ -94,11 +94,11 @@ if vim.g['user_loaded_telescope_dap'] then
     extensions['dap'] = {
         layout_strategy = "vertical",
     }
-    vim.keymap.set("n", "<Leader>lb", require('telescope').extensions.dap.list_breakpoints)
-    vim.keymap.set("n", "<Leader>dv", require('telescope').extensions.dap.variables)
-    vim.keymap.set("n", "<Leader>df", require('telescope').extensions.dap.frames)
-    vim.keymap.set("n", "<Leader>dc", require('telescope').extensions.dap.commands)
-    vim.keymap.set("n", "<Leader>dC", require('telescope').extensions.dap.configurations)
+    vim.keymap.set("n", "<Leader>lb", require('telescope').extensions.dap.list_breakpoints, { silent = true, desc = "Open dap breapoints list in telescope.", noremap = true })
+    vim.keymap.set("n", "<Leader>dv", require('telescope').extensions.dap.variables, { silent = true, desc = "Open dap varaibles list in telescope.", noremap = true })
+    vim.keymap.set("n", "<Leader>df", require('telescope').extensions.dap.frames, { silent = true, desc = "Open dap frames list in telescope.", noremap = true })
+    vim.keymap.set("n", "<Leader>dc", require('telescope').extensions.dap.commands, { silent = true, desc = "Open dap command list in telescope.", noremap = true })
+    vim.keymap.set("n", "<Leader>dC", require('telescope').extensions.dap.configurations, { silent = true, desc = "Open dap configurations list in telescope.", noremap = true })
 end
 
 if vim.g['user_loaded_telescope_http'] then
@@ -108,7 +108,7 @@ if vim.g['user_loaded_telescope_http'] then
         -- open_url = 'open %s' -- OSX
         -- open_url = 'start %s' -- Windows
     }
-    vim.keymap.set('n', "<Space>H", require('telescope').extensions.http.list)
+    vim.keymap.set('n', "<Space>H", require('telescope').extensions.http.list, { silent = true, desc = "Open HTTP status code list in telescope.", noremap = true })
 end
 
 if vim.g['user_loaded_telescope_emoji'] then
@@ -124,7 +124,7 @@ if vim.g['user_loaded_telescope_emoji'] then
             vim.api.nvim_put({ emoji.value }, 'c', false, true)
         end,
     }
-    vim.keymap.set('n', "<Space>E", require('telescope').extensions.emoji.emoji)
+    vim.keymap.set('n', "<Space>E", require('telescope').extensions.emoji.emoji, { silent = true, desc = "Open emoji list in telescope.", noremap = true })
 end
 
 if vim.g['user_loaded_telescope_glyph'] then
@@ -133,12 +133,17 @@ if vim.g['user_loaded_telescope_glyph'] then
             vim.api.nvim_put({glyph.value}, 'c', false, true)
         end
     }
-    vim.keymap.set('n', "<Space>G", require('telescope').extensions.glyph.glyph)
+    vim.keymap.set('n', "<Space>G", require('telescope').extensions.glyph.glyph, { silent = true, desc = "Open glyph list in telescope.", noremap = true })
 end
 
 if vim.g['user_loaded_telescope_color_names'] then
     extensions['color_names'] = {}
-    vim.keymap.set('n', "<Space>C", require('telescope').extensions.color_names.color_names)
+    vim.keymap.set('n', "<Space>C", require('telescope').extensions.color_names.color_names, { silent = true, desc = "Open color name list in telescope.", noremap = true })
+end
+
+if vim.g['user_loaded_noice'] then
+    extensions['noice'] = {}
+    vim.keymap.set('n', '<Space>n', ':Telescope noice<CR>', { silent = true, desc = "Open noice history in telescope.", noremap = true })
 end
 
 options['extensions'] = extensions
@@ -171,4 +176,9 @@ end
 
 if vim.g['user_loaded_telescope_color_names'] then
     telescope.load_extension('color_names')
+end
+
+
+if vim.g['user_loaded_noice'] then
+    telescope.load_extension('noice')
 end

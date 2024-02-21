@@ -198,9 +198,36 @@ local options = {
     views = {}, ---@see section on views
     ---@type NoiceRouteConfig[]
     routes = {
+        -- show recording macro as message
         {
             view = "notify",
-            filter = { event = "msg_showmode" },
+            filter = { event = "msg_showmode", },
+        },
+        -- filter out "The only match" from coc completion when accepting it.
+        {
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "The only match",
+            },
+            opts = { skip = true, },
+        },
+        -- don't show unite popup
+        {
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "[unite.vim] interactive mode: Please input source name",
+            },
+            opts = { skip = true, },
+        },
+        -- any message with this many lines gets sent to the split view
+        {
+            view = "split",
+            filter = {
+                event = "msg_show",
+                min_height = 10,
+            },
         },
     },           --- @see section on routes
     ---@type table<string, NoiceFilter>
