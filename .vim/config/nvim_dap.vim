@@ -59,60 +59,60 @@ lua <<EOF
     dap.defaults.fallback.exception_breakpoints = 'default'
     -- Key mappings
 
-    vim.keymap.set('n', '<F5>', require('dap').continue)
-    vim.keymap.set('n', '<F6>', require('dap').step_into)
-    vim.keymap.set('n', '<F7>', require('dap').step_over)
-    vim.keymap.set('n', '<F8>', require('dap').step_out)
-    vim.keymap.set('n', '<F9>', require('dap').up)
-    vim.keymap.set('n', '<F10>', require('dap').down)
-    vim.keymap.set('n', '<Leader>lb', list_breakpoints)
-    vim.keymap.set('n', '<Leader>b', require('dap').toggle_breakpoint)
-    vim.keymap.set('n', '<Leader>cb', create_conditional_bp)
-    vim.keymap.set('n', '<Leader>lp', create_log_point)
-    vim.keymap.set('n', '<Leader>dr', require('dap').repl.open)
-    -- vim.keymap.set('n', '<Leader>dl', require('dap').run_last)
+    vim.keymap.set('n', '<F5>', require('dap').continue, { silent = true, desc = "DAP - Continue", noremap = true })
+    vim.keymap.set('n', '<F6>', require('dap').step_into, { silent = true, desc = "DAP - Step into", noremap = true })
+    vim.keymap.set('n', '<F7>', require('dap').step_over, { silent = true, desc = "DAP - Step over", noremap = true })
+    vim.keymap.set('n', '<F8>', require('dap').step_out, { silent = true, desc = "DAP - Step out", noremap = true })
+    vim.keymap.set('n', '<F9>', require('dap').up, { silent = true, desc = "DAP - Stackframe up", noremap = true })
+    vim.keymap.set('n', '<F10>', require('dap').down, { silent = true, desc = "DAP - Stackframe down", noremap = true })
+    vim.keymap.set('n', '<Leader>lb', list_breakpoints, { silent = true, desc = "DAP - List breakpoints" })
+    vim.keymap.set('n', '<Leader>b', require('dap').toggle_breakpoint, { silent = true, desc = "DAP - Toggle breakpoint", noremap = true })
+    vim.keymap.set('n', '<Leader>cb', create_conditional_bp, { silent = true, desc = "DAP - Create conditional breakpoint", noremap = true })
+    vim.keymap.set('n', '<Leader>lp', create_log_point, { silent = true, desc = "DAP - Create log point", noremap = true })
+    vim.keymap.set('n', '<Leader>dr', require('dap').repl.open, { silent = true, desc = "DAP - REPL", noremap = true })
+    -- vim.keymap.set('n', '<Leader>dl', require('dap').run_last, { silent = true, desc = "DAP - Run last", noremap = true })
 
     if not (vim.g.user_loaded_nvim_dap_ui ~= nil) then
         -- use dap hover only when dap_ui not loaded
-        vim.keymap.set({'n', 'v'}, '<Leader>dh', require('dap.ui.widgets').hover())
+        vim.keymap.set({'n', 'v'}, '<Leader>dh', require('dap.ui.widgets').hover(), { silent = true, desc = "DAP - Hover widget", noremap = true })
     end
 
 
-    --vim.keymap.set({'n', 'v'}, '<Leader>dp', require('dap.ui.widgets').preview())
+    --vim.keymap.set({'n', 'v'}, '<Leader>dp', require('dap.ui.widgets').preview(), { silent = true, desc = "DAP - Preview Widget", noremap = true })
     local sidebar_frames = function()
       local widgets = require('dap.ui.widgets')
       local sidebar = widgets.sidebar(widgets.frames)
       sidebar.open()
     end
-    vim.keymap.set('n', '<Leader>df', sidebar_frames)
+    vim.keymap.set('n', '<Leader>df', sidebar_frames, { silent = true, desc = "DAP - Sidebar Widget - Frames", noremap = true })
 
     local sidebar_scopes = function()
       local widgets = require('dap.ui.widgets')
       local sidebar = widgets.sidebar(widgets.scopes)
       sidebar.open()
     end
-    vim.keymap.set('n', '<Leader>ds', sidebar_scopes)
+    vim.keymap.set('n', '<Leader>ds', sidebar_scopes, { silent = true, desc = "DAP - Sidebar Widget - Scopes", noremap = true })
 
     local sidebar_threads = function()
       local widgets = require('dap.ui.widgets')
       local sidebar = widgets.sidebar(widgets.threads)
       sidebar.open()
     end
-    vim.keymap.set('n', '<Leader>dt', sidebar_threads)
+    vim.keymap.set('n', '<Leader>dt', sidebar_threads, { silent = true, desc = "DAP - Sidebar Widget - Threads", noremap = true })
 
     local sidebar_sessions = function()
       local widgets = require('dap.ui.widgets')
       local sidebar = widgets.sidebar(widgets.sessions)
       sidebar.open()
     end
-    vim.keymap.set('n', '<Leader>dd', sidebar_sessions)
+    vim.keymap.set('n', '<Leader>dd', sidebar_sessions, { silent = true, desc = "DAP - Sidebar Widget - Sessions", noremap = true })
 
     local sidebar_expressions = function()
       local widgets = require('dap.ui.widgets')
       local sidebar = widgets.sidebar(widgets.expression)
       sidebar.open()
     end
-    vim.keymap.set('n', '<Leader>de', sidebar_expressions)
+    vim.keymap.set('n', '<Leader>de', sidebar_expressions, { silent = true, desc = "DAP - Sidebar Widget - Expressions", noremap = true })
 
 
     -- ==============================================================

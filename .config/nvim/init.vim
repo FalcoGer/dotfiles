@@ -583,7 +583,7 @@ cnoreabbrev help vertical help
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 " noremap <C-L> :nohl<CR>:cclose<CR>:lclose<CR>:helpclose<CR><C-L>
-noremap <C-L> :nohl<CR>:cclose<CR>:lclose<CR><C-L>
+noremap <silent> <C-L> :nohl<CR>:cclose<CR>:lclose<CR><C-L>
 
 " copy to PRIMARY or to CLIPBOARD
 noremap <Leader>y "+y

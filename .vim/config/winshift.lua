@@ -1,4 +1,4 @@
-vim.keymap.set({"n"}, "<leader>w", ":WinShift<CR>", { silent = true })
+vim.keymap.set({"n"}, "<leader>w", ":WinShift<CR>", { silent = true, desc = "Winshift - Move window" })
 
 local options = {
   highlight_moving_win = true,  -- Highlight the window being moved
