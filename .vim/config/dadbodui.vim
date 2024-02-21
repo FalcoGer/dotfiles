@@ -1,6 +1,6 @@
 " https://github.com/kristijanhusak/vim-dadbod-ui
 
-nnoremap <Leader>db :DBUIToggle<CR>
+nnoremap <silent> <Leader>db :DBUIToggle<CR>
 
 let g:db_ui_icons = {
     \ 'expanded': '▾',
