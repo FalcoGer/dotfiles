@@ -8,7 +8,6 @@ CompileFlags:
     -fvirtual-function-elimination,
     -L/usr/lib/llvm-19/lib,
     -fexperimental-library,
-    -mavx2,
     -fopenmp,
     -Wall,
     -Wextra,
