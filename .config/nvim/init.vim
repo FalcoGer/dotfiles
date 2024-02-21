@@ -112,6 +112,13 @@ Plug 'mbbill/undotree' | let g:user_loaded_undotree = 1
 " Tag bar, showing for example classes and members in a tree view
 Plug 'preservim/tagbar' | let g:user_loaded_tagbar = 1
 
+" Query databases
+Plug 'tpope/vim-dadbod' | let g:user_loaded_dadbod = 1
+if exists('g:user_loaded_dadbod')
+    Plug 'kristijanhusak/vim-dadbod-ui' | let g:user_loaded_dadbodui = 1
+endif
+
+
 if !has('nvim')
     " Provides fuzzy search, :FZF command, ctrl + X and ctrl + V to open in
     " split/vertical split
@@ -672,6 +679,10 @@ endif
 if exists('g:user_loaded_coc')
     source ~/.vim/config/coc.vim
     source ~/.vim/config/coc-snippets.vim
+endif
+
+if exists('g:user_loaded_dadbodui')
+    source ~/.vim/config/dadbodui.vim
 endif
 
 if exists('g:user_loaded_bufferline')
