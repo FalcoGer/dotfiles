@@ -220,6 +220,8 @@ else
 
     Plug 'folke/noice.nvim' | let g:user_loaded_noice = 1
 
+    Plug 'nvim-neorg/neorg' { 'do': 'Neorg sync-parsers' } | let g:user_loaded_neorg = 1
+
     if exists('g:user_loaded_telescope')
         if exists('g:user_loaded_coc')
             " CoC extension for telescope
@@ -247,7 +249,7 @@ else
         Plug 'MunifTanjim/nui.nvim'
     endif
 
-    if exists('g:user_loaded_neotree') || exists('g:user_loaded_telescope') || exists('g:user_loaded_codeium')
+    if exists('g:user_loaded_neotree') || exists('g:user_loaded_telescope') || exists('g:user_loaded_codeium') || exists('g:user_loaded_neorg')
         " general purpose lua function library
         Plug 'nvim-lua/plenary.nvim'
     endif
