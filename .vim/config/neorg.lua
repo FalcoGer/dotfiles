@@ -37,18 +37,22 @@ local options = {
         ["core.keybinds"] = {
             config = {
                 hook = function(keybinds)
-                    keybinds.unmap("norg", "n", keybinds.leader .. "nn")
-
                     keybinds.map_event_to_mode("norg", {
                         n = { -- Bind keys in normal mode
-                            { "<M-l>", "core.integrations.telescope.find_linkable" },
-                            { "<Leader>N", "core.dirman.new.note" },
-                            { "<C-CR>", "core.looking-glass.magnify-code-block" }
+                            { "<LocalLeader>l", "core.integrations.telescope.find_linkable" },
+                            { "<LocalLeader>h", "core.integrations.telescope.search_headings" },
+                            { "<LocalLeader>w", "core.integrations.telescope.switch_workspace" },
+                            { "<LocalLeader>b", "core.integrations.telescope.find_backlinks" },
+                            { "<C-CR>", "core.looking-glass.magnify-code-block" },
+                            { "<M-DOWN>", "core.integrations.treesitter.next.heading"},
+                            { "<M-UP>", "core.integrations.treesitter.previous.heading"},
                         },
 
                         i = { -- Bind in insert mode
                             { "<M-l>", "core.integrations.telescope.insert_link" },
                         },
+                        v = { -- bind to visual mode
+                        }
                     }, {
                         silent = true,
                         noremap = true,

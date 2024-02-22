@@ -37,6 +37,7 @@ endif
 " Set the leader button to , which is easier to press than the default \
 " see :help leader
 let mapleader=','
+let maplocalleader='.'
 " Set timeout to complete key combinations to 1500ms, default would be 1000ms
 let timeoutlen=1500
 
