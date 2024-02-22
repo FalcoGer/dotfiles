@@ -207,8 +207,8 @@ local options = {
         {
             filter = {
                 event = "msg_show",
-                kind = "",
                 find = "The only match",
+                kind = {"", "echo", "echomsg"},
             },
             opts = { skip = true, },
         },
@@ -216,8 +216,8 @@ local options = {
         {
             filter = {
                 event = "msg_show",
-                kind = "",
-                find = "[unite.vim] interactive mode: Please input source name",
+                kind = {"", "echo", "echomsg"},
+                find = "interactive mode: Please input source name",
             },
             opts = { skip = true, },
         },
