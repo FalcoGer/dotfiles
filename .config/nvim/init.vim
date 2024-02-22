@@ -365,6 +365,17 @@ set mouse=a         " Enable mouse usage (all modes)
 set colorcolumn=121
 highlight ColorColumn gui=underdashed guisp=#FF0000 ctermbg=1 guibg=NONE
 
+" Set conceal options
+" 0 - normal
+" 1 - each block is replaced by a single char, or whitespace if none is defined
+" 2 - text is replaced by a defined char, hidden if non defined
+" 3 - text is just concealed always, even if a replacement char is defined
+set conceallevel=2
+" The modes in which the cursor line can still conceal stuff. visual is all
+" visually marked characters. any combination of
+" v (visual), n (normal), i (insert) and c (command)
+set concealcursor=nc
+
 " Highlight Whitespaces
 set list
 set listchars=tab:<->               " Show tabs as this. xy[z], x always, then y as many as will fit, z as the last one.
