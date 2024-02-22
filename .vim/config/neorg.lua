@@ -3,15 +3,48 @@
 
 local neorg = require('neorg')
 
+local dirman = require('neorg').modules.get_module("core.dirman")
+
+CreateNote = function()
+    local dirman = require('neorg').modules.get_module("core.dirman")
+    local noteName = vim.fn.input("New Note: ")
+
+    if noteName ~= nil and noteName ~= "" then
+        dirman.create_file(noteName, "notes", {
+            no_open  = false, -- open file after creation?
+            force    = false, -- overwrite file if exists
+            metadata = {} -- key-value table for metadata fields
+        })
+    end
+end
+
+vim.keymap.set('n', '<Leader>N', ':lua CreateNote()<CR>', { silent = true, desc = "Neorg new note."})
+
 local options = {
     load = {
         ["core.defaults"] = {},  -- Loads default behaviour
-        ["core.concealer"] = {}, -- Adds pretty icons to your documents
+        ["core.concealer"] = {
+            config = {
+                folds = true,
+                icon_preset = "varied", -- "basic", "diamond", "varied"
+                code_block = {
+                    conceal = true,     -- hide @code and @end tags
+                    content_only = false, -- darken only content or also @code and @end tags
+                    padding = {
+                        left = 8,
+                        right = 0,
+                    },
+                    spell_check = false,
+                    width = "fullwidth", -- "fullwidth" or "content"
+                },
+            }
+        }, -- Adds pretty icons to your documents
         ["core.dirman"] = {      -- Manages Neorg workspaces
             config = {
                 workspaces = {
                     notes = "~/Documents/notes",
                 },
+                default_workspace = "notes",
             },
         },
         ["core.integrations.telescope"] = {}
