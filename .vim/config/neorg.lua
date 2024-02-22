@@ -37,19 +37,28 @@ local options = {
         ["core.keybinds"] = {
             config = {
                 hook = function(keybinds)
+                    --  want it on C-CR instead
+                    keybinds.unmap("norg", "i", "<M-CR>")
+                    -- Not very helpful on german keyboard, will put it on <localleader> & < / >
+                    keybinds.unmap("norg", "n", "<.")
+                    keybinds.unmap("norg", "n", ">,")
+
                     keybinds.map_event_to_mode("norg", {
                         n = { -- Bind keys in normal mode
-                            { "<LocalLeader>l", "core.integrations.telescope.find_linkable" },
-                            { "<LocalLeader>h", "core.integrations.telescope.search_headings" },
-                            { "<LocalLeader>w", "core.integrations.telescope.switch_workspace" },
-                            { "<LocalLeader>b", "core.integrations.telescope.find_backlinks" },
-                            { "<C-CR>", "core.looking-glass.magnify-code-block" },
-                            { "<M-DOWN>", "core.integrations.treesitter.next.heading"},
-                            { "<M-UP>", "core.integrations.treesitter.previous.heading"},
+                            { "<LocalLeader>l",    "core.integrations.telescope.find_linkable" },
+                            { "<LocalLeader>h",    "core.integrations.telescope.search_headings" },
+                            { "<LocalLeader>w",    "core.integrations.telescope.switch_workspace" },
+                            { "<LocalLeader>b",    "core.integrations.telescope.find_backlinks" },
+                            { "<C-CR>",            "core.looking-glass.magnify-code-block" }, -- open code block in new buffer
+                            { "<M-DOWN>",          "core.integrations.treesitter.next.heading" }, -- go up and down the tree headers
+                            { "<M-UP>",            "core.integrations.treesitter.previous.heading" },
+                            { "<LocalLeader><lt>", "core.promo.demote" },
+                            { "<LocalLeader>>",    "core.promo.promote" },
                         },
 
                         i = { -- Bind in insert mode
-                            { "<M-l>", "core.integrations.telescope.insert_link" },
+                            { "<M-l>",  "core.integrations.telescope.insert_link" }, -- insert a link
+                            { "<C-CR>", "core.itero.next-iteration" },              -- continue
                         },
                         v = { -- bind to visual mode
                         }
