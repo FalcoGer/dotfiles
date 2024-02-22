@@ -51,7 +51,15 @@ function! CocEnter()
     endif
 endfunction
 
-if !has('nvim')
+function! ShowDocumentation()
+    if CocAction('hasProvider', 'hover')
+        call CocActionAsync('doHover')
+    else
+        call feedkeys('K', 'in')
+    endif
+endfunction
+
+    if !has('nvim')
     " Use tab for trigger completion with characters ahead and navigate
     " NOTE: There's always complete item selected by default, you may want to enable
     " no select by `"suggest.noselect": true` in your configuration file
@@ -70,7 +78,7 @@ if !has('nvim')
     " <C-g>u breaks current undo, please make your own choice
     inoremap <silent><expr> <CR> CocEnter()
 
-    inoremap <silent><expr> <c-@> coc#refresh()
+    inoremap <silent><expr> <C-Space> coc#refresh()
 
     " Use `[g` and `]g` to navigate diagnostics
     " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
@@ -88,36 +96,28 @@ if !has('nvim')
     " Use K to show documentation in preview window
     nnoremap <silent> K :call ShowDocumentation()<CR>
 
-    function! ShowDocumentation()
-      if CocAction('hasProvider', 'hover')
-        call CocActionAsync('doHover')
-      else
-        call feedkeys('K', 'in')
-      endif
-    endfunction
-
     " Symbol renaming
-    nmap <leader>rn <Plug>(coc-rename)
+    nmap <silent> <leader>rn <Plug>(coc-rename)
 
     " Formatting selected code
-    xmap <leader>f  <Plug>(coc-format-selected)
-    nmap <leader>f  <Plug>(coc-format-selected)
-    nmap <leader>ff <Plug>(coc-format)
+    xmap <silent> <leader>f  <Plug>(coc-format-selected)
+    nmap <silent> <leader>f  <Plug>(coc-format-selected)
+    nmap <silent> <leader>ff <Plug>(coc-format)
 
     " Applying code actions to the selected code block
     " Example: `<leader>aap` for current paragraph
-    xmap <leader>a  <Plug>(coc-codeaction-selected)
-    nmap <leader>a  <Plug>(coc-codeaction-selected)
+    xmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
+    nmap <silent> <leader>a  <Plug>(coc-codeaction-selected)
 
     " Remap keys for applying code actions at the cursor position
-    nmap <C-Space>  <Plug>(coc-codeaction-cursor)
-    xmap <C-Space>  <Plug>(coc-codeaction-selected)
-    nmap <leader>ac  <Plug>(coc-codeaction-cursor)
-    nmap <leader>ca  <Plug>(coc-codeaction-cursor)
+    nmap <silent> <C-Space>  <Plug>(coc-codeaction-cursor)
+    xmap <silent> <C-Space>  <Plug>(coc-codeaction-selected)
+    nmap <silent> <leader>ac  <Plug>(coc-codeaction-cursor)
+    nmap <silent> <leader>ca  <Plug>(coc-codeaction-cursor)
     " Remap keys for apply code actions affect whole buffer
-    nmap <leader>as  <Plug>(coc-codeaction-source)
+    nmap <silent> <leader>as  <Plug>(coc-codeaction-source)
     " Apply the most preferred quickfix action to fix diagnostic on the current line
-    nmap <leader>qf  <Plug>(coc-fix-current)
+    nmap <silent> <leader>qf  <Plug>(coc-fix-current)
 
     " Remap keys for applying refactor code actions
     nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)

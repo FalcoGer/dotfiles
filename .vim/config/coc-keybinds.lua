@@ -4,8 +4,7 @@ vim.keymap.set('i', '<TAB>', 'CocTab()', { expr = true, silent = true, desc = "C
 vim.keymap.set('i', '<S-TAB>', 'CocSTab()', { expr = true, silent = true, desc = "COC - Previous completion" })
 vim.keymap.set('i', '<CR>', 'CocEnter()', { expr = true, silent = true, desc = "COC - Select completion/Enter" })
 
-vim.keymap.set('i', '<C-Space>', vim.fn['coc#refresh'](),
-    { silent = true, expr = true, desc = "COC - Show autocomplete." })
+vim.keymap.set('i', '<C-Space>', 'coc#refresh()', { silent = true, expr = true, desc = "COC - Show autocomplete." })
 
 -- Use `[g` and `]g` to navigate diagnostics
 vim.keymap.set('n', '[g', '<Plug>(coc-diagnostic-prev)', { silent = true, desc = "COC - Diagnostics prev" })
@@ -21,15 +20,7 @@ vim.keymap.set('n', 'gi', '<Plug>(coc-implementation)', { silent = true, desc = 
 vim.keymap.set('n', 'gr', '<Plug>(coc-references)', { silent = true, desc = "COC - Go to references" })
 
 -- Use K to show documentation in preview window
-vim.keymap.set('n', 'K', ':lua ShowDocumentation()<CR>', { silent = true, desc = "COC - Show documentation" })
-
-function ShowDocumentation()
-    if vim.fn['CocAction']('hasProvider', 'hover') == 1 then
-        vim.fn['CocActionAsync']('doHover')
-    else
-        vim.api.nvim_feedkeys('K', 'n', true)
-    end
-end
+vim.keymap.set('n', 'K', ':call ShowDocumentation()<CR>', { silent = true, desc = "COC - Show documentation" })
 
 -- Symbol renaming
 vim.keymap.set('n', '<leader>rn', '<Plug>(coc-rename)', { silent = true, desc = "COC - Rename symbol" })
