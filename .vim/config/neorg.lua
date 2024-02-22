@@ -32,6 +32,11 @@ local options = {
                 default_workspace = "notes",
             },
         },
+        ["core.summary"] = {
+            config = {
+                strategy = "default", -- "default" or "by_path"
+            },
+        }, -- makes generate-workspace-summary command available
         ["core.integrations.telescope"] = {},
         ["core.looking-glass"] = {}, -- code block editing
         ["core.keybinds"] = {
