@@ -32,6 +32,7 @@ local options = {
                 default_workspace = "notes",
             },
         },
+        ["core.ui.calendar"] = {},
         ["core.summary"] = {
             config = {
                 strategy = "default", -- "default" or "by_path"
