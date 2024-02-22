@@ -222,6 +222,10 @@ else
 
     Plug 'nvim-neorg/neorg', { 'do': 'Neorg sync-parsers' } | let g:user_loaded_neorg = 1
 
+    if exists('g:user_loaded_neorg') && exists('g:user_loaded_telescope')
+        Plug 'nvim-neorg/neorg-telescope'
+    endif
+
     if exists('g:user_loaded_telescope')
         if exists('g:user_loaded_coc')
             " CoC extension for telescope
