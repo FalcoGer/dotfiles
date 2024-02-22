@@ -18,34 +18,57 @@ endif
 " delays and poor user experience
 set updatetime=300
 
+function! CheckBackspace() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+function! CocTab()
+    if coc#pum#visible()
+        return coc#_select_confirm()
+    elseif coc#expandableOrJumpable()
+        return "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>"
+    elseif CheckBackspace()
+        return "\<TAB>"
+    else
+        return coc#refresh()
+    endif
+endfunction
+
+function! CocSTab()
+    if coc#pum#visible()
+        return coc#pum#prev(1)
+    else
+        return "\<C-h>"
+    endif
+endfunction
+
+function! CocEnter()
+    if coc#pum#visible()
+        return coc#pum#confirm()
+    else
+        return "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
+    endif
+endfunction
+
 if !has('nvim')
     " Use tab for trigger completion with characters ahead and navigate
     " NOTE: There's always complete item selected by default, you may want to enable
     " no select by `"suggest.noselect": true` in your configuration file
     " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
     " other plugin before putting this into your config
-    inoremap <silent><expr> <TAB>
-          \ coc#pum#visible() ? coc#_select_confirm() :
-          \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-          \ CheckBackspace() ? "\<TAB>" :
-          \ coc#refresh()
+    inoremap <silent><expr> <TAB> CocTab()
 
     " Old setting, without coc-snippets
     " inoremap <silent><expr> <TAB>
     "       \ coc#pum#visible() ? coc#pum#next(1) :
     "       \ CheckBackspace() ? "\<Tab>" :
     "       \ coc#refresh()
-    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+    inoremap <expr><S-TAB> CocSTab()
 
     " Make <CR> to accept selected completion item or notify coc.nvim to format
     " <C-g>u breaks current undo, please make your own choice
-    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                                  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-    function! CheckBackspace() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
+    inoremap <silent><expr> <CR> CocEnter()
 
     inoremap <silent><expr> <c-@> coc#refresh()
 

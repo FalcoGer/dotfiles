@@ -1,37 +1,8 @@
 -- keybinds for coc, so it has descriptions
 
-vim.keymap.set('i', '<TAB>', 'v:lua.CocTab()', { expr = true, silent = true, desc = "COC - Tab complete" })
-vim.keymap.set('i', '<S-TAB>', 'v:lua.CocShiftTab()', { expr = true, silent = true, desc = "COC - Previous completion" })
-vim.keymap.set('i', '<CR>', 'v:lua.CocEnter()', { expr = true, silent = true, desc = "COC - Select completion/Enter" })
-
-function CocTab()
-    if vim.fn['coc#pum#visible']() then
-        return vim.fn['coc#_select_confirm']()
-    elseif vim.fn['coc#expandableOrJumpable']() then
-        return '<C-r>=coc#rpc#request("doKeymap", ["snippets-expand-jump",""])<CR>'
-    elseif CheckBackspace() then
-        return '<TAB>'
-    else
-        return vim.fn['coc#refresh']()
-    end
-end
-
-function CocShiftTab()
-    return vim.fn['coc#pum#visible']() and vim.fn['coc#pum#prev'](1) or "<C-h>"
-end
-
-function CocEnter()
-    if vim.fn.pumvisible() == 1 then
-        return vim.fn['coc#_select_confirm']()
-    else
-        return '<C-g>u<CR>' .. vim.fn['coc#on_enter']()
-    end
-end
-
-function CheckBackspace()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
-end
+vim.keymap.set('i', '<TAB>', 'CocTab()', { expr = true, silent = true, desc = "COC - Tab complete" })
+vim.keymap.set('i', '<S-TAB>', 'CocSTab()', { expr = true, silent = true, desc = "COC - Previous completion" })
+vim.keymap.set('i', '<CR>', 'CocEnter()', { expr = true, silent = true, desc = "COC - Select completion/Enter" })
 
 vim.keymap.set('i', '<C-Space>', vim.fn['coc#refresh'](),
     { silent = true, expr = true, desc = "COC - Show autocomplete." })
