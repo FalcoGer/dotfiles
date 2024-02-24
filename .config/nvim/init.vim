@@ -221,7 +221,12 @@ else
 
     Plug 'folke/noice.nvim' | let g:user_loaded_noice = 1
 
-    Plug 'nvim-neorg/neorg', { 'do': ':Neorg sync-parsers' } | let g:user_loaded_neorg = 1
+    function! NeorgHook()
+        Neorg sync-parsers
+        help neorg-breaking-changes
+    endfunction
+
+    Plug 'nvim-neorg/neorg', { 'do': { -> NeorgHook() } } | let g:user_loaded_neorg = 1
 
     if exists('g:user_loaded_neorg') && exists('g:user_loaded_telescope')
         Plug 'nvim-neorg/neorg-telescope'
