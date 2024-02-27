@@ -64,7 +64,7 @@ brace_style = "AlwaysNextLine"
 #   Default value: 60
 #   Possible values: any positive integer that is less than or equal to the value specified for max_width
 # By default this option is set as a percentage of max_width provided by use_small_heuristics, but a value set directly for chain_width will take precedence.
-#chain_width = 60
+# chain_width = 60
 
 
 # Whether to use colored output or not.
@@ -94,7 +94,6 @@ comment_width = 80
 condense_wildcard_suffixes = true
 
 
-
 # Brace style for control flow constructs
 #   Default value: "AlwaysSameLine"
 #   Possible values: "AlwaysNextLine", "AlwaysSameLine", "ClosingNextLine"
@@ -105,7 +104,7 @@ control_brace_style = "AlwaysNextLine"
 # Specifies which edition is used by the parser.
 #   Default value: "2015"
 #   Possible values: "2015", "2018", "2021"
-edition = 2021
+edition = "2021"
 
 
 # Put empty-body functions and impls on a single line
@@ -128,7 +127,6 @@ enum_discrim_align_threshold = 20
 error_on_line_overflow = false
 
 
-
 # Error if unable to get comments or string literals within max_width, or they are left with trailing whitespaces.
 #   Default value: false
 #   Possible values: true, false
@@ -139,7 +137,7 @@ error_on_unformatted = false
 #   Default value: 60
 #   Possible values: any positive integer that is less than or equal to the value specified for max_width
 # By default this option is set as a percentage of max_width provided by use_small_heuristics, but a value set directly for fn_call_width will take precedence.
-#fn_call_width = 60
+# fn_call_width = 60
 
 
 # Control the layout of parameters in function signatures.
@@ -173,7 +171,6 @@ force_multiline_blocks = false
 #   Default value: false
 #   Possible values: true, false
 format_code_in_doc_comments = false
-
 
 
 # Max width for code snippets included in doc comments. Only used if format_code_in_doc_comments is true.
@@ -356,7 +353,7 @@ overflow_delimited_expr = false
 
 
 # Remove nested parens. `((((foo))))` becomes `(foo)`
-#   Default value: true,
+#   Default value: true
 #   Possible values: true, false
 remove_nested_parens = true
 
@@ -380,8 +377,8 @@ reorder_imports = true
 # Each set of imports (one or more use statements, optionally separated by newlines) will be formatted independently. Other statements such as mod ... or extern crate ... will cause imports to not be grouped together.
 # Preserve: Preserve the source file's import groups.
 # StdExternalCrate: Discard existing import groups, and create three groups for:
-#   std, core and alloc,
-#   external crates,
+#   std, core and alloc
+#   external crates
 #   self, super and crate imports.
 # One: Discard existing import groups, and create a single group for everything
 group_imports = "StdExternalCrate"
@@ -470,7 +467,7 @@ struct_lit_single_line = false
 #   Default value: "Vertical"
 #   Possible values: "Always", "Never", "Vertical"
 # Always: Always put a trailing comma
-# Never: Always remove trailing commas,
+# Never: Always remove trailing commas
 # Vertical: Place trailing comma when list is vertical, remove if list is horizontal
 trailing_comma = "Vertical"
 
