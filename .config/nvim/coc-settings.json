@@ -448,7 +448,7 @@
     "rust-analyzer.completion.callable.snippets": "fill_arguments",
     "rust-analyzer.completion.privateEditable.enable": false,
     "rust-analyzer.completion.fullFunctionSignatures.enable": true,
-    "rust-analyzer.rustfmt.extraArgs": ["--config-path", "~/.config/rustfmt/rustfmt.toml"],
+    "rust-analyzer.rustfmt.extraArgs": ["--config-path", "${userHome}/.config/rustfmt/rustfmt.toml"],
     "rust-analyzer.rustfmt.rangeFormatting.enable": true,
     "rust-analyzer.inlayHints.maxLength": 70,
     "rust-analyzer.inlayHints.closureStyle": "rust_analyzer",

@@ -189,7 +189,8 @@ format_generated_files = false
 # Number of lines to check for a @generated pragma header, starting from the top of the file. Setting this value to 0 will treat all files as non-generated. Whenformat_generated_files is true, this option has no effect.
 #   Default value: 5
 #   Possible values: any positive integer
-generated_marker_line_search_limit = 5
+# TODO: Uncomment when rustfmt starts to recognize this
+# generated_marker_line_search_limit = 5
 
 
 # Format the metavariable matching patterns in macros.
@@ -240,7 +241,8 @@ hex_literal_case = "Upper"
 # Show parse errors if the parser failed to parse files.
 #   Default value: true
 #   Possible values: true, false
-show_parse_errors = true
+# TODO: uncomment when rustfmt starts to recognize this
+# show_parse_errors = true
 
 
 # Skip formatting files and directories that match the specified pattern. The pattern format is the same as .gitignore. Be sure to use Unix/forwardslash / style paths. This path style will work on all platforms. Windows style paths with backslashes \ are not supported.
