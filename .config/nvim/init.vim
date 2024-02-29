@@ -776,7 +776,7 @@ if exists('g:user_loaded_matchup')
 endif
 
 if exists ('g:user_loaded_nvim_dap')
-    source ~/.vim/config/nvim_dap.vim
+    source ~/.vim/config/nvim_dap.lua
 endif
 
 if exists ('g:user_loaded_nvim_dap_virtual_text')
