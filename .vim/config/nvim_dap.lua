@@ -76,10 +76,9 @@ vim.keymap.set('n', '<Leader>dr', require('dap').repl.open, { silent = true, des
 
 if not (vim.g.user_loaded_nvim_dap_ui ~= nil) then
     -- use dap hover only when dap_ui not loaded
-    vim.keymap.set({ 'n', 'v' }, '<Leader>dh', require('dap.ui.widgets').hover(),
+    vim.keymap.set({ 'n', 'v' }, '<Leader>dh', require('dap.ui.widgets').hover,
         { silent = true, desc = "DAP - Hover widget", noremap = true })
 end
-
 
 --vim.keymap.set({'n', 'v'}, '<Leader>dp', require('dap.ui.widgets').preview(), { silent = true, desc = "DAP - Preview Widget", noremap = true })
 local sidebar_frames = function()
@@ -141,6 +140,29 @@ vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpo
 -- :help dap-adapter
 -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#contents
 
+local GetProjectRoot = function()
+    local buf = vim.api.nvim_get_current_buf()
+    local filepath = vim.api.nvim_buf_get_name(buf)
+    local success, project_root = pcall(vim.api.nvim_buf_get_var, buf, "project_root")
+    if success and project_root ~= nil then
+        return project_root
+    else
+        local success, project_roots = pcall(vim.api.nvim_get_var, "WorkspaceFolders")
+        if success and project_roots ~= nil and type(project_roots) == "table" then
+            for _, folder in ipairs(project_roots) do
+                print("    checking " .. folder)
+                if string.sub(filepath, 1, #folder) == folder then
+                    vim.api.nvim_buf_set_var(buf, "project_root", folder)
+                    print("  found " .. folder)
+                    return folder
+                end
+            end
+        end
+        local cwd = vim.fn.getcwd(0)
+        return cwd
+    end
+end
+
 -- --------------------------------------------------------------
 -- GDB, requires gdb 14.0 or higher
 
@@ -166,7 +188,8 @@ dap.configurations.c = {
         type = "gdb",
         request = "launch",
         program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            local separator = package.config:sub(1,1) -- Get the directory separator character
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. separator, 'file')
         end,
         -- No docs. Requires debugger to support forwarding
         -- https://github.com/mfussenegger/nvim-dap/issues/1091
@@ -195,12 +218,24 @@ dap.configurations.rust = {
         request = "launch",
         program = function()
             os.execute("cargo build")
-            return "${workspaceFolder}" .. "target/debug/" .. "${workspaceFolder}"
+
+            local wsRoot = GetProjectRoot()
+
+            local separator = package.config:sub(1,1) -- Get the directory separator character
+            local parts = {}
+            for part in wsRoot:gmatch("[^" .. separator .. "]+") do
+                table.insert(parts, part)
+            end
+
+            local executable = wsRoot .. separator .. "target" .. separator .. "debug" .. separator .. parts[#parts]
+
+            print("Executable: " .. executable)
+            return executable
         end,
         args = function()
             return vim.fn.input("Arguments: ", '')
         end,
-        cwd = "${workspaceFolder}",
+        cwd = GetProjectRoot
     },
 }
 
