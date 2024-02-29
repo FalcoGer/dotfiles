@@ -223,6 +223,12 @@
             }
         }
     },
+    "workspace.rootPatterns": [
+        ".git",
+        ".hg",
+        ".projections.json",
+        "Cargo.toml"
+    ],
     "workspace.ignoredFolders": [
         "$HOME",
         "$HOME/.cargo/**",
