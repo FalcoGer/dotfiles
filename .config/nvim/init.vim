@@ -683,6 +683,9 @@ if has('nvim')
     if filereadable(expand("~/.vim/config/Table2String.lua"))
         source ~/.vim/config/Table2String.lua
     endif
+    if filereadable(expand("~/.vim/config/Shell.lua"))
+        source ~/.vim/config/Shell.lua
+    endif
 endif
 
 " =============================================================================
