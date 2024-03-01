@@ -384,7 +384,11 @@ set concealcursor=nc
 " Highlight Whitespaces
 set list
 set listchars=tab:<->               " Show tabs as this. xy[z], x always, then y as many as will fit, z as the last one.
-set listchars+=eol:$                " End of line marker.
+if $TERM ==# 'xterm-kitty'
+    set listchars+=eol:
+else
+    set listchars+=eol:$                " End of line marker.
+endif
 set listchars+=lead:-
 set listchars+=leadmultispace:\|--> " What to display for leading white space characters.
 set listchars+=trail:·              " What to display for trailing white space characters.
