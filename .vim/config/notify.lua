@@ -65,34 +65,32 @@ for group, attributes in pairs(highlights) do
     vim.api.nvim_command(command)
 end
 --]]
-
 local highlights = {
-"NotifyERRORBorder",
-"NotifyERRORIcon",
-"NotifyERRORTitle",
-"NotifyERRORBody",
-"NotifyWARNBorder",
-"NotifyWARNIcon",
-"NotifyWARNTitle",
-"NotifyWARNBody",
-"NotifyINFOBorder",
-"NotifyINFOIcon",
-"NotifyINFOTitle",
-"NotifyINFOBody",
-"NotifyDEBUGBorder",
-"NotifyDEBUGIcon",
-"NotifyDEBUGTitle",
-"NotifyDEBUGBody",
-"NotifyTRACEBorder",
-"NotifyTRACEIcon",
-"NotifyTRACETitle",
-"NotifyTRACEBody",
+    "NotifyERRORBorder",
+    "NotifyERRORIcon",
+    "NotifyERRORTitle",
+    "NotifyERRORBody",
+    "NotifyWARNBorder",
+    "NotifyWARNIcon",
+    "NotifyWARNTitle",
+    "NotifyWARNBody",
+    "NotifyINFOBorder",
+    "NotifyINFOIcon",
+    "NotifyINFOTitle",
+    "NotifyINFOBody",
+    "NotifyDEBUGBorder",
+    "NotifyDEBUGIcon",
+    "NotifyDEBUGTitle",
+    "NotifyDEBUGBody",
+    "NotifyTRACEBorder",
+    "NotifyTRACEIcon",
+    "NotifyTRACETitle",
+    "NotifyTRACEBody",
 }
-
 for _, highlight in ipairs(highlights) do
     vim.api.nvim_command("highlight clear " .. highlight);
 
-    if highlight:sub(-#"Body") == "Body" then
+    if highlight:sub(- #"Body") == "Body" then
         vim.api.nvim_command("highlight link " .. highlight .. " Normal")
     else
         if string.find(highlight, "ERROR", 1, true) ~= nil then
