@@ -147,7 +147,8 @@ local GetProjectRoot = function()
     if success and project_root ~= nil then
         return project_root
     else
-        local success, project_roots = pcall(vim.api.nvim_get_var, "WorkspaceFolders")
+        local project_roots = {}
+        success, project_roots = pcall(vim.api.nvim_get_var, "WorkspaceFolders")
         if success and project_roots ~= nil and type(project_roots) == "table" then
             for _, folder in ipairs(project_roots) do
                 if string.sub(filepath, 1, #folder) == folder then
@@ -206,10 +207,12 @@ dap.configurations.c = {
     },
 }
 
+-- Needs TS grammar for gdb first: https://github.com/nvim-treesitter/nvim-treesitter/issues/5675
+--[[
 if vim.g['user_loaded_nvim_dap_repl_highlight'] ~= nil then
-    -- Needs TS grammar for gdb first: https://github.com/nvim-treesitter/nvim-treesitter/issues/5675
-    -- dap.configurations.c[1]['repl_lang'] = 'gdb'
+    dap.configurations.c[1]['repl_lang'] = 'gdb'
 end
+--]]
 
 dap.configurations.cpp = dap.configurations.c
 
@@ -219,7 +222,7 @@ dap.configurations.rust = {
     {
         name = "Launch",
         type = function()
-            exitStatus, _ = Shell("cargo check")
+            local exitStatus, _ = Shell("cargo check")
             if exitStatus ~= nil and exitStatus == 0 then
                 return "gdb"
             end
@@ -227,7 +230,7 @@ dap.configurations.rust = {
         end,
         request = "launch",
         program = function()
-            exitStatus, output = Shell("cargo build")
+            local exitStatus, output = Shell("cargo build")
             if exitStatus ~= nil and exitStatus == 0 then
                 -- build successful
                 if vim.g.user_loaded_nvim_notify == nil then
