@@ -150,10 +150,8 @@ local GetProjectRoot = function()
         local success, project_roots = pcall(vim.api.nvim_get_var, "WorkspaceFolders")
         if success and project_roots ~= nil and type(project_roots) == "table" then
             for _, folder in ipairs(project_roots) do
-                print("    checking " .. folder)
                 if string.sub(filepath, 1, #folder) == folder then
                     vim.api.nvim_buf_set_var(buf, "project_root", folder)
-                    print("  found " .. folder)
                     return folder
                 end
             end
@@ -179,6 +177,12 @@ dap.adapters.gdb = {
     options = {
         --    env = env,
     },
+}
+
+dap.adapters.nop = {
+    type = "executable",
+    command = "/usr/bin/true",
+    args = {}
 }
 
 -- debugee configuration
@@ -210,27 +214,46 @@ end
 dap.configurations.cpp = dap.configurations.c
 
 -- --------------------------------------------------------------
-
+-- rust
 dap.configurations.rust = {
     {
         name = "Launch",
-        type = "gdb",
+        type = function()
+            exitStatus, _ = Shell("cargo check")
+            if exitStatus ~= nil and exitStatus == 0 then
+                return "gdb"
+            end
+            return "nop"
+        end,
         request = "launch",
         program = function()
-            os.execute("cargo build")
+            exitStatus, output = Shell("cargo build")
+            if exitStatus ~= nil and exitStatus == 0 then
+                -- build successful
+                if vim.g.user_loaded_nvim_notify == nil then
+                    print("Built successful\n\n" .. output)
+                else
+                    vim.notify("Build Successful\n\n" .. output, "info")
+                end
+                local wsRoot = GetProjectRoot()
 
-            local wsRoot = GetProjectRoot()
+                local separator = package.config:sub(1,1) -- Get the directory separator character
+                local parts = {}
+                for part in wsRoot:gmatch("[^" .. separator .. "]+") do
+                    table.insert(parts, part)
+                end
 
-            local separator = package.config:sub(1,1) -- Get the directory separator character
-            local parts = {}
-            for part in wsRoot:gmatch("[^" .. separator .. "]+") do
-                table.insert(parts, part)
+                local executable = wsRoot .. separator .. "target" .. separator .. "debug" .. separator .. parts[#parts]
+
+                return executable
+            else
+                if vim.g.user_loaded_nvim_notify == nil then
+                    print("Build failed\n\n" .. output)
+                else
+                    vim.notify("Build Failed\n\n" .. output, "error")
+                end
+                return nil
             end
-
-            local executable = wsRoot .. separator .. "target" .. separator .. "debug" .. separator .. parts[#parts]
-
-            print("Executable: " .. executable)
-            return executable
         end,
         args = function()
             return vim.fn.input("Arguments: ", '')
