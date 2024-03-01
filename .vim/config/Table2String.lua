@@ -2,7 +2,7 @@
 
 function Table2String(val, indentWidth, level, tableKey)
     if level == nil then level = 0 end
-    if indentWidth == nill then indentWidth = 4 end
+    if indentWidth == nil then indentWidth = 4 end
     -- get indent for current level
     local singleIndent = ""
     for _ = 1, indentWidth do
