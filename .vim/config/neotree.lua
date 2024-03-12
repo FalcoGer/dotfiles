@@ -478,7 +478,85 @@ local sortFunc = function(a, b)
     return a.name:upper() < b.name:upper()
 end
 
-
+local event_handlers = {
+-- {
+--   event = "before_render",
+--   handler = function (state)
+--     -- add something to the state that can be used by custom components
+--   end
+-- },
+-- {
+--   event = "file_opened",
+--   handler = function(file_path)
+--     --auto close
+--     require("neo-tree.command").execute({ action = "close" })
+--   end
+-- },
+-- {
+--   event = "neo_tree_popup_input_ready",
+--   handler = function(input)
+--     -- enter input popup with normal mode by default.
+--     vim.cmd("stopinsert");
+--   end,
+-- },
+-- {
+--   event = "file_opened",
+--   handler = function(file_path)
+--     --clear search after opening a file
+--     require("neo-tree.sources.filesystem").reset_search()
+--   end
+-- },
+-- {
+--   event = "file_renamed",
+--   handler = function(args)
+--     -- fix references to file
+--     print(args.source, " renamed to ", args.destination)
+--   end
+-- },
+-- {
+--   event = "file_moved",
+--   handler = function(args)
+--     -- fix references to file
+--     print(args.source, " moved to ", args.destination)
+--   end
+-- },
+-- {
+--   event = "neo_tree_buffer_enter",
+--   handler = function()
+--     vim.cmd 'highlight! Cursor blend=100'
+--   end
+-- },
+-- {
+--   event = "neo_tree_buffer_leave",
+--   handler = function()
+--     vim.cmd 'highlight! Cursor guibg=#5f87af blend=0'
+--   end
+-- },
+-- {
+--   event = "neo_tree_window_before_open",
+--   handler = function(args)
+--     print("neo_tree_window_before_open", vim.inspect(args))
+--   end
+-- },
+-- {
+--   event = "neo_tree_window_after_open",
+--   handler = function(args)
+--     vim.cmd("wincmd =")
+--   end
+-- },
+-- {
+--   event = "neo_tree_window_before_close",
+--   handler = function(args)
+--     print("neo_tree_window_before_close", vim.inspect(args))
+--   end
+-- },
+-- {
+--   event = "neo_tree_window_after_close",
+--   handler = function(args)
+--     vim.cmd("wincmd =")
+--   end
+-- }
+}
 
 -- config options
 
@@ -500,7 +578,6 @@ local config = {
     enable_modified_markers = true, -- Show markers for files with unsaved changes.
     enable_opened_markers = true,   -- Enable tracking of opened files. Required for `components.name.highlight_opened_files`
     enable_refresh_on_write = true, -- Refresh the tree when a file is written. Only used if `use_libuv_file_watcher` is false.
-    enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
     git_status_async = true,
     -- These options are for people with VERY large git repos
     git_status_async_options = {
@@ -562,79 +639,7 @@ local config = {
         highlight_separator = "NeoTreeTabSeparatorInactive",
         highlight_separator_active = "NeoTreeTabSeparatorActive",
     },
-    --
-    --event_handlers = {
-    --  {
-    --    event = "before_render",
-    --    handler = function (state)
-    --      -- add something to the state that can be used by custom components
-    --    end
-    --  },
-    --  {
-    --    event = "file_opened",
-    --    handler = function(file_path)
-    --      --auto close
-    --      require("neo-tree.command").execute({ action = "close" })
-    --    end
-    --  },
-    --  {
-    --    event = "file_opened",
-    --    handler = function(file_path)
-    --      --clear search after opening a file
-    --      require("neo-tree.sources.filesystem").reset_search()
-    --    end
-    --  },
-    --  {
-    --    event = "file_renamed",
-    --    handler = function(args)
-    --      -- fix references to file
-    --      print(args.source, " renamed to ", args.destination)
-    --    end
-    --  },
-    --  {
-    --    event = "file_moved",
-    --    handler = function(args)
-    --      -- fix references to file
-    --      print(args.source, " moved to ", args.destination)
-    --    end
-    --  },
-    --  {
-    --    event = "neo_tree_buffer_enter",
-    --    handler = function()
-    --      vim.cmd 'highlight! Cursor blend=100'
-    --    end
-    --  },
-    --  {
-    --    event = "neo_tree_buffer_leave",
-    --    handler = function()
-    --      vim.cmd 'highlight! Cursor guibg=#5f87af blend=0'
-    --    end
-    --  },
-    -- {
-    --   event = "neo_tree_window_before_open",
-    --   handler = function(args)
-    --     print("neo_tree_window_before_open", vim.inspect(args))
-    --   end
-    -- },
-    -- {
-    --   event = "neo_tree_window_after_open",
-    --   handler = function(args)
-    --     vim.cmd("wincmd =")
-    --   end
-    -- },
-    -- {
-    --   event = "neo_tree_window_before_close",
-    --   handler = function(args)
-    --     print("neo_tree_window_before_close", vim.inspect(args))
-    --   end
-    -- },
-    -- {
-    --   event = "neo_tree_window_after_close",
-    --   handler = function(args)
-    --     vim.cmd("wincmd =")
-    --   end
-    -- }
-    --},
+    event_handlers = event_handlers,
     default_component_configs = {
         container = {
             enable_character_fade = true,
