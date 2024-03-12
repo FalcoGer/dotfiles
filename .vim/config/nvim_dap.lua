@@ -222,7 +222,7 @@ dap.configurations.rust = {
     {
         name = "Launch",
         type = function()
-            local exitStatus, _ = Shell("cargo check")
+            local exitStatus, _ = Shell("cargo check --color=never")
             if exitStatus ~= nil and exitStatus == 0 then
                 return "gdb"
             end
@@ -230,7 +230,7 @@ dap.configurations.rust = {
         end,
         request = "launch",
         program = function()
-            local exitStatus, output = Shell("cargo build")
+            local exitStatus, output = Shell("cargo build --color=never")
             if exitStatus ~= nil and exitStatus == 0 then
                 -- build successful
                 if vim.g.user_loaded_nvim_notify == nil then
@@ -259,7 +259,11 @@ dap.configurations.rust = {
             end
         end,
         args = function()
-            return vim.fn.input("Arguments: ", '')
+            local exitStatus, _ = Shell("cargo check --color=never")
+            if (exitStatus ~= nil and exitStatus == 0) then
+                return vim.fn.input("Arguments: ", '')
+            end
+            return nil
         end,
         cwd = GetProjectRoot
     },
