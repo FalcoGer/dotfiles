@@ -213,6 +213,7 @@ GPP_ERR="${GPP_ERR} -Werror=return-type" # undefined behavior if returning funct
 GPP_ERR="${GPP_ERR} -Werror=multichar" # char c = 'ABCD';
 GPP_STD="-std=c++23"
 GPP_OPT="-flto -fuse-linker-plugin" # enable link time optimization
+GPP_OPT="${GPP_OPT} -lstdc++exp"    # enable expanded c++ standard library (std::stacktrace)
 alias g++="g++ ${GPP_STD} ${GPP_OPT} ${GPP_WARN} ${GPP_ERR}"
 
 # Add an "alert" alias for long running commands.  Use like so:
