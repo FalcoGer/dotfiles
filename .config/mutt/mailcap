@@ -16,6 +16,6 @@ audio/*;                    ffplay %s
 # interactive
 application/pgp;            pgp
 application/postscript;     ps2pdf %s - | pdftotext -layout - | batcat;
-application/pdf;            pdftotext -layout - | batcat;
+application/pdf;            pdftotext -layout %s - | batcat;
 
 
