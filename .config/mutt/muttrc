@@ -18,5 +18,11 @@ set from = "paul@pi.lan"
 set realname = "Paul"
 
 # Other settings
-auto_view text/html text/* lynx -dump
+
+set implicit_autoview=yes
+
+set mailcap_path = "~/.config/mutt/mailcap"
+
+# prefer text only mails
+alternative_order text/enriched text/plain text text/html application/postscript image/*
 

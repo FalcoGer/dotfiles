@@ -1,0 +1,20 @@
+# html
+text/html;                  lynx -dump -force_html %s; copiousoutput
+
+# plain text
+text/plain;                 batcat %s;
+
+# images
+# check if a $DISPLAY variable exists, if so, execute feh
+image/jpeg;                 feh %s; test=test -n "$DISPLAY"; needsterminal
+image/png;                  feh %s; test=test -n "$DISPLAY"; needsterminal
+
+# audio
+audio/*;                    ffplay %s
+
+# interactive
+application/pgp;            pgp
+application/postscript;     ps2pdf %s - | pdftotext | batcat;
+application/pdf;            pdftotext | batcat;
+
+
