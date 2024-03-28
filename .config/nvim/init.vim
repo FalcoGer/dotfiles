@@ -198,6 +198,11 @@ else
         Plug 'Weissle/persistent-breakpoints.nvim' | let g:user_loaded_persistent_breakpoints = 1
     endif
 
+    if (exists('g:user_loaded_nvim_dap_ui'))
+        Plug 'nvim-neorg/lua-utils.nvim' | let g:user_loaded_lua_utils = 1
+        Plug 'nvim-neotest/nvim-nio' | let g:user_loaded_nvim_nio = 1
+    endif
+
     if exists('g:user_loaded_nvim_dap') && exists('g:user_loaded_treesitter')
         Plug 'LiadOz/nvim-dap-repl-highlights' | let g:user_loaded_nvim_dap_repl_highlight = 1
     endif
