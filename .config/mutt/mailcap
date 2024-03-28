@@ -3,6 +3,7 @@ text/html;                  lynx -dump -force_html %s; copiousoutput
 
 # plain text
 text/plain;                 batcat %s;
+text;                       batcat %s;
 
 # images
 # check if a $DISPLAY variable exists, if so, execute feh
@@ -14,7 +15,7 @@ audio/*;                    ffplay %s
 
 # interactive
 application/pgp;            pgp
-application/postscript;     ps2pdf %s - | pdftotext | batcat;
-application/pdf;            pdftotext | batcat;
+application/postscript;     ps2pdf %s - | pdftotext -layout - | batcat;
+application/pdf;            pdftotext -layout - | batcat;
 
 
