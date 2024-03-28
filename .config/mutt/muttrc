@@ -1,0 +1,22 @@
+# passwords
+# put `set imap_pass` and `set smtp_pass` into a file password and use `gpg -c password` to encrypt it.
+# then delete the original password file and set permission 600
+source "gpg -dq ~/.config/mutt/password.gpg |"
+
+# IMAP settings
+set imap_user = "paul@pi.lan"
+set folder = "imaps://pi.lan:993/"
+set spoolfile = "+INBOX"
+set postponed = "+Drafts"
+set header_cache = "~/.cache/mutt/headers"
+set message_cachedir = "~/.cache/mutt/bodies"
+set certificate_file = "~/.cache/mutt/certificates"
+
+# SMTP settings
+set smtp_url = "smtp://paul@pi.lan:587/"
+set from = "paul@pi.lan"
+set realname = "Paul"
+
+# Other settings
+auto_view text/html text/* lynx -dump
+
