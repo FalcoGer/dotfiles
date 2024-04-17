@@ -34,7 +34,8 @@ load db_tracker
 load request
 
 ### play sounds when events occur
-load sounds
+## example: try harder when exploit fails, etc.
+# load sounds
 
 ### load sqlmap plugin
 load sqlmap
@@ -45,9 +46,15 @@ load wmap
 ### load honeybadger post exploitation plugin
 load honeybadger
 
+### features
+features set fully_interactive_shells true
+
 ## Settings
 
+set ConsoleLogging true
+set LogLevel 5
 set SessionLogging true
+set TimestampOutput true
 
 # Set default values for some modules
 setg LHOST 0.0.0.0
