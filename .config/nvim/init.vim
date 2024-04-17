@@ -140,7 +140,7 @@ else
     " Provides fuzzy search, like the fzf plugin for regular vim
     " fzf-vim is backwards compatible with the setup for fzf-vim
     " Provides the :FzfLua command, use auto completion
-    Plug 'ibhagwan/fzf-lua', { 'do': ':FzfLua setup_fzfvim_cmds', 'branch': 'main' } | let g:user_loaded_fzf = 2
+    Plug 'Pagliacii/fzf-lua', { 'do': ':FzfLua setup_fzfvim_cmds', 'branch': 'main' } | let g:user_loaded_fzf = 2
     " Coloured icons, used by nvim-tree and bufferline
     Plug 'nvim-tree/nvim-web-devicons' | let g:user_loaded_devicons = 1
     " Plug 'ryanoasis/vim-devicons' Icons without colours
@@ -233,8 +233,12 @@ else
 
     Plug 'nvim-neorg/neorg', { 'do': { -> NeorgHook() } } | let g:user_loaded_neorg = 1
 
+    if exists('g:user_loaded_neorg')
+        Plug 'pysan3/pathlib.nvim' | let g:user_loaded_pathlib = 1
+    endif
+
     if exists('g:user_loaded_neorg') && exists('g:user_loaded_telescope')
-        Plug 'nvim-neorg/neorg-telescope'
+        Plug 'nvim-neorg/neorg-telescope' | let g:user_loaded_neorg_telescope = 1
     endif
 
     if exists('g:user_loaded_telescope')
@@ -242,9 +246,11 @@ else
             " CoC extension for telescope
             Plug 'fannheyward/telescope-coc.nvim' | let g:user_loaded_telescope_coc = 1
         endif
+        
         if exists('g:user_loaded_nvim_dap')
             Plug 'nvim-telescope/telescope-dap.nvim' | let g:user_loaded_telescope_dap = 1
         endif
+        
         " FZF extension
         Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } | let g:user_loaded_telescope_fzf = 1
         " ChatGPT extension for telescope
