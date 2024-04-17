@@ -104,10 +104,6 @@ if [[ "${TERM}" = "xterm-kitty" ]]; then
     # export TERM="xterm-256color"
 fi
 
-if [[ -f "${HOME}/repositories/hacking/john/run/john" ]]; then
-    alias john="${HOME}/repositories/hacking/john/run/john"
-fi
-
 
 if [[ -f "${HOME}/repositories/hacking/wesng/wes.py" ]]; then
     alias wes.py='${HOME}/repositories/hacking/wesng/wes.py --color --definitions ${HOME}/repositories/wesng/definitions.zip'
