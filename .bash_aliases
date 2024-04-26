@@ -93,8 +93,8 @@ update-repo() {
 
 alias quit='exit'
 alias ipython='ipython3'
-if [[ -f ".bash_aliases_secret" ]]; then
-    source ".bash_aliases_secret"
+if [[ -f "${HOME}/.bash_aliases_secret" ]]; then
+    source "${HOME}/.bash_aliases_secret"
 fi
 
 if [[ "${TERM}" = "xterm-kitty" ]]; then
