@@ -22,3 +22,12 @@
     path = .oh-my-zsh
     url = git@github.com:ohmyzsh/ohmyzsh.git
     branch = master
+[submodule "/home/paul/.local/share/pwncat/modules_src/pwncat_dirtypipe"]
+	path = /home/paul/.local/share/pwncat/modules_src/pwncat_dirtypipe
+	url = git@github.com:DanaEpp/pwncat_dirtypipe
+[submodule "/home/paul/.local/share/pwncat/modules_src/pwncat_linpeas"]
+	path = /home/paul/.local/share/pwncat/modules_src/pwncat_linpeas
+	url = git@github.com:JorianWoltjer/pwncat_linpeas
+[submodule "/home/paul/.local/share/pwncat/modules_src/pwncat_pwnkit"]
+	path = /home/paul/.local/share/pwncat/modules_src/pwncat_pwnkit
+	url = git@github.com:DanaEpp/pwncat_pwnkit
