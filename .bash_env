@@ -25,11 +25,11 @@ then
 fi
 
 # perl
-export PATH="$PATH:$HOME/perl5/bin"
-export PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-export PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
-export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
+export PATH="$PATH:$HOME/.local/share/perl5/bin"
+export PERL5LIB="$HOME/.local/share/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+export PERL_LOCAL_LIB_ROOT="$HOME/.local/share/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+export PERL_MB_OPT="--install_base \"$HOME/.local/share/perl5\""; export PERL_MB_OPT;
+export PERL_MM_OPT="INSTALL_BASE=$HOME/.local/share/perl5"; export PERL_MM_OPT;
 
 # rust/cargo
 export PATH="$PATH:$HOME/.cargo/bin"
