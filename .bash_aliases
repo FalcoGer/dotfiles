@@ -35,6 +35,11 @@ if [[ -e "$(which pwncat-cs)" ]]; then
     alias pwncat='pwncat-cs --config ~/.local/share/pwncat/pwncatrc'
 fi
 
+if [[ -e "$(which mycli)" ]]; then
+    alias mycli='mycli --myclirc ~/.config/myclirc'
+    alias mysql='mycli --myclirc ~/.config/myclirc'
+fi
+
 cmp=$(command -v batcat)
 if [[ -n "${cmp}" ]]; then
     # we have batcat
