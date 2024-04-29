@@ -26,7 +26,7 @@ fi
 if [[ -e "$(which exa)" ]]; then
     # we have exa
     # alias ls='exa -aalF -g --group-directories-first --color-scale --icons --time-style long-iso --git --extended'
-    alias ls='exa -aalF -g --group-directories-first --icons --time-style long-iso --git --extended'
+    alias ls='exa -aalF -g --group-directories-first --icons --time-style long-iso --git --extended --smart-group --total-size'
 else
     alias ls='ls -alhF --color=auto --group-directories-first'
 fi
