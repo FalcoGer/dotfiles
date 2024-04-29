@@ -9,9 +9,11 @@ vim.keymap.set('i', '<C-Space>', 'coc#refresh()', { silent = true, expr = true, 
 -- Use `[g` and `]g` to navigate diagnostics
 vim.keymap.set('n', '[g', '<Plug>(coc-diagnostic-prev)', { silent = true, desc = "COC - Diagnostics prev" })
 vim.keymap.set('n', ']g', '<Plug>(coc-diagnostic-next)', { silent = true, desc = "COC - Diagnostics next" })
-vim.keymap.set('n', '<C-Up>', '<Plug>(coc-diagnostic-prev)', { silent = true, desc = "COC - Diagnostics prev" })
-vim.keymap.set('n', '<C-Down>', '<Plug>(coc-diagnostic-next)',
-    { silent = true, desc = "COC - Diagnostics next" })
+-- vim.keymap.set('n', '<C-Up>', '<Plug>(coc-diagnostic-prev)', { silent = true, desc = "COC - Diagnostics prev" })
+-- vim.keymap.set('n', '<C-Down>', '<Plug>(coc-diagnostic-next)',{ silent = true, desc = "COC - Diagnostics next" })
+vim.keymap.set('n', '<C-Up>', ':CocCommand document.jumpToPrevSymbol<CR>', { silent = true, desc = "COC - Jump to prev symbol" })
+vim.keymap.set('n', '<C-Down>', ':CocCommand document.jumpToNextSymbol<CR>', { silent = true, desc = "COC - Jump to next symbol" })
+
 
 -- GoTo code navigation
 vim.keymap.set('n', 'gd', '<Plug>(coc-definition)', { silent = true, desc = "COC - Go to definition" })
