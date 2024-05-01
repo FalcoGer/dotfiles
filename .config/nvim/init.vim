@@ -849,7 +849,7 @@ if exists ('g:user_loaded_nvim_dap_virtual_text')
 endif
 
 if exists ('g:user_loaded_nvim_dap_python')
-    lua require('dap-python').setup('~/repositories/debugpy/bin/python')
+    lua require('dap-python').setup('/usr/bin/python')
 endif
 
 if exists('g:user_loaded_nvim_dap_ui')
