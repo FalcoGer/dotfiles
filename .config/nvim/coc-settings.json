@@ -310,6 +310,7 @@
     "suggest.snippetIndicator": "~",
     
     "pylsp.plugins.pylint.enabled": true,
+    "pylsp.commandPath": "/bin/pylsp",
     "pylsp.builtin.installExtrasArgs": [
         "flake8",
         "mccabe",
