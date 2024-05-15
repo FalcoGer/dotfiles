@@ -19,8 +19,8 @@
 	url = git@github.com:rsherstnev/zshcompletions
     branch = master
 [submodule ".oh-my-zsh"]
-    path = .oh-my-zsh
-    url = git@github.com:ohmyzsh/ohmyzsh.git
+	path = .oh-my-zsh
+	url = git@github.com:ohmyzsh/ohmyzsh.git
     branch = master
 [submodule "/home/paul/.local/share/pwncat/modules_src/pwncat_dirtypipe"]
 	path = /home/paul/.local/share/pwncat/modules_src/pwncat_dirtypipe
