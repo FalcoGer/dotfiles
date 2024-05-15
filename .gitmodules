@@ -15,8 +15,8 @@
     url = git@github.com:pwndbg/pwndbg.git
     branch = dev
 [submodule "repositories/zshcompletions"]
-    path = repositories/zshcompletions
-    url = git@github.com:rsherstnev/zshcompletions
+	path = repositories/zshcompletions
+	url = git@github.com:rsherstnev/zshcompletions
     branch = master
 [submodule ".oh-my-zsh"]
     path = .oh-my-zsh
@@ -30,4 +30,31 @@
 	url = git@github.com:JorianWoltjer/pwncat_linpeas
 [submodule "/home/paul/.local/share/pwncat/modules_src/pwncat_pwnkit"]
 	path = /home/paul/.local/share/pwncat/modules_src/pwncat_pwnkit
+	url = git@github.com:DanaEpp/pwncat_pwnkit
+[submodule ".config/omz_custom/plugins/fast-syntax-highlighting"]
+	path = .config/omz_custom/plugins/fast-syntax-highlighting
+	url = git@github.com:zdharma-continuum/fast-syntax-highlighting
+[submodule ".config/omz_custom/plugins/fzf-tab"]
+	path = .config/omz_custom/plugins/fzf-tab
+	url = git@github.com:Aloxaf/fzf-tab
+[submodule ".config/omz_custom/plugins/zsh-autosuggestions"]
+	path = .config/omz_custom/plugins/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
+[submodule ".config/omz_custom/plugins/zsh-completions"]
+	path = .config/omz_custom/plugins/zsh-completions
+	url = git@github.com:zsh-users/zsh-completions
+[submodule ".config/omz_custom/plugins/zsh-syntax-highlighting"]
+	path = .config/omz_custom/plugins/zsh-syntax-highlighting
+	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+[submodule ".config/omz_custom/themes/powerlevel10k"]
+	path = .config/omz_custom/themes/powerlevel10k
+	url = git@github.com:romkatv/powerlevel10k.git
+[submodule ".local/share/pwncat/modules_src/pwncat_dirtypipe"]
+	path = .local/share/pwncat/modules_src/pwncat_dirtypipe
+	url = git@github.com:DanaEpp/pwncat_dirtypipe
+[submodule ".local/share/pwncat/modules_src/pwncat_linpeas"]
+	path = .local/share/pwncat/modules_src/pwncat_linpeas
+	url = git@github.com:JorianWoltjer/pwncat_linpeas
+[submodule ".local/share/pwncat/modules_src/pwncat_pwnkit"]
+	path = .local/share/pwncat/modules_src/pwncat_pwnkit
 	url = git@github.com:DanaEpp/pwncat_pwnkit
