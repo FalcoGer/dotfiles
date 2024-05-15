@@ -14,7 +14,7 @@
     path = repositories/hacking/pwndbg
     url = git@github.com:pwndbg/pwndbg.git
     branch = dev
-[submodul "repositories/zshcompletions"]
+[submodule "repositories/zshcompletions"]
     path = repositories/zshcompletions
     url = git@github.com:rsherstnev/zshcompletions
     branch = master
