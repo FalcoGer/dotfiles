@@ -176,6 +176,8 @@ else
     " Better syntax highlighting
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | let g:user_loaded_treesitter = 1
     
+    Plug 'olimorris/codecompanion.nvim' | let g:user_loaded_codecompanion = 1
+
     " More lightweight version of context.vim
     if exists('g:user_loaded_treesitter')
         " See note for context.vim
@@ -225,6 +227,7 @@ else
     Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' } | let g:user_loaded_telescope = 1
 
     Plug 'folke/noice.nvim' | let g:user_loaded_noice = 1
+    Plug 'stevearc/dressing.nvim' | let g:user_loaded_dressing = 1
 
     function! NeorgHook()
         Neorg sync-parsers
@@ -265,7 +268,7 @@ else
         Plug 'nat-418/telescope-color-names.nvim' | let g:user_loaded_telescope_color_names = 1
     endif
 
-    if exists('g:user_loaded_neotree') || exists('g:user_loaded_chatgpt') || exists('g:user_loaded_noice')
+    if exists('g:user_loaded_neotree') || exists('g:user_loaded_chatgpt') || exists('g:user_loaded_noice') || exists('g:user_loaded_dressing')
         " Lua function library for UI elements
         Plug 'MunifTanjim/nui.nvim'
     endif
@@ -882,12 +885,21 @@ if exists ('g:user_loaded_codeium')
     source ~/.vim/config/codeium.lua
 endif
 
+if exists ('g:user_loaded_codecompanion')
+    source ~/.vim/config/ollama.lua
+endif
+
+
 if exists ('g:user_loaded_nvim_notify')
     source ~/.vim/config/notify.lua
 endif
 
 if exists('g:user_loaded_noice')
     source ~/.vim/config/noice.lua
+endif
+
+if exists('g:user_loaded_dressing')
+    source ~/.vim/config/dressing.lua
 endif
 
 if exists('g:user_loaded_neorg')
