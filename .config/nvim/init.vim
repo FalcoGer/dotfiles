@@ -259,7 +259,7 @@ else
         " ChatGPT extension for telescope
         Plug 'jackMort/ChatGPT.nvim' | let g:user_loaded_chatgpt = 1
         " Find HTML status codes
-        Plug 'barrett-ruth/telescope-http.nvim' | let g:user_loaded_telescope_http = 1
+        Plug 'barrett-ruth/http-codes.nvim' | let g:user_loaded_telescope_http = 1
         " Find emojis
         Plug 'xiyaowong/telescope-emoji.nvim' | let g:user_loaded_telescope_emoji = 1
         " Find NerdFont glyphs
