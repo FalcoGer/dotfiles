@@ -19,7 +19,7 @@
 			<pref name='audio'>
 				<pref name='silence_threshold' type='int' value='5'/>
 				<pref name='volume'>
-					<pref name='input' type='int' value='10'/>
+					<pref name='input' type='int' value='8'/>
 					<pref name='output' type='int' value='10'/>
 				</pref>
 			</pref>
@@ -39,7 +39,7 @@
 			<pref name='default' type='int' value='1477776721'/>
 			<pref name='startup' type='int' value='1477776721'/>
 			<pref name='startup_current_status' type='bool' value='0'/>
-			<pref name='idleaway' type='int' value='1689272043'/>
+			<pref name='idleaway' type='int' value='1714997616'/>
 			<pref name='isidleaway' type='bool' value='0'/>
 		</pref>
 		<pref name='conversations'>
@@ -436,20 +436,21 @@
 		</pref>
 		<pref name='plugins'>
 			<pref name='loaded' type='pathlist'>
-				<item value='/usr/local/lib/pidgin/convcolors.so'/>
-				<item value='/usr/local/lib/pidgin/history.so'/>
-				<item value='/usr/lib/purple-2/irchelper.so'/>
-				<item value='/usr/local/lib/purple-2/joinpart.so'/>
-				<item value='/usr/local/lib/pidgin/markerline.so'/>
-				<item value='/usr/local/lib/pidgin/notify.so'/>
-				<item value='/usr/local/lib/pidgin/timestamp_format.so'/>
-				<item value='/usr/local/lib/purple-2/ssl-nss.so'/>
-				<item value='/usr/local/lib/purple-2/newline.so'/>
-				<item value='/usr/local/lib/purple-2/offlinemsg.so'/>
-				<item value='/usr/local/lib/pidgin/pidginrc.so'/>
-				<item value='/usr/local/lib/pidgin/themeedit.so'/>
-				<item value='/usr/local/lib/purple-2/ssl.so'/>
-				<item value='/usr/local/lib/pidgin/timestamp.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/pidgin/convcolors.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/pidgin/history.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/purple-2/irchelper.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/purple-2/joinpart.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/pidgin/markerline.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/pidgin/notify.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/pidgin/timestamp_format.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/purple-2/ssl-nss.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/purple-2/newline.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/purple-2/offlinemsg.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/pidgin/pidginrc.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/pidgin/themeedit.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/purple-2/ssl.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/pidgin/switchspell.so'/>
+				<item value='/usr/lib/x86_64-linux-gnu/pidgin/timestamp.so'/>
 			</pref>
 			<pref name='gtk-plugin_pack-irssi'>
 				<pref name='textfmt' type='bool' value='1'/>
@@ -544,8 +545,8 @@
 			<pref name='list_visible' type='bool' value='1'/>
 			<pref name='list_maximized' type='bool' value='0'/>
 			<pref name='sort_type' type='string' value='status'/>
-			<pref name='x' type='int' value='1039'/>
-			<pref name='y' type='int' value='59'/>
+			<pref name='x' type='int' value='1037'/>
+			<pref name='y' type='int' value='48'/>
 			<pref name='width' type='int' value='554'/>
 			<pref name='height' type='int' value='760'/>
 			<pref name='theme' type='string' value=''/>
@@ -635,6 +636,13 @@
 				<pref name='sink'>
 					<pref name='device' type='string' value='autovideosink'/>
 				</pref>
+			</pref>
+		</pref>
+	</pref>
+	<pref name='core'>
+		<pref name='plugins'>
+			<pref name='core-plugin_pack-google'>
+				<pref name='domain' type='string' value='www.google.com'/>
 			</pref>
 		</pref>
 	</pref>
