@@ -182,7 +182,7 @@ else
     " Better syntax highlighting
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | let g:user_loaded_treesitter = 1
     
-    Plug 'olimorris/codecompanion.nvim' | let g:user_loaded_codecompanion = 1
+    " Plug 'olimorris/codecompanion.nvim' | let g:user_loaded_codecompanion = 1
 
     " More lightweight version of context.vim
     if exists('g:user_loaded_treesitter')
