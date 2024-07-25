@@ -22,7 +22,8 @@ set width 0
 #     x /3i $rip
 # end
 
-
+# auto download symbols
+set debuginfod enabled on
 
 # load extensions if they exist
 
