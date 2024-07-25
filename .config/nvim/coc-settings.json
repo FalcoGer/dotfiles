@@ -7,14 +7,6 @@
     "coc.preferences.enableMessageDialog": true,
     "coc.preferences.enableLinkedEditing": true,
 
-    "coc-codellama.host": "paul-pc.lan",
-    "coc-codellama.model": "codegemma:code",
-    "coc-codellama.prefix": "<|fim_prefix|>",
-    "coc-codellama.suffix": "<|fim_suffix|>",
-    "coc-codellama.middle": "<|fim_middle|>",
-    "coc-codellama.temperature": 0.0,
-    
-
     "ltex.enabled": [
         "bibtex",
         "context",
