@@ -6,7 +6,7 @@ CompileFlags:
     -stdlib=libc++,
     -flto=full,
     -fvirtual-function-elimination,
-    -L/usr/lib/llvm-19/lib,
+    #-L/usr/lib/llvm-19/lib,
     -fexperimental-library,
     -fopenmp,
     -Wall,
