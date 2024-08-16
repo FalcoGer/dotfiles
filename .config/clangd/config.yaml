@@ -2,13 +2,13 @@
 
 CompileFlags:
   Add: [
-    -std=c++23,
+    -std=c++26,
     -stdlib=libc++,
-    -flto=full,
-    -fvirtual-function-elimination,
-    #-L/usr/lib/llvm-19/lib,
+    #-L/usr/lib/llvm-20/lib,
+    #-flto=full,
+    #-fvirtual-function-elimination,
     -fexperimental-library,
-    -fopenmp,
+    #-fopenmp,
     -Wall,
     -Wextra,
     -Wpedantic,
@@ -71,16 +71,23 @@ InlayHints:
   ParameterNames: true
   DeducedTypes: true
   BlockEnd: true
+  TypeNameLimit: 32
 
 # https://clang.llvm.org/extra/clang-tidy/#suppressing-undesired-diagnostics
 Diagnostics:
   UnusedIncludes: Strict
   ClangTidy:
     FastCheckFilter: None
+    # FastCheckFilter: Strict
     Add: [
       abseil-*,
       bugprone*,
-      boost-*,
+      
+      # boost-* causes hangup with FastCheckFilter: None
+      # boost-*,
+      boost-use-ranges
+      boost-use-to-string
+      
       concurrency-*,
       cppcoreguidelines-*,
       modernize-*,
@@ -98,6 +105,8 @@ Diagnostics:
       mpi-*
     ]
     Remove: [
+      # debugging hanging check
+
       readability-avoid-const-params-in-decls, # const in parameter in function declarations is useful for header files.
       misc-unused-parameters, # caught by -Wunused-parameter
       cppcoreguidelines-avoid-do-while, # annoying, do-while might be useful.
@@ -175,6 +184,7 @@ Diagnostics:
       llvm-qualified-auto # alias for readability-qualified-auto
     ]
     CheckOptions:
+      boost-use-ranges.UseReversePipe: true
       modernize-use-auto.MinTypeNameLength: 10
       modernize-use-auto.RemoveStars: 0
       hicpp-multiway-paths-covered.WarnOnMissingElse: true
