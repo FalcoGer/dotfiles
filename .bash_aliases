@@ -124,7 +124,7 @@ if [[ -e $(which clang) ]]; then
 
     # https://clang.llvm.org/docs/DiagnosticsReference.html
 
-    CLANG_OPT="-std=c++23"
+    CLANG_OPT="-std=c++26"
     CLANG_OPT="${CLANG_OPT} -stdlib=libc++ -fexperimental-library -L/usr/lib/llvm-${CLANG_VERSION}/lib"
     CLANG_OPT="${CLANG_OPT} -flto=full"
     CLANG_OPT="${CLANG_OPT} -fvirtual-function-elimination" # requires -flto=full, removes unused virtual functions
@@ -220,7 +220,7 @@ GPP_ERR="${GPP_ERR} -Werror=multistatement-macros" # warn if macro with multiple
 GPP_ERR="${GPP_ERR} -Werror=sequence-point" # undefined behavior for things like a = a++ or a[n] = n++ or a[n++] = n
 GPP_ERR="${GPP_ERR} -Werror=return-type" # undefined behavior if returning function does not return a value. also if non-returning function returns a value.
 GPP_ERR="${GPP_ERR} -Werror=multichar" # char c = 'ABCD';
-GPP_STD="-std=c++23"
+GPP_STD="-std=c++26"
 GPP_OPT="-flto -fuse-linker-plugin" # enable link time optimization
 GPP_OPT="${GPP_OPT} -lstdc++exp"    # enable expanded c++ standard library (std::stacktrace)
 GPP_OPT="${GPP_OPT} -fuse-ld=gold"  # enable the use of the gold linker instead of the default ld linker
