@@ -94,7 +94,8 @@ HIST_STAMPS="%Y-%m-%d %T "
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    adb                     # android debug bridge autocomplete
+    #adb not found
+    #adb                     # android debug bridge autocomplete
     colored-man-pages       # colored man pages :>
     colorize                # colored output (syntax highlighting using pygmentize)
     command-not-found       # suggest packages to install if a command was not found
