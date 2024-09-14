@@ -201,13 +201,13 @@ Diagnostics:
       misc-const-correctness.TransformPointersAsValues: true
       readability-redundant-inline-specifier.StrictMode: true
       readability-identifier-length.MinimumVariableNameLength: 0
-      readability-identifier-length.IgnoredVariableNames: "^([XYZxyzit]|id|it)$"
+      readability-identifier-length.IgnoredVariableNames: "^([XYZxyzit]|id|it|to)$"
       readability-identifier-length.MinimumLoopCounterNameLength: 3
       readability-identifier-length.IgnoredLoopCounterNames: "^([ijkxyz_]|idx|it)$"
       readability-identifier-length.MinimumExceptionNameLength: 2
       readability-identifier-length.IgnoredExceptionVariableNames: "^(e|ex)$"
       readability-identifier-length.MinimumParameterNameLength: 3
-      readability-identifier-length.IgnoredParameterNames: "^([XYZxyzit]|id)$"
+      readability-identifier-length.IgnoredParameterNames: "^([XYZxyzit]|id|it|to)$"
       readability-identifier-naming.AbstractClassCase: CamelCase
       readability-identifier-naming.ClassCase: CamelCase
       readability-identifier-naming.ClassConstantCase: UPPER_CASE
