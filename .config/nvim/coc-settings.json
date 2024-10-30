@@ -130,7 +130,7 @@
                 "--all-scopes-completion",
                 "--background-index",
                 "--completion-style=bundled",
-                "--function-arg-placeholders",
+                "--function-arg-placeholders=1",
                 "--header-insertion=iwyu",
                 "--header-insertion-decorators",
                 "--limit-results=500"
