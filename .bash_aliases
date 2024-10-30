@@ -73,7 +73,7 @@ alias cp='cp -v -i'
 alias mv='mv -v -i'
 alias cd..='cd ..'
 
-alias rsync='rsync --progress --compress --compress-level=9 --human-readable --links --keep-dirlinks --preallocate --recursive --partial --partial-dir=/tmp'
+alias rsync='rsync --progress --compress --compress-level=9 --human-readable --links --keep-dirlinks --preallocate --recursive --acls --xattrs --partial --partial-dir=/tmp'
 
 up () {
     local d=""
