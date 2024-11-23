@@ -366,8 +366,9 @@ highlight Visual ctermbg=237 guibg=#3A3A3A
 " clipboard support
 " register "+ (clipboard) and
 " "* primary
-set guioptions+=a
-
+if !has("nvim")
+  set guioptions+=a
+endif
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
