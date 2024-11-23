@@ -6,6 +6,11 @@ case $- in
     *i*) ;;
       *) return;;
 esac
+
+if [ -f "${HOME}/.bash_env" ]; then
+    source "${HOME}/.bash_env"
+fi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -80,8 +85,5 @@ if ! shopt -oq posix; then
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
-fi
-if [ -f "$HOME/.bash_env" ]; then
-    source "$HOME/.bash_env"
 fi
 

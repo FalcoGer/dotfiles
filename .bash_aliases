@@ -102,9 +102,17 @@ update-repo() {
 
 alias quit='exit'
 alias ipython='ipython3'
+
+if [ -f "${HOME}/.bash_env_secret" ]; then
+    source "${HOME}/.bash_env_secret"
+fi
+
 if [[ -f "${HOME}/.bash_aliases_secret" ]]; then
     source "${HOME}/.bash_aliases_secret"
 fi
+
+
+alias nmap="nmap --privileged --reason --script-args=\"shodan-api.apikey=${SHODAN_API_KEY}\""
 
 if [[ "${TERM}" = "xterm-kitty" ]]; then
     alias icat='kitty +kitten icat'

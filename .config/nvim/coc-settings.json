@@ -186,12 +186,11 @@
                             "host": "localhost",
                             "port": 3306,
                             "__comment_GRANTS__": [
-                                "SHOW DATABASES ON *.*",
-                                "SHOW VIEW ON *.*",
-                                "SHOW_ROUTINE ON *.*"
+                                "GRANT SELECT, SHOW DATABASES, SHOW VIEW ON *.* TO 'sqlls'@'localhost';",
+                                "GRANT SHOW_ROUTINE ON *.* TO 'sqlls'@'localhost'"
                             ],
                             "user": "sqlls",
-                            "password": "nnywQmCXKhp3xTAAttLg",
+                            "password": "${env:SQL_LANGSERV_PASSWD}",
                             "database": "mysql",
                             "projectPaths": [
                                 "/"
