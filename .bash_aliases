@@ -136,6 +136,7 @@ if [[ -e $(which clang) ]]; then
     CLANG_OPT="${CLANG_OPT} -stdlib=libc++ -fexperimental-library -L/usr/lib/llvm-${CLANG_VERSION}/lib"
     CLANG_OPT="${CLANG_OPT} -flto=full"
     CLANG_OPT="${CLANG_OPT} -fvirtual-function-elimination" # requires -flto=full, removes unused virtual functions
+    CLANG_OPT="${CLANG_OPT} -march=native"
     # CLANG_OPT="${CLANG_OPT} -fmodules -fcxx-modules" # enables module support
     CLANG_WARN="-Wall -Wextra -Wpedantic"
     CLANG_WARN="${CLANG_WARN} -Wdouble-promotion" # implicit float->double
@@ -232,6 +233,7 @@ GPP_STD="-std=c++26"
 GPP_OPT="-flto -fuse-linker-plugin" # enable link time optimization
 GPP_OPT="${GPP_OPT} -lstdc++exp"    # enable expanded c++ standard library (std::stacktrace)
 GPP_OPT="${GPP_OPT} -fuse-ld=gold"  # enable the use of the gold linker instead of the default ld linker
+GPP_OPT="${GPP_OPT} -march=native"  # enable native CPU extensions (avx, etc)
 alias g++="g++ ${GPP_STD} ${GPP_OPT} ${GPP_WARN} ${GPP_ERR}"
 
 # Add an "alert" alias for long running commands.  Use like so:
