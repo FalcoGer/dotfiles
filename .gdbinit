@@ -17,6 +17,7 @@ python
 try:
     # Try setting debuginfod to see if it's supported
     gdb.execute( "set debuginfod enabled on" )
+    gdb.execute( "set debuginfod urls https://debuginfod.ubuntu.com https://debuginfod.elfutils.org" )
     gdb.write( "Debuginfod is enabled.\n" )
 except gdb.error as e:
     gdb.write( "Debuginfod is not supported.\n" )
