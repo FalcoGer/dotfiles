@@ -12,29 +12,37 @@ set disassembly-flavor intel
 set height 0
 set width 0
 
-# hook, not required with peda or pwndbg
-# show registers, stack and instruction pointer when stopping
-
-# not required with gef/pwndbg
-# define hook-stop
-#     info registers rax rbx rcx rdx rsi rdi rbp rsp rip eflags
-#     x /64wx $rsp
-#     x /3i $rip
-# end
-
 # auto download symbols
-set debuginfod enabled on
+python
+try:
+    # Try setting debuginfod to see if it's supported
+    gdb.execute( "set debuginfod enabled on" )
+    gdb.write( "Debuginfod is enabled.\n" )
+except gdb.error as e:
+    gdb.write( "Debuginfod is not supported.\n" )
+end
 
 # load extensions if they exist
+python
 
-# source ~/repositories/hacking/exploitable/exploitable/exploitable.py
-shell if test -f ~/repositories/hacking/exploitable/exploitable/exploitable.py; then echo source ~/repositories/hacking/exploitable/exploitable/exploitable.py; fi > /tmp/gdbinit_source
-source /tmp/gdbinit_source
+import os
 
-# source ~/repositories/hacking/pwndbg/gdbinit.py
-shell if test -f ~/repositories/hacking/pwndbg/gdbinit.py; then echo source ~/repositories/hacking/pwndbg/gdbinit.py; fi > /tmp/gdbinit_source
-source /tmp/gdbinit_source
-shell if test -f ~/repositories/hacking/pwndbg/gdbinit.py; then echo set context-ghidra if-no-source; fi > /tmp/gdbinit_source
-source /tmp/gdbinit_source
+exploitablePath = os.getenv( "HOME", "~" ) + "/repositories/hacking/exploitable/exploitable/exploitable.py"
+if os.path.isfile(exploitablePath):
+    gdb.write( "Loading exploitable from " + exploitablePath + "\n" )
+    gdb.execute( "source " + exploitablePath )
 
-shell rm /tmp/gdbinit_source
+# allow gdb to be loaded without pwndbg by setting this variable
+noLoadPwndbg = os.getenv( "NOLOAD_PWNDBG", "0" )
+pwnDbgPath = os.getenv( "HOME", "~" ) + "/repositories/hacking/pwndbg/gdbinit.py"
+
+if noLoadPwndbg == "0" and os.path.isfile(pwnDbgPath):
+    gdb.write ( "Loading PwnDbg from " + pwnDbgPath + "\n" )
+    gdb.execute( "source " + pwnDbgPath )
+    gdb.execute( "set context-ghidra if-no-source" )
+else:
+    # hook, not required with peda or pwndbg
+    # show registers, stack and instruction pointer when stopping
+    gdb.execute( "define hook-stop\n  info registers rax rbx rcx rdx rsi rdi rbp rsp rip eflags\n  x /64wx $rsp\n  x/3i $rip\nend" )
+end
+
