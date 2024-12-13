@@ -185,6 +185,7 @@ Diagnostics:
     ]
     CheckOptions:
       boost-use-ranges.UseReversePipe: true
+      cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor: true
       modernize-use-auto.MinTypeNameLength: 10
       modernize-use-auto.RemoveStars: 0
       hicpp-multiway-paths-covered.WarnOnMissingElse: true
