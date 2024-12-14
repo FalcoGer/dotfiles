@@ -81,12 +81,12 @@ Diagnostics:
     # FastCheckFilter: Strict
     Add: [
       abseil-*,
-      bugprone*,
+      bugprone-*,
       
       # boost-* causes hangup with FastCheckFilter: None
       # boost-*,
-      boost-use-ranges
-      boost-use-to-string
+      boost-use-ranges,
+      boost-use-to-string,
       
       concurrency-*,
       cppcoreguidelines-*,
