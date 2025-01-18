@@ -5,6 +5,8 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/go/bin"
 export PATH="$PATH:$HOME/repositories/john/run"
 
+export ZSH_CUSTOM="$HOME/.config/omz_custom"
+
 if [ -f "${HOME}/.bash_env_secret" ]; then
     source "${HOME}/.bash_env_secret"
 fi

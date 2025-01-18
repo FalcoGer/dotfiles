@@ -86,7 +86,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="%Y-%m-%d %T "
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM="$HOME/.config/omz_custom"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
