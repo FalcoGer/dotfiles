@@ -123,7 +123,7 @@ plugins=(
 # breaks history search
 # see: https://github.com/ohmyzsh/ohmyzsh/issues/8749
 #    safe-paste              # prevents code that's pasted into terminal from running immediately
-    
+    yt-dlp
     # zsh-syntax-highlighting must be the last plugin!
     # zsh-syntax-highlighting # provide syntax highlighting
     fast-syntax-highlighting
