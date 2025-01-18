@@ -58,3 +58,6 @@
 [submodule ".local/share/pwncat/modules_src/pwncat_pwnkit"]
 	path = .local/share/pwncat/modules_src/pwncat_pwnkit
 	url = git@github.com:DanaEpp/pwncat_pwnkit
+[submodule ".config/omz_custom/plugins/yt-dlp"]
+	path = .config/omz_custom/plugins/yt-dlp
+	url = https://github.com/clavelm/yt-dlp-omz-plugin.git
