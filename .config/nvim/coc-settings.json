@@ -7,14 +7,6 @@
     "coc.preferences.enableMessageDialog": true,
     "coc.preferences.enableLinkedEditing": true,
 
-    "coc-codellama.host": "paul-pc.lan",
-    "coc-codellama.model": "codegemma:code",
-    "coc-codellama.prefix": "<|fim_prefix|>",
-    "coc-codellama.suffix": "<|fim_suffix|>",
-    "coc-codellama.middle": "<|fim_middle|>",
-    "coc-codellama.temperature": 0.0,
-    
-
     "ltex.enabled": [
         "bibtex",
         "context",
@@ -138,7 +130,7 @@
                 "--all-scopes-completion",
                 "--background-index",
                 "--completion-style=bundled",
-                "--function-arg-placeholders",
+                "--function-arg-placeholders=1",
                 "--header-insertion=iwyu",
                 "--header-insertion-decorators",
                 "--limit-results=500"
@@ -194,12 +186,11 @@
                             "host": "localhost",
                             "port": 3306,
                             "__comment_GRANTS__": [
-                                "SHOW DATABASES ON *.*",
-                                "SHOW VIEW ON *.*",
-                                "SHOW_ROUTINE ON *.*"
+                                "GRANT SELECT, SHOW DATABASES, SHOW VIEW ON *.* TO 'sqlls'@'localhost';",
+                                "GRANT SHOW_ROUTINE ON *.* TO 'sqlls'@'localhost'"
                             ],
                             "user": "sqlls",
-                            "password": "nnywQmCXKhp3xTAAttLg",
+                            "password": "${env:SQL_LANGSERV_PASSWD}",
                             "database": "mysql",
                             "projectPaths": [
                                 "/"

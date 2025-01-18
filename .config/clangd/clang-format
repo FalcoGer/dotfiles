@@ -98,6 +98,8 @@ AlignTrailingComments:
 
 # Left: int* a, Middle: int * a, Right: int *a
 PointerAlignment: Left
+# If true, will use most common in code, otherwise PointerAlignment as fallback
+DerivePointerAlignment: false
 
 # Align reference symbol: Left, Right, Middle or like the pointer
 ReferenceAlignment: Pointer
@@ -131,6 +133,8 @@ AllowShortCompoundRequirementOnASingleLine: true
 # ShortBlockStyle: Never, Empty, Always - Allow single statement blocks to be put on the same line as control flow keyword
 AllowShortBlocksOnASingleLine: Empty
 
+AllowShortCaseExpressionOnASingleLine: true
+
 # Allow single statements and break statement on the same line as a case statement
 AllowShortCaseLabelsOnASingleLine: true
 
@@ -163,22 +167,26 @@ AllowShortLoopsOnASingleLine: false
 ########################################################################################
 # Line Break behavior
 
-# Deprecated, see AlwaysBreakAfterReturnType
+# Deprecated, see BreakAfterReturnType
 # AlwaysBreakAfterDefinitionReturnType: None
 
 # ReturnTypeBreakingStyle: None, All, TopLevel - None uses PenaltyReturnTypeOnItsOwnLine
 # Also AllDefinitions and TopLevelDefinitions - Breaks for definitions only
 # Breaks after return type of a function declarations, top level ignores that in classes
-AlwaysBreakAfterReturnType: None
+BreakAfterReturnType: None
 
 # If true uses ContinuationIndentWidth, if false aligns next line on the " mark
 AlwaysBreakBeforeMultilineStrings: false
 
 # BreakTemplateDeclarationsStyle:
+#   Leave:          Leave as is
 #   No:             Don't force, uses PenaltyBreakTemplateDeclaration
 #   MultiLine:      Only if the following declaration spans multiple lines (for example multiple lines of function arguments)
 #   Yes:            Force line break after template declaration
-AlwaysBreakTemplateDeclarations: Yes
+BreakTemplateDeclarations: Yes
+
+# Break between adjacent string literals
+BreakAdjacentStringLiterals: false
 
 # AttributeBreakingStyle: Always, Leave, Never - Break after attributes like [[nodiscard]]
 BreakAfterAttributes: Always
@@ -188,6 +196,13 @@ BreakAfterJavaFieldAnnotations: true
 
 # Add newline for each item in an array
 BreakArrays: false
+
+# BreakBinaryOperationsStyle
+#   Never: Never break
+#   OnePerLine: Always break
+#   RespectPrecedence: Break on lower precedence operations (+ rather than *)
+# When breaking binary operations
+BreakBinaryOperations: RespectPrecedence
 
 # BinaryOperatorStyle
 #   None:           Leave operators on the back of lines
@@ -216,6 +231,9 @@ BreakBeforeTernaryOperators: true
 #   AfterComma:     Colon is at the end of the ctor identifier line, colons are at the end of each individual line
 BreakConstructorInitializers: BeforeColon
 
+# if true, will always break between ( and first parameter in function definition
+BreakFunctionDefinitionParameters: false
+
 # BreakInheritanceListStyle
 #   BeforeColon:    Colon on new line, commas at the end of each line
 #   BeforeComma:    Colon on new line, commas also on new line aligned with colon
@@ -225,6 +243,33 @@ BreakInheritanceList: AfterColon
 
 # Allow breaking string literals when formatting
 BreakStringLiterals: true
+
+# ???
+#   DontBreak, BreakElements, BreakAll
+TableGenBreakInsideDAGArg: BreakAll
+
+# ???
+TableGenBreakingDAGArgOperators:
+    - ins
+    - outs
+
+# ???
+AlignConsecutiveTableGenBreakingDAGArgColons:
+    Enabled: true
+    AcrossEmptyLines: true
+    AcrossComments: true
+
+# ???
+AlignConsecutiveTableGenCondOperatorColons:
+    Enabled: true
+    AcrossEmptyLines: true
+    AcrossComments: true
+
+# ???
+AlignConsecutiveTableGenDefinitionColons:
+    Enabled: true
+    AcrossEmptyLines: true
+    AcrossComments: true
 
 # If true, Place multiple namespace declarations on the same line, if they fit. Otherwise one line for each.
 CompactNamespaces: false
@@ -243,7 +288,7 @@ ReflowComments: true
 # Regex to describe comments with special meaning, which should not be messed with by the formatter
 # exclude doxygen comments like /// @param and * @param
 # https://www.mitk.org/images/1/1c/BugSquashingSeminars$2013-07-17-DoxyReference.pdf
-CommentPragmas: 'NOLINT|(@|\\)(attention|author|brief|bug|cond|date|deprecated|else(if|cond)?|end(cond|if)|exception|if(not)?|invariant|note|par|t?param|post|pre|return|retval|sa|see|since|test|throw|todo|version|warning|xrefitem)|^!'
+CommentPragmas: 'NOLINT|(@|\\)(attention|author|brief|bug|cond|date|deprecated|else(if|cond)?|end(cond|if)|exception|if(not)?|invariant|note|par|t?param|post|pre|return|retval|sa|see|since|test|throw|todo|version|warning|xrefitem)|^ IWYU pragma:|^!'
 
 # RequiresClausePositionStyle
 #   OwnLine: Always put requires clause on it's own line
@@ -391,8 +436,22 @@ EmptyLineBeforeAccessModifier: LogicalBlock
 # Add empty line at end of file
 InsertNewlineAtEOF: true
 
-# Keep up to MaxEmptyLinesToKeep at end of file, false to set 1 if InsertNewlineAtEOF, otherwise none
-KeepEmptyLinesAtEOF: false
+KeepEmptyLines:
+    # Keep up to MaxEmptyLinesToKeep at end of file
+    # false to set 1 if InsertNewlineAtEOF, otherwise none
+    AtEndOfFile: false
+    AtStartOfBlock: false
+    AtStartOfFile: false
+
+# Deprecated, see KeepEmptyLines
+# KeepEmptyLinesAtEOF: false
+
+# Keep form feed characters if surrounded by new line characters
+# Multiple form feeds are collapsed into one
+KeepFormFeed: false
+
+# Removes empty lines within unwrapped lines
+RemoveEmptyLinesInUnwrappedLines: true
 
 # Keep or delete empty lines at the start of a block
 KeepEmptyLinesAtTheStartOfBlocks: false
@@ -483,36 +542,71 @@ IncludeBlocks: Regroup
 # Define categories into which to re-group includes when formatting them. Items with the same Priority and SortPriority get grouped
 #   Regex: Regex to match, first one that matches is used to assign priorities
 #   Priority: Same priority goes into the same block.
-#   SortPriority: IDFK
+#   SortPriority: If priority is the same, this is how they are arranged
 #   CaseSensitive: Regex matching case sensitive, default is false.
 
 IncludeCategories:
     # Precompiled header first always
-    - Regex: '"pch.h(pp)?"'
+    - Regex: '^"pch.h(pp|xx)?"'
       Priority: -1
+    # Standard library
+    - Regex: '^<(?!Q|SFML/|SDL/|gsl/|spdlog/|fmt/)'
+      Priority: 1
+      SortPriority: 0
+      CaseSensitive: true
+    # Qt libraries
+    - Regex: '^<Q.*'
+      Priority: 1
+      SortPriority: 1
+      CaseSensitive: true
     # Priority 2 is guideline support library
-    - Regex: '/gsl/'
+    - Regex: '^<gsl/'
       Priority: 2
+      CaseSensitive: true
     # spdlog & fmt in one group
-    - Regex: '<(spdlog|fmt)/'
+    - Regex: '^<(spdlog|fmt)/'
       Priority: 3
+      CaseSensitive: true
     # Priority 4 is game engine stuff
     - Regex: '^<SDL/'
       Priority: 4
+      SortPriority: 0
       CaseSensitive: true
     - Regex: '^<SFML/'
       Priority: 4
+      SortPriority: 1
       CaseSensitive: true
-    # Standard library
-    - Regex: '^<.+>'
-      Priority: 1
     # User libraries last
-    - Regex: '".*'
+    - Regex: '"(?!pch.h(pp|xx)?)'
       Priority: 999
+
+# A regex to show which include is the "main" include for header
+# For example header a.h would be the main include for "a.cpp" and "a_test.cpp"
+# If this was set to '(_test)?$'
+IncludeIsMainRegex: '((?:_t|T)est)?$'
+
+# if this option is configured to `(Impl\.hpp)$`, then a file ClassImpl.hpp
+# is considered “main” (in addition to Class.c, Class.cc, Class.cpp and so on)
+IncludeIsMainSourceRegex: ''
+
+# Which character to use for the main include
+#   Quote, AngleBracket, Any
+MainIncludeChar: Quote
 
 # Insert braces into one line if/while/do/for etc statements.
 # MAY BREAK CODE, REVIEW CHANGES MADE BY THIS
 InsertBraces: true
+
+# RemoveParenthesesStyle
+# Anything other than leave MAY BREAK CODE
+#   Leave: Leave as is.
+#   MultipleParentheses: Collapse multiples into single parens
+#   ReturnStatement: Also removes parens around return statement
+RemoveParentheses: MultipleParentheses
+
+# Remove semicolons after the closing braces of functions and constructors/destructors.
+# MAY BREAK CODE if set to true
+RemoveSemicolon: true
 
 # Insert trailing commas for container literals like [ a, b, c ]. Only works for javascript
 # TrailingCommaStyle
@@ -532,4 +626,146 @@ IntegerLiteralSeparator:
 # Sort using declarations: Never, Lexicographic, LexicographicNumeric
 SortUsingDeclarations: Lexicographic
 
+# ----------------------------------------------------------------------------
+# Penalties
+
+# For breaking around assignment operator
+PenaltyBreakAssignment: 150
+
+# For breaking a function call after call(
+PenaltyBreakBeforeFirstCallParameter: 300
+
+# For breaking inside a comment
+PenaltyBreakComment: 500
+
+# For breaking before the first <<
+PenaltyBreakFirstLessLess: 400
+
+# For breaking after (
+PenaltyBreakOpenParenthesis: 0
+
+# For breaking after ::
+PenaltyBreakScopeResolution: 500
+
+# For breaking inside a string literal
+PenaltyBreakString: 600
+
+# For breaking after a template declaration
+PenaltyBreakTemplateDeclaration: 10
+
+# For braeking outside the ColumnLimit
+PenaltyExcessCharacter: 50
+
+# For every whitespace used for indentation
+PenaltyIndentedWhitespace: 0
+
+# For putting the return type of a function onto it's own line
+PenaltyReturnTypeOnItsOwnLine: 300
+
+# ----------------------------------------------------------------------------
+# Macros
+
+AttributeMacros:
+    - __capability
+    - __output
+    - __unused
+
+ForEachMacros:
+    - forever
+    - foreach
+    - Q_FOREACH
+    - BOOST_FOREACH
+
+IfMacros:
+    - KJ_IF_MAYBE
+
+# regular expression matching macros that start/end a block
+MacroBlockBegin: ''
+MacroBlockEnd: ''
+
+# Do/Don't format macro body
+SkipMacroDefinitionBody: true
+
+# Macros which are ignored in front of a statement, as if they were an attribute. So that they are not parsed as identifier
+StatementAttributeLikeMacros:
+    - Q_EMIT
+
+# A vector of macros that should be interpreted as complete statements.
+# Typical macros are expressions and require a semicolon to be added.
+# Sometimes this is not the case, and this allows
+# to make clang-format aware of such cases.
+StatementMacros:
+    - Q_UNUSED
+    - QT_REQUIRE_VERSION
+    - Q_CLASSINFO
+    - Q_ENUM
+    - Q_ENUM_NS
+    - Q_FLAG
+    - Q_FLAG_NS
+    - Q_GADGET
+    - Q_GADGET_EXPORT
+    - Q_INTERFACES
+    - Q_MOC_INCLUDE
+    - Q_NAMESPACE
+    - Q_NAMESPACE_EXPORT
+    - Q_OBJECT
+    - Q_PROPERTY
+    - Q_REVISION
+    - Q_DISABLE_COPY
+    - Q_SET_OBJECT_NAME
+    - QT_BEGIN_NAMESPACE
+    - QT_END_NAMESPACE
+    - QML_ADDED_IN_MINOR_VERSION
+    - QML_ANONYMOUS
+    - QML_ATTACHED
+    - QML_DECLARE_TYPE
+    - QML_DECLARE_TYPEINFO
+    - QML_ELEMENT
+    - QML_EXTENDED
+    - QML_EXTENDED_NAMESPACE
+    - QML_EXTRA_VERSION
+    - QML_FOREIGN
+    - QML_FOREIGN_NAMESPACE
+    - QML_IMPLEMENTS_INTERFACES
+    - QML_INTERFACE
+    - QML_NAMED_ELEMENT
+    - QML_REMOVED_IN_MINOR_VERSION
+    - QML_SINGLETON
+    - QML_UNAVAILABLE
+    - QML_UNCREATABLE
+    - QML_VALUE_TYPE
+    - QML_FOREIGN_NAMESPACE
+    - QML_IMPLEMENTS_INTERFACES
+    - QML_INTERFACE
+    - QML_NAMED_ELEMENT
+    - QML_REMOVED_IN_MINOR_VERSION
+    - QML_SINGLETON
+    - QML_UNAVAILABLE
+    - QML_UNCREATABLE
+    - QML_VALUE_TYPE
+
+# A vector of macros which are whitespace-sensitive and should not be touched.
+WhitespaceSensitiveMacros:
+    - BOOST_PP_STRINGIZE
+    - CF_SWIFT_NAME
+    - NS_SWIFT_NAME
+    - PP_STRINGIZE
+    - STRINGIZE
+
+# ----------------------------------------------------------------------------
+# Non C++
+
+# Which quotes to use for strings in JS: Leave, Single, Double
+JavaScriptQuotes: Double
+JavaScriptWrapImports: true
+
+SortJavaStaticImport: Before
+
+ObjCBinPackProtocolList: Auto
+ObjCBlockIndentWidth: 4
+ObjCBreakBeforeNestedBlockParam: true
+ObjCSpaceAfterProperty: false
+ObjCSpaceBeforeProtocolList: true
+
+VerilogBreakBetweenInstancePorts: false
 ...

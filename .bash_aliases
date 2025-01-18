@@ -73,7 +73,7 @@ alias cp='cp -v -i'
 alias mv='mv -v -i'
 alias cd..='cd ..'
 
-alias rsync='rsync --progress --compress --compress-level=9 --human-readable --links --keep-dirlinks --preallocate --recursive --partial --partial-dir=/tmp'
+alias rsync='rsync --progress --compress --compress-level=9 --human-readable --links --keep-dirlinks --preallocate --recursive --acls --xattrs --partial --partial-dir=/tmp'
 
 up () {
     local d=""
@@ -102,9 +102,17 @@ update-repo() {
 
 alias quit='exit'
 alias ipython='ipython3'
+
+if [ -f "${HOME}/.bash_env_secret" ]; then
+    source "${HOME}/.bash_env_secret"
+fi
+
 if [[ -f "${HOME}/.bash_aliases_secret" ]]; then
     source "${HOME}/.bash_aliases_secret"
 fi
+
+
+alias nmap="nmap --privileged --reason --script-args=\"shodan-api.apikey=${SHODAN_API_KEY}\""
 
 if [[ "${TERM}" = "xterm-kitty" ]]; then
     alias icat='kitty +kitten icat'
@@ -124,10 +132,11 @@ if [[ -e $(which clang) ]]; then
 
     # https://clang.llvm.org/docs/DiagnosticsReference.html
 
-    CLANG_OPT="-std=c++23"
+    CLANG_OPT="-std=c++26"
     CLANG_OPT="${CLANG_OPT} -stdlib=libc++ -fexperimental-library -L/usr/lib/llvm-${CLANG_VERSION}/lib"
     CLANG_OPT="${CLANG_OPT} -flto=full"
     CLANG_OPT="${CLANG_OPT} -fvirtual-function-elimination" # requires -flto=full, removes unused virtual functions
+    CLANG_OPT="${CLANG_OPT} -march=native"
     # CLANG_OPT="${CLANG_OPT} -fmodules -fcxx-modules" # enables module support
     CLANG_WARN="-Wall -Wextra -Wpedantic"
     CLANG_WARN="${CLANG_WARN} -Wdouble-promotion" # implicit float->double
@@ -220,10 +229,11 @@ GPP_ERR="${GPP_ERR} -Werror=multistatement-macros" # warn if macro with multiple
 GPP_ERR="${GPP_ERR} -Werror=sequence-point" # undefined behavior for things like a = a++ or a[n] = n++ or a[n++] = n
 GPP_ERR="${GPP_ERR} -Werror=return-type" # undefined behavior if returning function does not return a value. also if non-returning function returns a value.
 GPP_ERR="${GPP_ERR} -Werror=multichar" # char c = 'ABCD';
-GPP_STD="-std=c++23"
+GPP_STD="-std=c++26"
 GPP_OPT="-flto -fuse-linker-plugin" # enable link time optimization
 GPP_OPT="${GPP_OPT} -lstdc++exp"    # enable expanded c++ standard library (std::stacktrace)
 GPP_OPT="${GPP_OPT} -fuse-ld=gold"  # enable the use of the gold linker instead of the default ld linker
+GPP_OPT="${GPP_OPT} -march=native"  # enable native CPU extensions (avx, etc)
 alias g++="g++ ${GPP_STD} ${GPP_OPT} ${GPP_WARN} ${GPP_ERR}"
 
 # Add an "alert" alias for long running commands.  Use like so:

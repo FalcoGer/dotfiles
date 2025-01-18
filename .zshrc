@@ -86,7 +86,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="%Y-%m-%d %T "
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM="$HOME/.config/omz_custom"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -94,7 +94,8 @@ HIST_STAMPS="%Y-%m-%d %T "
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    adb                     # android debug bridge autocomplete
+    #adb not found
+    #adb                     # android debug bridge autocomplete
     colored-man-pages       # colored man pages :>
     colorize                # colored output (syntax highlighting using pygmentize)
     command-not-found       # suggest packages to install if a command was not found

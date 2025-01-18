@@ -169,11 +169,13 @@ end
 -- requires posix (sudo luarocks --lua-version=5.1 install luaposix)
 local posix = require('posix')
 posix.setenv("PWNDBG_DISABLE_COLORS", "1")
+-- do not load pwndbg here, check gdbinit for details
+posix.setenv("NOLOAD_PWNDBG", "1")
 
 -- local env = {PWNDBG_DISABLE_COLORS = "1"}
 dap.adapters.gdb = {
     type = "executable",
-    command = "/usr/bin/gdb",
+    command = "gdb",
     args = { "--interpreter", "dap" },
     options = {
         --    env = env,

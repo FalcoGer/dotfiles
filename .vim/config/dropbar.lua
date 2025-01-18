@@ -4,7 +4,7 @@ local dropbar = require('dropbar')
 local utils  = require('dropbar.utils')
 local api = require('dropbar.api')
 
-local general_opts = {
+local bar_opts = {
     ---@type boolean|fun(buf: integer, win: integer, info: table?): boolean
     enable = function(buf, win, _)
         return not vim.api.nvim_win_get_config(win).zindex
@@ -25,7 +25,7 @@ local general_opts = {
     -- setting this option to a number slightly larger than
     -- 1000 / key_repeat_rate
     -- dconf-editor org.gnome.desktop.peripherals.keyboard
-    update_interval = 100, -- repeat rate 30 -> 1000 / 30 = 33 -> 100ms
+    update_debounce = 100, -- repeat rate 30 -> 1000 / 30 = 33 -> 100ms
     update_events = {
         win = {
             'CursorMoved',
@@ -49,7 +49,6 @@ local general_opts = {
 local icons_opts = {
     enable = true,
     kinds = {
-        use_devicons = true,
         symbols = {
             Array = '󰅪 ',
             Boolean = ' ',
@@ -290,9 +289,6 @@ local sources_opts = {
         end,
     },
     treesitter = {
-        -- Lua pattern used to extract a short name from the node text
-        name_pattern = '[#~%*%w%._%->!@:]+%s*'
-            .. string.rep('[#~%*%w%._%->!@:]*', 3, '%s*'),
         -- The order matters! The first match is used as the type
         -- of the treesitter symbol and used to show the icon
         -- Types listed below must have corresponding icons
@@ -554,7 +550,7 @@ local symbol_opts = {
 }
 
 local options = {
-    general = general_opts,
+    bar = bar_opts,
     icons = icons_opts,
     symbol = symbol_opts,
     bar = bar_opts,

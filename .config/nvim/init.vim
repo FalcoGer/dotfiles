@@ -10,6 +10,12 @@
 if !has('nvim')
     runtime! debian.vim
 endif
+
+" Enable nvim plugin loader, available since 0.9
+if has('nvim')
+    lua vim.loader.enable() 
+endif
+
 " Vim will load $VIMRUNTIME/defaults.vim if the user does not have a vimrc.
 " This happens after /etc/vim/vimrc(.local) are loaded, so it will override
 " any settings in these files.
@@ -176,7 +182,7 @@ else
     " Better syntax highlighting
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} | let g:user_loaded_treesitter = 1
     
-    Plug 'olimorris/codecompanion.nvim' | let g:user_loaded_codecompanion = 1
+    " Plug 'olimorris/codecompanion.nvim' | let g:user_loaded_codecompanion = 1
 
     " More lightweight version of context.vim
     if exists('g:user_loaded_treesitter')
@@ -360,8 +366,9 @@ highlight Visual ctermbg=237 guibg=#3A3A3A
 " clipboard support
 " register "+ (clipboard) and
 " "* primary
-set guioptions+=a
-
+if !has("nvim")
+  set guioptions+=a
+endif
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -554,7 +561,7 @@ set showmode            " Shows the current mode in the last line
 set wrapscan            " wrap around while searching
 set cmdheight=2         " command line height
 set emoji               " Smartly allocate 2 cells for emojis
-set ambiwidth="single"  " East Asian Width Class Ambiguous (special characters) take a single cell only.
+set ambiwidth=single    " East Asian Width Class Ambiguous (special characters) take a single cell only.
 if has('nvim')
     set signcolumn=auto:1-3
 else
