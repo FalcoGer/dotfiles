@@ -103,6 +103,10 @@ update-repo() {
 alias quit='exit'
 alias ipython='ipython3'
 
+if [ -f "${HOME}/.bash_env" ]; then
+    source "${HOME}/.bash_env"
+fi
+
 if [ -f "${HOME}/.bash_env_secret" ]; then
     source "${HOME}/.bash_env_secret"
 fi
@@ -112,7 +116,7 @@ if [[ -f "${HOME}/.bash_aliases_secret" ]]; then
 fi
 
 if [[ -e "$(which go-exploitdb)" ]]; then
-    alias go-exploitdb="go-exploitdb --dbtype mysql --dbpath=goexploitdb:${GOEXPLOITDB_PASSWD}@tcp(pi.lan:3306)/goexploitdb"
+    alias go-exploitdb="go-exploitdb --dbtype mysql --dbpath=\"goexploitdb:${GOEXPLOITDB_PASSWD}@tcp(pi.lan:3306)/goexploitdb\""
 fi
 
 alias nmap="nmap --privileged --reason --script-args=\"shodan-api.apikey=${SHODAN_API_KEY}\""
