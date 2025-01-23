@@ -329,3 +329,7 @@ unsetopt extendedglob
 bindkey -e # -e = emacs mode, -v = vim mode
 # End of lines configured by zsh-newuser-install
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
