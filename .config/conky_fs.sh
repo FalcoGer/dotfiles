@@ -8,7 +8,7 @@ max_len=0
 
 # Read from /proc/mounts, update mount_points array, and update max_len 
 while read -r device mount fs_type rest; do
-    if [[ "$fs_type" =~ ^(ext2|ext3|ext4|btrfs|xfs|fat32|fat16|exfat|ntfs)$ ]] && [[ "$mount" != */snap/* ]]; then
+    if [[ "$fs_type" =~ ^(ext2|ext3|ext4|btrfs|xfs|fat32|fat16|exfat|vfat|ntfs)$ ]] && [[ "$mount" != */snap/* ]]; then
         mount_points+=("$mount")
         (( ${#mount} > max_len )) && max_len=${#mount}
     fi
