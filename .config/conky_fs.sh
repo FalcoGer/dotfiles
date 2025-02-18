@@ -1,0 +1,2 @@
+#!/bin/bash
+awk '$3 ~ /ext4|btrfs|xfs|fat32|fat16|exfat|ntfs/ && $2 !~ /\/snap\// {print "${color1}" $2, "\t${color2}${fs_used " $2 "}/${fs_size " $2 "} $alignr${fs_used_perc " $2 "}% ${color}${fs_bar 8,100 " $2 "}"}' /proc/mounts
