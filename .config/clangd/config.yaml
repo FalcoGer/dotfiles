@@ -3,8 +3,11 @@
 CompileFlags:
   Add: [
     -std=c++26,
-    -stdlib=libc++,
-    #-L/usr/lib/llvm-20/lib,
+    #-stdlib=libc++,
+    
+    -stdlib=libstdc++,
+    --gcc-toolchain=/usr/local/gcc/15.0.1,
+
     #-flto=full,
     #-fvirtual-function-elimination,
     -fexperimental-library,

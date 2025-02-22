@@ -133,6 +133,8 @@ if [[ -f "${HOME}/repositories/hacking/wesng/wes.py" ]]; then
     alias wes.py='${HOME}/repositories/hacking/wesng/wes.py --color --definitions ${HOME}/repositories/wesng/definitions.zip'
 fi
 
+GCC_VERSION=$(gcc --version | head -n 1 | cut -d' ' -f 3)
+
 if [[ -e $(which clang) ]]; then
 
     CLANG_VERSION=$(clang --version | head -n1 | sed -E 's/.* version ([[:digit:]]+)\.[[:digit:]]+\.[[:digit:]]+.*$/\1/')
@@ -140,10 +142,12 @@ if [[ -e $(which clang) ]]; then
     # https://clang.llvm.org/docs/DiagnosticsReference.html
 
     CLANG_OPT="-std=c++26"
-    CLANG_OPT="${CLANG_OPT} -stdlib=libc++ -fexperimental-library -L/usr/lib/llvm-${CLANG_VERSION}/lib"
+    # CLANG_OPT="${CLANG_OPT} -stdlib=libc++"
+    CLANG_OPT="${CLANG_OPT} -fexperimental-library -L/usr/lib/llvm-${CLANG_VERSION}/lib"
     CLANG_OPT="${CLANG_OPT} -flto=full"
     CLANG_OPT="${CLANG_OPT} -fvirtual-function-elimination" # requires -flto=full, removes unused virtual functions
     CLANG_OPT="${CLANG_OPT} -march=native"
+    CLANG_OPT="${CLANG_OPT} --gcc-toolchain=/usr/local/gcc/${GCC_VERSION}"
     # CLANG_OPT="${CLANG_OPT} -fmodules -fcxx-modules" # enables module support
     CLANG_WARN="-Wall -Wextra -Wpedantic"
     CLANG_WARN="${CLANG_WARN} -Wdouble-promotion" # implicit float->double
