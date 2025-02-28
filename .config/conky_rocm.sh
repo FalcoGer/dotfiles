@@ -13,7 +13,7 @@ if [[ -z "$2" ]]; then
         echo \${stippled_hr}
         echo \${color3}GPU "${gpuid}"
         echo \${color1}Freq:\$alignc\${color3}SCLK:\${color2}\${execp ~/.config/conky_rocm.sh " ${gpuid}"  SCLK} MHz  \${color3}MCLK:\${color2}\${execp ~/.config/conky_rocm.sh " ${gpuid}"  MCLK} MHz\$alignr\${color1}Temp:\${color2} \${execp ~/.config/conky_rocm.sh " ${gpuid}"  Temperature}°C
-        echo \${color1}Usage:\${color2} \${execp ~/.config/conky_rocm.sh " ${gpuid}"  GPU}% \${color4}\${execgauge ~/.config/conky_rocm.sh " ${gpuid}"  GPU 24,48}\$alignr\${color1}VRAM:\${color2} \${execp ~/.config/conky_rocm.sh " ${gpuid}"  VRAM}% \${color4}\${execgauge ~/.config/conky_rocm.sh " ${gpuid}"  VRAM 24,48}
+        echo \${color1}Usage:\${color2} \${execp ~/.config/conky_rocm.sh " ${gpuid}"  GPU}% \${color4}\${execgauge ~/.config/conky_rocm.sh " ${gpuid}"  GPU}\$alignr\${color1}VRAM:\${color2} \${execp ~/.config/conky_rocm.sh " ${gpuid}"  VRAM}% \${color4}\${execgauge ~/.config/conky_rocm.sh " ${gpuid}"  VRAM}
         echo \${color1}Power:\${color2} \${execp ~/.config/conky_rocm.sh " ${gpuid}"  Power}W\${color1}/\${color2}\${execp ~/.config/conky_rocm.sh " ${gpuid}"  PwrCap}W \${color1}\(\${color2}\${execp ~/.config/conky_rocm.sh 0 PowerPerc}%\${color1}\)\${color1}\$alignr\${execbar 8,140 ~/.config/conky_rocm.sh " ${gpuid}"  PowerPerc}
     done
     exit
@@ -50,3 +50,4 @@ rocm-smi | grep -E "^$1" | sed 's/[[:space:]]\+/ /g' | sed -E 's/°C|W|Mhz|%//g'
     fi
     echo "${VALUE}"
 done
+
