@@ -245,6 +245,7 @@ GPP_OPT="-flto -fuse-linker-plugin" # enable link time optimization
 GPP_OPT="${GPP_OPT} -lstdc++exp"    # enable expanded c++ standard library (std::stacktrace)
 GPP_OPT="${GPP_OPT} -fuse-ld=gold"  # enable the use of the gold linker instead of the default ld linker
 GPP_OPT="${GPP_OPT} -march=native"  # enable native CPU extensions (avx, etc)
+GPP_OPT="${GPP_OPT} -fmodules-ts"   # enable module support
 alias g++="g++ ${GPP_STD} ${GPP_OPT} ${GPP_WARN} ${GPP_ERR}"
 
 # Add an "alert" alias for long running commands.  Use like so:
