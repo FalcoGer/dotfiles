@@ -172,8 +172,7 @@ if [[ -e $(which clang) ]]; then
     CLANG_WARN="${CLANG_WARN} -Wconversion"
     CLANG_WARN="${CLANG_WARN} -Wfloat-conversion"
     CLANG_WARN="${CLANG_WARN} -Wsign-conversion"
-    CLANG_WARN="${CLANG_WARN} -Wduplicated-branches -Wduplicated-cond -Wduplicate-decl-specifier" # warn about duplicated branches and conditions
-    GLANG_WARN="${CLANG_WARN} -Wlogical-op"
+    CLANG_WARN="${CLANG_WARN} -Wduplicate-decl-specifier"
     CLANG_WARN="${CLANG_WARN} -Wfloat-equal"
     CLANG_WARN="${CLANG_WARN} -Wshadow-all"
     CLANG_WARN="${CLANG_WARN} -Wundef"
