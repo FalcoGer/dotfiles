@@ -147,9 +147,10 @@ if [[ -e $(which clang) ]]; then
     CLANG_OPT="${CLANG_OPT} -flto=full"
     CLANG_OPT="${CLANG_OPT} -fvirtual-function-elimination" # requires -flto=full, removes unused virtual functions
     CLANG_OPT="${CLANG_OPT} -march=native"
-    CLANG_OPT="${CLANG_OPT} --gcc-toolchain=/usr/local/gcc/${GCC_VERSION}"
+    CLANG_OPT="${CLANG_OPT} --gcc-toolchain=/usr/local/gcc/latest"
     # CLANG_OPT="${CLANG_OPT} -fmodules -fcxx-modules" # enables module support
     CLANG_WARN="-Wall -Wextra -Wpedantic"
+    CLANG_WARN="${CLANG_WARN} -Wnon-virtual-dtor"
     CLANG_WARN="${CLANG_WARN} -Wdouble-promotion" # implicit float->double
     CLANG_WARN="${CLANG_WARN} -Wformat=2"
     CLANG_WARN="${CLANG_WARN} -Wformat-nonliteral"
@@ -164,20 +165,23 @@ if [[ -e $(which clang) ]]; then
     # CLANG_WARN="${CLANG_WARN} -Wswitch-enum"
     CLANG_WARN="${CLANG_WARN} -Wswitch-bool"
     CLANG_WARN="${CLANG_WARN} -Wcovered-switch-default"
-    CLANG_WARN="${CLANG_WARN} -Wunused-parameter"
+    CLANG_WARN="${CLANG_WARN} -Wunused"
+    CLANG_WARN="${CLANG_WARN} -Woverloaded-virtual"
     CLANG_WARN="${CLANG_WARN} -Wuninitialized"
     CLANG_WARN="${CLANG_WARN} -Walloca"
     CLANG_WARN="${CLANG_WARN} -Wconversion"
     CLANG_WARN="${CLANG_WARN} -Wfloat-conversion"
     CLANG_WARN="${CLANG_WARN} -Wsign-conversion"
+    CLANG_WARN="${CLANG_WARN} -Wduplicated-branches -Wduplicated-cond -Wduplicate-decl-specifier" # warn about duplicated branches and conditions
+    GLANG_WARN="${CLANG_WARN} -Wlogical-op"
     CLANG_WARN="${CLANG_WARN} -Wfloat-equal"
     CLANG_WARN="${CLANG_WARN} -Wshadow-all"
     CLANG_WARN="${CLANG_WARN} -Wundef"
-    CLANG_WARN="${CLANG_WARN} -Wunused-macros"
     CLANG_WARN="${CLANG_WARN} -Wcast-qual"
     CLANG_WARN="${CLANG_WARN} -Wcast-align"
     CLANG_WARN="${CLANG_WARN} -Wmissing-declarations"
     CLANG_WARN="${CLANG_WARN} -Wredundant-decls"
+    CLANG_WARN="${CLANG_WARN} -Wold-style-cast"
     CLANG_WARN="${CLANG_WARN} -Wstack-protector -fstack-protector"
     CLANG_WARN="${CLANG_WARN} -pedantic-errors"
     CLANG_ERROR="-Werror=pedantic"
@@ -194,6 +198,8 @@ if [[ -e $(which clang) ]]; then
     CLANG_ERROR="${CLANG_ERROR} -Werror=sequence-point"
     CLANG_ERROR="${CLANG_ERROR} -Werror=return-type"
     CLANG_ERROR="${CLANG_ERROR} -Werror=multichar"
+    CLANG_ERROR="${CLANG_ERROR} -Werror=non-virtual-dtor"
+    CLANG_ERROR="${CLANG_ERROR} -Werror=overloaded-virtual"
     alias clang++="clang++ ${CLANG_OPT} ${CLANG_WARN} ${CLANG_ERROR}"
 
 fi
@@ -203,29 +209,31 @@ fi
 GPP_WARN="-Wall -Wextra -Wpedantic"
 GPP_WARN="${GPP_WARN} -Wdouble-promotion" # implicit float->double. 32bit CPUs implement float in hardware but double in software emulation. This causes speed loss
 GPP_WARN="${GPP_WARN} -Wformat=2 -Wformat-nonliteral -Wformat-signedness -Wformat-y2k" # aditional format checks for printf, scanf, etc.
+GPP_WARN="${GPP_WARN} -Wnon-virtual-dtor"
+GPP_WARN="${GPP_WARN} -Woverloaded-virtual"
 GPP_WARN="${GPP_WARN} -Wnull-dereference" # check if a code path can lead to null pointer dereferencing
 GPP_WARN="${GPP_WARN} -Wimplicit-fallthrough=2" # warn about switch-case-fallthrough unless comment matches regex ".*falls?[ \t-]*thr(ough|u).*" IMPLICIT-FALLTHROUGH=3 IS ENABLED BY WEXTRA!
 GPP_WARN="${GPP_WARN} -Wmissing-include-dirs"
 GPP_WARN="${GPP_WARN} -Wswitch" # warn about enum value not present if also no default branch, also warns about values outside enum scope
 GPP_WARN="${GPP_WARN} -Wswitch-default" # warn about switch statement not having a default
 GPP_WARN="${GPP_WARN} -Wswitch-enum" # warn about switch statement not having a case for every enum, even with default.
-GPP_WARN="${GPP_WARN} -Wunused-parameter" # warn about a function parameter is unused aside from it's declaration
+GPP_WARN="${GPP_WARN} -Wunused" # enable all unused warnings
 GPP_WARN="${GPP_WARN} -Wuninitialized" # warn if auto-var is used uninitialized also warn if ref or const appear in class without ctor.
 GPP_WARN="${GPP_WARN} -Wsuggest-attribute=const" # warn where an attribute might be a good idea
 GPP_WARN="${GPP_WARN} -Walloc-zero" # warn if allocating 0 bytes
 GPP_WARN="${GPP_WARN} -Walloca" # warn of usage of alloca
 GPP_WARN="${GPP_WARN} -Wconversion -Wfloat-conversion -Wsign-conversion" # warn about implicit conversions
-GPP_WARN="${GPP_WARN} -Wduplicated-branches -Wduplicated-cond" # warn about duplicated branches and conditions
+GPP_WARN="${GPP_WARN} -Wduplicated-branches -Wduplicated-cond -Wduplicate-decl-specifier" # warn about duplicated branches and conditions
 GPP_WARN="${GPP_WARN} -Wtrampolines" # warn about trampoline code that might require stack execution. trampoline = data/code on stack that takes nested function pointer to call that function indirectly
 GPP_WARN="${GPP_WARN} -Wfloat-equal" # warn if floating point values are used for equality checks.
 GPP_WARN="${GPP_WARN} -Wshadow=compatible-local" # warn if variable shaddows a compatible (implicitly convertible) variable, not when it's a completely different type (likely intentional)
 GPP_WARN="${GPP_WARN} -Wundef" # warn if undefined preprocessor variable is evaluated (will be replaced by 0)
-GPP_WARN="${GPP_WARN} -Wunused-macros" # warn if macro is unused in main file (not include files)
 GPP_WARN="${GPP_WARN} -Wcast-qual" # warn about unsafe casts that adds or removes qualifiers such as const
 GPP_WARN="${GPP_WARN} -Wcast-align=strict" # warn when casting pointers that could cause missalignment that can access for example integers only at 2 or 4 byte boundaries. =strict -> regardless of machine
 GPP_WARN="${GPP_WARN} -Wlogical-op" # warns when bitwise operator is likely, also warns if duplicate condition
 GPP_WARN="${GPP_WARN} -Wmissing-declarations" # warn if function is missing declaration, even if declaration is in the definition. not in anonymous namespace, inline functions or function templates.
 GPP_WARN="${GPP_WARN} -Wredundant-decls" # warn if multiple declarations are redundant
+GPP_WARN="${GPP_WARN} -Wold-style-cast" # for c-style casts
 GPP_WARN="${GPP_WARN} -Wstack-protector -fstack-protector" # warn about functions that are not protected against stack smashing. also enable stack smashing protection
 
 GPP_ERR="-pedantic-errors -Werror=pedantic"
@@ -240,6 +248,8 @@ GPP_ERR="${GPP_ERR} -Werror=multistatement-macros" # warn if macro with multiple
 GPP_ERR="${GPP_ERR} -Werror=sequence-point" # undefined behavior for things like a = a++ or a[n] = n++ or a[n++] = n
 GPP_ERR="${GPP_ERR} -Werror=return-type" # undefined behavior if returning function does not return a value. also if non-returning function returns a value.
 GPP_ERR="${GPP_ERR} -Werror=multichar" # char c = 'ABCD';
+GPP_ERR="${GPP_ERR} -Werror=non-virtual-dtor"
+GPP_ERR="${GPP_ERR} -Werror=overloaded-virtual"
 GPP_STD="-std=c++26"
 GPP_OPT="-flto -fuse-linker-plugin" # enable link time optimization
 GPP_OPT="${GPP_OPT} -lstdc++exp"    # enable expanded c++ standard library (std::stacktrace)

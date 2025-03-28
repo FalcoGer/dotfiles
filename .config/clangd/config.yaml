@@ -14,6 +14,7 @@ CompileFlags:
     -Wall,
     -Wextra,
     -Wpedantic,
+    -Wnon-virtual-dtor,
     -Wdouble-promotion,
     -Wformat=2,
     -Wformat-nonliteral,
@@ -25,21 +26,25 @@ CompileFlags:
     #-Wswitch-enum,
     -Wswitch-bool,
     -Wcovered-switch-default,
-    -Wunused-parameter,
+    -Wunused,
     -Wuninitialized,
     -Walloca,
     -Wconversion,
     -Wfloat-conversion,
     -Wsign-conversion,
+    -Wduplicated-branches,
+    -Wduplicated-cond,
+    -Wduplicate-decl-specifier,
+    -Wlogical-op,
     -Wfloat-equal,
     -Wshadow-all,
     -Wundef,
-    -Wunused-macros,
     -Wcast-qual,
     -Wcast-align,
     -Wmissing-declarations,
     -Wredundant-decls,
     -Wstack-protector,
+    -Wold-style-cast,
     -fstack-protector,
     -pedantic-errors,
     -Werror=pedantic,
@@ -54,11 +59,13 @@ CompileFlags:
     -Werror=missing-braces,
     -Werror=sequence-point,
     -Werror=return-type,
-    -Werror=multichar
+    -Werror=multichar,
+    -Werror=non-virtual-dtor
+    -Werror=overloaded-virtual
   ]
 
 Index:
-  StandardLibrary: Yes
+  StandardLibrary: true
   Background: Build
 
 Completion:
