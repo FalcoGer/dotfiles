@@ -251,6 +251,7 @@ GPP_ERR="${GPP_ERR} -Werror=non-virtual-dtor"
 GPP_ERR="${GPP_ERR} -Werror=overloaded-virtual"
 GPP_STD="-std=c++26"
 GPP_OPT="-flto -fuse-linker-plugin" # enable link time optimization
+GPP_OPT="${GPP_OPT} -fdiagnostics-set-output=text:experimental-nesting=yes" # enable nested template and concept error messages
 GPP_OPT="${GPP_OPT} -lstdc++exp"    # enable expanded c++ standard library (std::stacktrace)
 GPP_OPT="${GPP_OPT} -fuse-ld=gold"  # enable the use of the gold linker instead of the default ld linker
 GPP_OPT="${GPP_OPT} -march=native"  # enable native CPU extensions (avx, etc)
