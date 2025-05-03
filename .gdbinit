@@ -15,12 +15,29 @@ set width 0
 # auto download symbols
 python
 try:
-    # Try setting debuginfod to see if it's supported
+    # Try setting debuginfod to see whether it's supported
     gdb.execute( "set debuginfod enabled on" )
     gdb.execute( "set debuginfod urls https://debuginfod.ubuntu.com https://debuginfod.elfutils.org" )
     gdb.write( "Debuginfod is enabled.\n" )
 except gdb.error as e:
     gdb.write( "Debuginfod is not supported.\n" )
+end
+
+# Use pretty printers
+python
+try:
+    import sys
+    sys.path.insert(0, '/usr/local/share/gcc-15.0.1/python')
+    from libstdcxx.v6 import register_libstdcxx_printers
+    register_libstdcxx_printers(None)
+except ModuleNotFoundError as e:
+    print( f"libstdcxx printer module not found: {e}" )
+except ImportError as e:
+    print( f"Import failed: {e}" )
+except FileNotFoundError as e:
+    print( f"Path not found: {e}" )
+except Exception as e:
+    print( "Failed to load pretty-printers: {e}" )
 end
 
 # load extensions if they exist
@@ -46,4 +63,3 @@ else:
     # show registers, stack and instruction pointer when stopping
     gdb.execute( "define hook-stop\n  info registers rax rbx rcx rdx rsi rdi rbp rsp rip eflags\n  x /64wx $rsp\n  x/3i $rip\nend" )
 end
-
