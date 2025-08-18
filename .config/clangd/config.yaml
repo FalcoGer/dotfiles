@@ -187,7 +187,8 @@ Diagnostics:
       hicpp-use-override, # alias for modernize-use-override
       hicpp-vararg, # alias for cppcoreguidelines-pro-type-vararg
       llvm-else-after-return, # alias for readability-else-after-return
-      llvm-qualified-auto # alias for readability-qualified-auto
+      llvm-qualified-auto, # alias for readability-qualified-auto
+      llvm-prefer-static-over-anonymous-namespace # conflicts with misc-use-anonymous-namespace
     ]
     CheckOptions:
       boost-use-ranges.UseReversePipe: true
