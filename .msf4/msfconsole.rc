@@ -60,3 +60,7 @@ set TimestampOutput true
 setg LHOST 0.0.0.0
 setg PEASS_URL /home/paul/repositories/hacking/linpeas/linPEAS/linpeas.sh
 
+use post/multi/gather/peass
+set CUSTOM_URL /home/paul/repositories/hacking/linpeas/linPEAS/linpeas.sh
+back
+
