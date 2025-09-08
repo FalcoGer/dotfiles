@@ -199,6 +199,7 @@ if [[ -e $(which clang) ]]; then
     CLANG_ERROR="${CLANG_ERROR} -Werror=multichar"
     CLANG_ERROR="${CLANG_ERROR} -Werror=non-virtual-dtor"
     CLANG_ERROR="${CLANG_ERROR} -Werror=overloaded-virtual"
+    CLANG_ERROR="${CLANG_ERROR} -Werror=aggressive-loop-optimizations"
     alias clang++="clang++ ${CLANG_OPT} ${CLANG_WARN} ${CLANG_ERROR}"
 
 fi
@@ -222,7 +223,7 @@ GPP_WARN="${GPP_WARN} -Wsuggest-attribute=const" # warn where an attribute might
 GPP_WARN="${GPP_WARN} -Walloc-zero" # warn if allocating 0 bytes
 GPP_WARN="${GPP_WARN} -Walloca" # warn of usage of alloca
 GPP_WARN="${GPP_WARN} -Wconversion -Wfloat-conversion -Wsign-conversion" # warn about implicit conversions
-GPP_WARN="${GPP_WARN} -Wduplicated-branches -Wduplicated-cond -Wduplicate-decl-specifier" # warn about duplicated branches and conditions
+GPP_WARN="${GPP_WARN} -Wduplicated-branches -Wduplicated-cond" # warn about duplicated branches and conditions
 GPP_WARN="${GPP_WARN} -Wtrampolines" # warn about trampoline code that might require stack execution. trampoline = data/code on stack that takes nested function pointer to call that function indirectly
 GPP_WARN="${GPP_WARN} -Wfloat-equal" # warn if floating point values are used for equality checks.
 GPP_WARN="${GPP_WARN} -Wshadow=compatible-local" # warn if variable shaddows a compatible (implicitly convertible) variable, not when it's a completely different type (likely intentional)
@@ -249,11 +250,12 @@ GPP_ERR="${GPP_ERR} -Werror=return-type" # undefined behavior if returning funct
 GPP_ERR="${GPP_ERR} -Werror=multichar" # char c = 'ABCD';
 GPP_ERR="${GPP_ERR} -Werror=non-virtual-dtor"
 GPP_ERR="${GPP_ERR} -Werror=overloaded-virtual"
+GPP_ERR="${GPP_ERR} -Werror=aggressive-loop-optimizations" # undefined behavior for out of bounds access in loops
 GPP_STD="-std=c++26"
 GPP_OPT="-flto -fuse-linker-plugin" # enable link time optimization
-GPP_OPT="${GPP_OPT} -fdiagnostics-set-output=text:experimental-nesting=yes" # enable nested template and concept error messages
+#GPP_OPT="${GPP_OPT} -fdiagnostics-set-output=text:experimental-nesting=yes" # enable nested template and concept error messages
 GPP_OPT="${GPP_OPT} -lstdc++exp"    # enable expanded c++ standard library (std::stacktrace)
-GPP_OPT="${GPP_OPT} -fuse-ld=gold"  # enable the use of the gold linker instead of the default ld linker
+#GPP_OPT="${GPP_OPT} -fuse-ld=gold"  # enable the use of the gold linker instead of the default ld linker
 GPP_OPT="${GPP_OPT} -march=native"  # enable native CPU extensions (avx, etc)
 GPP_OPT="${GPP_OPT} -fmodules-ts"   # enable module support
 alias g++="g++ ${GPP_STD} ${GPP_OPT} ${GPP_WARN} ${GPP_ERR}"

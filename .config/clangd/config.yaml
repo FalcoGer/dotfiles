@@ -57,8 +57,9 @@ CompileFlags:
     -Werror=sequence-point,
     -Werror=return-type,
     -Werror=multichar,
-    -Werror=non-virtual-dtor
-    -Werror=overloaded-virtual
+    -Werror=non-virtual-dtor,
+    -Werror=overloaded-virtual,
+    -Werror=aggressive-loop-optimizations
   ]
 
 Index:
