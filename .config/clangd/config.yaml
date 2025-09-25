@@ -196,6 +196,8 @@ Diagnostics:
       cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor: true
       modernize-use-auto.MinTypeNameLength: 10
       modernize-use-auto.RemoveStars: 0
+      modernize-use-trailing-return-type.TransformFunctions: true
+      modernize-use-trailing-return-type.TransformLambdas: none
       hicpp-multiway-paths-covered.WarnOnMissingElse: true
       hicpp-signed-bitwise.IgnorePositiveIntegerLiterals: true
       llvm-namespace-comment.ShortNamespaceLines: 10
