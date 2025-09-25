@@ -199,7 +199,6 @@ if [[ -e $(which clang) ]]; then
     CLANG_ERROR="${CLANG_ERROR} -Werror=multichar"
     CLANG_ERROR="${CLANG_ERROR} -Werror=non-virtual-dtor"
     CLANG_ERROR="${CLANG_ERROR} -Werror=overloaded-virtual"
-    CLANG_ERROR="${CLANG_ERROR} -Werror=aggressive-loop-optimizations"
     alias clang++="clang++ ${CLANG_OPT} ${CLANG_WARN} ${CLANG_ERROR}"
 
 fi
