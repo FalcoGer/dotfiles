@@ -27,7 +27,7 @@ end
 python
 try:
     import sys
-    sys.path.insert(0, '/usr/local/share/gcc-15.0.1/python')
+    sys.path.insert(0, '/usr/local/share/gcc-16.0.0/python')
     from libstdcxx.v6 import register_libstdcxx_printers
     register_libstdcxx_printers(None)
 except ModuleNotFoundError as e:
