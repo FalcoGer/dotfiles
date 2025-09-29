@@ -178,7 +178,6 @@ if [[ -e $(which clang) ]]; then
     CLANG_WARN="${CLANG_WARN} -Wundef"
     CLANG_WARN="${CLANG_WARN} -Wcast-qual"
     CLANG_WARN="${CLANG_WARN} -Wcast-align"
-    CLANG_WARN="${CLANG_WARN} -Wmissing-declarations"
     CLANG_WARN="${CLANG_WARN} -Wredundant-decls"
     CLANG_WARN="${CLANG_WARN} -Wold-style-cast"
     CLANG_WARN="${CLANG_WARN} -Wstack-protector -fstack-protector"
@@ -230,7 +229,6 @@ GPP_WARN="${GPP_WARN} -Wundef" # warn if undefined preprocessor variable is eval
 GPP_WARN="${GPP_WARN} -Wcast-qual" # warn about unsafe casts that adds or removes qualifiers such as const
 GPP_WARN="${GPP_WARN} -Wcast-align=strict" # warn when casting pointers that could cause missalignment that can access for example integers only at 2 or 4 byte boundaries. =strict -> regardless of machine
 GPP_WARN="${GPP_WARN} -Wlogical-op" # warns when bitwise operator is likely, also warns if duplicate condition
-GPP_WARN="${GPP_WARN} -Wmissing-declarations" # warn if function is missing declaration, even if declaration is in the definition. not in anonymous namespace, inline functions or function templates.
 GPP_WARN="${GPP_WARN} -Wredundant-decls" # warn if multiple declarations are redundant
 GPP_WARN="${GPP_WARN} -Wold-style-cast" # for c-style casts
 GPP_WARN="${GPP_WARN} -Wstack-protector -fstack-protector" # warn about functions that are not protected against stack smashing. also enable stack smashing protection

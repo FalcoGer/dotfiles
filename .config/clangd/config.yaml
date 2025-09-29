@@ -38,7 +38,6 @@ CompileFlags:
     -Wundef,
     -Wcast-qual,
     -Wcast-align,
-    -Wmissing-declarations,
     -Wredundant-decls,
     -Wstack-protector,
     -Wold-style-cast,
