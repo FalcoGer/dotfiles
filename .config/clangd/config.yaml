@@ -6,7 +6,7 @@ CompileFlags:
     #-stdlib=libc++,
     
     -stdlib=libstdc++,
-    --gcc-toolchain=/usr/local/gcc/15.0.1,
+    --gcc-toolchain=/usr/local/gcc/latest,
     #-flto=full,
     #-fvirtual-function-elimination,
     -fexperimental-library,
