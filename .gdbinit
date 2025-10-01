@@ -12,6 +12,9 @@ set disassembly-flavor intel
 set height 0
 set width 0
 
+# allow loading of plugins.
+add-auto-load-safe-path /usr/
+
 # auto download symbols
 python
 try:
@@ -37,7 +40,7 @@ except ImportError as e:
 except FileNotFoundError as e:
     print( f"Path not found: {e}" )
 except Exception as e:
-    print( "Failed to load pretty-printers: {e}" )
+    print( f"Failed to load pretty-printers: {e}" )
 end
 
 # load extensions if they exist
