@@ -64,5 +64,6 @@ if noLoadPwndbg == "0" and os.path.isfile(pwnDbgPath):
 else:
     # hook, not required with peda or pwndbg
     # show registers, stack and instruction pointer when stopping
+    gdb.write( "NOLOAD_PWNDBG was set. Not loading pwndbg.\n" )
     gdb.execute( "define hook-stop\n  info registers rax rbx rcx rdx rsi rdi rbp rsp rip eflags\n  x /64wx $rsp\n  x/3i $rip\nend" )
 end
