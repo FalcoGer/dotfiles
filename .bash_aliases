@@ -253,9 +253,10 @@ GPP_STD="-std=c++26"
 GPP_OPT="-flto -fuse-linker-plugin" # enable link time optimization
 #GPP_OPT="${GPP_OPT} -fdiagnostics-set-output=text:experimental-nesting=yes" # enable nested template and concept error messages
 GPP_OPT="${GPP_OPT} -lstdc++exp"    # enable expanded c++ standard library (std::stacktrace)
+GPP_OPT="${GPP_OPT} -freflection"    # enable experimental reflection support
 #GPP_OPT="${GPP_OPT} -fuse-ld=gold"  # enable the use of the gold linker instead of the default ld linker
 GPP_OPT="${GPP_OPT} -march=native"  # enable native CPU extensions (avx, etc)
-GPP_OPT="${GPP_OPT} -fmodules-ts"   # enable module support
+GPP_OPT="${GPP_OPT} -fmodules"   # enable module support
 alias g++="g++ ${GPP_STD} ${GPP_OPT} ${GPP_WARN} ${GPP_ERR}"
 
 # Add an "alert" alias for long running commands.  Use like so:

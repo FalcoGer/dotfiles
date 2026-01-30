@@ -23,6 +23,7 @@ CompileFlags:
     -Wmissing-include-dirs,
     #-Wswitch-default,
     #-Wswitch-enum,
+    -Wswitch,
     -Wswitch-bool,
     -Wcovered-switch-default,
     -Wunused,
@@ -88,12 +89,12 @@ Diagnostics:
     Add: [
       abseil-*,
       bugprone-*,
-      
+
       # boost-* causes hangup with FastCheckFilter: None
       # boost-*,
       boost-use-ranges,
       boost-use-to-string,
-      
+
       concurrency-*,
       cppcoreguidelines-*,
       modernize-*,
