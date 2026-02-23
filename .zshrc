@@ -285,7 +285,7 @@ fi
 
 # Custom completion files in .oh-my-zsh/custom/plugins/completion
 # put any compdef completion files into that directory and run "compinit"
-fpath+="${HOME}/.oh-my-zsh/custom/plugins/completion"
+fpath+="${HOME}/.config/omz_custom/plugins/completion"
 fpath+="${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src"
 
 # autocomplete from man pages
@@ -328,4 +328,8 @@ setopt autocd nomatch notify beep numericglobsort histignorespace histignoredups
 unsetopt extendedglob
 bindkey -e # -e = emacs mode, -v = vim mode
 # End of lines configured by zsh-newuser-install
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 

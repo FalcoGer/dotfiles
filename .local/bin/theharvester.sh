@@ -6,7 +6,7 @@ WD='/home/paul/repositories/hacking/theHarvester/'
 
 CMD="cd $WD"
 # activate virtualenv
-CMD="$CMD"' && source env/bin/activate'
+CMD="$CMD"' && source bin/activate'
 # append command
 CMD="$CMD"' && python theHarvester.py '"$ARGS"
 

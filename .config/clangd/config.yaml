@@ -3,8 +3,9 @@
 CompileFlags:
   Add: [
     -std=c++26,
-    -stdlib=libc++,
-    #-L/usr/lib/llvm-20/lib,
+    #-stdlib=libc++,
+    -stdlib=libstdc++,
+    --gcc-toolchain=/usr/local/gcc/latest,
     #-flto=full,
     #-fvirtual-function-elimination,
     -fexperimental-library,
@@ -12,6 +13,7 @@ CompileFlags:
     -Wall,
     -Wextra,
     -Wpedantic,
+    -Wnon-virtual-dtor,
     -Wdouble-promotion,
     -Wformat=2,
     -Wformat-nonliteral,
@@ -21,23 +23,24 @@ CompileFlags:
     -Wmissing-include-dirs,
     #-Wswitch-default,
     #-Wswitch-enum,
+    -Wswitch,
     -Wswitch-bool,
     -Wcovered-switch-default,
-    -Wunused-parameter,
+    -Wunused,
     -Wuninitialized,
     -Walloca,
     -Wconversion,
     -Wfloat-conversion,
     -Wsign-conversion,
+    -Wduplicate-decl-specifier,
     -Wfloat-equal,
     -Wshadow-all,
     -Wundef,
-    -Wunused-macros,
     -Wcast-qual,
     -Wcast-align,
-    -Wmissing-declarations,
     -Wredundant-decls,
     -Wstack-protector,
+    -Wold-style-cast,
     -fstack-protector,
     -pedantic-errors,
     -Werror=pedantic,
@@ -52,11 +55,15 @@ CompileFlags:
     -Werror=missing-braces,
     -Werror=sequence-point,
     -Werror=return-type,
-    -Werror=multichar
+    -Werror=multichar,
+    -Werror=non-virtual-dtor,
+    -Werror=overloaded-virtual,
+    -Werror=aggressive-loop-optimizations,
+    -Werror=reinterpret-base-class
   ]
 
 Index:
-  StandardLibrary: Yes
+  StandardLibrary: true
   Background: Build
 
 Completion:
@@ -82,12 +89,12 @@ Diagnostics:
     Add: [
       abseil-*,
       bugprone-*,
-      
+
       # boost-* causes hangup with FastCheckFilter: None
       # boost-*,
       boost-use-ranges,
       boost-use-to-string,
-      
+
       concurrency-*,
       cppcoreguidelines-*,
       modernize-*,
@@ -141,6 +148,7 @@ Diagnostics:
       cert-pos47-c, # alias for concurrency-thread-canceltype-asynchronous
       cert-sig30-c, # alias for bugprone-signal-handler
       cert-str34-c, # alias for bugprone-signed-char-misuse
+      cert-err58-cpp, # alias for bugprone-throwing-static-initialization
       bugprone-narrowing-conversions, # alias for cppcoreguidelines-narrowing-conversions
       cppcoreguidelines-avoid-c-arrays, # alias for modernize-avoid-c-arrays
       cppcoreguidelines-avoid-magic-numbers, # alias for readability-magic-numbers
@@ -181,13 +189,16 @@ Diagnostics:
       hicpp-use-override, # alias for modernize-use-override
       hicpp-vararg, # alias for cppcoreguidelines-pro-type-vararg
       llvm-else-after-return, # alias for readability-else-after-return
-      llvm-qualified-auto # alias for readability-qualified-auto
+      llvm-qualified-auto, # alias for readability-qualified-auto
+      llvm-prefer-static-over-anonymous-namespace # conflicts with misc-use-anonymous-namespace
     ]
     CheckOptions:
       boost-use-ranges.UseReversePipe: true
       cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor: true
       modernize-use-auto.MinTypeNameLength: 10
       modernize-use-auto.RemoveStars: 0
+      modernize-use-trailing-return-type.TransformFunctions: true
+      modernize-use-trailing-return-type.TransformLambdas: none
       hicpp-multiway-paths-covered.WarnOnMissingElse: true
       hicpp-signed-bitwise.IgnorePositiveIntegerLiterals: true
       llvm-namespace-comment.ShortNamespaceLines: 10

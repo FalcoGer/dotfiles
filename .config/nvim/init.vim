@@ -126,6 +126,12 @@ if exists('g:user_loaded_dadbod')
 endif
 
 
+" Unit test integration
+Plug 'vim-test/vim-test' | let g:user_loaded_vimtest = 1
+if (exists('g:user_loaded_vimtest'))
+    Plug 'tpope/vim-dispatch' | let g:user_loaded_vimdispatch = 1
+endif
+
 if !has('nvim')
     " Provides fuzzy search, :FZF command, ctrl + X and ctrl + V to open in
     " split/vertical split
@@ -786,6 +792,10 @@ endif
 if exists('g:user_loaded_coc')
     source ~/.vim/config/coc.vim
     source ~/.vim/config/coc-snippets.vim
+endif
+
+if exists('g:user_loaded_vimtest')
+    source ~/.vim/config/vim-test.vim
 endif
 
 if exists('g:user_loaded_dadbodui')

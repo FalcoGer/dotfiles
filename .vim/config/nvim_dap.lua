@@ -267,7 +267,7 @@ dap.configurations.rust = {
             end
             return nil
         end,
-        cwd = GetProjectRoot
+        cwd = GetProjectRoot,
     },
 }
 
