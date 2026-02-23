@@ -148,6 +148,7 @@ Diagnostics:
       cert-pos47-c, # alias for concurrency-thread-canceltype-asynchronous
       cert-sig30-c, # alias for bugprone-signal-handler
       cert-str34-c, # alias for bugprone-signed-char-misuse
+      cert-err58-cpp, # alias for bugprone-throwing-static-initialization
       bugprone-narrowing-conversions, # alias for cppcoreguidelines-narrowing-conversions
       cppcoreguidelines-avoid-c-arrays, # alias for modernize-avoid-c-arrays
       cppcoreguidelines-avoid-magic-numbers, # alias for readability-magic-numbers
