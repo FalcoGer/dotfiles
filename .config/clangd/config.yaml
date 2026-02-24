@@ -2,8 +2,7 @@
 
 CompileFlags:
   Add: [
-    -std=c++26,
-    #-stdlib=libc++,
+    -std=c++23,
     -stdlib=libstdc++,
     --gcc-toolchain=/usr/local/gcc/latest,
     #-flto=full,
