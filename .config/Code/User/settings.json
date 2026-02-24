@@ -3,7 +3,7 @@
     "C_Cpp.autocompleteAddParentheses": true,
     "C_Cpp.default.compilerArgs": [
         "-std=c++23",
-        "-stdlib=libc++",
+        "-stdlib=libstdc++",
         "-fexperimental-library",
         "-flto=full",
         "-fvirtual-function-elimination",
@@ -126,6 +126,7 @@
         "cert-pos47-c",
         "cert-sig30-c",
         "cert-str34-c",
+        "cert-err58-cpp",
         "bugprone-narrowing-conversions",
         "cppcoreguidelines-avoid-c-arrays",
         "cppcoreguidelines-avoid-magic-numbers",
