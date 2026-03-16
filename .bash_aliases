@@ -156,6 +156,7 @@ if [[ -e $(which clang) ]]; then
     CLANG_WARN="${CLANG_WARN} -Wformat-nonliteral"
     CLANG_WARN="${CLANG_WARN} -Wformat-y2k"
     CLANG_WARN="${CLANG_WARN} -Wnull-dereference"
+    CLANG_WARN="${CLANG_WARN} -Wlifetime-safety-all"
     CLANG_WARN="${CLANG_WARN} -Wimplicit-fallthrough"
     CLANG_WARN="${CLANG_WARN} -Wmissing-include-dirs"
     CLANG_WARN="${CLANG_WARN} -Wswitch"

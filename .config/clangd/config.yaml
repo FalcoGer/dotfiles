@@ -18,6 +18,7 @@ CompileFlags:
     -Wformat-nonliteral,
     -Wformat-y2k,
     -Wnull-dereference,
+    -Wlifetime-safety-all,
     -Wimplicit-fallthrough,
     -Wmissing-include-dirs,
     #-Wswitch-default,
