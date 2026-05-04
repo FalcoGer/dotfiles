@@ -16,6 +16,28 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+_detect_clip_tool() {
+    # 1. Wayland check
+    if [[ -n "$WAYLAND_DISPLAY" ]] && (( $+commands[wl-copy] )); then
+        echo "wl-copy"
+    # 2. X11 check
+    elif [[ -n "$DISPLAY" ]] && (( $+commands[xclip] )); then
+        echo "xclip -selection clipboard"
+    elif [[ -n "$DISPLAY" ]] && (( $+commands[xsel] )); then
+        echo "xsel --clipboard --input"
+    # 3. macOS check
+    elif (( $+commands[pbcopy] )); then
+        echo "pbcopy"
+    # 4. WSL check
+    elif (( $+commands[clip.exe] )); then
+        echo "clip.exe"
+    else
+        echo "cat" # Fallback to doing nothing but printing
+    fi
+}
+
+export CLIPBOARD_CUSTOM_COMMAND=$(_detect_clip_tool)
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
