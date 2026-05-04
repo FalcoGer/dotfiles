@@ -1,5 +1,12 @@
 vim.loader.enable() -- enable built in plugin loader
 
+-- Done before plugins so plugins correctly set the keymaps
+-- Set the leader button to , which is easier to press than the default \
+-- see :help leader
+vim.g.mapleader = ','
+vim.g.maplocalleader = '.'
+vim.g.timeoutlen = 1500 -- key combination timeout 1.5s (default 1.0s)
+
 -- disable the built in file browser (replaced by nvim-tree)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -362,14 +369,14 @@ require("lazy").setup({
           tagbar_open = true
 
           if has_context then
-            vim.cmd('TSContextDisable')
+            vim.cmd('TSContext disable')
           end
         else
           vim.cmd('TagbarClose')
           tagbar_open = false
 
           if has_context then
-            vim.cmd('TSContextEnable')
+            vim.cmd('TSContext enable')
           end
         end
       end
@@ -731,6 +738,8 @@ vim.opt.autowrite  = true      -- Automatically save before commands like :next 
 vim.opt.hidden     = true      -- Hide buffers when they are abandoned
 vim.opt.mouse      = "a"       -- Enable mouse usage (all modes)
 
+vim.opt.showtabline = 2        -- force showing tabline
+
 -- Set conceal options
 -- 0 - normal
 -- 1 - each block is replaced by a single char, or whitespace if none is defined
@@ -787,6 +796,8 @@ vim.opt.wrapscan = true         -- wrap around while searching
 vim.opt.cmdheight = 2           -- command line height
 vim.opt.emoji = true            -- Smartly allocate 2 cells for emojis
 vim.opt.ambiwidth = "single"    -- East Asian Width Class Ambiguous (special characters) take a single cell only.
+
+vim.opt.showtabline = 2         -- show tabline 0: never, 1: if tab open (default), 2: always
 
 -- The width of the sign column (used for example to display file changes and git status, etc)
 vim.opt.signcolumn = "auto:1-3"
@@ -1019,12 +1030,6 @@ vim.api.nvim_set_hl(0, "CursorLineNr", { ctermfg = 11, ctermbg = 234, bold = tru
 
 -- =============================================================================
 -- Key mappings
-
--- Set the leader button to , which is easier to press than the default \
--- see :help leader
-vim.g.mapleader = ','
-vim.g.maplocalleader = '.'
-vim.g.timeoutlen = 1500 -- key combination timeout 1.5s (default 1.0s)
 
 -- alias for fold current cursor position for convenience
 vim.keymap.set("n", "zz", "za", { silent = true })

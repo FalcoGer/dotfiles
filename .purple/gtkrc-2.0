@@ -1,10 +1,10 @@
 style "chat"
 {
-  font_name = "Monospace"
-	base[NORMAL] = "#000011"
-	bg[NORMAL] = "#000011"
-	GtkTreeView::odd_row_color = ""
-	GtkTreeView::even_row_color = ""    
+  font_name = "FiraCode Nerd Font 11"
+  base[NORMAL] = "#000011"
+  bg[NORMAL] = "#000011"
+  GtkTreeView::odd_row_color = ""
+  GtkTreeView::even_row_color = ""
   text[NORMAL] = "#00DD00"	
   # Change the color of hyperlinks.
   GtkIMHtml::hyperlink-color = "#000080"
@@ -22,8 +22,16 @@ style "chat"
   GtkIMHtml::typing-notification-color = "#00DD00"
 }
 
+style "buddylist"
+{
+#  font_name = "Sans 18"
+}
+
 # Conversation entry box--where you type.
 widget "*pidgin_conv_entry" style "chat"
 
 # Conversation history pane--where you read the conversation.
 widget "*pidgin_conv_imhtml" style "chat"
+
+# Buddy list
+widget "*pidgin_blist_treeview*" style "buddylist"

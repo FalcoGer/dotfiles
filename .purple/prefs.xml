@@ -19,7 +19,7 @@
 			<pref name='audio'>
 				<pref name='silence_threshold' type='int' value='5'/>
 				<pref name='volume'>
-					<pref name='input' type='int' value='8'/>
+					<pref name='input' type='int' value='0'/>
 					<pref name='output' type='int' value='10'/>
 				</pref>
 			</pref>
@@ -39,7 +39,7 @@
 			<pref name='default' type='int' value='1477776721'/>
 			<pref name='startup' type='int' value='1477776721'/>
 			<pref name='startup_current_status' type='bool' value='0'/>
-			<pref name='idleaway' type='int' value='1714997616'/>
+			<pref name='idleaway' type='int' value='1775731246'/>
 			<pref name='isidleaway' type='bool' value='0'/>
 		</pref>
 		<pref name='conversations'>
@@ -171,6 +171,24 @@
 				<pref name='locale' type='string' value='en'/>
 				<pref name='service' type='string' value='google'/>
 			</pref>
+			<pref name='vvconfig'>
+				<pref name='audio'>
+					<pref name='src'>
+						<pref name='plugin' type='string' value=''/>
+						<pref name='device' type='string' value=''/>
+					</pref>
+					<pref name='sink'>
+						<pref name='plugin' type='string' value=''/>
+						<pref name='device' type='string' value=''/>
+					</pref>
+				</pref>
+				<pref name='video'>
+					<pref name='src'>
+						<pref name='plugin' type='string' value=''/>
+						<pref name='device' type='string' value=''/>
+					</pref>
+				</pref>
+			</pref>
 		</pref>
 		<pref name='lopl'/>
 		<pref name='prpl'>
@@ -283,7 +301,7 @@
 					</pref>
 					<pref name='disable-typing-notification' type='bool' value='0'/>
 				</pref>
-				<pref name='gtk-font-name' type='string' value='FiraCode Nerd Font 11'/>
+				<pref name='gtk-font-name' type='string' value='FiraCode Nerd Font 18'/>
 				<pref name='gtk-key-theme-name' type='string' value=''/>
 				<pref name='color'>
 					<pref name='GtkIMHtml::hyperlink-color' type='string' value=''/>
@@ -298,8 +316,8 @@
 					<pref name='GtkTreeView::horizontal_separator' type='int' value='0'/>
 				</pref>
 				<pref name='font'>
-					<pref name='*pidgin_conv_entry' type='string' value='FiraCode Nerd Font 11'/>
-					<pref name='*pidgin_conv_imhtml' type='string' value='FiraCode Nerd Font 11'/>
+					<pref name='*pidgin_conv_entry' type='string' value='FiraCode Nerd Font 18'/>
+					<pref name='*pidgin_conv_imhtml' type='string' value='FiraCode Nerd Font 18'/>
 					<pref name='*pidgin_request_imhtml' type='string' value=''/>
 					<pref name='*pidgin_notify_imhtml' type='string' value=''/>
 				</pref>
@@ -418,6 +436,14 @@
 				<pref name='use_all_logs' type='bool' value='0'/>
 				<pref name='use_dct' type='bool' value='0'/>
 			</pref>
+			<pref name='vvconfig'>
+				<pref name='video'>
+					<pref name='sink'>
+						<pref name='plugin' type='string' value=''/>
+						<pref name='device' type='string' value=''/>
+					</pref>
+				</pref>
+			</pref>
 		</pref>
 		<pref name='gtk-rlaager-album'>
 			<pref name='window_height' type='int' value='258'/>
@@ -438,7 +464,6 @@
 			<pref name='loaded' type='pathlist'>
 				<item value='/usr/lib/x86_64-linux-gnu/pidgin/convcolors.so'/>
 				<item value='/usr/lib/x86_64-linux-gnu/pidgin/history.so'/>
-				<item value='/usr/lib/x86_64-linux-gnu/purple-2/irchelper.so'/>
 				<item value='/usr/lib/x86_64-linux-gnu/purple-2/joinpart.so'/>
 				<item value='/usr/lib/x86_64-linux-gnu/pidgin/markerline.so'/>
 				<item value='/usr/lib/x86_64-linux-gnu/pidgin/notify.so'/>
@@ -449,7 +474,6 @@
 				<item value='/usr/lib/x86_64-linux-gnu/pidgin/pidginrc.so'/>
 				<item value='/usr/lib/x86_64-linux-gnu/pidgin/themeedit.so'/>
 				<item value='/usr/lib/x86_64-linux-gnu/purple-2/ssl.so'/>
-				<item value='/usr/lib/x86_64-linux-gnu/pidgin/switchspell.so'/>
 				<item value='/usr/lib/x86_64-linux-gnu/pidgin/timestamp.so'/>
 			</pref>
 			<pref name='gtk-plugin_pack-irssi'>
@@ -525,8 +549,8 @@
 			<pref name='theme' type='string' value=''/>
 			<pref name='conv_focus' type='bool' value='1'/>
 			<pref name='mute' type='bool' value='0'/>
-			<pref name='command' type='path' value=''/>
-			<pref name='method' type='string' value='automatic'/>
+			<pref name='command' type='path' value='paplay %s'/>
+			<pref name='method' type='string' value='custom'/>
 			<pref name='volume' type='int' value='54'/>
 		</pref>
 		<pref name='accounts'>
@@ -545,10 +569,10 @@
 			<pref name='list_visible' type='bool' value='1'/>
 			<pref name='list_maximized' type='bool' value='0'/>
 			<pref name='sort_type' type='string' value='status'/>
-			<pref name='x' type='int' value='1037'/>
-			<pref name='y' type='int' value='48'/>
-			<pref name='width' type='int' value='554'/>
-			<pref name='height' type='int' value='760'/>
+			<pref name='x' type='int' value='1682'/>
+			<pref name='y' type='int' value='182'/>
+			<pref name='width' type='int' value='878'/>
+			<pref name='height' type='int' value='1316'/>
 			<pref name='theme' type='string' value=''/>
 		</pref>
 		<pref name='conversations'>
@@ -568,7 +592,7 @@
 			<pref name='placement_number' type='int' value='1'/>
 			<pref name='bgcolor' type='string' value=''/>
 			<pref name='fgcolor' type='string' value=''/>
-			<pref name='font_face' type='string' value='FiraCode Nerd Font'/>
+			<pref name='font_face' type='string' value='FiraCode Nerd Font 18'/>
 			<pref name='font_size' type='int' value='11'/>
 			<pref name='tabs' type='bool' value='1'/>
 			<pref name='tab_side' type='int' value='2'/>
@@ -582,10 +606,10 @@
 				<pref name='height' type='int' value='390'/>
 			</pref>
 			<pref name='im'>
-				<pref name='x' type='int' value='0'/>
-				<pref name='y' type='int' value='28'/>
-				<pref name='width' type='int' value='1497'/>
-				<pref name='height' type='int' value='684'/>
+				<pref name='x' type='int' value='61'/>
+				<pref name='y' type='int' value='64'/>
+				<pref name='width' type='int' value='2436'/>
+				<pref name='height' type='int' value='1379'/>
 				<pref name='animate_buddy_icons' type='bool' value='1'/>
 				<pref name='entry_height' type='int' value='54'/>
 				<pref name='show_buddy_icons' type='bool' value='1'/>
@@ -623,7 +647,7 @@
 		<pref name='vvconfig'>
 			<pref name='audio'>
 				<pref name='src'>
-					<pref name='device' type='string' value='autoaudiosrc'/>
+					<pref name='device' type='string' value='audiotestsrc'/>
 				</pref>
 				<pref name='sink'>
 					<pref name='device' type='string' value='autoaudiosink'/>
@@ -631,18 +655,11 @@
 			</pref>
 			<pref name='video'>
 				<pref name='src'>
-					<pref name='device' type='string' value='autovideosrc'/>
+					<pref name='device' type='string' value='disabledvideosrc'/>
 				</pref>
 				<pref name='sink'>
 					<pref name='device' type='string' value='autovideosink'/>
 				</pref>
-			</pref>
-		</pref>
-	</pref>
-	<pref name='core'>
-		<pref name='plugins'>
-			<pref name='core-plugin_pack-google'>
-				<pref name='domain' type='string' value='www.google.com'/>
 			</pref>
 		</pref>
 	</pref>
