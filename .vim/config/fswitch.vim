@@ -1,2 +1,1 @@
-nmap <silent><F4> :FSHere<CR>
-
+/home/paul/.config/nvim/lua/user/configs/fswitch.vim

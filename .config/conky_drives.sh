@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# requires smartctl to be callable without sudo password.
+# create /etc/sudoers.d/smartctl with file permissions 440 (.r--r-----)
+# ---
+# %sudo ALL=(ALL) NOPASSWD: /usr/sbin/smartctl -A *
+# ---
+
 # Function to get disk temperature
 get_hddtemp() {
   # Check if smartctl exists

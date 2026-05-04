@@ -10,42 +10,50 @@
 -- command! -nargs=0 StepInto      :lua require('dap').step_into()
 -- command! -nargs=0 StepOut       :lua require('dap').step_out()
 -- command! -nargs=0 REPL          :lua require('dap').repl.open()
-vim.cmd([[command! -nargs=0 DapRunLast                :lua require('dap').run_last()]])
-vim.cmd([[command! -nargs=? DapPause                  :lua require('dap').pause(<f-args>)]])
-vim.cmd([[command! -nargs=0 DapStepBack               :lua require('dap').step_back()]])
-vim.cmd([[command! -nargs=0 DapStepIntoInstruction    :lua require('dap').step_into('instruction')]])
-vim.cmd([[command! -nargs=0 DapStepOverInstruction    :lua require('dap').step_over('instruction')]])
-vim.cmd([[command! -nargs=0 DapStepOutInstruction     :lua require('dap').step_out('instruction')]])
-vim.cmd([[command! -nargs=0 DapStepBackInstruction    :lua require('dap').step_back('instruction')]])
-vim.cmd([[command! -nargs=0 DapReverseContinue        :lua require('dap').reverse_continue()]])
-vim.cmd([[command! -nargs=0 DapUp                     :lua require('dap').up()]])
-vim.cmd([[command! -nargs=0 DapDown                   :lua require('dap').down()]])
-vim.cmd([[command! -nargs=? DapGotoLine               :lua require('dap').goto_(<f-args>)]])
-vim.cmd([[command! -nargs=0 DapFocusFrame             :lua require('dap').focus_frame()]])
-vim.cmd([[command! -nargs=0 DapRunToCursor            :lua require('dap').run_to_cursor()]])
-vim.cmd([[command! -nargs=0 DapListBreakpoints        :lua require('dap').list_breakpoints(0)]])
-vim.cmd([[command! -nargs=0 DapClearBreakpoints       :lua require('dap').clear_breakpoints()]])
+
+local user_commands = {
+    DapRunLast = function() dap.run_last() end,
+    DapPause = function(args) dap.pause(args.args) end,
+    DapStepBack = function() dap.step_back() end,
+    DapStepIntoInstruction = function() dap.step_into('instruction') end,
+    DapStepOverInstruction = function() dap.step_over('instruction') end,
+    DapStepOutInstruction = function() dap.step_out('instruction') end,
+    DapStepBackInstruction = function() dap.step_back('instruction') end,
+    DapReverseContinue = function() dap.reverse_continue() end,
+    DapUp = function() dap.up() end,
+    DapDown = function() dap.down() end,
+    DapGotoLine = function(args) dap.goto_(args.args) end,
+    DapFocusFrame = function() dap.focus_frame() end,
+    DapRunToCursor = function() dap.run_to_cursor() end,
+    DapListBreakpoints = function() dap.list_breakpoints(0) end,
+    DapClearBreakpoints = function() dap.clear_breakpoints() end,
+}
+
+for name, fun in pairs(user_commands) do
+    vim.api.nvim_create_user_command(name, fun, { nargs = (name == "DapPause" or name == "DapGotoLine") and "?" or 0 })
+end
 
 -- Highlights for sign config
 -- highlight bg for text and number from .vimrc, SignColumn background
-vim.cmd([[highlight BreakPointText ctermfg=9 ctermbg=234 cterm=bold guifg=#FF0000 guibg=#1C1C1C gui=bold]])
-vim.cmd([[highlight BreakPointNum  ctermbg=9 cterm=bold guibg=#FF0000 gui=bold]])
-vim.cmd([[highlight BreakPointLine ctermbg=52 guisp=#5F0000 gui=underdashed]])
+local set_hl = vim.api.nvim_set_hl
 
-vim.cmd([[highlight BreakPointCondText ctermfg=5 ctermbg=234 cterm=bold guifg=#800080 guibg=#1C1C1C gui=bold]])
-vim.cmd([[highlight BreakPointCondNum  ctermbg=5 cterm=bold guibg=#800080 gui=bold]])
-vim.cmd([[highlight BreakPointCondLine ctermbg=91 guisp=#8700AF gui=underdashed]])
+set_hl(0, 'BreakpointText', { fg = '#FF0000', bg = '#1C1C1C', bold = true })
+set_hl(0, 'BreakpointNum',  { bg = '#FF0000', bold = true })
+set_hl(0, 'BreakPointLine', { bg = '#5F0000', underdashed = true })
 
-vim.cmd([[highlight DapLogPointText ctermfg=12 ctermbg=234 cterm=bold guifg=#0000FF guibg=#1C1C1C gui=bold]])
-vim.cmd([[highlight DapLogPointNum  ctermbg=12 cterm=bold guibg=#0000FF gui=bold]])
-vim.cmd([[highlight DapLogPointLine ctermbg=17 guisp=#0000FF gui=underdashed]])
+set_hl(0, 'BreakPointCondText', { fg = '#800080', bg = '#1C1C1C', bold = true })
+set_hl(0, 'BreakPointCondNum',  { bg = '#800080', bold = true })
+set_hl(0, 'BreakPointCondLine', { bg = '#8700AF', underdashed = true })
 
-vim.cmd([[highlight DapStoppedText ctermfg=9 ctermbg=24 cterm=bold guifg=#FF0000 guibg=#005F78 gui=bold]])
-vim.cmd([[highlight link DapStoppedNum DapStoppedText]])
-vim.cmd([[highlight DapStoppedLine ctermbg=24 cterm=underline guisp=#005F78 gui=underdouble]])
+set_hl(0, 'DapLogPointText', { fg = '#0000FF', bg = '#1C1C1C', bold = true })
+set_hl(0, 'DapLogPointNum',  { bg = '#0000FF', bold = true })
+set_hl(0, 'DapLogPointLine', { bg = '#0000FF', underdashed = true })
 
-vim.cmd(
-[[highlight DapBreaPointRejectedText ctermfg=11 ctermbg=9 cterm=bold,undercurl guifg=#FFFF00 guisp=#FF0000 gui=bold,undercurl]])
+set_hl(0, 'DapStoppedText', { fg = '#FF0000', bg = '#005F78', bold = true })
+set_hl(0, 'DapStoppedLine', { bg = '#005F78', underdouble = true })
+set_hl(0, 'DapStoppedNum',  { link = 'DapStoppedText' })
+
+set_hl(0, 'DapBreakpointRejectedText', { fg = '#FFFF00', sp = '#FF0000', bold = true, undercurl = true })
 
 -- behavior
 local dap = require('dap')
@@ -167,10 +175,12 @@ end
 
 -- Workaround for https://github.com/mfussenegger/nvim-dap/issues/1088
 -- requires posix (sudo luarocks --lua-version=5.1 install luaposix)
-local posix = require('posix')
-posix.setenv("PWNDBG_DISABLE_COLORS", "1")
+-- local posix = require('posix')
+-- posix.setenv("PWNDBG_DISABLE_COLORS", "1")
+vim.env.PWNDBG_DISABLE_COLORS = "1"
 -- do not load pwndbg here, check gdbinit for details
-posix.setenv("NOLOAD_PWNDBG", "1")
+-- posix.setenv("NOLOAD_PWNDBG", "1")
+vim.env.NOLOAD_PWNDBG = "1"
 
 -- local env = {PWNDBG_DISABLE_COLORS = "1"}
 dap.adapters.gdb = {
@@ -276,7 +286,7 @@ dap.configurations.rust = {
 dap.adapters.php = {
     type = 'executable',
     command = 'node',
-    args = { '/home/paul/repositories/vim/vscode-php-debug/out/phpDebug.js' }
+    args = { vim.fn.expand('~/repositories/vim/vscode-php-debug/out/phpDebug.js') }
 }
 
 dap.configurations.php =
@@ -295,14 +305,14 @@ dap.adapters["local-lua"] = {
     type = "executable",
     command = "node",
     args = {
-        "/home/paul/repositories/vim/local-lua-debugger-vscode/extension/debugAdapter.js"
+        vim.fn.expand('~/repositories/vim/local-lua-debugger-vscode/extension/debugAdapter.js')
     },
     enrich_config = function(config, on_config)
         if not config["extensionPath"] then
             local c = vim.deepcopy(config)
             -- 💀 If this is missing or wrong you'll see
             -- "module 'lldebugger' not found" errors in the dap-repl when trying to launch a debug session
-            c.extensionPath = "/home/paul/repositories/vim/local-lua-debugger-vscode/"
+            c.extensionPath = vim.fn.expand('~/repositories/vim/local-lua-debugger-vscode/')
             on_config(c)
         else
             on_config(config)

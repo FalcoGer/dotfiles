@@ -38,7 +38,7 @@ local options = {
                 strategy = "default", -- "default" or "by_path"
             },
         }, -- makes generate-workspace-summary command available
-        ["core.integrations.telescope"] = {},
+        ["external.telescope"] = {},
         ["core.looking-glass"] = {}, -- code block editing
         ["core.keybinds"] = {
             config = {

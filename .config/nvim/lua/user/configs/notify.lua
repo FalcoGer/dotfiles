@@ -35,7 +35,6 @@ local options = {
 
 notify.setup(options);
 
-
 -- highlights
 
 --[[

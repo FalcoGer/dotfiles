@@ -1,3 +1,1 @@
-" https://github.com/vim-test/vim-test
-
-let test#strategy = "dispatch"
+/home/paul/.config/nvim/lua/user/configs/vim-test.vim

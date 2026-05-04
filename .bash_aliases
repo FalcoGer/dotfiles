@@ -52,7 +52,11 @@ if [[ -n "${cmp}" ]]; then
     alias vim='nvim'
 else
     # we do not have neovim
-    alias vim='vim -p'
+    cmp=$(command -v vim)
+    if [[ -n "${cmp}" ]]; then
+        # we have vim
+        alias vim='vim -p'
+    fi
 fi
 cmp=$(command -v neovide)
 if [[ -n "${cmp}" ]]; then
@@ -258,6 +262,8 @@ GPP_OPT="${GPP_OPT} -freflection"    # enable experimental reflection support
 #GPP_OPT="${GPP_OPT} -fuse-ld=gold"  # enable the use of the gold linker instead of the default ld linker
 GPP_OPT="${GPP_OPT} -march=native"  # enable native CPU extensions (avx, etc)
 GPP_OPT="${GPP_OPT} -fmodules"   # enable module support
+GPP_OPT="${GPP_OPT} -fcontracts"   # enable contract support
+# GPP_OPT="${GPP_OPT} -fhardened"   # enable -D_FORTIFY_SOURCE=3 -D_GLIBCXX_ASSERTIONS -ftrivial-auto-var-init=zero -fPIE  -pie  -Wl,-z,relro,-z,now -fstack-protector-strong -fstack-clash-protection -fcf-protection=full
 alias g++="g++ ${GPP_STD} ${GPP_OPT} ${GPP_WARN} ${GPP_ERR}"
 
 # Add an "alert" alias for long running commands.  Use like so:

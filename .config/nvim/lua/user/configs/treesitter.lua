@@ -1,4 +1,4 @@
-local ts_config = require 'nvim-treesitter.configs'
+local ts_config = require 'nvim-treesitter.config'
 
 -- see https://github.com/nvim-treesitter/nvim-treesitter#available-modules
 -- see :help treesitter
@@ -54,9 +54,5 @@ local options = {
         },
     },
 }
-
-if vim.g['user_loaded_nvim_dap_repl_highlight'] then
-    table.insert(options['ensure_installed'], 'dap_repl')
-end
 
 ts_config.setup(options)

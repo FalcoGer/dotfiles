@@ -201,7 +201,8 @@ local options = {
         -- show recording macro as message
         {
             view = "notify",
-            filter = { event = "msg_showmode", },
+            filter = { event = "msg_showmode" },
+            opts = { skip = true, },
         },
         -- filter out "The only match" from coc completion when accepting it.
         {
