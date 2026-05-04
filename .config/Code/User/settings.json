@@ -266,4 +266,5 @@
     },
     "git.enableSmartCommit": true,
     "update.showReleaseNotes": false,
+    "chat.disableAIFeatures": true,
 }
