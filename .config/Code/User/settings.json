@@ -190,7 +190,7 @@
         "--header-insertion-decorators",
         "--limit-results=500"
     ],
-    "clangd.checkUpdates": true,
+    "clangd.checkUpdates": false,
     "clangd.path": "/usr/bin/clangd",
     "editor.accessibilitySupport": "off",
     "C_Cpp.formatting": "disabled",
@@ -267,4 +267,7 @@
     "git.enableSmartCommit": true,
     "update.showReleaseNotes": false,
     "chat.disableAIFeatures": true,
+    "workbench.settings.showAISearchToggle": false,
+    "git.addAICoAuthor": "off",
+    "gitlens.ai.enabled": false,
 }
