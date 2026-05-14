@@ -1,6 +1,6 @@
 style "chat"
 {
-  font_name = "FiraCode Nerd Font 11"
+  font_name = "FiraCode Nerd Font 9"
   base[NORMAL] = "#000011"
   bg[NORMAL] = "#000011"
   GtkTreeView::odd_row_color = ""
@@ -24,7 +24,7 @@ style "chat"
 
 style "buddylist"
 {
-#  font_name = "Sans 18"
+  font_name = "Sans 18"
 }
 
 # Conversation entry box--where you type.
@@ -34,4 +34,4 @@ widget "*pidgin_conv_entry" style "chat"
 widget "*pidgin_conv_imhtml" style "chat"
 
 # Buddy list
-widget "*pidgin_blist_treeview*" style "buddylist"
+# widget "*pidgin_blist_treeview*" style "buddylist"
