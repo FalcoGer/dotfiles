@@ -8,6 +8,7 @@ CompileFlags:
     #-flto=full,
     #-fvirtual-function-elimination,
     -fexperimental-library,
+    -freflection,
     #-fopenmp,
     -Wall,
     -Wextra,

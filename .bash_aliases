@@ -148,6 +148,7 @@ if [[ -e $(which clang) ]]; then
     CLANG_OPT="-std=c++26"
     # CLANG_OPT="${CLANG_OPT} -stdlib=libc++"
     CLANG_OPT="${CLANG_OPT} -fexperimental-library -L/usr/lib/llvm-${CLANG_VERSION}/lib"
+    CLANG_OPT="${CLANG_OPT} -freflection"
     CLANG_OPT="${CLANG_OPT} -flto=full"
     CLANG_OPT="${CLANG_OPT} -fvirtual-function-elimination" # requires -flto=full, removes unused virtual functions
     CLANG_OPT="${CLANG_OPT} -march=native"
