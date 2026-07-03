@@ -46,7 +46,7 @@ require("lazy").setup({
     build = ':CocUpdate',
     dependencies = {
       {
-        'fannheyward/telescope-coc.nvim',
+                'fannheyward/telescope-coc.nvim',
         dependencies = { 'nvim-telescope/telescope.nvim' },
         config = function()
           local telescope = require('telescope')
@@ -69,16 +69,17 @@ require("lazy").setup({
             vim.keymap.set('n', keys, func, { silent = true, noremap = true, desc = desc })
           end
 
-          map("<Space>a", telescope.extensions.coc.diagnostics, "CoC Diagnostics")
-          map("<Space>A", telescope.extensions.coc.workspace_diagnostics, "CoC Workspace Diagnostics")
-          map("<Space>s", telescope.extensions.coc.document_symbols, "CoC Document Symbols")
-          map("<Space>S", telescope.extensions.coc.workspace_symbols, "CoC Workspace Symbols")
-          map("<Space>c", telescope.extensions.coc.commands, "CoC Commands")
-          map("<Space>x", telescope.extensions.coc.references, "CoC References")
-          map("<Space>X", telescope.extensions.coc.references_used, "CoC References Used")
-          map("<Space>d", telescope.extensions.coc.declarations, "CoC Declarations")
-          map("<Space>D", telescope.extensions.coc.definitions, "CoC Definitions")
-          map("<Space>i", telescope.extensions.coc.implementations, "CoC Implementations")
+          map("<Space>a", "<cmd>Telescope coc diagnostics<CR>", "CoC Diagnostics")
+          map("<Space>A", "<cmd>Telescope coc workspace_diagnostics<CR>", "CoC Workspace Diagnostics")
+          map("<Space>s", "<cmd>Telescope coc document_symbols<CR>", "CoC Document Symbols")
+          map("<Space>S", "<cmd>Telescope coc workspace_symbols<CR>", "CoC Workspace Symbols")
+          map("<Space>c", "<cmd>Telescope coc commands<CR>", "CoC Commands")
+          map("<Space>x", "<cmd>Telescope coc references<CR>", "CoC References")
+          map("<Space>X", "<cmd>Telescope coc references_used<CR>", "CoC References Used")
+          map("<Space>d", "<cmd>Telescope coc declarations<CR>", "CoC Declarations")
+          map("<Space>D", "<cmd>Telescope coc definitions<CR>", "CoC Definitions")
+          map("<Space>i", "<cmd>Telescope coc implementations<CR>", "CoC Implementations")
+          map("<Space>c", "<cmd>Telescope coc commands<CR>", "CoC Implementations")
         end
       }
     },
@@ -394,7 +395,8 @@ require("lazy").setup({
   -- ==========================================
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
+        -- branch = '0.1.x',
+    branch = 'master',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('user.configs.telescope')

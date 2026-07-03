@@ -11,8 +11,10 @@ vim.keymap.set('n', '[g', '<Plug>(coc-diagnostic-prev)', { silent = true, desc =
 vim.keymap.set('n', ']g', '<Plug>(coc-diagnostic-next)', { silent = true, desc = "COC - Diagnostics next" })
 -- vim.keymap.set('n', '<C-Up>', '<Plug>(coc-diagnostic-prev)', { silent = true, desc = "COC - Diagnostics prev" })
 -- vim.keymap.set('n', '<C-Down>', '<Plug>(coc-diagnostic-next)',{ silent = true, desc = "COC - Diagnostics next" })
-vim.keymap.set('n', '<C-Up>', ':CocCommand document.jumpToPrevSymbol<CR>', { silent = true, desc = "COC - Jump to prev symbol" })
-vim.keymap.set('n', '<C-Down>', ':CocCommand document.jumpToNextSymbol<CR>', { silent = true, desc = "COC - Jump to next symbol" })
+vim.keymap.set('n', '<C-Up>', ':CocCommand document.jumpToPrevSymbol<CR>',
+    { silent = true, desc = "COC - Jump to prev symbol" })
+vim.keymap.set('n', '<C-Down>', ':CocCommand document.jumpToNextSymbol<CR>',
+    { silent = true, desc = "COC - Jump to next symbol" })
 
 
 -- GoTo code navigation
@@ -97,27 +99,29 @@ vim.keymap.set({ 'n', 'x' }, '<C-s>', '<Plug>(coc-range-select)',
     { silent = true, desc = "COC - Use CTRL-S for selections ranges" })
 
 -- Mappings for CocList
-vim.keymap.set('n', '<space>l', ':<C-u>CocList<CR>',
+vim.keymap.set('n', '<space>l', '<cmd>CocList<CR>',
     { silent = true, nowait = true, desc = "COC - Show CocList" })
-vim.keymap.set('n', '<space>a', ':<C-u>CocList diagnostics<CR>',
-    { silent = true, nowait = true, desc = "COC - Show all diagnostics" })
-vim.keymap.set('n', '<space>e', ':<C-u>CocList extensions<CR>',
+-- provided by telescope
+-- vim.keymap.set('n', '<space>a', '<cmd>CocList diagnostics<CR>',
+--     { silent = true, nowait = true, desc = "COC - Show all diagnostics" })
+vim.keymap.set('n', '<space>e', '<cmd>CocList extensions<CR>',
     { silent = true, nowait = true, desc = "COC - Manage extensions" })
-vim.keymap.set('n', '<space>c', ':<C-u>CocList commands<CR>',
-    { silent = true, nowait = true, desc = "COC - Show commands" })
-vim.keymap.set('n', '<space>o', ':<C-u>CocList outline<CR>',
+-- vim.keymap.set('n', '<space>c', '<cmd>CocList commands<CR>',
+--     { silent = true, nowait = true, desc = "COC - Show commands" })
+vim.keymap.set('n', '<space>o', '<cmd>CocList outline<CR>',
     { silent = true, nowait = true, desc = "COC - Find symbol of current document" })
-vim.keymap.set('n', '<space>s', ':<C-u>CocList -I symbols<CR>',
-    { silent = true, nowait = true, desc = "COC - Search workspace symbols" })
-vim.keymap.set('n', '<space>j', ':<C-u>CocNext<CR>',
+-- provided by telescope-coc, but broken
+-- vim.keymap.set('n', '<space>s', '<cmd>CocList -I symbols<CR>',
+--     { silent = true, nowait = true, desc = "COC - Search workspace symbols" })
+vim.keymap.set('n', '<space>j', '<cmd>CocNext<CR>',
     { silent = true, nowait = true, desc = "COC - Do default action for next item" })
-vim.keymap.set('n', '<space>k', ':<C-u>CocPrev<CR>',
+vim.keymap.set('n', '<space>k', '<cmd>CocPrev<CR>',
     { silent = true, nowait = true, desc = "COC - Do default action for previous item" })
-vim.keymap.set('n', '<space>p', ':<C-u>CocListResume<CR>',
+vim.keymap.set('n', '<space>p', '<cmd>CocListResume<CR>',
     { silent = true, nowait = true, desc = "COC - Resume latest coc list" })
-vim.keymap.set('n', '<space>y', ':<C-u>CocList -A yank<CR>',
+vim.keymap.set('n', '<space>y', '<cmd>CocList -A yank<CR>',
     { silent = true, nowait = true, desc = "COC - Yank List" })
-vim.keymap.set('n', '<C-y>', ':<C-u>CocList -A yank<CR>',
+vim.keymap.set('n', '<C-y>', '<cmd>CocList -A yank<CR>',
     { silent = true, nowait = true, desc = "COC - Yank List" })
-vim.keymap.set('n', '<space>g', ':<C-u>CocList gchunks<CR>',
+vim.keymap.set('n', '<space>g', '<cmd>CocList gchunks<CR>',
     { silent = true, nowait = true, desc = "COC - git list" })
