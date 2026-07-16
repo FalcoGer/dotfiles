@@ -35,6 +35,14 @@ export PERL_MM_OPT="INSTALL_BASE=$HOME/.local/share/perl5"; export PERL_MM_OPT;
 # rust/cargo
 export PATH="$PATH:$HOME/.cargo/bin"
 
+# dotnet installed via https://dot.net/v1/dotnet-install.sh
+# ex `./dotnet-install.sh --channel 6.0 --runtime dotnet`
+if [[ -d $HOME/.dotnet ]]
+then
+  export DOTNET_ROOT=$HOME/.dotnet
+  export PATH=$PATH:$HOME/.dotnet
+fi
+
 # opt out of dotnet telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 
